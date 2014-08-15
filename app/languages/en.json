@@ -1,4 +1,8 @@
 {
 	"APP_NAME":"Skill Management",
-	"APP_TITLE":"Skill Management"
+	"APP_TITLE":"Skill Management",
+	
+	"BinderFormListHeading": "Forms",
+	"JP": "Jury President",
+	"CE": "Chief Expert"
 }

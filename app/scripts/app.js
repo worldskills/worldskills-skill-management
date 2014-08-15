@@ -47,45 +47,12 @@ $urlRouterProvider.otherwise('/');
       url: '/',
       templateUrl: 'views/main.html'
     })
+    .state('binder_form', {
+    	url: '/forms/{id}',
+    	templateUrl: 'views/binder_form.html',
+    	controller: 'BinderFormCtrl'
+    });
 
-   //personnel
-   .state('personnel', {
-     url: '/personnel',
-     templateUrl: 'views/personnel.html',
-     controller: 'PersonnelCtrl'
-   })
-
-   //assessment
-   .state('assessment', {
-     url: '/assessment',
-     templateUrl: 'views/assessment.html',
-     controller: 'AssessmentCtrl'
-   })
-
-  //Competition / assessment criteria
-  .state('assessmentCriteria', {
-    abstract: true,
-    url: '/assessmentCriteria',
-    templateUrl: 'views/assessmentCriteria.html'
-  })
-
-  .state('assessmentCriteria.menu', {
-    url: '/assessmentCriteria/menu_:stepName',
-
-    views: {
-      'assessmentCriteriaMenu': assessmentCriteriaMenu,
-      'assessmentCriteriaContent':{
-        templateUrl: function ($stateParams){
-          return 'views/assessmentCriteria.' + $stateParams.stepName + '.html';
-        },
-        controllerProvider: ['$stateParams', function($stateParams){
-          //var ctrlName = $stateParams.stepID
-          var ctrlName = 'Assessmentcriteria' + $stateParams.stepName + 'Ctrl';
-          return ctrlName;
-        }]
-      }
-    }
-  });
 
 
 }])

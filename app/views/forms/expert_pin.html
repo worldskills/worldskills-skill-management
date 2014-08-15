@@ -1,0 +1,14 @@
+<div class="col-sm-1">
+	<p>
+		<img ng-show="expert.images[0]" src="{{expert.images[0].links[1].href}}" class="img-responsive" alt="{{expert.first_name}} {{expert.last_name}}">
+		<img ng-show="!expert.images[0]" class="img-responsive" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="" width="140" height="140">
+	</p>
+</div>
+<div class="col-sm-5">
+	<p>
+		<strong>{{expert.title.abbreviation}} {{expert.first_name}} {{expert.last_name}} ({{expert.country.member.code}})</strong> <br />
+	</p>
+	<p>
+		PIN <input type="password" class="pin_field" ng-model="expert.pin" maxlength="4"/> <i class="glyphicon glyphicon-ok tick" ng-show="expert.pin.length == 4"></i>
+	</p>
+</div>

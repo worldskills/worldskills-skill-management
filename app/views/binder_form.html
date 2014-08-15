@@ -1,0 +1,16 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="binder_form_list" translate>BinderFormListHeading</a></li>
+    <li class="active">{{binderForm.name.text}}</li>
+</ol>
+
+<h1>{{binderForm.name.text}}</h1>
+
+<alerts></alerts>
+
+<form name="form" role="form">
+	<div class="form-group" ng-repeat="question in binderForm.questions">
+    	<label for="name">{{question.question_text.text}}</label>
+        <wsi-textarea question="question" ng-show="question.type == 'TEXTAREA'"></wsi-textarea>
+        <wsi-expert-signoff experts="experts" ce="ce" jp="jp" ng-show="question.type == 'EXPERT_APPROVAL'"></wsi-expert-signoff>
+    </div>
+</form>
