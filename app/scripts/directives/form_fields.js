@@ -26,7 +26,8 @@ angular.module('skillMgmtApp')
 	  return {
 		  restrict: 'E',
 		  scope: {
-			expert: '='
+			expert: '=',
+			position: '='
 		  },
 		  templateUrl: '../../views/forms/expert_pin.html'
 	  }
