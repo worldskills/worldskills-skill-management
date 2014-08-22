@@ -4,5 +4,9 @@
 	
 	"BinderFormListHeading": "Forms",
 	"JP": "Jury President",
-	"CE": "Chief Expert"
+	"CE": "Chief Expert",
+	
+	"Day": "Day",
+	"Form": "Form",
+	"NoForms": "No Forms Found"
 }

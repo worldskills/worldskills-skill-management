@@ -44,13 +44,19 @@ $urlRouterProvider.otherwise('/');
 
   // //index
     .state('index', {
-      url: '/',
-      templateUrl: 'views/main.html'
+    	url: '/',
+      	templateUrl: 'views/binder_form_list.html',
+  	  	controller: 'BinderFormListCtrl'
     })
     .state('binder_form', {
     	url: '/forms/{id}',
     	templateUrl: 'views/binder_form.html',
     	controller: 'BinderFormCtrl'
+    })
+    .state('binder_form_list', {
+    	url: '/forms',
+    	templateUrl: 'views/binder_form_list.html',
+    	controller: 'BinderFormListCtrl'
     });
 
 

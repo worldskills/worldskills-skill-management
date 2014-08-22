@@ -10,6 +10,24 @@ angular.module('skillMgmtApp')
 		  templateUrl: '../../views/forms/textarea.html'
 	  }
   })
+  .directive('wsiTextfield', function () {
+	  return {
+		  restrict: 'E',
+		  scope: {
+			question: '='
+		  },
+		  templateUrl: '../../views/forms/textfield.html'
+	  }
+  })
+  .directive('wsiRadio', function () {
+	  return {
+		  restrict: 'E',
+		  scope: {
+			question: '='
+		  },
+		  templateUrl: '../../views/forms/radio.html'
+	  }
+  })
   
   .directive('wsiExpertSignoff', function () {
 	  return {

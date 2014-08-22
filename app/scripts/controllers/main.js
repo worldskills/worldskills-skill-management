@@ -5,6 +5,50 @@ angular.module('skillMgmtApp')
     $scope.selectedLanguage = Language.selectedLanguage;
     
     
+    $rootScope.formList = [
+        {
+        	"id": 1,
+        	"name": "WSC2013 Test Project 30% Change Agreement",
+        	"day": "C-4"
+        },
+        {
+        	"id": 2,
+        	"name": "CIS Skill Marking Rules Confirmation",
+        	"day": "C-3"
+        },
+        {
+        	"name": "Competitor Identity and Name Spell Check",
+        	"day": "C-2"
+        },
+        {
+        	"name": "Competitor Toolbox Check",
+        	"day": "C-2"
+        },
+        {
+        	"name": "Competitor Familiarization Agreement",
+        	"day": "C-2"
+        },
+        {
+        	"name": "Competition Commencement",
+        	"day": "C-1"
+        },
+        {
+        	"name": "Competitor Timeout Record (if required)",
+        	"day": "C1"
+        },
+        {
+        	"name": "Competitor Timeout Record (if required)",
+        	"day": "C2"
+        },
+        {
+        	"name": "Competitor Timeout Record (if required)",
+        	"day": "C3"
+        },
+        {
+        	"name": "Competitor Timeout Record (if required)",
+        	"day": "C4"
+        }
+    ];
     
     $rootScope.form1 = {
     		"id" : 342,
@@ -36,18 +80,115 @@ angular.module('skillMgmtApp')
     	            }
     	        },
     	        {
-    	            "id": 9889,
-    	            "type": "TEXT",
-    	            "order": 2,
+    	            "id": 9890,
+    	            "type": "EXPERT_APPROVAL",
+    	            "order": 3,
     	            "question_text": {
     	                "lang_code": "en",
     	                "text": "I agree to the 30% change to the Test Project as described and I understand that the Competitors must be informed of the 30% change as soon as it is agreed. Competition Rule 12.5.6."
     	            }
+    	        }
+    	    ]	
+    };
+    
+    
+    $rootScope.form2 = {
+    		"id" : 342,
+    	    "name": {
+    	       "lang_code": "en",
+    	       "text": "CIS Skill Marking Rules Confirmation"
+    	    },
+    	    "timeline_day": "C-3",
+    	    "requires_expert_approval": false,
+    	    "is_template": false,
+    	    "questions": [
+    	        {
+    	            "id": 9888,
+    	            "type": "TEXT",
+    	            "order": 1,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "This form is used to define the skill marking rules which need to be activated in the CIS prior to locking. Please confirm the following details regarding skill marking rules and required format of marking forms prior to the Marking Scheme for your Skill being locked in the CIS."
+    	            }
+    	        },
+    	        {
+    	            "id": 9889,
+    	            "type": "TEXT_FIELD",
+    	            "order": 2,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "Number of Experts in each subjective marking team (usually 5)"
+    	            },
+    	            "answer": ""
     	        },
     	        {
     	            "id": 9890,
-    	            "type": "EXPERT_APPROVAL",
-    	            "order": 3
+    	            "type": "RADIO",
+    	            "order": 3,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "Allow compatriot marking"
+    	            },
+    	            "options": [
+    	                {
+    	                	"value": "yes",
+    	                	"text": "Yes"
+    	                },
+    	                {
+    	                	"value": "no",
+    	                	"text": "No"
+    	                }
+    	            ],
+    	            "answer": ""
+    	        },
+    	        {
+    	            "id": 9891,
+    	            "type": "RADIO",
+    	            "order": 4,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "Competitors are organised in groups/teams"
+    	            },
+    	            "options": [
+    	                {
+    	                	"value": "yes",
+    	                	"text": "Yes"
+    	                },
+    	                {
+    	                	"value": "no",
+    	                	"text": "No"
+    	                }
+    	            ],
+    	            "answer": ""
+    	        },
+    	        {
+    	            "id": 9892,
+    	            "type": "RADIO",
+    	            "order": 5,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "Landscape marking forms are required"
+    	            },
+    	            "options": [
+    	                {
+    	                	"value": "yes",
+    	                	"text": "Yes"
+    	                },
+    	                {
+    	                	"value": "no",
+    	                	"text": "No"
+    	                }
+    	            ],
+    	            "answer": ""
+    	        },
+    	        {
+    	            "id": 9890,
+    	            "type": "CE_APPROVAL",
+    	            "order": 6,
+    	            "question_text": {
+    	                "lang_code": "en",
+    	                "text": "Approved by"
+    	            }
     	        }
     	    ]	
     };

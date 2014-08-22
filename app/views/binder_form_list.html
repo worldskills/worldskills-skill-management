@@ -1,0 +1,41 @@
+<ol class="breadcrumb">
+    <li class="active" translate>BinderFormListHeading</li>
+</ol>
+
+<h1 translate>BinderFormListHeading</h1>
+
+<alerts></alerts>
+
+<div class="row">
+	<div class="col-md-9 ">
+		<div class="table-responsive">
+			<table class="table table-striped resource_list">
+				<colgroup>
+					<col width="15%" />
+					<col width="50%" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th><span translate>Day</span></th>
+						<th><span translate>Form</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="binderForm in formList">
+						<td>{{binderForm.day}}</td>
+						<td><a ui-sref="binder_form({id: binderForm.id})" >{{binderForm.name}}</a></td>
+					</tr>
+					<tr ng-show="formList.total_count == 0">
+						<td colspan="8"><span translate>NoForms</span></td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="8"></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
