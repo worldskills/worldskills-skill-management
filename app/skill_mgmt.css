@@ -1,5 +1,6 @@
 .pin_field {
-	width:80px;
+    display: inline-block;
+    width: 80px;
 }
 
 .expert_signoff {

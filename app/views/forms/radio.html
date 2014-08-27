@@ -1,1 +1,6 @@
-<span ng-repeat="option in question.options"><input type="radio" ng-model="question.answer" name="{{question.id}}" required="true" value="{{option.value}}" > {{option.text}}</input><br/></span>
+<div class="radio" ng-repeat="option in question.options">
+    <label>
+        <input type="radio" ng-model="question.answer" name="{{question.id}}" required="true" value="{{option.value}}" >
+        {{option.text}}
+    </label>
+</div>

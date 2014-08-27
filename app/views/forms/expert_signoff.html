@@ -1,12 +1,18 @@
-<div class="row" ng-show="$index % 2 == 0" ng-repeat="expert in experts.people" >
-	<wsi-expert-pin expert="expert"></wsi-expert-pin>
-	<wsi-expert-pin expert="experts.people[$index+1]" ng-show="experts.people.length > $index+1"></wsi-expert-pin>
+
+<div class="row">
+    <span ng-repeat="expert in experts.people">
+        <div class="col-sm-6">
+            <wsi-expert-pin expert="expert"></wsi-expert-pin>
+        </div>
+        <div ng-show="$index % 2 == 1" class="clearfix"></div>
+    </span>
 </div>
 
-<hr/>
-	<div class="row">
-		<wsi-expert-pin expert="ce" position="'Chief Expert'"></wsi-expert-pin>
-		
-		<wsi-expert-pin expert="jp" position="'Jury President'"></wsi-expert-pin>
-	</div>
-<hr/>
+<div class="row">
+    <div class="col-sm-6">
+        <wsi-expert-pin expert="ce" position="'Chief Expert'"></wsi-expert-pin>
+    </div>
+    <div class="col-sm-6">
+        <wsi-expert-pin expert="jp" position="'Jury President'"></wsi-expert-pin>
+    </div>
+</div>
