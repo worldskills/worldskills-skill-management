@@ -16,6 +16,7 @@
     <div ng-repeat="question in binderForm.questions">
 	<div class="form-group" ng-show="!binderForm.horizontal">
         <p ng-if="question.type == 'TEXT'">{{question.question_text.text}}</p>
+        <h3 ng-if="question.type == 'TITLE'">{{question.question_text.text}}</h3>
         <h5 ng-if="question.type == 'EXPERT_APPROVAL' || question.type == 'CE_APPROVAL'">{{question.question_text.text}}</h5>
     	<label ng-if="question.type == 'TEXT_FIELD' || question.type == 'TEXTAREA' || question.type == 'RADIO'" for="name">{{question.question_text.text}}</label>
     	

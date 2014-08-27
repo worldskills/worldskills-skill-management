@@ -72,7 +72,7 @@ angular.module('skillMgmtApp')
     	        },
     	        {
     	            "id": 9888,
-    	            "type": "TEXT",
+    	            "type": "TITLE",
     	            "order": 1,
     	            "question_text": {
     	                "lang_code": "en",
