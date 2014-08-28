@@ -1,13 +1,13 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-xs-3">
                 <p>
                     <img ng-show="expert.images[0]" src="{{expert.images[0].links[1].href}}" class="img-responsive" alt="{{expert.first_name}} {{expert.last_name}}">
                     <img ng-show="!expert.images[0]" class="img-responsive" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="" width="140" height="140">
                 </p>
             </div>
-            <div class="col-sm-8">
+            <div class="col-xs-8">
                 <p>
                     <span ng-show="position">{{position}}<br/></span>
                     <strong>{{expert.title.abbreviation}} {{expert.first_name}} {{expert.last_name}} ({{expert.country.member.code}})</strong> <br />
