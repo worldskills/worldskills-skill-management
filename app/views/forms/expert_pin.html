@@ -3,18 +3,26 @@
         <div class="row">
             <div class="col-xs-3">
                 <p>
-                    <img ng-show="expert.images[0]" src="{{expert.images[0].links[1].href}}" class="img-responsive" alt="{{expert.first_name}} {{expert.last_name}}">
-                    <img ng-show="!expert.images[0]" class="img-responsive" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="" width="140" height="140">
+                    <img class="img-circle" ng-show="expert.images[0]" src="{{expert.images[0].links[1].href}}" class="img-responsive" alt="{{expert.first_name}} {{expert.last_name}}" width="60" height="60">
+                    <img class="img-circle" ng-show="!expert.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" alt="" width="60" height="60">
                 </p>
             </div>
             <div class="col-xs-8">
                 <p>
                     <span ng-show="position">{{position}}<br/></span>
-                    <strong>{{expert.title.abbreviation}} {{expert.first_name}} {{expert.last_name}} ({{expert.country.member.code}})</strong> <br />
+                    <strong>{{expert.title.abbreviation}} {{expert.first_name}} {{expert.last_name}}</strong> {{expert.country.member.code}} <br />
                 </p>
-                <p>
-                    <input type="password" class="form-control pin_field" ng-model="expert.pin" maxlength="4" placeholder="PIN" /> <i class="glyphicon glyphicon-ok tick" ng-show="expert.pin.length == 4"></i>
-                </p>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="expert.pin" maxlength="4" placeholder="PIN" ng-disabled="expert.pin == '9876'" />
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="form-control-static" ng-show="expert.pin.length == 4">
+                            <i class="glyphicon glyphicon-ok text-success" ng-show="expert.pin == '9876'"></i>
+                            <i class="glyphicon glyphicon-remove text-danger" ng-show="expert.pin != '9876'"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

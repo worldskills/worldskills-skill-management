@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Skill Management</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -72,29 +72,7 @@
     </div>
    <div class='container'>
     <footer>
-            <div class="row">
-                <div class="col-xs-6 col-sm-4 col-md-2">
-                  <h5>Language</h5>
-                    <div class="dropdown" ng-controller="TranslateCtrl">                      
-                      <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="languageSelect" data-toggle="dropdown">
-                        Switch language <small class='label'>{{selectedLanguage}}</small>
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="languageSelect">
-                        <li 
-                          ng-repeat="(lang_code, lang_name) in available_languages" 
-                          ng-class="{active: lang_code == selectedLanguage}"
-                          role="presentation">
-
-                            <a ng-click="changeLanguage(lang_code);" role="menuitem" tabindex="-1">{{lang_name}}</a>
-                        </li>
-                      </ul>
-                </div>  
-                </div>
-                <div class="clearfix visible-xs"></div>
-                <div class="clearfix visible-sm"></div>
-                <div class="col-xs-6 col-sm-4 col-md-2"></div>
-                <div class="clearfix visible-xs"></div>
+            <div class="row"> 
                
             </div>
 

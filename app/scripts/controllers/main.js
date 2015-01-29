@@ -8,7 +8,7 @@ angular.module('skillMgmtApp')
     $rootScope.formList = [
         {
         	"id": 1,
-        	"name": "WSC2013 Test Project 30% Change Agreement",
+        	"name": "Test Project 30% Change Agreement",
         	"day": "C-4"
         },
         {
@@ -16,38 +16,6 @@ angular.module('skillMgmtApp')
         	"name": "CIS Skill Marking Rules Confirmation",
         	"day": "C-3"
         },
-        {
-        	"name": "Competitor Identity and Name Spell Check",
-        	"day": "C-2"
-        },
-        {
-        	"name": "Competitor Toolbox Check",
-        	"day": "C-2"
-        },
-        {
-        	"name": "Competitor Familiarization Agreement",
-        	"day": "C-2"
-        },
-        {
-        	"name": "Competition Commencement",
-        	"day": "C-1"
-        },
-        {
-        	"name": "Competitor Timeout Record (if required)",
-        	"day": "C1"
-        },
-        {
-        	"name": "Competitor Timeout Record (if required)",
-        	"day": "C2"
-        },
-        {
-        	"name": "Competitor Timeout Record (if required)",
-        	"day": "C3"
-        },
-        {
-        	"name": "Competitor Timeout Record (if required)",
-        	"day": "C4"
-        }
     ];
     
     $rootScope.form1 = {
@@ -71,18 +39,13 @@ angular.module('skillMgmtApp')
     	            "answer": ""
     	        },
     	        {
-    	            "id": 9888,
-    	            "type": "TITLE",
-    	            "order": 1,
-    	            "question_text": {
-    	                "lang_code": "en",
-    	                "text": "Confirmation and agreement of 30% change"
-    	            }
-    	        },
-    	        {
     	            "id": 9890,
     	            "type": "EXPERT_APPROVAL",
     	            "order": 3,
+                    "title_text": {
+                        "lang_code": "en",
+                        "text": "Confirmation and agreement of 30% change"
+                    },
     	            "question_text": {
     	                "lang_code": "en",
     	                "text": "I agree to the 30% change to the Test Project as described and I understand that the Competitors must be informed of the 30% change as soon as it is agreed. Competition Rule 12.5.6."
@@ -439,7 +402,7 @@ angular.module('skillMgmtApp')
                         },
                         {
                             "rel": "alternate",
-                            "href": "http://images.diaz.worldskills.org/ws27/wsd0/3495/ws27d01658-fc36-45b7-99ca-9ee3350b7fb7",
+                            "href": "https://images.worldskillsusercontent.org/ws23/ws88/3541/ws2388494c-9c77-4f44-8fc5-cfb0e3535f6f_square",
                             "description": null
                         }
                     ]
@@ -587,7 +550,7 @@ angular.module('skillMgmtApp')
                         },
                         {
                             "rel": "alternate",
-                            "href": "http://images.diaz.worldskills.org/wseb/ws9d/1393/wseb9dc6d6-9381-4a53-b228-f52e8ece33cf",
+                            "href": "https://images.worldskillsusercontent.org/wsf4/wsdd/9618/wsf4ddc4c7-9bc3-4f4c-b998-b71747e325d0_square",
                             "description": null
                         }
                     ]
@@ -776,7 +739,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wsbf/wscd/63/wsbfcd6e8c-5ed7-4bd7-bb50-031d6ea35871",
+    	                                   "href": "https://images.worldskillsusercontent.org/wsac/ws71/111/wsac7175d1-7abb-40ff-81f5-a6340f1fafb7_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -950,7 +913,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/ws54/wsd4/4834/ws54d4c8b1-fb9e-4441-af9a-fbe6c75a1708",
+    	                                   "href": "https://images.worldskillsusercontent.org/wsf9/ws64/4880/wsf96417c2-32a1-42c9-996f-6e36c53c46bf_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -1124,7 +1087,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wsf1/wsf0/245/wsf1f0b0f2-dcea-484b-8563-807f00bb955b",
+    	                                   "href": "https://images.worldskillsusercontent.org/ws9a/wsb6/293/ws9ab6643b-2492-4099-8f3d-2cf7b71f381f_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -1310,7 +1273,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wsa5/wsbb/1484/wsa5bba09a-45f3-4012-a438-5f04cda70f37",
+    	                                   "href": "https://images.worldskillsusercontent.org/ws8e/ws4c/1531/ws8e4c06a0-a3f6-4279-8f3b-82ce1fdbc48c_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -1496,7 +1459,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wsd4/wsb4/330/wsd4b4ebb8-d3ed-4abe-b251-c4881cbddf1b",
+    	                                   "href": "https://images.worldskillsusercontent.org/ws8d/ws52/378/ws8d521f68-0e0c-45e4-b0c1-a4ff393cb4f4_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -1837,7 +1800,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wsd8/wsf0/339/wsd8f0654b-4d27-4d78-8d9b-dba2dae2638c",
+    	                                   "href": "https://images.worldskillsusercontent.org/wsef/ws0d/387/wsef0de36a-44ee-4f82-883e-3449ecacce29_square",
     	                                   "description": null
     	                               }
     	                           ]
@@ -2167,7 +2130,7 @@ angular.module('skillMgmtApp')
     	                               },
     	                               {
     	                                   "rel": "alternate",
-    	                                   "href": "http://images.diaz.worldskills.org/wse7/wsdc/3193/wse7dc8d25-85b3-4543-b941-2b8b8bcc6cfa",
+    	                                   "href": "https://images.worldskillsusercontent.org/ws29/ws74/3239/ws2974d4ce-40b5-4d32-b369-f4089f511281_square",
     	                                   "description": null
     	                               }
     	                           ]
