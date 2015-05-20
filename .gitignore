@@ -1,2 +1,11 @@
-/bower_components/
+/.buildpath
+/.project
+/.settings/
+
 /node_modules/
+/dist
+/.tmp
+/app/bower_components/
+/app/scripts/config.js
+/app/xdomain/xdomain.js
+/coverage/
