@@ -9,12 +9,14 @@ angular.module('skillMgmtApp')
         {
         	"id": 1,
         	"name": "Test Project 30% Change Agreement",
-        	"day": "C-4"
+        	"day": "C-4",
+        	"state": "pending"
         },
         {
         	"id": 2,
         	"name": "CIS Skill Marking Rules Confirmation",
-        	"day": "C-3"
+        	"day": "C-3",
+            "state": "pending"
         },
     ];
     
@@ -150,15 +152,279 @@ angular.module('skillMgmtApp')
     	            "order": 6,
     	            "question_text": {
     	                "lang_code": "en",
-    	                "text": "Approved by"
+    	                "text": ""
     	            }
     	        }
     	    ]	
     };
     
-    
-    
+
     $rootScope.ce = {
+            "id": 4985,
+            "title": {
+                "id": 1,
+                "abbreviation": "Mr",
+                "text": "Adult male"
+            },
+            "first_name": "Ray",
+            "last_name": "Coyle",
+            "gender": "M",
+            "country": {
+                "id": 239,
+                "abbreviation": "UK",
+                "name": {
+                    "lang_code": "en",
+                    "text": "UNITED KINGDOM"
+                },
+                "member": {
+                    "id": 8,
+                    "code": "UK",
+                    "name": {
+                        "lang_code": "en",
+                        "text": "United Kingdom"
+                    },
+                    "entity": {
+                        "id": 8,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "United Kingdom"
+                        }
+                    },
+                    "organization": {
+                        "id": 3,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "WorldSkills UK"
+                        }
+                    }
+                },
+                "phonePrefix": "44"
+            },
+            "email_addresses": [],
+            "addresses": [],
+            "organizations": [],
+            "positions": [
+                {
+                    "id": 18718,
+                    "position": {
+                        "id": 9,
+                        "short_name": "e",
+                        "name": {
+                            "lang_code": "en_US",
+                            "text": "Expert"
+                        },
+                        "ws_entity": {
+                            "id": 1,
+                            "name": {
+                                "lang_code": "en",
+                                "text": "WorldSkills International"
+                            }
+                        },
+                        "skill_based": true,
+                        "sector_based": false,
+                        "event_based": false,
+                        "open_field": false,
+                        "hidden": false
+                    },
+                    "skill": {
+                        "id": 413,
+                        "skill_id": 228,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "Electronics"
+                        },
+                        "number": "16",
+                        "event": {
+                            "id": 10,
+                            "name": "WorldSkills São Paulo 2015",
+                            "code": "WSC2015",
+                            "town": "São Paulo",
+                            "country": {
+                                "id": 30,
+                                "abbreviation": "BR",
+                                "name": {
+                                    "lang_code": "en",
+                                    "text": "BRAZIL"
+                                },
+                                "member": {
+                                    "id": 21,
+                                    "code": "BR",
+                                    "name": {
+                                        "lang_code": "en",
+                                        "text": "Brazil"
+                                    },
+                                    "entity": {
+                                        "id": 21,
+                                        "name": {
+                                            "lang_code": "en",
+                                            "text": "Brazil"
+                                        }
+                                    },
+                                    "organization": {
+                                        "id": 16,
+                                        "name": {
+                                            "lang_code": "en",
+                                            "text": "SENAI"
+                                        }
+                                    }
+                                },
+                                "phonePrefix": "55"
+                            },
+                            "ws_entity": {
+                                "id": 1,
+                                "name": {
+                                    "lang_code": "en",
+                                    "text": "WorldSkills International"
+                                }
+                            },
+                            "is_competition": true,
+                            "legacy_id": 43
+                        },
+                        "sector": {
+                            "id": 45,
+                            "name": {
+                                "lang_code": "en",
+                                "text": "Manufacturing and Engineering Technology"
+                            }
+                        },
+                        "sort": 0
+                    },
+                    "timestamp_start": "2014-07-22T13:19:51+0000",
+                    "open_field": "92",
+                    "invalid": false
+                },
+                {
+                    "id": 17961,
+                    "position": {
+                        "id": 7,
+                        "short_name": "ce",
+                        "name": {
+                            "lang_code": "en_US",
+                            "text": "Chief Expert"
+                        },
+                        "ws_entity": {
+                            "id": 1,
+                            "name": {
+                                "lang_code": "en",
+                                "text": "WorldSkills International"
+                            }
+                        },
+                        "skill_based": true,
+                        "sector_based": false,
+                        "event_based": false,
+                        "open_field": false,
+                        "hidden": false
+                    },
+                    "skill": {
+                        "id": 413,
+                        "skill_id": 228,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "Electronics"
+                        },
+                        "number": "16",
+                        "event": {
+                            "id": 10,
+                            "name": "WorldSkills São Paulo 2015",
+                            "code": "WSC2015",
+                            "town": "São Paulo",
+                            "country": {
+                                "id": 30,
+                                "abbreviation": "BR",
+                                "name": {
+                                    "lang_code": "en",
+                                    "text": "BRAZIL"
+                                },
+                                "member": {
+                                    "id": 21,
+                                    "code": "BR",
+                                    "name": {
+                                        "lang_code": "en",
+                                        "text": "Brazil"
+                                    },
+                                    "entity": {
+                                        "id": 21,
+                                        "name": {
+                                            "lang_code": "en",
+                                            "text": "Brazil"
+                                        }
+                                    },
+                                    "organization": {
+                                        "id": 16,
+                                        "name": {
+                                            "lang_code": "en",
+                                            "text": "SENAI"
+                                        }
+                                    }
+                                },
+                                "phonePrefix": "55"
+                            },
+                            "ws_entity": {
+                                "id": 1,
+                                "name": {
+                                    "lang_code": "en",
+                                    "text": "WorldSkills International"
+                                }
+                            },
+                            "is_competition": true,
+                            "legacy_id": 43
+                        },
+                        "sector": {
+                            "id": 45,
+                            "name": {
+                                "lang_code": "en",
+                                "text": "Manufacturing and Engineering Technology"
+                            }
+                        },
+                        "sort": 0
+                    },
+                    "timestamp_start": "2013-10-24T02:23:40+0000",
+                    "open_field": "92",
+                    "invalid": false
+                }
+            ],
+            "images": [
+                {
+                    "id": 3495,
+                    "image_id": 3495,
+                    "thumbnail_hash": "27d01658-fc36-45b7-99ca-9ee3350b7fb7",
+                    "ws_entity": {
+                        "id": 1,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "WorldSkills International"
+                        }
+                    },
+                    "links": [
+                        {
+                            "rel": "image",
+                            "href": "http://diaz.worldskills.org:8080/images/3495",
+                            "description": null
+                        },
+                        {
+                            "rel": "alternate",
+                            "href": "https://images.worldskillsusercontent.org/ws23/ws88/3541/ws2388494c-9c77-4f44-8fc5-cfb0e3535f6f_square",
+                            "description": null
+                        }
+                    ]
+                }
+            ],
+            "entities": [
+                {
+                    "id": 4985,
+                    "ws_entity": {
+                        "id": 8,
+                        "name": {
+                            "lang_code": "en",
+                            "text": "United Kingdom"
+                        }
+                    }
+                }
+            ]
+        };
+    
+    
+    $rootScope.ce2 = {
             "id": 4985,
             "title": {
                 "id": 1,

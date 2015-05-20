@@ -46,17 +46,6 @@
                         </ul>
                     </li> -->
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="!auth.loggedIn"><a href="{{auth.loginUrl}}" translate>LOGIN</a></li>
-                    <li class="dropdown" ng-show="auth.loggedIn">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                            {{auth.user.first_name}} {{auth.user.last_name}} <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="" ng-click="logout()" translate>LOGOUT</a></li>
-                        </ul>
-                    </li>
-                </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">

@@ -8,13 +8,13 @@
 <div class="col-lg-8 col-lg-offset-2">
 
 <div class="page-header">
-<p>Skill Electronics</p>
+<p>Skill 16 Electronics</p>
 <h1>{{binderForm.name.text}}</h1>
 </div>
 
 <alerts></alerts>
 
-<form name="form" role="form" class="{{binderForm.horizontal == true ? 'form-horizontal' : ''}}">
+<form name="form" role="form" class="{{binderForm.horizontal == true ? 'form-horizontal' : ''}}" ng-submit="submit()">
     <div ng-repeat="question in binderForm.questions">
 	<div class="form-group" ng-show="!binderForm.horizontal">
         <p ng-if="question.type == 'TEXT'">{{question.question_text.text}}</p>
@@ -29,7 +29,7 @@
 		<wsi-expert-signoff experts="experts" ce="ce" jp="jp" ng-show="question.type == 'EXPERT_APPROVAL'"></wsi-expert-signoff>
         <div class="row" ng-show="question.type == 'CE_APPROVAL'">
             <div class="col-sm-6">
-                <wsi-expert-pin expert="ce" position="'Chief Expert'" ng-show="question.type == 'CE_APPROVAL'"></wsi-expert-pin>
+                <wsi-expert-pin expert="ce2" position="'Chief Expert'" ng-show="question.type == 'CE_APPROVAL'"></wsi-expert-pin>
             </div>
         </div>
     </div>

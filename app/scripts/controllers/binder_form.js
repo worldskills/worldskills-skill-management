@@ -30,6 +30,11 @@ angular.module('skillMgmtApp')
 		  else {
 			  return 'col-sm-12';
 		  }
-	  }
+	  };
+	  
+	  $scope.submit = function () {
+	      $scope.formList[$stateParams.id - 1].state = 'submitted';
+	      $state.go('binder_form_list');
+	  };
 	  
   });

@@ -15,28 +15,32 @@
 		<div class="table-responsive">
 			<table class="table table-striped resource_list">
 				<colgroup>
-					<col width="15%" />
-					<col width="50%" />
+					<col width="20%" />
+					<col width="60%" />
+                    <col width="20%" />
 				</colgroup>
 				<thead>
 					<tr>
 						<th><span translate>Day</span></th>
 						<th><span translate>Form</span></th>
+                        <th>State</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="binderForm in formList">
 						<td>{{binderForm.day}}</td>
 						<td><a ui-sref="binder_form({id: binderForm.id})" >{{binderForm.name}}</a></td>
+                        <td>
+                            <span class="glyphicon glyphicon-ok text-success" ng-show="binderForm.state == 'submitted'"></span>
+                        </td>
 					</tr>
 					<tr ng-show="formList.total_count == 0">
-						<td colspan="8"><span translate>NoForms</span></td>
+						<td colspan="3"><span translate>NoForms</span></td>
 					</tr>
-
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="8"></td>
+						<td colspan="3"></td>
 					</tr>
 				</tfoot>
 			</table>
