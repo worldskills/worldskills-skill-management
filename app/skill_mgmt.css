@@ -12,3 +12,7 @@
 .tick {
 	color: #0B0;
 }
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
