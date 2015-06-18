@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skillMgmtApp')
-  .controller('BinderFormCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, REST_BASE_URL) {
+  .controller('BinderFormCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular) {
   
 	  if ($stateParams.id == 1)
 	  {

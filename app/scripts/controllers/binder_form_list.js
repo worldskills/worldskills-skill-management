@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skillMgmtApp')
-  .controller('BinderFormListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL) {
+  .controller('BinderFormListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular) {
   
 	  $scope.formList = $rootScope.formList;
 	  $scope.experts = $rootScope.experts;

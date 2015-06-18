@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skillMgmtApp')
-	.service('authenticator', function(API_AUTH_CODE)
+	.service('authenticator', function(WORLDSKILLS_API_AUTH_CODE)
 	{
 		this.hasPermission = function(user, webServiceCode, permission)
         {
@@ -21,6 +21,6 @@ angular.module('skillMgmtApp')
 		
 		this.authenticate = function(user)
 		{
-			return this.hasPermission(user, API_AUTH_CODE, 'Admin') || this.hasPermission(user, API_AUTH_CODE, 'CreateResource');
+			return this.hasPermission(user, WORLDSKILLS_API_AUTH_CODE, 'Admin') || this.hasPermission(user, WORLDSKILLS_API_AUTH_CODE, 'CreateResource');
 		}
 	});
