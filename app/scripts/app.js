@@ -28,7 +28,7 @@ angular
             }
             $state.go(redirectToState, redirectToParams);
         } else {
-            $state.go('/');
+            $state.go('binder_form_list');
         }
     });
 
@@ -61,20 +61,21 @@ angular
   $stateProvider
 
   // //index
-    .state('index', {
-    	url: '/',
-      	templateUrl: 'views/binder_form_list.html',
-  	  	controller: 'BinderFormListCtrl'
-    })
     .state('binder_form', {
-    	url: '/forms/{id}',
-    	templateUrl: 'views/binder_form.html',
-    	controller: 'BinderFormCtrl'
+        url: '/forms/{id}',
+        templateUrl: 'views/binder_form.html',
+        controller: 'BinderFormCtrl',
+        data: {
+            requireLoggedIn: true
+        }
     })
     .state('binder_form_list', {
-    	url: '/forms',
-    	templateUrl: 'views/binder_form_list.html',
-    	controller: 'BinderFormListCtrl'
+        url: '/forms',
+        templateUrl: 'views/binder_form_list.html',
+        controller: 'BinderFormListCtrl',
+        data: {
+            requireLoggedIn: true
+        }
     });
 
 

@@ -36,22 +36,25 @@
                 </button>
                 <a class="navbar-brand" href="#" ng-cloak translate>APP_NAME</a>
             </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown"><span translate>Resources</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li ui-sref-active="active"><a ui-sref="resource_list" translate>ResourceListHeading</a></li>
-                            <li ui-sref-active="active" ng-show="user.hasPermission('Admin')"><a ui-sref="resource_type_list" translate>ResourceTypeListHeading</a></li>
-                            <li ui-sref-active="active" ng-show="user.hasPermission('Admin')"><a ui-sref="metadata_list" translate>MetadataHeading</a></li>
-                        </ul>
-                    </li> -->
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default sr-only">Submit</button>
-                </form>
+            <div ng-show="auth.loggedIn">
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                {{auth.user.first_name || ""}} {{auth.user.last_name || ""}} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="" ng-click="logout()">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default sr-only">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
