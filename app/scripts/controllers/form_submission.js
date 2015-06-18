@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('BinderFormCtrl', function ($scope, $rootScope, $state, $stateParams) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams) {
   
       if ($stateParams.id == 1)
       {
@@ -33,7 +33,7 @@ angular.module('skillMgmtApp').controller('BinderFormCtrl', function ($scope, $r
       
       $scope.submit = function () {
           $scope.formList[$stateParams.id - 1].state = 'submitted';
-          $state.go('binder_form_list');
+          $state.go('form_submissions');
       };
       
 });

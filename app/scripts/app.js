@@ -63,16 +63,16 @@ angular
   // //index
     .state('binder_form', {
         url: '/forms/{id}',
-        templateUrl: 'views/binder_form.html',
-        controller: 'BinderFormCtrl',
+        templateUrl: 'views/form_submission.html',
+        controller: 'FormSubmissionCtrl',
         data: {
             requireLoggedIn: true
         }
     })
     .state('binder_form_list', {
         url: '/forms',
-        templateUrl: 'views/binder_form_list.html',
-        controller: 'BinderFormListCtrl',
+        templateUrl: 'views/form_submission_list.html',
+        controller: 'FormSubmissionListCtrl',
         data: {
             requireLoggedIn: true
         }

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('BinderFormListCtrl', function ($scope, $rootScope) {
+angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($scope, $rootScope) {
 
         $scope.formList = $rootScope.formList;
         $scope.experts = $rootScope.experts;
