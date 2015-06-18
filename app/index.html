@@ -58,27 +58,26 @@
             </div>
         </div>
     </div>
-    <!-- <div class="appContainer" ng-view=""></div> -->
-    <div class="container">
-    	<div class="view-frame" ui-view></div>
-    </div>
-   <div class='container'>
-    <footer>
-            <div class="row"> 
-               
-            </div>
 
-            <hr />
+    <div class="container" ng-cloak ng-show="auth.loggedIn">
+        <div class="view-frame" ui-view></div>
 
+        <hr class="hr-extended">
+
+        <footer>
             <div class="row">
-                <div class="col-md-12">
-                    <p>&copy; 2013 WorldSkills</p>
+                <div class="col-md-10 col-sm-8">
+                    <p>© {{date | date:'yyyy'}} WorldSkills International · <a href="https://www.worldskills.org/site/privacy/">Privacy</a> · <a href="https://www.worldskills.org/site/terms/">Terms</a></p>
+                </div>
+                <div class="col-md-2 col-sm-4">
+                    <div ng-show="auth.loggedIn">
+                        <p class="site-user">{{auth.user.first_name || ""}} {{auth.user.last_name || ""}}, <a href="#" ng-click="logout()">Logout</a></p>
+                    </div>
                 </div>
             </div>
-
         </footer>
+
     </div>
-    <!-- <konami/> -->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
