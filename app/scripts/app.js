@@ -8,7 +8,8 @@ angular
     'ngAnimate',
     'ui.router',
     'ui.bootstrap',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'worldskills.utils'
   ])
   .config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
 
