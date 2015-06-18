@@ -13,7 +13,24 @@ angular
   ])
   .config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
 
-$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+        // check for existing redirect
+        var $state = $injector.get('$state');
+        var redirectToState = sessionStorage.getItem('redirect_to_state');
+        var redirectToParams = sessionStorage.getItem('redirect_to_params');
+        sessionStorage.removeItem('redirect_to_state');
+        sessionStorage.removeItem('redirect_to_params');
+        if (redirectToState) {
+            if (redirectToParams) {
+                redirectToParams = angular.fromJson(redirectToParams);
+            } else {
+                redirectToParams = {};
+            }
+            $state.go(redirectToState, redirectToParams);
+        } else {
+            $state.go('/');
+        }
+    });
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'languages/',
