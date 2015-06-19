@@ -34,7 +34,7 @@
                 <tbody>
                     <tr ng-repeat="form in forms.forms">
                         <td>{{ form.timeline }}</td>
-                        <td><a ui-sref="binder_form({id: binderForm.id})">{{ form.name.text }}</td>
+                        <td><a ui-sref="form_submission({formId: form.id, skillId: skill.id})">{{ form.name.text }}</td>
                         <td>
                             <span class="glyphicon glyphicon-ok text-success" ng-show="form.state == 'submitted'"></span>
                         </td>

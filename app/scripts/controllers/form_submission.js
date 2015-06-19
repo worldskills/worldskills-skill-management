@@ -1,7 +1,19 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
 
+    $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function (submission) {
+        $scope.loading = false;
+        /*
+        attempt.questions.forEach(function (question) {
+            if (question.answer !== null) {
+                $scope.questions[question.id] = question.answer.id;
+            }
+        });
+        */
+    });
+
+/*
       if ($stateParams.id == 1)
       {
           $scope.binderForm = $rootScope.form1;
@@ -35,5 +47,5 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
           $scope.formList[$stateParams.id - 1].state = 'submitted';
           $state.go('form_submissions');
       };
-
+*/
 });

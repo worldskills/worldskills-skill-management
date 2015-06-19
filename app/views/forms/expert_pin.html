@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col-xs-3">
                 <p>
-                    <img class="img-circle" ng-show="expert.images[0]" src="{{expert.images[0].links[1].href}}" class="img-responsive" alt="{{expert.first_name}} {{expert.last_name}}" width="60" height="60">
-                    <img class="img-circle" ng-show="!expert.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" alt="" width="60" height="60">
+                    <img class="img-circle" ng-show="expert.person.images[0]" class="img-responsive" ng-src="{{expert.person.images[0].links[1].href}}_square" width="60" height="60">
+                    <img class="img-circle" ng-show="!expert.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                 </p>
             </div>
             <div class="col-xs-8">
                 <p>
                     <span ng-show="position">{{position}}<br/></span>
-                    <strong>{{expert.title.abbreviation}} {{expert.first_name}} {{expert.last_name}}</strong> {{expert.country.member.code}} <br />
+                    <strong>{{ expert.person.first_name }} {{ expert.person.last_name}}</strong> {{ expert.country.member.code }} <br />
                 </p>
                 <div class="row">
                     <div class="col-xs-5">

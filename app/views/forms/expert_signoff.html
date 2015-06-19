@@ -1,20 +1,9 @@
 
 <div class="row">
-    <span ng-repeat="expert in experts.people">
+    <span ng-repeat="expert in experts">
         <div class="col-sm-6">
             <wsi-expert-pin expert="expert"></wsi-expert-pin>
         </div>
         <div ng-show="$index % 2 == 1" class="clearfix"></div>
     </span>
-</div>
-
-<br/>
-
-<div class="row">
-    <div class="col-sm-6">
-        <wsi-expert-pin expert="ce" position="'Chief Expert'"></wsi-expert-pin>
-    </div>
-    <div class="col-sm-6">
-        <wsi-expert-pin expert="jp" position="'Jury President'"></wsi-expert-pin>
-    </div>
 </div>

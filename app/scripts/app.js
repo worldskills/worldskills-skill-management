@@ -62,15 +62,15 @@ angular
   $stateProvider
 
   // //index
-    .state('binder_form', {
-        url: '/forms/{id}',
+    .state('form_submission', {
+        url: '/forms/{formId}/skills/{skillId}',
         templateUrl: 'views/form_submission.html',
         controller: 'FormSubmissionCtrl',
         data: {
             requireLoggedIn: true
         }
     })
-    .state('binder_form_list', {
+    .state('form_submission_list', {
         url: '/forms',
         templateUrl: 'views/form_submission_list.html',
         controller: 'FormSubmissionListCtrl',

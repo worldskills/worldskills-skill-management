@@ -1,39 +1,31 @@
 <ol class="breadcrumb">
     <li><a ui-sref="binder_form_list">Skill Management</a></li>
     <li><a ui-sref="binder_form_list" translate>BinderFormListHeading</a></li>
-    <li class="active">{{binderForm.name.text}}</li>
+    <li class="active">{{ submission.form.name.text }}</li>
 </ol>
 
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
 
 <div class="page-header">
-<p>Skill 16 Electronics</p>
-<h1>{{binderForm.name.text}}</h1>
+<p>{{ submission.skill.number }} {{ submission.skill.name.text }}</p>
+<h1>{{ submission.form.name.text }}</h1>
 </div>
 
 <alerts></alerts>
 
-<form name="form" role="form" class="{{binderForm.horizontal == true ? 'form-horizontal' : ''}}" ng-submit="submit()">
-    <div ng-repeat="question in binderForm.questions">
-	<div class="form-group" ng-show="!binderForm.horizontal">
-        <p ng-if="question.type == 'TEXT'">{{question.question_text.text}}</p>
-        <h3 ng-if="question.type == 'TITLE'">{{question.question_text.text}}</h3>
-        <h5 ng-if="question.type == 'EXPERT_APPROVAL' || question.type == 'CE_APPROVAL'">{{question.title_text.text}}</h5>
-        <p ng-if="question.type == 'EXPERT_APPROVAL' || question.type == 'CE_APPROVAL'">{{question.question_text.text}}</p>
-    	<label ng-if="question.type == 'TEXT_FIELD' || question.type == 'TEXTAREA' || question.type == 'RADIO'" for="name">{{question.question_text.text}}</label>
+<form name="form" role="form" ng-submit="submit()">
+    <div ng-repeat="field in submission.fields">
+        <div class="form-group">
+            <h4>{{ field.title.text }}</h4>
+            <p>{{ field.text.text }}</p>
 
-    	<wsi-textarea question="question" ng-show="question.type == 'TEXTAREA'"></wsi-textarea>
-		<wsi-textfield question="question" ng-show="question.type == 'TEXT_FIELD'"></wsi-textfield>
-		<wsi-radio question="question" ng-show="question.type == 'RADIO'"></wsi-radio>
-		<wsi-expert-signoff experts="experts" ce="ce" jp="jp" ng-show="question.type == 'EXPERT_APPROVAL'"></wsi-expert-signoff>
-        <div class="row" ng-show="question.type == 'CE_APPROVAL'">
-            <div class="col-sm-6">
-                <wsi-expert-pin expert="ce2" position="'Chief Expert'" ng-show="question.type == 'CE_APPROVAL'"></wsi-expert-pin>
-            </div>
+            <wsi-textarea question="question" ng-show="question.type == 'input_textarea'"></wsi-textarea>
+            <wsi-textfield question="question" ng-show="field.type == 'input_text'"></wsi-textfield>
+            <wsi-radio question="question" ng-show="question.type == 'input_yesno'"></wsi-radio>
+            <wsi-expert-signoff experts="field.people" ng-show="field.type == 'expert_agreement'"></wsi-expert-signoff>
         </div>
-    </div>
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
     </div>
 
     <div>
