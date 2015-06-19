@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($scope, $rootScope, auth, Skills) {
+angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($scope, $rootScope, auth, PersonSkills) {
 
     var eventId = 10;
 
     auth.user.$promise.then(function () {
-        $scope.skills = Skills.get({eventId: eventId, personId: auth.user.person_id});
+        $scope.skills = PersonSkills.get({eventId: eventId, personId: auth.user.person_id});
     });
 
         $scope.formList = $rootScope.formList;
