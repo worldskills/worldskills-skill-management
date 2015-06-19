@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function (submission) {
         $scope.loading = false;
@@ -12,6 +12,29 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         });
         */
     });
+
+    var timeoutsFields = {};
+    $scope.fieldChanged = function (field) {
+        var updateField = function () {
+            FormSubmissionField.update({submissionId: $scope.submission.id}, field);
+        };
+        if (field.id in timeoutsFields) {
+            $timeout.cancel(timeoutsFields[field.id]);
+        }
+        timeoutsFields[field.id] = $timeout(updateField, 2000);
+    };
+
+    $scope.personChanged = function (field, person) {
+        if (person.value.length == 4) {
+            FormSubmissionFieldPerson.update({
+                submissionId: $scope.submission.id,
+                fieldId: field.id,
+                personId: person.person.id
+            }, person, function (p) {
+                person.checked = p.checked;
+            });
+        }
+    };
 
 /*
       if ($stateParams.id == 1)
