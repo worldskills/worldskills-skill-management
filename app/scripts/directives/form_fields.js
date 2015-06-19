@@ -28,7 +28,7 @@ angular.module('skillMgmtApp')
 		  templateUrl: '../../views/forms/radio.html'
 	  }
   })
-  
+
   .directive('wsiExpertSignoff', function () {
 	  return {
 		  restrict: 'E',

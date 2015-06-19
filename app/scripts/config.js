@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var wsApp = angular.module('skillMgmtApp'); 
+    var wsApp = angular.module('skillMgmtApp');
     wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'http://localhost:8080/skillman');
     wsApp.constant('WORLDSKILLS_API_AUTH_CODE', 1000);
     wsApp.constant('WORLDSKILLS_CLIENT_ID', '269f5d211');

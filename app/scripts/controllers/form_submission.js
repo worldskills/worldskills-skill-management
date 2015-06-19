@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams) {
-  
+
       if ($stateParams.id == 1)
       {
           $scope.binderForm = $rootScope.form1;
@@ -17,7 +17,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
       $scope.experts = $rootScope.experts;
       $scope.ce = $rootScope.ce;
       $scope.jp = $rootScope.jp;
-      
+
       $scope.labelClass = function(type) {
           console.log(type);
           if (type == 'TEXT') {
@@ -30,10 +30,10 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
               return 'col-sm-12';
           }
       };
-      
+
       $scope.submit = function () {
           $scope.formList[$stateParams.id - 1].state = 'submitted';
           $state.go('form_submissions');
       };
-      
+
 });

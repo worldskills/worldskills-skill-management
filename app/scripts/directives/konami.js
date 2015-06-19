@@ -11,15 +11,15 @@ angular.module('skillMgmtApp')
         $.getScript('http://www.cornify.com/js/cornify.js',function(){
           cornify_add();
           $(document).keydown(cornify_add);
-        }); 
+        });
         //end konami fun
       }
     },
     link: function (scope, element, attrs) {
-      
+
       var kon_index = 0,
       kon_keys = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-      
+
       $(document).keydown(function(e){
         if (e.keyCode === kon_keys[kon_index++]) {
           console.log(e.keyCode);

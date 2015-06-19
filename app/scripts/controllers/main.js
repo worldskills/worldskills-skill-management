@@ -3,13 +3,13 @@
 angular.module('skillMgmtApp')
   .controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth) {
     $scope.selectedLanguage = Language.selectedLanguage;
-    
+
     $scope.auth = auth;
     $scope.logout = function (e) {
         auth.logout();
     };
     $scope.date = new Date();
-    
+
     $rootScope.formList = [
         {
         	"id": 1,
@@ -24,7 +24,7 @@ angular.module('skillMgmtApp')
             "state": "pending"
         },
     ];
-    
+
     $rootScope.form1 = {
     		"id" : 342,
     	    "name": {
@@ -58,10 +58,10 @@ angular.module('skillMgmtApp')
     	                "text": "I agree to the 30% change to the Test Project as described and I understand that the Competitors must be informed of the 30% change as soon as it is agreed. Competition Rule 12.5.6."
     	            }
     	        }
-    	    ]	
+    	    ]
     };
-    
-    
+
+
     $rootScope.form2 = {
     		"id" : 342,
     	    "name": {
@@ -160,9 +160,9 @@ angular.module('skillMgmtApp')
     	                "text": ""
     	            }
     	        }
-    	    ]	
+    	    ]
     };
-    
+
 
     $rootScope.ce = {
             "id": 4985,
@@ -427,8 +427,8 @@ angular.module('skillMgmtApp')
                 }
             ]
         };
-    
-    
+
+
     $rootScope.ce2 = {
             "id": 4985,
             "title": {
@@ -692,7 +692,7 @@ angular.module('skillMgmtApp')
                 }
             ]
         };
-    
+
     $rootScope.jp = {
             "id": 2454,
             "title": {
@@ -840,7 +840,7 @@ angular.module('skillMgmtApp')
                 }
             ]
         };
-    
+
     $rootScope.experts = {
     	    "people": [
     	               {
@@ -2425,5 +2425,5 @@ angular.module('skillMgmtApp')
     	           "sum": 9,
     	           "offset": 0
     	       }
-    
+
   });

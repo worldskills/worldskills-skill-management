@@ -47,9 +47,9 @@ angular
   // $translateProvider.registerAvailableLanguageKeys(['en', 'pt'], {
   //   'en_US': 'en',
   //   'en_UK': 'en',
-  //   'pt_BR': 'pt'    
+  //   'pt_BR': 'pt'
   // });
-  
+
   // try to find out preferred language by yourself
   //$translateProvider.determinePreferredLanguage();
 

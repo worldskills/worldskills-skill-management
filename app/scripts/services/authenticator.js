@@ -9,7 +9,7 @@ angular.module('skillMgmtApp')
 			{
 				for (var i=0; i<user.roles.length; i++)
 				{
-					if (user.roles[i].name == permission 
+					if (user.roles[i].name == permission
 							&& user.roles[i].role_application.application_code == webServiceCode)
 					{
 						return true;
@@ -18,7 +18,7 @@ angular.module('skillMgmtApp')
 			}
 			return false;
        	};
-		
+
 		this.authenticate = function(user)
 		{
 			return this.hasPermission(user, WORLDSKILLS_API_AUTH_CODE, 'Admin') || this.hasPermission(user, WORLDSKILLS_API_AUTH_CODE, 'CreateResource');

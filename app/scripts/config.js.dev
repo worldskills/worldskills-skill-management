@@ -4,8 +4,8 @@
     var restBaseUrl = 'http://localhost:9999';
     var authBaseUrl = 'http://localhost:8088';
     var loginApp = 'http://worldskillsdevauth.com';
-    
-    var wsApp = angular.module('skillMgmtApp'); 
+
+    var wsApp = angular.module('skillMgmtApp');
     wsApp.constant('REST_BASE_URL', restBaseUrl);
     wsApp.constant('CLIENT_ID', '81de4e404d80');
     wsApp.constant('API_AUTH', authBaseUrl + '/auth');

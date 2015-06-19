@@ -5,7 +5,7 @@ angular.module('skillMgmtApp')
 	{
 		this.hasPermission = function(permission)
 		{
-			
+
 			return authenticator.hasPermission(auth.user, WORLDSKILLS_API_AUTH_CODE, permission);
 		};
 
