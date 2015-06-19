@@ -22,9 +22,20 @@
 
             <input ng-show="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
 
-            <textarea ng-show="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value"></textarea>
+            <textarea ng-show="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" ng-change="fieldChanged(field)"></textarea>
 
-            <div ng-show="question.type == 'input_yesno'" class="radio" ng-repeat="option in question.options">
+            <div ng-show="field.type == 'input_yesno'">
+                <label class="radio-inline">
+                    <input type="radio" ng-model="field.checked" ng-change="fieldChanged(field)" ng-value="true" >
+                    Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="field.checked" ng-change="fieldChanged(field)" ng-value="false" >
+                    No
+                </label>
+            </div>
+
+            <div ng-show="question.type == 'input_checkbox'" class="radio" ng-repeat="option in question.options">
                 <label>
                     <input type="radio" ng-model="question.answer" name="{{question.id}}" required="true" value="{{option.value}}" >
                     {{option.text}}
