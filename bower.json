@@ -1,5 +1,5 @@
 {
-  "name": "world-skills-app",
+  "name": "worldskills-skill-management",
   "dependencies": {
     "angular": "1.2.16",
     "json3": "~3.2.6",

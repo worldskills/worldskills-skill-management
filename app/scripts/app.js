@@ -4,7 +4,6 @@ angular
   .module('skillMgmtApp', [
     'ngResource',
     'ngCookies',
-    'restangular',
     'ngSanitize',
     'ngAnimate',
     'ui.router',

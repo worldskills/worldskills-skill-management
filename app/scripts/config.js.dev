@@ -1,16 +1,11 @@
 (function() {
     'use strict';
 
-    var restBaseUrl = 'http://localhost:9999';
-    var authBaseUrl = 'http://localhost:8088';
-    var loginApp = 'http://worldskillsdevauth.com';
-
     var wsApp = angular.module('skillMgmtApp');
-    wsApp.constant('REST_BASE_URL', restBaseUrl);
-    wsApp.constant('CLIENT_ID', '81de4e404d80');
-    wsApp.constant('API_AUTH', authBaseUrl + '/auth');
-    wsApp.constant('AUTHORIZE_URL', loginApp + '/oauth/authorize');
-    wsApp.constant('LOGOUT_URL', loginApp + '/logout');
-    wsApp.constant('API_AUTH_CODE', 1000);
+    wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'http://localhost:8080/skillman');
+    wsApp.constant('WORLDSKILLS_API_AUTH_CODE', 1200);
+    wsApp.constant('WORLDSKILLS_CLIENT_ID', '55169e05a468');
+    wsApp.constant('WORLDSKILLS_API_AUTH', 'http://localhost:8080/auth');
+    wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.dev/oauth/authorize');
 
 })();
