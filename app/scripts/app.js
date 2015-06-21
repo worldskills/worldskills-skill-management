@@ -28,7 +28,7 @@ angular
             }
             $state.go(redirectToState, redirectToParams);
         } else {
-            $state.go('binder_form_list');
+            $state.go('form_submission_list');
         }
     });
 

@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="binder_form_list">Skill Management</a></li>
-    <li><a ui-sref="binder_form_list" translate>BinderFormListHeading</a></li>
+    <li><a ui-sref="form_submission_list">Skill Management</a></li>
+    <li><a ui-sref="form_submission_list" translate>BinderFormListHeading</a></li>
     <li class="active">{{ submission.form.name.text }}</li>
 </ol>
 
@@ -87,7 +87,7 @@
     <div>
         <br/>
         <button class="btn btn-primary" type="submit">Submit Form</button>
-        <button class="btn btn-link pull-right" type="submit">« Return to form list</button>
+        <a class="btn btn-link pull-right" ui-sref="form_submission_list">« Return to form list</button>
     </div>
 
 
