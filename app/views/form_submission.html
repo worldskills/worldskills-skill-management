@@ -61,7 +61,7 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="expert.value" ng-change="personChanged(field, expert)" maxlength="4" placeholder="PIN" ng-show="!expert.checked" />
+                                                <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="expert.pin" ng-change="pinChanged(field, expert)" maxlength="4" placeholder="PIN" ng-show="!expert.checked" />
                                                 <input type="password" class="form-control" value="0000" disabled="disabled" ng-show="expert.checked" />
                                             </div>
                                             <div class="col-xs-7">

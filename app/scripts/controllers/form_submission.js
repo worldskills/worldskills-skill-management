@@ -4,13 +4,6 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function (submission) {
         $scope.loading = false;
-        /*
-        attempt.questions.forEach(function (question) {
-            if (question.answer !== null) {
-                $scope.questions[question.id] = question.answer.id;
-            }
-        });
-        */
     });
 
     var timeoutsFields = {};
@@ -28,8 +21,8 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         }
     };
 
-    $scope.personChanged = function (field, person) {
-        if (person.value.length == 4) {
+    $scope.pinChanged = function (field, person) {
+        if (person.pin.length == 4) {
             FormSubmissionFieldPerson.update({
                 submissionId: $scope.submission.id,
                 fieldId: field.id,
