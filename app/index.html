@@ -19,6 +19,7 @@
     <script src="xdomain/xdomain.js"></script>
     <![endif]-->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/angular-worldskills-utils/src/spinner.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -37,7 +38,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" ng-cloak translate>APP_NAME</a>
+                <a class="navbar-brand" ui-sref="form_submission_list" ng-cloak translate>APP_NAME</a>
             </div>
             <div ng-show="auth.loggedIn">
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -47,6 +48,8 @@
                                 {{auth.user.first_name || ""}} {{auth.user.last_name || ""}} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
+                                <li ng-show="userCanEditForms"><a ui-sref="admin_form.list">Admin</a></li>
+                                <li ng-show="userCanEditForms" role="separator" class="divider"></li>
                                 <li><a href="" ng-click="logout()">Logout</a></li>
                             </ul>
                         </li>
@@ -109,6 +112,7 @@
         <script src="scripts/controllers/translate.js"></script>
         <script src="scripts/controllers/form_submission_list.js"></script>
         <script src="scripts/controllers/form_submission.js"></script>
+        <script src="scripts/controllers/admin_form.js"></script>
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/alerts.js"></script>
         <script src="scripts/directives/select2_tags.js"></script>
@@ -116,6 +120,7 @@
         <script src="scripts/services/language.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/alert.js"></script>
+        <script src="scripts/services/Form.js"></script>
         <script src="scripts/services/PersonSkills.js"></script>
         <script src="scripts/services/SkillForms.js"></script>
         <script src="scripts/services/FormSubmission.js"></script>

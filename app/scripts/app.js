@@ -76,6 +76,24 @@ angular
         data: {
             requireLoggedIn: true
         }
+    })
+    .state('admin_form', {
+        url: '/admin/forms',
+        templateUrl: 'views/admin_form.html',
+        controller: 'AdminFormCtrl',
+        abstract: true
+    })
+    .state('admin_form.list', {
+        url: '/admin/forms',
+        templateUrl: 'views/admin_form_list.html',
+        controller: 'AdminFormListCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditForms'}
+            ]
+        }
     });
 
 
