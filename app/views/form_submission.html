@@ -18,7 +18,7 @@
     <div ng-repeat="field in submission.fields">
         <div class="form-group">
             <h4>{{ field.title.text }}</h4>
-            <p>{{ field.text.text }}</p>
+            <p ng-show="field.type != 'input_checkbox'">{{ field.text.text }}</p>
 
             <input ng-show="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
 
@@ -26,48 +26,48 @@
 
             <div ng-show="field.type == 'input_yesno'">
                 <label class="radio-inline">
-                    <input type="radio" ng-model="field.checked" ng-change="fieldChanged(field)" ng-value="true" >
+                    <input type="radio" ng-model="field.checked" ng-change="fieldChecked(field)" ng-value="true" >
                     Yes
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" ng-model="field.checked" ng-change="fieldChanged(field)" ng-value="false" >
+                    <input type="radio" ng-model="field.checked" ng-change="fieldChecked(field)" ng-value="false" >
                     No
                 </label>
             </div>
 
-            <div ng-show="question.type == 'input_checkbox'" class="radio" ng-repeat="option in question.options">
+            <div ng-show="field.type == 'input_checkbox'" class="checkbox">
                 <label>
-                    <input type="radio" ng-model="question.answer" name="{{question.id}}" required="true" value="{{option.value}}" >
-                    {{option.text}}
+                    <input type="checkbox" ng-model="field.checked" ng-change="fieldChecked(field)" value="true" >
+                    {{ field.text.text }}
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement'" class="row">
-                <span ng-repeat="expert in field.people">
+            <div ng-show="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
+                <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <p>
-                                            <img class="img-circle" ng-show="expert.person.images[0]" class="img-responsive" ng-src="{{expert.person.images[0].links[1].href}}_square" width="60" height="60">
-                                            <img class="img-circle" ng-show="!expert.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                            <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].links[1].href}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
                                     </div>
                                     <div class="col-xs-8">
                                         <p>
-                                            <span ng-show="position">{{position}}<br/></span>
-                                            <strong>{{ expert.person.first_name }} {{ expert.person.last_name}}</strong> {{ expert.country.member.code }} <br />
+                                            <span ng-show="person.position">{{person.position}}<br/></span>
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong> {{ person.country.member.code }} <br />
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="expert.pin" ng-change="pinChanged(field, expert)" maxlength="4" placeholder="PIN" ng-show="!expert.checked" />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-show="expert.checked" />
+                                                <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-show="!person.checked" />
+                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-show="person.checked" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
-                                                    <i class="glyphicon glyphicon-ok text-success" ng-show="expert.checked"></i>
-                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!expert.checked"></i>
+                                                    <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
                                                 </div>
                                             </div>
                                         </div>

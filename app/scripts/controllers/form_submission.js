@@ -11,14 +11,14 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         var updateField = function () {
             FormSubmissionField.update({submissionId: $scope.submission.id}, field);
         };
-        if (field.type == 'input_textarea' || field.type == 'input_text') {
-            if (field.id in timeoutsFields) {
-                $timeout.cancel(timeoutsFields[field.id]);
-            }
-            timeoutsFields[field.id] = $timeout(updateField, 1000);
-        } else {
-            updateField();
+        if (field.id in timeoutsFields) {
+            $timeout.cancel(timeoutsFields[field.id]);
         }
+        timeoutsFields[field.id] = $timeout(updateField, 1000);
+    };
+
+    $scope.fieldChecked = function (field) {
+        FormSubmissionField.update({submissionId: $scope.submission.id}, field);
     };
 
     $scope.pinChanged = function (field, person) {
