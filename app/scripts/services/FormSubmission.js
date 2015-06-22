@@ -12,6 +12,10 @@
             },
             update: {
                 method: 'PUT'
+            },
+            query: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submissions',
             }
         });
 

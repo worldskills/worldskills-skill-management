@@ -15,41 +15,41 @@
         <tabset>
             <tab ng-repeat="skill in skills.skills" heading="{{ skill.name.text }}">
 
-        <br/>
+                <br/>
 
-        <div class="table-responsive">
-            <table class="table table-striped resource_list">
-                <colgroup>
-                    <col width="20%" />
-                    <col width="60%" />
-                    <col width="20%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th><span translate>Day</span></th>
-                        <th><span translate>Form</span></th>
-                        <th>State</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="form in forms.forms">
-                        <td>{{ form.timeline }}</td>
-                        <td><a ui-sref="form_submission({formId: form.id, skillId: skill.id})">{{ form.name.text }}</td>
-                        <td>
-                            <span class="glyphicon glyphicon-ok text-success" ng-show="form.state == 'submitted'"></span>
-                        </td>
-                    </tr>
-                    <tr ng-show="forms.total_count == 0">
-                        <td colspan="3">No forms found</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+                <div class="table-responsive">
+                    <table class="table table-striped resource_list">
+                        <colgroup>
+                            <col width="20%" />
+                            <col width="60%" />
+                            <col width="20%" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th><span translate>Day</span></th>
+                                <th><span translate>Form</span></th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="form in forms[skill.id].forms">
+                                <td>{{ form.timeline }}</td>
+                                <td><a ui-sref="form_submission({formId: form.id, skillId: skill.id})">{{ form.name.text }}</td>
+                                <td>
+                                    <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submissions"></span>
+                                </td>
+                            </tr>
+                            <tr ng-show="forms.total_count == 0">
+                                <td colspan="3">No forms found</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
             </tab>
         </tabset>
