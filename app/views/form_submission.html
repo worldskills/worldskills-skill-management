@@ -46,7 +46,7 @@
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
-                            <div class="panel-body">
+                            <div class="panel-body" ng-class="{'bg-success': person.checked}">
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <p>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="col-xs-5">
                             <div class="panel panel-default">
-                                <div class="panel-body">
+                                <div class="panel-body" ng-class="{'bg-success': person.checked}">
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <p>
