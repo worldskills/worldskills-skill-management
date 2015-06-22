@@ -21,6 +21,30 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         FormSubmissionField.update({submissionId: $scope.submission.id}, field);
     };
 
+    var timeoutsFieldPersons = {};
+    $scope.fieldPersonChanged = function (field, person) {
+        var key = field.id + '_' + person.person.id;
+        var updateField = function () {
+            FormSubmissionFieldPerson.update({
+                submissionId: $scope.submission.id,
+                fieldId: field.id,
+                personId: person.person.id
+            }, person);
+        };
+        if (key in timeoutsFieldPersons) {
+            $timeout.cancel(timeoutsFieldPersons[key]);
+        }
+        timeoutsFieldPersons[key] = $timeout(updateField, 1000);
+    };
+
+    $scope.personChecked = function (field, person) {
+        FormSubmissionFieldPerson.update({
+            submissionId: $scope.submission.id,
+            fieldId: field.id,
+            personId: person.person.id
+        }, person);
+    };
+
     $scope.pinChanged = function (field, person) {
         if (person.pin.length == 4) {
             FormSubmissionFieldPerson.update({

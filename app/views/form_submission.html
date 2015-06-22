@@ -9,7 +9,7 @@
 
 <div class="page-header">
 <p>{{ submission.skill.number }} {{ submission.skill.name.text }}</p>
-<h1>{{ submission.form.name.text }}</h1>
+<h1>{{ submission.form.name.text }} <small>{{ submission.form.timeline }}</small></h1>
 </div>
 
 <alerts></alerts>
@@ -42,7 +42,7 @@
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
+            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -78,6 +78,80 @@
                     </div>
                     <div ng-show="$index % 2 == 1" class="clearfix"></div>
                 </span>
+            </div>
+
+            <div ng-show="field.type == 'competitor_toolbox'">
+                <div ng-repeat="person in field.people">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox">
+                                {{ person.person.first_name }} {{ person.person.last_name}} {{ person.country.member.code }}
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="person.checked" ng-change="personChecked(field, person)" value="true">
+                                    Toolbox checked
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" ng-model="person.value" ng-change="fieldPersonChanged(field, person)" placeholder="Notes" />
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+
+            <div ng-show="field.type == 'competitor_check'">
+                <div ng-repeat="person in field.people">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <p>
+                                Name on passport:<br/>
+                                Passport number:<br/>
+                                Date of birth:<br/>
+                                Language:
+                            </p>
+                        </div>
+                        <div class="col-xs-4">
+                            <textarea class="form-control" rows="4" ng-model="person.value" ng-change="fieldPersonChanged(field, person)"></textarea>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <p>
+                                                <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].links[1].href}}_square" width="60" height="60">
+                                                <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <p>
+                                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong> {{ person.country.member.code }} <br />
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-xs-5">
+                                                    <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-show="!person.checked" />
+                                                    <input type="password" class="form-control" value="0000" disabled="disabled" ng-show="person.checked" />
+                                                </div>
+                                                <div class="col-xs-7">
+                                                    <div class="form-control-static">
+                                                        <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                                        <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
             </div>
 
         </div>
