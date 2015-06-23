@@ -23,7 +23,7 @@
     "angular-scenario": "1.2.16"
   },
   "overrides": {
-    "bootstrap": {
+    "worldskills-bootstrap": {
       "main": [
         "dist/js/bootstrap.js",
         "dist/css/bootstrap.css",
