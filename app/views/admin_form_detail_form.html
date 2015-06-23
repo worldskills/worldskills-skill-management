@@ -1,0 +1,43 @@
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+    <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+        <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="name" required ng-model="model.name.text">
+        </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted && form.name.$error.required">Please enter a name!</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.event.$invalid}">
+        <label for="event" class="col-sm-3 control-label">Competition <span class="required">*</span></label>
+        <div class="col-sm-4">
+            <select ui-select2 class="form-control" id="event" name="event" required ng-model="model.event.id">
+                <option ng-repeat="event in events" value="{{event.id}}">{{event.name}}</option>
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted && form.ws_entity.$error.required">Please select an event.</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.timeline.$invalid}">
+        <label for="timeline" class="col-sm-3 control-label">Day <span class="required">*</span></label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="timeline" required ng-model="model.timeline" placeholder="e.g. C-3 or C4">
+        </div>
+        <div class="col-sm-5">
+            <span class="help-block" ng-show="submitted && form.timeline.$error.required">Please enter a day!</span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.description.$invalid}">
+        <label for="description" class="col-sm-3 control-label">Description</label>
+        <div class="col-sm-4">
+            <textarea class="form-control" id="description" name="description" rows="3" ng-model="model.description.text" tabindex="1"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success" id="save">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="admin_form.list" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>

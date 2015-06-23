@@ -8,6 +8,7 @@ angular
     'ngAnimate',
     'ui.router',
     'ui.bootstrap',
+    'ui.select2',
     'pascalprecht.translate',
     'worldskills.utils'
   ])
@@ -84,7 +85,7 @@ angular
         abstract: true
     })
     .state('admin_form.list', {
-        url: '/admin/forms',
+        url: '?page',
         templateUrl: 'views/admin_form_list.html',
         controller: 'AdminFormListCtrl',
         data: {
@@ -93,6 +94,19 @@ angular
                 {code: 1200, role: 'Admin'},
                 {code: 1200, role: 'EditForms'}
             ]
+        },
+        reloadOnSearch: false
+    }).state('admin_form.detail', {
+        url: '/{id}',
+        templateUrl: 'views/admin_form_detail.html',
+        controller: 'AdminFormDetailCtrl',
+        abstract: true
+    }).state('admin_form.detail.form', {
+        url: '',
+        templateUrl: 'views/admin_form_detail_form.html',
+        controller: 'AdminFormDetailFormCtrl',
+        data: {
+            requireLoggedIn: true
         }
     });
 

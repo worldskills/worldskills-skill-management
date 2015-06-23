@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="form_submission_list">Skill Management</a></li>
+    <li><a ui-sref="admin_form.list">Admin</a></li>
+    <li><a ui-sref="admin_form.list">Forms</a></li>
+    <li class="active">{{title || " "}}</li>
+</ol>
+
+<alerts></alerts>
+
+<h1>{{title || " "}}</h1>
+
+<ul class="nav nav-tabs">
+    <li ui-sref-active="active"><a ui-sref="admin_form.detail.form">Form</a></li>
+    <li ui-sref-active="active"><a ui-sref="admin_form.detail.fields">Fields</a></li>
+    <li ui-sref-active="active"><a ui-sref="admin_form.detail.submissions">Submissions</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>
