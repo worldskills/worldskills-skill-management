@@ -63,10 +63,13 @@
                                             <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
                                     </div>
-                                    <div class="col-xs-8">
+                                    <div class="col-xs-9">
                                         <p>
                                             <span ng-show="person.position">{{person.position}}<br/></span>
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong> {{ person.country.member.code }} <br />
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
+                                            <span ng-repeat="entity in person.person.entities">
+                                                <span ng-show="entity.id != 1 && entity.id != 83" class="text-muted"><br/>{{ entity.name.text }}</span>
+                                            </span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -94,7 +97,10 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <div class="checkbox">
-                                {{ person.person.first_name }} {{ person.person.last_name}} {{ person.country.member.code }}
+                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
+                                <span ng-repeat="entity in person.person.entities">
+                                    <span ng-show="entity.id != 1 && entity.id != 83" class="text-muted"><br/>{{ entity.name.text }}</span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-xs-4">
@@ -140,7 +146,10 @@
                                         </div>
                                         <div class="col-xs-8">
                                             <p>
-                                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong> {{ person.country.member.code }} <br />
+                                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
+                                                <span ng-repeat="entity in person.person.entities">
+                                                    <span ng-show="entity.id != 1 && entity.id != 83" class="text-muted"><br/>{{ entity.name.text }}</span>
+                                                </span>
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">
