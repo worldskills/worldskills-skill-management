@@ -51,7 +51,7 @@
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'competitor_agreement'" class="row">
+            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'jp_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -117,15 +117,16 @@
                 <div ng-repeat="person in field.people">
                     <div class="row">
                         <div class="col-xs-3">
-                            <p>
+                            <label class="competitor-check-label">
+                                Name for certificate:<br/>
                                 Name on passport:<br/>
                                 Passport number:<br/>
                                 Date of birth:<br/>
-                                Language:
-                            </p>
+                                Language Test Project:
+                            </label>
                         </div>
                         <div class="col-xs-4">
-                            <textarea class="form-control" rows="4" ng-model="person.value" ng-change="fieldPersonChanged(field, person)"></textarea>
+                            <textarea class="form-control" rows="5" ng-model="person.value" ng-change="fieldPersonChanged(field, person)"></textarea>
                         </div>
                         <div class="col-xs-5">
                             <div class="panel panel-default">
