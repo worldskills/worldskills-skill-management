@@ -18,6 +18,11 @@
 
 <alerts></alerts>
 
+<div ng-show="submission.form.description.text">
+    <p>{{ submission.form.description.text }}</p>
+    <br/>
+</div>
+
 <form name="form" role="form" ng-submit="submit()">
     <div ng-repeat="field in submission.fields">
         <div class="form-group">
