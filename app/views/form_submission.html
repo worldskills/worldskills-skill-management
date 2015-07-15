@@ -51,7 +51,7 @@
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'jp_agreement' || field.type == 'competitor_agreement'" class="row">
+            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_jp_agreement' || field.type == 'jp_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -121,6 +121,7 @@
 
             <div ng-show="field.type == 'competitor_check'">
                 <div ng-repeat="person in field.people">
+                    <hr/>
                     <div class="row">
                         <div class="col-xs-3">
                             <label class="competitor-check-label">
@@ -169,7 +170,6 @@
                             </div>
                         </div>
                     </div>
-                    <hr/>
                 </div>
             </div>
 
