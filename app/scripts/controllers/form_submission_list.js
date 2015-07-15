@@ -5,9 +5,12 @@ angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($s
     var eventId = 10;
 
     $scope.forms = {};
+    $scope.loading = true;
 
     auth.user.$promise.then(function () {
         $scope.skills = PersonSkills.get({eventId: eventId, personId: auth.user.person_id}, function () {
+
+            $scope.loading = false;
 
             angular.forEach($scope.skills.skills, function (skill) {
 
@@ -19,6 +22,9 @@ angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($s
 
             });
 
+        }, function () {
+            // error
+            $scope.loading = false;
         });
     });
 

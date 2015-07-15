@@ -50,5 +50,13 @@
             </tab>
         </tabset>
 
+        <div ng-show="loading">
+            <ws-spinner></ws-spinner>
+        </div>
+
+        <div ng-show="!loading && !(skills.skills.length > 0)">
+            <p>No forms available. Please note that only the Chief Expert can submit forms.</p>
+        </div>
+
     </div>
 </div>
