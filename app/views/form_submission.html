@@ -18,6 +18,10 @@
 
 <alerts></alerts>
 
+<div class="alert alert-danger" ng-show="submitted && form.$invalid">
+    Some values are missing or wrong. Please check the form and try to submit again.
+</div>
+
 <div ng-show="submission.form.description.text">
     <p>{{ submission.form.description.text }}</p>
     <br/>
@@ -51,7 +55,7 @@
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement' || field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_jp_agreement' || field.type == 'jp_agreement' || field.type == 'competitor_agreement'" class="row">
+            <div ng-show="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -73,8 +77,49 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-show="!person.checked" />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-show="person.checked" />
+                                                <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked" />
+                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="$index % 2 == 1" class="clearfix"></div>
+                </span>
+            </div>
+
+            <div ng-show="field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_jp_agreement' || field.type == 'jp_agreement'" class="row">
+                <span ng-repeat="person in field.people" ng-form="formFieldPerson">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': submitted && formFieldPerson.pin.$invalid}">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].links[1].href}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <span ng-show="person.position">{{person.position}}<br/></span>
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
+                                            <span ng-repeat="entity in person.person.entities">
+                                                <span ng-show="entity.id != 1 && entity.id != 83" class="text-muted"><br/>{{ entity.name.text }}</span>
+                                            </span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked" required />
+                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
@@ -189,7 +234,7 @@
 
     <div>
         <br/>
-        <button class="btn btn-primary" type="submit">Submit Form<ws-text-spinner ng-show="saving" class="ng-hide"></ws-text-spinner></button>
+        <button class="btn btn-primary" type="submit">Submit Form<ws-text-spinner ng-show="submitting" class="ng-hide"></ws-text-spinner></button>
         <a class="btn btn-link pull-right" ui-sref="form_submission_list">« Return to form list</button>
     </div>
 

@@ -6,12 +6,14 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         $scope.loading = false;
     });
 
+    $scope.saving = false;
     var saved = function () {
         $scope.saving = false;
         $scope.saved = true;
     };
 
     $scope.submitted = false;
+    $scope.submitting = false;
 
     var timeoutsFields = {};
     $scope.fieldChanged = function (field) {
@@ -77,19 +79,18 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         $scope.submitted = true;
         if ($scope.form.$valid) {
             if (confirm('Please only submit the form if you have filled out all fields. Click OK to proceed.')) {
-                $scope.saving = true;
+                $scope.submitting = true;
                 $scope.submission.state = 'submitted';
                 $scope.submission.$update(function () {
                     alert.success('The form has been submitted successfully.');
                     $state.go('form_submission_list');
                 }, function (response) {
-                    $scope.saving = false;
-                    alert.error('There was an error saving the form.');
+                    $scope.submitting = false;
+                    alert.error('There was an error submitting the form.');
                     $('body,html').animate({scrollTop: 0});
                 });
             }
         } else {
-            alert.error('Some values are missing or wrong. Please check the form and try to submit again.');
             $('body,html').animate({scrollTop: 0});
         }
     };
