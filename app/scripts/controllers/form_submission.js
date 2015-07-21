@@ -70,10 +70,12 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     };
 
     $scope.submit = function () {
-        $scope.submission.state = 'submitted';
-        $scope.submission.$update(function () {
-            alert.success('The form has been submitted successfully.');
-            $state.go('form_submission_list');
-        });
+        if (confirm('Please only submit the form if you have filled out all fields. Click OK to proceed.')) {
+            $scope.submission.state = 'submitted';
+            $scope.submission.$update(function () {
+                alert.success('The form has been submitted successfully.');
+                $state.go('form_submission_list');
+            });
+        }
     };
 });
