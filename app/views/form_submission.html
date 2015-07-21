@@ -33,11 +33,11 @@
             <h4>{{ field.title.text }}</h4>
             <p ng-show="field.type != 'input_checkbox'">{{ field.text.text }}</p>
 
-            <input ng-show="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
+            <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
 
-            <textarea ng-show="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" ng-change="fieldChanged(field)"></textarea>
+            <textarea ng-if="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" ng-change="fieldChanged(field)"></textarea>
 
-            <div ng-show="field.type == 'input_yesno'">
+            <div ng-if="field.type == 'input_yesno'">
                 <label class="radio-inline">
                     <input type="radio" ng-model="field.checked" ng-change="fieldChecked(field)" ng-value="true" >
                     Yes
@@ -48,14 +48,14 @@
                 </label>
             </div>
 
-            <div ng-show="field.type == 'input_checkbox'" class="checkbox">
+            <div ng-if="field.type == 'input_checkbox'" class="checkbox">
                 <label>
                     <input type="checkbox" ng-model="field.checked" ng-change="fieldChecked(field)" value="true" >
                     {{ field.text.text }}
                 </label>
             </div>
 
-            <div ng-show="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
+            <div ng-if="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -96,7 +96,7 @@
                 </span>
             </div>
 
-            <div ng-show="field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_jp_agreement' || field.type == 'jp_agreement'" class="row">
+            <div ng-if="field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_jp_agreement' || field.type == 'jp_agreement'" class="row">
                 <span ng-repeat="person in field.people" ng-form="formFieldPerson">
                     <div class="col-sm-6">
                         <div class="panel panel-default">
@@ -137,7 +137,7 @@
                 </span>
             </div>
 
-            <div ng-show="field.type == 'competitor_toolbox'">
+            <div ng-if="field.type == 'competitor_toolbox'">
                 <div ng-repeat="person in field.people">
                     <div class="row">
                         <div class="col-xs-3">
@@ -164,7 +164,7 @@
                 </div>
             </div>
 
-            <div ng-show="field.type == 'competitor_check'">
+            <div ng-if="field.type == 'competitor_check'">
                 <div ng-repeat="person in field.people" ng-form="formFieldPerson">
                     <hr/>
                     <div class="row">
