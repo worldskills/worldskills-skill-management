@@ -63,7 +63,9 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
                 personId: person.person.id
             }, person, function (p) {
                 person.checked = p.checked;
-                person.pin = '';
+                if (!person.checked) {
+                    person.pin = '';
+                }
                 saved();
             });
         }
