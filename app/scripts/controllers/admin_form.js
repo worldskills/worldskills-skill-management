@@ -121,3 +121,35 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
         $scope.loading = false;
     });
 });
+
+
+angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $q, Form, FormSubmission) {
+
+    $scope.loading = true;
+
+    var skills = {}
+    $scope.skills = [];
+
+    $scope.forms = Form.query({limit: 99, digital: true}, function () {
+
+        var submissionsPromises = [];
+
+        angular.forEach($scope.forms.forms, function (form) {
+            var s = FormSubmission.query({formId: form.id}, function (submissions) {
+                angular.forEach(submissions.submissions, function (submission) {
+                    if (!(submission.skill.id in skills)) {
+                        var skill = {skill: submission.skill, submissions: {}};
+                        skills[submission.skill.id] = skill;
+                        $scope.skills.push(skill);
+                    }
+                    skills[submission.skill.id].submissions[form.id] = submission;
+                });
+            });
+            submissionsPromises.push(s.$promise);
+        });
+
+        $q.all(submissionsPromises).then(function() {
+            $scope.loading = false;
+        });
+    });
+});

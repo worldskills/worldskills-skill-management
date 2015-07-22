@@ -20,12 +20,22 @@
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.timeline.$invalid}">
-        <label for="timeline" class="col-sm-3 control-label">Day <span class="required">*</span></label>
+        <label for="timeline" class="col-sm-3 control-label">Day</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="timeline" required ng-model="model.timeline" placeholder="e.g. C-3 or C4">
+            <input type="text" class="form-control" id="timeline" ng-model="model.timeline" placeholder="e.g. C-3 or C4">
         </div>
         <div class="col-sm-5">
             <span class="help-block" ng-show="submitted && form.timeline.$error.required">Please enter a day!</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="digital" ng-model="model.digital">
+                    Digital form
+                </label>
+            </div>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.description.$invalid}">

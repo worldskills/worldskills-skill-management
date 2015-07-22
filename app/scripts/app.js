@@ -122,6 +122,13 @@ angular
         data: {
             requireLoggedIn: true
         }
+    }).state('admin_form_progress', {
+        url: '/admin/forms_progress',
+        templateUrl: 'views/admin_form_progress.html',
+        controller: 'AdminFormProgressCtrl',
+        data: {
+            requireLoggedIn: true
+        }
     });
 
 

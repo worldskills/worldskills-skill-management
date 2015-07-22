@@ -1,0 +1,47 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="form_submission_list">Skill Management</a></li>
+    <li><a ui-sref="admin_form.list">Admin</a></li>
+    <li><a ui-sref="admin_form.list">Forms</a></li>
+    <li class="active">Progress</li>
+</ol>
+
+<alerts></alerts>
+
+<h1>Forms Progress</h1>
+
+<br/>
+
+<div class="table-responsive">
+    <table class="table table-striped table-condensed">
+        <colgroup>
+            <col width="30%" />
+            <col width="3%" ng-repeat="form in forms.forms" />
+        </colgroup
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th ng-repeat="form in forms.forms" title="{{ form.name.text }}">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="!loading" ng-repeat="skill in skills">
+                <td>{{ skill.skill.number }} {{ skill.skill.name.text }}</td>
+                <th ng-repeat="form in forms.forms" ng-class="{danger: skill.submissions[form.id].state != 'submitted'}" title="{{ skill.skill.name.text }}\n{{ form.timeline }} {{ form.name.text }}">
+                    <i class="glyphicon glyphicon-ok text-success" ng-show="skill.submissions[form.id].state == 'submitted'"></i>
+                    <i class="glyphicon glyphicon-remove text-danger" ng-show="skill.submissions[form.id].state != 'submitted'"></i>
+                </th>
+            </tr>
+            <tr ng-show="forms.total_count == 0">
+                <td colspan="{{ forms.forms.length + 1 }}">No forms found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="{{ forms.forms.length + 1 }}"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="{{ forms.forms.length + 1 }}"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
