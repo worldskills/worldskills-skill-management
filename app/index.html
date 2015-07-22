@@ -50,8 +50,8 @@
                                 {{auth.user.first_name || ""}} {{auth.user.last_name || ""}} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li ng-show="userCanEditForms"><a ui-sref="admin_form.list">Admin</a></li>
-                                <li ng-show="userCanEditForms" role="separator" class="divider"></li>
+                                <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin_form.list">Admin</a></li>
+                                <li ng-show="userCanViewAllSubmissions || userCanEditForms" role="separator" class="divider"></li>
                                 <li><a href="" ng-click="logout()">Logout</a></li>
                             </ul>
                         </li>

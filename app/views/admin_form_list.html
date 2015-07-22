@@ -19,15 +19,13 @@
         <colgroup>
             <col width="10%" />
             <col width="10%" />
-            <col width="70%" />
-            <col width="10%" />
+            <col width="80%" />
         </colgroup>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Day</th>
                 <th>Name</th>
-                <th>Digital</th>
             </tr>
         </thead>
         <tbody>
@@ -35,18 +33,17 @@
                 <td><a ui-sref="admin_form.detail.submissions({id: form.id})">{{ form.id }}</a></td>
                 <td>{{ form.timeline }}</td>
                 <td><a ui-sref="admin_form.detail.submissions({id: form.id})">{{ form.name.text }}</a></td>
-                <td>{{ form.digital ? 'Yes' : 'No' }}</td>
             </tr>
             <tr ng-show="forms.total_count == 0">
-                <td colspan="4">No forms found</td>
+                <td colspan="3">No forms found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="4"><ws-spinner></ws-spinner></td>
+                <td colspan="3"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4"></td>
+                <td colspan="3"></td>
             </tr>
         </tfoot>
     </table>

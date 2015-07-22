@@ -23,6 +23,7 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
 
         var filters = angular.copy($scope.filters);
         filters.offset = $scope.pagination.itemsPerPage * (page - 1);
+        filters.digital = true;
 
         $scope.forms = Form.query(filters, function (data) {
             $scope.loading = false;
