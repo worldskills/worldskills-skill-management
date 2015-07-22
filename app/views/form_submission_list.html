@@ -16,13 +16,13 @@
                 <div class="table-responsive">
                     <table class="table table-striped resource_list">
                         <colgroup>
-                            <col width="20%" />
-                            <col width="60%" />
-                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="80%" />
+                            <col width="10%" />
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Completion Day</th>
+                                <th>Day</th>
                                 <th>Competition Form</th>
                                 <th>State</th>
                             </tr>
@@ -31,8 +31,8 @@
                             <tr ng-repeat="form in forms[skill.id].forms">
                                 <td>{{ form.timeline }}</td>
                                 <td>
-                                    <a ui-sref="form_submission({formId: form.id, skillId: skill.id})" ng-if="!form.has_submitted_submission">{{ form.name.text }}</a>
-                                    <span ng-if="form.has_submitted_submission">{{ form.name.text }}</span>
+                                    <a ui-sref="form_submission({formId: form.id, skillId: skill.id})" ng-if="!form.has_submitted_submission && form.digital">{{ form.name.text }}</a>
+                                    <span ng-if="form.has_submitted_submission || !form.digital">{{ form.name.text }}<span ng-if="!form.digital"> (see binder in workshop)</span></span>
                                 </td>
                                 <td>
                                     <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
