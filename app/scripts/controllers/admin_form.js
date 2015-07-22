@@ -100,3 +100,24 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($
         }
     };
 });
+
+angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
+
+    $scope.loading = true;
+
+    $scope.submissions = FormSubmission.query({formId: $scope.id}, function () {
+        $scope.loading = false;
+    });
+});
+
+angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
+
+    $scope.loading = true;
+
+    $scope.formId = $stateParams.formId;
+    $scope.skillId = $stateParams.skillId;
+
+    $scope.submission = FormSubmission.get({formId: $scope.formId, skillId: $scope.skillId}, function () {
+        $scope.loading = false;
+    });
+});
