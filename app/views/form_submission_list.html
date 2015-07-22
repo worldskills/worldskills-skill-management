@@ -22,17 +22,20 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th><span translate>Day</span></th>
-                                <th><span translate>Form</span></th>
+                                <th>Completion Day</th>
+                                <th>Competition Form</th>
                                 <th>State</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="form in forms[skill.id].forms">
                                 <td>{{ form.timeline }}</td>
-                                <td><a ui-sref="form_submission({formId: form.id, skillId: skill.id})">{{ form.name.text }}</a></td>
                                 <td>
-                                    <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submissions"></span>
+                                    <a ui-sref="form_submission({formId: form.id, skillId: skill.id})" ng-if="!form.has_submitted_submission">{{ form.name.text }}</a>
+                                    <span ng-if="form.has_submitted_submission">{{ form.name.text }}</span>
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
                                 </td>
                             </tr>
                             <tr ng-show="forms.total_count == 0">

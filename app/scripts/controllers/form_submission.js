@@ -2,7 +2,11 @@
 
 angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, alert, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson) {
 
-    $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function (submission) {
+    $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
+        if ($scope.submission.state == 'submitted') {
+            alert.error('The form has been already been submitted and can\'t be edited anymore.');
+            $state.go('form_submission_list');
+        }
         $scope.loading = false;
     });
 
@@ -19,7 +23,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.fieldChanged = function (field) {
         var updateField = function () {
             $scope.saving = true;
-            FormSubmissionField.update({submissionId: $scope.submission.id}, field, saved);
+            FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved);
         };
         if (field.id in timeoutsFields) {
             $timeout.cancel(timeoutsFields[field.id]);
@@ -29,7 +33,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.fieldChecked = function (field) {
         $scope.saving = true;
-        FormSubmissionField.update({submissionId: $scope.submission.id}, field, saved);
+        FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved);
     };
 
     var timeoutsFieldPersons = {};
@@ -38,7 +42,8 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         var updateField = function () {
             $scope.saving = true;
             FormSubmissionFieldPerson.update({
-                submissionId: $scope.submission.id,
+                formId: $scope.submission.form.id,
+                skillId: $scope.submission.skill.id,
                 fieldId: field.id,
                 personId: person.person.id
             }, person, saved);
@@ -52,7 +57,8 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.personChecked = function (field, person) {
         $scope.saving = true;
         FormSubmissionFieldPerson.update({
-            submissionId: $scope.submission.id,
+            formId: $scope.submission.form.id,
+            skillId: $scope.submission.skill.id,
             fieldId: field.id,
             personId: person.person.id
         }, person, saved);
@@ -62,7 +68,8 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         if (person.pin.length == 4) {
             $scope.saving = true;
             FormSubmissionFieldPerson.update({
-                submissionId: $scope.submission.id,
+                formId: $scope.submission.form.id,
+                skillId: $scope.submission.skill.id,
                 fieldId: field.id,
                 personId: person.person.id
             }, person, function (p) {
