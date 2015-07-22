@@ -69,9 +69,12 @@
         <footer>
             <div class="row">
                 <div class="col-md-10 col-sm-8">
-                    <p>© {{date | date:'yyyy'}} WorldSkills International · <a href="https://www.worldskills.org/site/privacy/">Privacy</a> · <a href="https://www.worldskills.org/site/terms/">Terms</a></p>
+                    <p>
+                        © {{date | date:'yyyy'}} WorldSkills International
+                        <span class="hidden-print"> · <a href="https://www.worldskills.org/site/privacy/">Privacy</a> · <a href="https://www.worldskills.org/site/terms/">Terms</a></span>
+                    </p>
                 </div>
-                <div class="col-md-2 col-sm-4">
+                <div class="col-md-2 col-sm-4 hidden-print">
                     <div ng-show="auth.loggedIn">
                         <p class="site-user">{{auth.user.first_name || ""}} {{auth.user.last_name || ""}}, <a href="#" ng-click="logout()">Logout</a></p>
                     </div>
