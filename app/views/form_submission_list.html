@@ -32,7 +32,7 @@
                                 <td>{{ form.timeline }}</td>
                                 <td>
                                     <a ui-sref="form_submission({formId: form.id, skillId: skill.id})" ng-if="!form.has_submitted_submission && form.digital">{{ form.name.text }}</a>
-                                    <span ng-if="form.has_submitted_submission || !form.digital">{{ form.name.text }}<span ng-if="!form.digital"> (see binder in workshop)</span></span>
+                                    <span ng-if="form.has_submitted_submission || !form.digital">{{ form.name.text }} <span ng-show="!form.digital">(see binder in workshop)</span></span>
                                 </td>
                                 <td>
                                     <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
