@@ -39,11 +39,11 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr>
-                <th>Form</th>
+            <tr ng-show="!loading">
+                <th>&nbsp;</th>
                 <th ng-repeat="form in forms.forms" title="{{ form.name.text }}" class="text-center">{{ $index + 1 }}</th>
             </tr>
-            <tr ng-repeat="form in forms.forms">
+            <tr ng-show="!loading" ng-repeat="form in forms.forms">
                 <th>&nbsp;</th>
                 <th class="text-center text-muted">{{ $index + 1 }}</th>
                 <th colspan="{{ forms.forms.length }}" class="text-muted">{{ form.name.text }}</th>
