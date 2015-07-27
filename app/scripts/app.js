@@ -92,7 +92,6 @@ angular
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'EditForms'},
                 {code: 1200, role: 'ViewAllSubmissions'}
             ]
         },
@@ -102,33 +101,38 @@ angular
         templateUrl: 'views/admin_form_detail.html',
         controller: 'AdminFormDetailCtrl',
         abstract: true
-    }).state('admin_form.detail.form', {
-        url: '/form',
-        templateUrl: 'views/admin_form_detail_form.html',
-        controller: 'AdminFormDetailFormCtrl',
-        data: {
-            requireLoggedIn: true
-        }
     }).state('admin_form.detail.submissions', {
         url: '',
         templateUrl: 'views/admin_form_detail_submissions.html',
         controller: 'AdminFormDetailSubmissionCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
         }
     }).state('admin_submission', {
         url: '/admin/forms/{formId}/skills/{skillId}/submission',
         templateUrl: 'views/admin_submission.html',
         controller: 'AdminSubmissionCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
         }
     }).state('admin_form_progress', {
         url: '/admin/forms_progress',
         templateUrl: 'views/admin_form_progress.html',
         controller: 'AdminFormProgressCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
         }
     });
 

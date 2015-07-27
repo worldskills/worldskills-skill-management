@@ -59,49 +59,6 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
 
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($scope, $rootScope, $state, $stateParams, $http, WORLDSKILLS_API_EVENTS, alert) {
-
-    $http({
-        method: 'GET',
-        url: WORLDSKILLS_API_EVENTS,
-        params: {
-            limit: 100,
-            l: 'en',
-            sort: 'name_asc'
-        }
-    }).success(function(data, status, headers, config) {
-        $scope.events = data.events;
-    });
-
-    $scope.save = function() {
-        $scope.submitted = true;
-        if ($scope.form.$valid) {
-            $scope.loading = true;
-            if ($scope.model.id) {
-                $scope.model.$update(function () {
-                    alert.success('The Form has been saved successfully.');
-                    $state.go('admin_form.list');
-                }, function (response) {
-                    window.alert('Error saving Form.');
-                    $scope.loading = false;
-                });
-            } else {
-                $scope.model.$save(function () {
-                    alert.success('The Form has been added successfully.');
-                    $state.go('admin_form.detail.form', {id: $scope.model.id});
-                }, function (response) {
-                    if (response.status == 401) {
-                        window.alert('Insufficient permissions for to adding a new Form to this Competition.');
-                    } else {
-                        window.alert('Error while adding Form.');
-                    }
-                    $scope.loading = false;
-                });
-            }
-        }
-    };
-});
-
 angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
 
     $scope.loading = true;
