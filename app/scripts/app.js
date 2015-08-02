@@ -139,18 +139,7 @@ angular
 
 
 }])
-.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
-  //DEVELOPMENT API URL
-  $rootScope.api_url = "http://localhost:8080/glossary/";
-  $rootScope.available_languages = {"en_US":"English", "pt_BR":"Portuguese (Brazil)"};
-
-  //PRODUCTION API URL
-  //$rootScope.api_url = "http://beuk.worldskills.org/glossary/";
-
-  // It's very handy to add references to $state and $stateParams to the $rootScope
-  // so that you can access them from any scope within your applications.For example,
-  // <li ng-class='{ active: $state.includes('contacts.list') }'> will set the <li>
-  // to active whenever 'contacts.list' or one of its decendents is active.
-  $rootScope.$state = $state;
-  $rootScope.$stateParams = $stateParams;
+.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
 }]);
