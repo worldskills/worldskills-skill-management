@@ -68,7 +68,7 @@ angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', funct
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
+angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, auth, alert, FormSubmission, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.loading = true;
 
@@ -77,6 +77,36 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
 
     $scope.submission = FormSubmission.get({formId: $scope.formId, skillId: $scope.skillId}, function () {
         $scope.loading = false;
+    });
+
+    $scope.rejectSubmission = function () {
+        if (confirm('Rejecting a submission will show the form to the Chief Expert for editing again. Click OK to proceed.')) {
+            $scope.rejectLoading = true;
+            $scope.submission.$reject(function () {
+                $scope.rejectLoading = false;
+                alert.success('The submission has been rejected.');
+                $state.go('admin_form.detail.submissions', {id: $scope.formId});
+            }, function (response) {
+                $scope.rejectLoading = false;
+                alert.error('There was an error rejecting the form.');
+            });
+        }
+    };
+
+    auth.user.$promise.then(function () {
+
+        angular.forEach(auth.user.roles, function (role) {
+
+            if (role.name == 'Admin' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
+            {
+                $scope.userCanRejectAllSubmissions = true;
+            }
+
+            if (role.name == 'RejectAllSubmissions' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
+            {
+                $scope.userCanRejectAllSubmissions = true;
+            }
+        });
     });
 });
 

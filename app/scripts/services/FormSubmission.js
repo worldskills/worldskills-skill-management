@@ -16,6 +16,10 @@
             query: {
                 method: 'GET',
                 url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/submissions',
+            },
+            reject: {
+                method: 'PUT',
+                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission/reject',
             }
         });
 

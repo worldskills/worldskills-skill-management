@@ -27,7 +27,9 @@
                     <span class="glyphicon glyphicon-remove text-danger" ng-show="submission.state != 'submitted'"></span>
                 </td>
                 <td>
-                    {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}
+                    <span ng-show="submission.state == 'submitted'">
+                        {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}
+                    </span>
                 </td>
             </tr>
             <tr ng-show="!loading && submissions.submissions.length == 0">

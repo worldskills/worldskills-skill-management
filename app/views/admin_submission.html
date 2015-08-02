@@ -13,6 +13,10 @@
 <div class="col-lg-8 col-lg-offset-2">
 
 <div class="page-header">
+<p class="pull-right" ng-show="userCanRejectAllSubmissions">
+    <button ng-click="rejectSubmission()" class="btn btn-danger">Reject<ws-text-spinner ng-show="rejectLoading" class="ng-hide"></ws-text-spinner></button>
+</p>
+
 <p>{{ submission.skill.number }} {{ submission.skill.name.text }}</p>
 
 <h1>{{ submission.form.name.text }} <small>{{ submission.form.timeline }}</small></h1>
