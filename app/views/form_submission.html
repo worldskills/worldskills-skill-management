@@ -77,13 +77,14 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked" />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                <input type="tel" class="form-control form-control-pin" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" />
+                                                <input type="tel" class="form-control form-control-pin" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-hourglass text-muted" ng-show="!person.checked && person.pin.length == 4"></i>
                                                     <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
-                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked && (!person.pin || person.pin.length < 4)"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,13 +119,14 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked" required />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                <input type="tel" class="form-control form-control-pin" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                <input type="tel" class="form-control form-control-pin" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-hourglass text-muted" ng-show="!person.checked && person.pin.length == 4"></i>
                                                     <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
-                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                                    <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked && (!person.pin || person.pin.length < 4)"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,13 +221,14 @@
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">
-                                                    <input type="password" name="pin" inputmode="numeric" pattern="[0-9]*" class="form-control" ng-model="person.pin" ng-change="pinChanged(field, person)" maxlength="4" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked" required />
-                                                    <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                    <input type="tel" class="form-control form-control-pin" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                    <input type="tel" class="form-control form-control-pin" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                                 </div>
                                                 <div class="col-xs-7">
                                                     <div class="form-control-static">
+                                                        <i class="glyphicon glyphicon-hourglass text-muted" ng-show="!person.checked && person.pin.length == 4"></i>
                                                         <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
-                                                        <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                                        <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked && (!person.pin || person.pin.length < 4)"></i>
                                                     </div>
                                                 </div>
                                             </div>

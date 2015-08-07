@@ -15,19 +15,14 @@ footer {
     padding-bottom: 70px;
 }
 
-.pin_field {
-    display: inline-block;
-    width: 80px;
+.form-control-pin {
+    -webkit-text-security: disc;
 }
 
-.expert_signoff {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 2px;
-}
-
-.tick {
-    color: #0B0;
+.form-control-pin::-webkit-inner-spin-button,
+.form-control-pin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .nav.nav-tabs {
