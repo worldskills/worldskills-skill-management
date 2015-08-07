@@ -18,6 +18,10 @@
 
 <alerts></alerts>
 
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
 <div class="alert alert-danger" ng-show="submitted && form.$invalid">
     Some values are missing or wrong. Please check the form and try to submit again.
 </div>

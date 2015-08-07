@@ -16,6 +16,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         $scope.saved = true;
     };
 
+    $scope.loading = true;
     $scope.submitted = false;
     $scope.submitting = false;
 
