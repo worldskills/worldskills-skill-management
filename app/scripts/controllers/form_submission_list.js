@@ -10,6 +10,10 @@ angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($s
     auth.user.$promise.then(function () {
         $scope.skills = PersonSkills.get({eventId: eventId, personId: auth.user.person_id}, function () {
 
+            if ($scope.skills.skills.length == 0) {
+                scope.loading = false;
+            }
+
             angular.forEach($scope.skills.skills, function (skill) {
 
                 var skillId = skill.id;
