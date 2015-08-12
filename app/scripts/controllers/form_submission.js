@@ -19,8 +19,12 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     var errored = function (httpResponse) {
         if (httpResponse.status == 401) {
             // Unauthorized
-            window.alert('Your session has timed out. Please login again.');
-            auth.logout();
+
+            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+
+            // reload page
+            window.location.reload(false)
+
         } else {
             if (typeof httpResponse.data.user_msg != 'undefined') {
                 window.alert('Error: ' + httpResponse.data.user_msg);
