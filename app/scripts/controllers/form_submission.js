@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, alert, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, auth, alert, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
@@ -16,6 +16,21 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         $scope.saved = true;
     };
 
+    var errored = function (httpResponse) {
+        if (httpResponse.status == 401) {
+            // Unauthorized
+            window.alert('Your session has timed out. Please login again.');
+            auth.logout();
+        } else {
+            if (typeof httpResponse.data.user_msg != 'undefined') {
+                window.alert('Error: ' + httpResponse.data.user_msg);
+            } else {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            }
+        }
+        $scope.saving = false;
+    };
+
     $scope.loading = true;
     $scope.submitted = false;
     $scope.submitting = false;
@@ -24,7 +39,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.fieldChanged = function (field) {
         var updateField = function () {
             $scope.saving = true;
-            FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved);
+            FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
         };
         if (field.id in timeoutsFields) {
             $timeout.cancel(timeoutsFields[field.id]);
@@ -34,7 +49,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.fieldChecked = function (field) {
         $scope.saving = true;
-        FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved);
+        FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
     };
 
     var timeoutsFieldPersons = {};
@@ -47,7 +62,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
                 skillId: $scope.submission.skill.id,
                 fieldId: field.id,
                 personId: person.person.id
-            }, person, saved);
+            }, person, saved, errored);
         };
         if (key in timeoutsFieldPersons) {
             $timeout.cancel(timeoutsFieldPersons[key]);
@@ -62,7 +77,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             skillId: $scope.submission.skill.id,
             fieldId: field.id,
             personId: person.person.id
-        }, person, saved);
+        }, person, saved, errored);
     };
 
     $scope.pinChanged = function (field, person) {
@@ -79,6 +94,9 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
                     person.pin = '';
                 }
                 saved();
+            }, function (httpResponse) {
+                person.pin = '';
+                errored(httpResponse);
             });
         }
     };
