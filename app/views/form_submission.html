@@ -26,6 +26,8 @@
     Some values are missing or wrong. Please check the form and try to submit again.
 </div>
 
+<p ng-if="submission.fields.length == 0">No fields need to be filled out.</p>
+
 <div ng-show="submission.form.description.text">
     <p>{{ submission.form.description.text }}</p>
     <br/>
