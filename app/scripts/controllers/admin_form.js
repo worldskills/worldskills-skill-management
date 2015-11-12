@@ -23,7 +23,6 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
 
         var filters = angular.copy($scope.filters);
         filters.offset = $scope.pagination.itemsPerPage * (page - 1);
-        filters.digital = true;
 
         $scope.forms = Form.query(filters, function (data) {
             $scope.loading = false;
@@ -118,7 +117,7 @@ angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($sco
     var skills = {}
     $scope.skills = [];
 
-    $scope.forms = Form.query({limit: 99, digital: true}, function () {
+    $scope.forms = Form.query({limit: 99}, function () {
 
         var submissionsPromises = [];
 
