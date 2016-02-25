@@ -26,7 +26,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             window.location.reload(false)
 
         } else {
-            if (typeof httpResponse.data.user_msg != 'undefined') {
+            if (httpResponse.data.user_msg) {
                 window.alert('Error: ' + httpResponse.data.user_msg);
             } else {
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
