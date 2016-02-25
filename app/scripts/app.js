@@ -5,10 +5,8 @@ angular
     'ngResource',
     'ngCookies',
     'ngSanitize',
-    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
-    'ui.select2',
     'pascalprecht.translate',
     'worldskills.utils'
   ])
