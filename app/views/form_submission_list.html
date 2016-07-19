@@ -10,8 +10,8 @@
 
         <h1>Forms</h1>
 
-        <tabset>
-            <tab ng-repeat="skill in skills.skills" heading="{{ skill.name.text }}">
+        <uib-tabset>
+            <uib-tab ng-repeat="skill in skills.skills" heading="{{ skill.name.text }}">
 
                 <div class="table-responsive">
                     <table class="table table-striped resource_list">
@@ -50,8 +50,8 @@
                     </table>
                 </div>
 
-            </tab>
-        </tabset>
+            </uib-tab>
+        </uib-tabset>
 
         <div ng-show="loading">
             <ws-spinner></ws-spinner>

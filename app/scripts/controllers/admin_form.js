@@ -30,9 +30,9 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
         });
     };
 
-    $scope.changePage = function (page) {
-        $location.search('page', page);
-        $scope.load(page);
+    $scope.changePage = function () {
+        $location.search('page', $scope.pagination.currentPage);
+        $scope.load($scope.pagination.currentPage);
     };
 
     $scope.clear = function () {

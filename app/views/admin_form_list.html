@@ -49,4 +49,4 @@
     </table>
 </div>
 
-<pagination items-per-page="pagination.itemsPerPage" total-items="forms.total_count || pagination.currentPage * pagination.itemsPerPage" page="pagination.currentPage" on-select-page="changePage(page)" max-size="10" boundary-links="true" rotate="false"></pagination>
+<uib-pagination items-per-page="pagination.itemsPerPage" total-items="forms.total_count || pagination.currentPage * pagination.itemsPerPage" ng-model="pagination.currentPage" ng-change="changePage()" max-size="10" boundary-links="true" rotate="false"></uib-pagination>
