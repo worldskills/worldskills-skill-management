@@ -1,0 +1,110 @@
+<p class="pull-right text-muted">
+    <span ng-show="!saving && !saved">Changes are saved automatically</span>
+    <span ng-show="saving">Saving...</span>
+    <span ng-show="!saving && saved">Plan saved</span>
+</p>
+
+<h3>Lunch Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+
+<hr/>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h4>Expert lunch times</h4>
+        <div ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
+            <hr/>
+            <div class="row">
+                <div class="col-sm-3">
+                    {{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}
+                </div>
+                <div class="col-sm-9">
+                    <div class="btn-toolbar">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
+                            <ul class="dropdown-menu" uib-dropdown-menu>
+                                <li ng-repeat="person in experts.persons | filter:inGroup as filteredExperts"><a href ng-click="addPerson(lunchPeriod, person)">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" uib-dropdown>
+                            <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add group <span class="caret"></span></button>
+                            <ul class="dropdown-menu" uib-dropdown-menu>
+                                <li ng-repeat="group in lunchGroups.groups | filter:{type: 'EXPERT'}"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br ng-show="filteredAllocations.length || filteredGroups.length" />
+                    <table class="table table-hover" ng-show="filteredAllocations.length || filteredGroups.length">
+                        <colgroup>
+                            <col width="80%" />
+                            <col width="20%" />
+                        </colgroup>
+                        <tbody>
+                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'} as filteredAllocations">
+                                <td>
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                </td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            </tr>
+                            <tr ng-repeat="group in lunchAllocations.groups | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}} as filteredGroups">
+                                <td>
+                                    {{ group.group.name }}
+                                </td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h4>Competitor lunch times</h4>
+        <div ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
+            <hr/>
+            <div class="row">
+                <div class="col-sm-3">
+                    {{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}
+                </div>
+                <div class="col-sm-9">
+                    <div class="btn-toolbar">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
+                            <ul class="dropdown-menu" uib-dropdown-menu>
+                                <li ng-repeat="person in competitors.persons | filter:inGroup as filteredExperts"><a href ng-click="addPerson(lunchPeriod, person)">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" uib-dropdown>
+                            <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add group <span class="caret"></span></button>
+                            <ul class="dropdown-menu" uib-dropdown-menu>
+                                <li ng-repeat="group in lunchGroups.groups | filter:{type: 'COMPETITOR'}"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br ng-show="filteredAllocations.length || filteredGroups.length" />
+                    <table class="table table-hover" ng-show="filteredAllocations.length || filteredGroups.length">
+                        <colgroup>
+                            <col width="80%" />
+                            <col width="20%" />
+                        </colgroup>
+                        <tbody>
+                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'} as filteredAllocations">
+                                <td>
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                </td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            </tr>
+                            <tr ng-repeat="group in lunchAllocations.groups | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}} as filteredGroups">
+                                <td>
+                                    {{ group.group.name }}
+                                </td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

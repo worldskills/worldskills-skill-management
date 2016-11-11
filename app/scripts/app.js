@@ -98,6 +98,20 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('lunch', {
+        url: '/events/{eventId}/skills/{skillId}/lunch',
+        templateUrl: 'views/lunch.html',
+        controller: 'LunchCtrl',
+        abstract: true
+    })
+    .state('lunch.day', {
+        url: '/day/{day}',
+        templateUrl: 'views/lunch_day.html',
+        controller: 'LunchDayCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('lunch_group_list', {
         url: '/events/{eventId}/skills/{skillId}/groups',
         templateUrl: 'views/lunch_group_list.html',
