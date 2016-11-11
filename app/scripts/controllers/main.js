@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, WORLDSKILLS_API_SKILLMAN_CODE) {
+angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, PersonSkills, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.selectedLanguage = Language.selectedLanguage;
 
@@ -34,6 +34,20 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
             {
                 $scope.userCanEditForms = true;
             }
+        });
+
+        $scope.active = {};
+
+        $scope.skills = PersonSkills.get({personId: auth.user.person_id}, function () {
+
+            if ($scope.skills.skills.length != 0) {
+                $scope.active.skill = $scope.skills.skills[0];
+                $scope.userHasSkillPosition = true;
+            }
+
+        }, function () {
+            // error
+            $scope.loading = false;
         });
     });
 

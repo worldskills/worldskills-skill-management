@@ -27,7 +27,7 @@ angular
             }
             $state.go(redirectToState, redirectToParams);
         } else {
-            $state.go('form_submission_list');
+            $state.go('index');
         }
     });
 
@@ -60,8 +60,16 @@ angular
   $stateProvider
 
   // //index
+    .state('index', {
+        url: '/',
+        controller: 'IndexCtrl',
+    })
+    .state('sorry', {
+      url: '/sorry',
+      templateUrl: 'views/sorry.html'
+    })
     .state('form_submission', {
-        url: '/forms/{formId}/skills/{skillId}',
+        url: '/events/{eventId}/skills/{skillId}/forms/{formId}',
         templateUrl: 'views/form_submission.html',
         controller: 'FormSubmissionCtrl',
         data: {
@@ -69,7 +77,7 @@ angular
         }
     })
     .state('form_submission_list', {
-        url: '/forms',
+        url: '/events/{eventId}/skills/{skillId}/forms',
         templateUrl: 'views/form_submission_list.html',
         controller: 'FormSubmissionListCtrl',
         data: {

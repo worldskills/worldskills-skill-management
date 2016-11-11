@@ -1,18 +1,21 @@
-<ol class="breadcrumb">
-    <li><a ui-sref="form_submission_list">Skill Management</a></li>
-    <li><a ui-sref="form_submission_list">Forms</a></li>
-    <li class="active">{{ submission.form.name.text }}</li>
-</ol>
-
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
+
+<ol class="breadcrumb">
+    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Forms</a></li>
+    <li class="active">{{ submission.form.name.text }}</li>
+</ol>
 
 <div class="page-header">
 <p class="pull-right text-muted">
     <span ng-show="saving">Saving...</span>
     <span ng-show="!saving && saved">Draft saved</span>
 </p>
-<p>{{ submission.skill.number }} {{ submission.skill.name.text }}</p>
+<p>
+    <span class="text-muted">{{ submission.skill.event.name }}</span>
+    <br/>
+    {{ submission.skill.number }} {{ submission.skill.name.text }}
+</p>
 <h1>{{ submission.form.name.text }} <small>{{ submission.form.timeline }}</small></h1>
 </div>
 

@@ -1,64 +1,63 @@
-<ol class="breadcrumb">
-    <li><a ui-sref="form_submission_list">Skill Management</a></li>
-    <li class="active" translate>Forms</li>
-</ol>
-
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
 
+        <ol class="breadcrumb">
+            <li class="active">Forms</li>
+        </ol>
+
         <alerts></alerts>
 
-        <h1>Forms</h1>
+        <p class="pull-right">
+            <button class="btn btn-default" ng-click="changeSkill()">Change Skill</button>
+        </p>
 
-        <uib-tabset>
-            <uib-tab ng-repeat="skill in skills.skills" heading="{{ skill.name.text }}">
+        <h1>
+            <small>{{ skill.event.name || "&nbsp;" }}</small>
+            <br/>
+            {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+        </h1>
 
-                <div class="table-responsive">
-                    <table class="table table-striped resource_list">
-                        <colgroup>
-                            <col width="10%" />
-                            <col width="80%" />
-                            <col width="10%" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>Day</th>
-                                <th>Competition Form</th>
-                                <th>State</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="form in forms[skill.id].forms">
-                                <td>{{ form.timeline }}</td>
-                                <td>
-                                    <a ui-sref="form_submission({formId: form.id, skillId: skill.id})" ng-if="!form.has_submitted_submission">{{ form.name.text }}</a>
-                                    <span ng-if="form.has_submitted_submission">{{ form.name.text }}</span>
-                                </td>
-                                <td>
-                                    <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
-                                </td>
-                            </tr>
-                            <tr ng-show="forms.total_count == 0">
-                                <td colspan="3">No forms found</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="3"></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+        <hr/>
 
-            </uib-tab>
-        </uib-tabset>
+        <div class="table-responsive">
+            <table class="table table-striped resource_list">
+                <colgroup>
+                    <col width="10%" />
+                    <col width="80%" />
+                    <col width="10%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Competition Form</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="form in forms.forms">
+                        <td>{{ form.timeline }}</td>
+                        <td>
+                            <a ui-sref="form_submission({eventId: active.skill.event.id, skillId: active.skill.id, formId: form.id})" ng-if="!form.has_submitted_submission">{{ form.name.text }}</a>
+                            <span ng-if="form.has_submitted_submission">{{ form.name.text }}</span>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
+                        </td>
+                    </tr>
+                    <tr ng-show="forms.total_count == 0">
+                        <td colspan="3">No forms found</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
 
         <div ng-show="loading">
             <ws-spinner></ws-spinner>
-        </div>
-
-        <div ng-show="!loading && !(skills.skills.length > 0)">
-            <p>No forms available. Please note that only the Chief Expert can submit forms.</p>
         </div>
 
     </div>
