@@ -31,7 +31,6 @@
 
     <ws-puppet p="auth.user.puppeteer"></ws-puppet>
 
-    <!-- Add your site or application content here -->
      <div class="navbar navbar-worldskills navbar-static-top">
         <div class="cube-container">
             <div class="cube-right-bottom-blue">&nbsp;</div>
@@ -41,14 +40,22 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="form_submission_list" ng-cloak translate>APP_NAME</a>
+                <a class="navbar-brand" ui-sref="index" ng-cloak>Skill M<span class="hidden-xs hidden-sm">ana</span>g<span class="hidden-xs hidden-sm">e</span>m<span class="hidden-xs hidden-sm">en</span>t</a>
             </div>
             <div ng-show="auth.loggedIn">
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav" ng-show="userHasSkillPosition">
+                        <li ui-sref-active="{active: 'skill_plan'}"><a ui-sref="skill_plan.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Plans</a></li>
+                        <li ui-sref-active="'active'"><a ui-sref="form_submission_list({eventId: active.skill.event.id, skillId: active.skill.id})">Forms</a></li>
+                        <li ui-sref-active="{active: 'lunch'}"><a ui-sref="lunch.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Lunches</a></li>
+                        <li ui-sref-active="'active'"><a ui-sref="lunch_group_list({eventId: active.skill.event.id, skillId: active.skill.id})">Groups</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                {{auth.user.first_name || ""}} {{auth.user.last_name || ""}} <b class="caret"></b>
+                                <span class="hidden-sm">{{auth.user.first_name || ""}} {{auth.user.last_name || ""}}</span>
+                                <span class="visible-sm-inline"><span class="glyphicon glyphicon-user"></span></span>
+                                <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin_form.list">Admin</a></li>
@@ -117,6 +124,7 @@
         <script src="scripts/controllers/translate.js"></script>
         <script src="scripts/controllers/form_submission_list.js"></script>
         <script src="scripts/controllers/form_submission.js"></script>
+        <script src="scripts/controllers/skill_plan.js"></script>
         <script src="scripts/controllers/admin_form.js"></script>
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/alerts.js"></script>
@@ -131,6 +139,9 @@
         <script src="scripts/services/FormSubmission.js"></script>
         <script src="scripts/services/FormSubmissionField.js"></script>
         <script src="scripts/services/FormSubmissionFieldPerson.js"></script>
+        <script src="scripts/services/Skill.js"></script>
+        <script src="scripts/services/SkillItem.js"></script>
+        <script src="scripts/services/CompetitionDay.js"></script>
         <!-- endbuild -->
 </body>
 </html>

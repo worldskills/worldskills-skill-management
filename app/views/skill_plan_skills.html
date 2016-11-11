@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h2 class="modal-title">Skills</h2>
+</div>
+<div class="modal-body">
+    <div class="btn-group-vertical center-block">
+        <a ng-repeat="skill in skills.skills" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})" class="btn btn-default">
+            <span class="text-muted">{{ skill.event.name }}</span>
+            <br/>
+            {{ skill.number }} {{ skill.name.text }}
+        </a>
+    </div>
+</div>

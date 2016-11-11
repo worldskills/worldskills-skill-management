@@ -84,6 +84,20 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('skill_plan', {
+        url: '/events/{eventId}/skills/{skillId}',
+        templateUrl: 'views/skill_plan.html',
+        controller: 'SkillPlanCtrl',
+        abstract: true
+    })
+    .state('skill_plan.day', {
+        url: '/day/{day}',
+        templateUrl: 'views/skill_plan_day.html',
+        controller: 'SkillPlanDayCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('admin_form', {
         url: '/admin/forms',
         templateUrl: 'views/admin_form.html',

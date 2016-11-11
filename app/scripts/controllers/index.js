@@ -7,7 +7,7 @@ angular.module('skillMgmtApp').controller('IndexCtrl', function ($scope, $rootSc
 
             if ($scope.skills.skills.length > 0) {
                 $scope.active.skill;
-                $state.go('form_submission_list', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id});
+                $state.go('skill_plan.day', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id, day: 'C1'});
             } else {
                 $state.go('sorry');
             }
