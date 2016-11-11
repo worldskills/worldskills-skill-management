@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h2 class="modal-title">Skills</h2>
+</div>
+<div class="modal-body">
+    <div class="btn-group-vertical center-block">
+        <a ng-repeat="skill in skills.skills" ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})" class="btn btn-default">
+            <span class="text-muted">{{ skill.event.name }}</span>
+            <br/>
+            {{ skill.number }} {{ skill.name.text }}
+        </a>
+    </div>
+</div>

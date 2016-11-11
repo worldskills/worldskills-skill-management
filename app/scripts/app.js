@@ -98,6 +98,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('lunch_group_list', {
+        url: '/events/{eventId}/skills/{skillId}/groups',
+        templateUrl: 'views/lunch_group_list.html',
+        controller: 'LunchGroupListCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('admin_form', {
         url: '/admin/forms',
         templateUrl: 'views/admin_form.html',
