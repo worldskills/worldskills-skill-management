@@ -63,10 +63,16 @@ angular
     .state('index', {
         url: '/',
         controller: 'IndexCtrl',
+        data: {
+            requireLoggedIn: true
+        }
     })
     .state('sorry', {
       url: '/sorry',
-      templateUrl: 'views/sorry.html'
+      templateUrl: 'views/sorry.html',
+      data: {
+          requireLoggedIn: true
+      }
     })
     .state('form_submission', {
         url: '/events/{eventId}/skills/{skillId}/forms/{formId}',
