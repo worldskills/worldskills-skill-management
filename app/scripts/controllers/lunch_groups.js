@@ -104,8 +104,12 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
         timeoutsGroups[group.id] = $timeout(updateGroup, 1000);
     };
 
+    $scope.cancelSkillsModal = function () {
+        $scope.skillsModal.dismiss('cancel');
+    };
+
     $scope.changeSkill = function () {
-        $uibModal.open({
+        $scope.skillsModal = $uibModal.open({
             templateUrl: 'views/lunch_group_list_skills.html',
             size: 'sm',
             scope: $scope

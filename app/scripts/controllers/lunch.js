@@ -34,8 +34,12 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
     $scope.experts = Person.experts({skillId: $stateParams.skillId});
     $scope.lunchGroups = LunchGroup.query({skillId: $stateParams.skillId});
 
+    $scope.cancelSkillsModal = function () {
+        $scope.skillsModal.dismiss('cancel');
+    };
+
     $scope.changeSkill = function () {
-        $uibModal.open({
+        $scope.skillsModal = $uibModal.open({
             templateUrl: 'views/lunch_skills.html',
             size: 'sm',
             scope: $scope

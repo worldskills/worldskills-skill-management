@@ -24,8 +24,12 @@ angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($s
         $scope.loading = false;
     });
 
+    $scope.cancelSkillsModal = function () {
+        $scope.skillsModal.dismiss('cancel');
+    };
+
     $scope.changeSkill = function () {
-        $uibModal.open({
+        $scope.skillsModal = $uibModal.open({
             templateUrl: 'views/form_submission_list_skills.html',
             size: 'sm',
             scope: $scope

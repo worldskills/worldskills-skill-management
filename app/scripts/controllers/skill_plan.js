@@ -20,8 +20,12 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
 
     });
 
+    $scope.cancelSkillsModal = function () {
+        $scope.skillsModal.dismiss('cancel');
+    };
+
     $scope.changeSkill = function () {
-        $uibModal.open({
+        $scope.skillsModal = $uibModal.open({
             templateUrl: 'views/skill_plan_skills.html',
             size: 'sm',
             scope: $scope
