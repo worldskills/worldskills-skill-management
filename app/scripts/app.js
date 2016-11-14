@@ -104,6 +104,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('plan', {
+        url: '/plan/{skillId}/day/{day}',
+        templateUrl: 'views/plan.html',
+        controller: 'PlanCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('lunch', {
         url: '/events/{eventId}/skills/{skillId}/lunch',
         templateUrl: 'views/lunch.html',

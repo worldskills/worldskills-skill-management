@@ -1,0 +1,134 @@
+<p>
+    <span class="text-muted">{{ plan.skill.event.name || "&nbsp;" }}</span>
+    <br/>
+    {{ plan.skill.number }} {{ plan.skill.name.text || "&nbsp;" }}
+</p>
+
+<h1>Skill Management Plan</h1>
+
+<uib-tabset ng-show="!loading" active="activeDay">
+    <uib-tab ng-repeat="day in plan.competition_days" heading="{{ day.timeline }}" index="day.timeline" select="changeDay(day)">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Day {{ day.timeline }}, {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="90%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in plan.competition_items | filter:{timeline:day.timeline}" style="background-color: #{{ item.color }};">
+                            <td>
+                                <span>{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
+                            </td>
+                            <td>
+                                <span>{{ item.name.text }}</span>
+                                <em ng-show="item.description.text">- {{ item.description.text }}</em>
+                                <em ng-show="item.room">({{ item.room.name.text }})</em>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Skill Specific Items</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="60%">
+                        <col width="30%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Description</th>
+                            <th>Responsible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in plan.skill_items | filter:{timeline:day.timeline}">
+                            <td>
+                                <span class="text-muted">{{ item.time | limitTo:5 }}</span>
+                            </td>
+                            <td>
+                                <span style="white-space: pre-wrap;">{{ item.description.text }}</span>
+                            </td>
+                            <td>{{ item.responsibility }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default" ng-show="lunchPeriods.lunch_periods.length">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Lunch Allocations</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="45%">
+                        <col width="45%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Competitors</th>
+                            <th>Experts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
+                            <td>
+                                <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
+                            </td>
+                            <td>
+                                <span ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}">
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}{{ $last ? '' : ', ' }}
+                                </span>
+                                <span ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}">
+                                    {{ group.group.name }}
+                                </span>
+                            </td>
+                            <td>
+                                <span ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}">
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}{{ $last ? '' : ', ' }}
+                                </span>
+                                <span ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}">
+                                    {{ group.group.name }}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </uib-tab>
+</uib-tabset>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+<div class="alert alert-warning" ng-show="!loading && !plan.competition_days.length" ng-cloak>
+    <strong>No competition days found!</strong> Please make sure the event has a competition start and end date.
+</div>
