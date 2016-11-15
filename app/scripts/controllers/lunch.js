@@ -100,4 +100,21 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         LunchAllocation.remove({skillId: $stateParams.skillId}, allocation);
         $scope.lunchAllocations.allocations.splice(index, 1);
     };
+
+    $scope.addAllCompetitors = function (lunchPeriod) {
+        angular.forEach($scope.competitors.persons, function (person) {
+            if ($scope.inAssociation(person)) {
+                $scope.addPerson(lunchPeriod, person, 'COMPETITOR');
+            }
+        });
+    };
+
+    $scope.addAllExperts = function (lunchPeriod) {
+        angular.forEach($scope.experts.persons, function (person) {
+            if ($scope.inAssociation(person)) {
+                $scope.addPerson(lunchPeriod, person, 'EXPERT');
+            }
+        });
+    };
+
 });
