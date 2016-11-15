@@ -18,13 +18,18 @@
                 <td>{{ skill.number }}</td>
                 <td>{{ skill.name.text }}</td>
                 <td>
-                    <a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Plans</a>
-                    &nbsp;&nbsp;
-                    <a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Forms</a>
-                    &nbsp;&nbsp;
-                    <a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Lunches</a>
-                    &nbsp;&nbsp;
-                    <a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Groups</a>
+                    <span ng-show="!userIsAdmin">
+                        <a ui-sref="plan({skillId: skill.id, day: 'C1'})">Plan</a>
+                    </span>
+                    <span ng-show="userIsAdmin">
+                        <a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Plans</a>
+                        &nbsp;&nbsp;
+                        <a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Forms</a>
+                        &nbsp;&nbsp;
+                        <a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Lunches</a>
+                        &nbsp;&nbsp;
+                        <a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Groups</a>
+                    </span>
                 </td>
             </tr>
             <tr ng-show="skills.skills.length == 0">

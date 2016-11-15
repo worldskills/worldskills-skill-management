@@ -15,26 +15,29 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     });
 
     $scope.userCanEditForms = false;
+    $scope.userCanEditSkillItems = false;
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'Admin').then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userIsAdmin = true;
+            $scope.userCanViewAllSubmissions = true;
+            $scope.userCanEditForms = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'ViewAllSubmissions', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanViewAllSubmissions = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanEditForms = true;
+        }
+    });
+
     auth.user.$promise.then(function () {
-
-        angular.forEach(auth.user.roles, function (role) {
-
-            if (role.name == 'Admin' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanViewAllSubmissions = true;
-                $scope.userCanEditForms = true;
-            }
-
-            if (role.name == 'ViewAllSubmissions' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanViewAllSubmissions = true;
-            }
-
-            if (role.name == 'EditForms' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanEditForms = true;
-            }
-        });
 
         $scope.active = {};
 

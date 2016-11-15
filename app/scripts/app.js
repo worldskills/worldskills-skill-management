@@ -79,7 +79,11 @@ angular
         templateUrl: 'views/form_submission.html',
         controller: 'FormSubmissionCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
         }
     })
     .state('form_submission_list', {
@@ -87,7 +91,11 @@ angular
         templateUrl: 'views/form_submission_list.html',
         controller: 'FormSubmissionListCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
         }
     })
     .state('skill_plan', {
@@ -101,7 +109,11 @@ angular
         templateUrl: 'views/skill_plan_day.html',
         controller: 'SkillPlanDayCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSkillItems'}
+            ]
         }
     })
     .state('plan', {
@@ -109,7 +121,11 @@ angular
         templateUrl: 'views/plan.html',
         controller: 'PlanCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewManagementPlan'}
+            ]
         }
     })
     .state('lunch', {
@@ -123,7 +139,11 @@ angular
         templateUrl: 'views/lunch_day.html',
         controller: 'LunchDayCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditLunch'}
+            ]
         }
     })
     .state('lunch_group_list', {
@@ -131,7 +151,11 @@ angular
         templateUrl: 'views/lunch_group_list.html',
         controller: 'LunchGroupListCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditLunch'}
+            ]
         }
     })
     .state('admin', {
