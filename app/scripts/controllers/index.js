@@ -5,13 +5,20 @@ angular.module('skillMgmtApp').controller('IndexCtrl', function ($scope, $rootSc
     auth.user.$promise.then(function () {
         $scope.skills.$promise.then(function () {
 
-            if ($scope.skills.skills.length > 0) {
-                $scope.active.skill;
+            if ($scope.userHasSkillPosition) {
+
                 $state.go('skill_plan.day', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id, day: 'C1'});
+
             } else {
-                $state.go('sorry');
+
+                if ($scope.userCanViewAllSubmissions || $scope.userCanEditForms) {
+                    $state.go('admin');
+                } else {
+                    $state.go('sorry');
+                }
+
             }
-            
+
         }, function () {
             $state.go('sorry');
         });
