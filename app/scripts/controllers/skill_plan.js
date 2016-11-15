@@ -73,9 +73,9 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         var updateItem = function () {
             $scope.saving = true;
             if (item.id) {
-                SkillItem.update(item, saved, errored);
+                SkillItem.update({skillId: $stateParams.skillId}, item, saved, errored);
             } else {
-                SkillItem.save(item, function (response) {
+                SkillItem.save({skillId: $stateParams.skillId}, item, function (response) {
                     item.id = response.id;
                     saved();
                 }, errored);
@@ -105,7 +105,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     $scope.removeItem = function (item) {
         var index = $scope.skillItems.items.indexOf(item);
         $scope.skillItems.items.splice(index, 1);
-        SkillItem.delete({}, item);
+        SkillItem.delete({skillId: $stateParams.skillId}, item);
     };
 
     $scope.moveItemUp = function (orderNum, item) {
