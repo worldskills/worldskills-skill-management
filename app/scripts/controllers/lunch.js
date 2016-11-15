@@ -48,7 +48,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
 });
 
-angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup) {
+angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup, LunchAllocation) {
 
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
@@ -57,6 +57,16 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
             }
         });
     });
+
+    $scope.inAssociation = function (person) {
+        var inAssociation = false;
+        angular.forEach($scope.lunchAllocations.allocations, function (allocation) {
+            if (allocation.timeline == $scope.active.day.timeline && person.id == allocation.person.id) {
+                inAssociation = true;
+            }
+        });
+        return !inAssociation;
+    };
 
     $scope.addGroup = function (lunchPeriod, group) {
         var allocation = {
@@ -72,5 +82,22 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         var index = $scope.lunchAllocations.groups.indexOf(allocation);
         LunchAllocationGroup.remove({skillId: $stateParams.skillId}, allocation);
         $scope.lunchAllocations.groups.splice(index, 1);
+    };
+
+    $scope.addPerson = function (lunchPeriod, person, type) {
+        var allocation = {
+            lunch_period: lunchPeriod,
+            person: person,
+            timeline: $scope.active.day.timeline,
+            type: type
+        };
+        $scope.lunchAllocations.allocations.push(allocation);
+        LunchAllocation.add({skillId: $stateParams.skillId}, allocation);
+    };
+
+    $scope.removePerson = function (allocation) {
+        var index = $scope.lunchAllocations.allocations.indexOf(allocation);
+        LunchAllocation.remove({skillId: $stateParams.skillId}, allocation);
+        $scope.lunchAllocations.allocations.splice(index, 1);
     };
 });
