@@ -58,7 +58,7 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin_form.list">Admin</a></li>
+                                <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin">Admin</a></li>
                                 <li ng-show="userCanViewAllSubmissions || userCanEditForms" role="separator" class="divider"></li>
                                 <li><a href="" ng-click="logout()">Logout</a></li>
                             </ul>
@@ -128,6 +128,7 @@
         <script src="scripts/controllers/skill_plan.js"></script>
         <script src="scripts/controllers/lunch.js"></script>
         <script src="scripts/controllers/lunch_groups.js"></script>
+        <script src="scripts/controllers/admin.js"></script>
         <script src="scripts/controllers/admin_form.js"></script>
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/alerts.js"></script>
@@ -152,6 +153,7 @@
         <script src="scripts/services/SkillItem.js"></script>
         <script src="scripts/services/Person.js"></script>
         <script src="scripts/services/CompetitionDay.js"></script>
+        <script src="scripts/services/Event.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -134,14 +134,38 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('admin_form', {
-        url: '/admin/forms',
-        templateUrl: 'views/admin_form.html',
-        controller: 'AdminFormCtrl',
+    .state('admin', {
+        url: '/admin',
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event', {
+        url: '/admin/{eventId}',
+        templateUrl: 'views/admin_event.html',
+        controller: 'AdminEventCtrl',
         abstract: true
     })
-    .state('admin_form.list', {
-        url: '?page',
+    .state('admin_event.skills', {
+        url: '',
+        templateUrl: 'views/admin_event_skills.html',
+        controller: 'AdminEventSkillsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event.form_list', {
+        url: '/forms',
         templateUrl: 'views/admin_form_list.html',
         controller: 'AdminFormListCtrl',
         data: {
@@ -152,12 +176,12 @@ angular
             ]
         },
         reloadOnSearch: false
-    }).state('admin_form.detail', {
-        url: '/{id}',
+    }).state('admin_form_detail', {
+        url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
         controller: 'AdminFormDetailCtrl',
         abstract: true
-    }).state('admin_form.detail.submissions', {
+    }).state('admin_form_detail.submissions', {
         url: '',
         templateUrl: 'views/admin_form_detail_submissions.html',
         controller: 'AdminFormDetailSubmissionCtrl',
@@ -169,7 +193,7 @@ angular
             ]
         }
     }).state('admin_submission', {
-        url: '/admin/forms/{formId}/skills/{skillId}/submission',
+        url: '/admin/events/{eventId}/forms/{formId}/skills/{skillId}/submission',
         templateUrl: 'views/admin_submission.html',
         controller: 'AdminSubmissionCtrl',
         data: {
@@ -179,8 +203,8 @@ angular
                 {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
-    }).state('admin_form_progress', {
-        url: '/admin/forms_progress',
+    }).state('admin_event.form_progress', {
+        url: '/admin/events/{eventId}/forms_progress',
         templateUrl: 'views/admin_form_progress.html',
         controller: 'AdminFormProgressCtrl',
         data: {

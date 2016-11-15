@@ -1,0 +1,38 @@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="50%" />
+            <col width="40%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Skill Management Team view</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="skill in skills.skills">
+                <td>{{ skill.number }}</td>
+                <td>{{ skill.name.text }}</td>
+                <td>
+                    <a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Plans</a>
+                    &nbsp;&nbsp;
+                    <a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Forms</a>
+                    &nbsp;&nbsp;
+                    <a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Lunches</a>
+                    &nbsp;&nbsp;
+                    <a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Groups</a>
+                </td>
+            </tr>
+            <tr ng-show="skills.skills.length == 0">
+                <td colspan="3">No skills found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="3"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

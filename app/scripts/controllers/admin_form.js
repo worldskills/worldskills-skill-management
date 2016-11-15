@@ -1,51 +1,20 @@
 'use strict';
 
-
-angular.module('skillMgmtApp').controller('AdminFormCtrl', function($scope) {
-    $scope.pagination = {
-        currentPage: 1,
-        itemsPerPage: 10
-    };
-});
-
 angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope, $rootScope, $state, $stateParams, $location, Form) {
 
-    var page = parseInt($stateParams.page, 10);
-    if (page) {
-        $scope.pagination.currentPage = page;
-    } else {
-        $location.search('page', $scope.pagination.currentPage);
-    }
+    $scope.loading = true;
 
-    $scope.load = function (page) {
-
-        $scope.loading = true;
-
-        var filters = angular.copy($scope.filters);
-        filters.offset = $scope.pagination.itemsPerPage * (page - 1);
-
-        $scope.forms = Form.query(filters, function (data) {
-            $scope.loading = false;
-            $scope.pagination.currentPage = page;
-        });
+    var filters = {
+        eventId: $stateParams.eventId,
+        limit: 99
     };
 
-    $scope.changePage = function () {
-        $location.search('page', $scope.pagination.currentPage);
-        $scope.load($scope.pagination.currentPage);
-    };
-
-    $scope.clear = function () {
-        $scope.filters = {
-            limit: $scope.pagination.itemsPerPage
-        };
-        $scope.load($scope.pagination.currentPage);
-    };
-
-    $scope.clear();
+    $scope.forms = Form.query(filters, function (data) {
+        $scope.loading = false;
+    });
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, Form) {
+angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, Form, Event) {
 
     $scope.id = $stateParams.id;
 
@@ -55,6 +24,8 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
             $scope.model.description = {text: '', lang_code: 'en'};
         }
     });
+
+    $scope.event = Event.get({id: $stateParams.eventId});
 
 });
 
@@ -110,14 +81,16 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
 });
 
 
-angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $q, Form, FormSubmission) {
+angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $stateParams, $q, Form, FormSubmission, Event) {
 
     $scope.loading = true;
+
+    $scope.event = Event.get({id: $stateParams.eventId});
 
     var skills = {}
     $scope.skills = [];
 
-    $scope.forms = Form.query({limit: 99}, function () {
+    $scope.forms = Form.query({eventId: $stateParams.eventId, limit: 99}, function () {
 
         var submissionsPromises = [];
 

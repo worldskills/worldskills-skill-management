@@ -7,6 +7,9 @@
             eventId: '@event.id',
             id: '@id'
         }, {
+            query: {
+                method: 'GET'
+            }
         });
 
     });
