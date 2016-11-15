@@ -29,7 +29,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
         // error
         $scope.loading = false;
     });
-    
+
     $scope.competitors = Person.competitors({skillId: $stateParams.skillId});
     $scope.experts = Person.experts({skillId: $stateParams.skillId});
     $scope.lunchGroups = LunchGroup.query({skillId: $stateParams.skillId});
@@ -48,7 +48,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
 });
 
-angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert) {
+angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup) {
 
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
@@ -58,4 +58,19 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         });
     });
 
+    $scope.addGroup = function (lunchPeriod, group) {
+        var allocation = {
+            lunch_period: lunchPeriod,
+            group: group,
+            timeline: $scope.active.day.timeline
+        };
+        $scope.lunchAllocations.groups.push(allocation);
+        LunchAllocationGroup.add({skillId: $stateParams.skillId}, allocation);
+    };
+
+    $scope.removeGroup = function (allocation) {
+        var index = $scope.lunchAllocations.groups.indexOf(allocation);
+        LunchAllocationGroup.remove({skillId: $stateParams.skillId}, allocation);
+        $scope.lunchAllocations.groups.splice(index, 1);
+    };
 });
