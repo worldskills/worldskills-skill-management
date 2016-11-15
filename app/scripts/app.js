@@ -188,6 +188,18 @@ angular
             ]
         }
     })
+    .state('admin_event.items', {
+        url: '/items/{day}',
+        templateUrl: 'views/admin_event_items.html',
+        controller: 'AdminEventItemsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditCompetitionItems'}
+            ]
+        }
+    })
     .state('admin_event.form_list', {
         url: '/forms',
         templateUrl: 'views/admin_form_list.html',

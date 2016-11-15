@@ -7,6 +7,7 @@
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="{active: 'admin_event.skills'}"><a ui-sref="admin_event.skills">Skills</a></li>
+    <li ng-show="userCanEditCompetitionItems" ui-sref-active="{active: 'admin_event.items'}"><a ui-sref="admin_event.items({day: 'C1'})">Competition Items</a></li>
     <li ui-sref-active="{active: 'admin_event.form_list'}"><a ui-sref="admin_event.form_list">Forms</a></li>
     <li ui-sref-active="{active: 'admin_event.form_progress'}"><a ui-sref="admin_event.form_progress">Progress</a></li>
 </ul>

@@ -22,6 +22,7 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
             $scope.userIsAdmin = true;
             $scope.userCanViewAllSubmissions = true;
             $scope.userCanEditForms = true;
+            $scope.userCanEditCompetitionItems = true;
         }
     });
 
@@ -34,6 +35,12 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', 1).then(function (hasUserRole) {
         if (hasUserRole) {
             $scope.userCanEditForms = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditCompetitionItems', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanEditCompetitionItems = true;
         }
     });
 
