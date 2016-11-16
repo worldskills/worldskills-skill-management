@@ -101,20 +101,26 @@
                                 <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
                             </td>
                             <td>
-                                <span ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}">
-                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}{{ $last ? '' : ', ' }}
-                                </span>
-                                <span ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}">
+                                <div ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}">
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                    <span ng-repeat="entity in allocation.person.entities">
+                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                    </span>
+                                </div>
+                                <div ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}">
                                     {{ group.group.name }}
-                                </span>
+                                </div>
                             </td>
                             <td>
-                                <span ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}">
-                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}{{ $last ? '' : ', ' }}
-                                </span>
-                                <span ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}">
+                                <div ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}">
+                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                    <span ng-repeat="entity in allocation.person.entities">
+                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                    </span>
+                                </div>
+                                <div ng-repeat="group in plan.lunch_allocation_groups | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}">
                                     {{ group.group.name }}
-                                </span>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

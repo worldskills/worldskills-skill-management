@@ -23,7 +23,14 @@
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
                                 <li ng-show="filteredExperts.length != 0"><a href ng-click="addAllExperts(lunchPeriod)">Add all remaining Experts</a></li>
-                                <li ng-repeat="person in experts.persons | filter:inAssociation as filteredExperts"><a href ng-click="addPerson(lunchPeriod, person, 'EXPERT')">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                <li ng-repeat="person in experts.persons | filter:inAssociation as filteredExperts">
+                                    <a href ng-click="addPerson(lunchPeriod, person, 'EXPERT')">
+                                        {{ person.first_name }} {{ person.last_name }}
+                                        <span ng-repeat="entity in person.entities">
+                                            <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                        </span>
+                                    </a>
+                                </li>
                                 <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
                             </ul>
                         </div>
@@ -44,6 +51,9 @@
                             <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'} as filteredAllocations">
                                 <td>
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                    <span ng-repeat="entity in allocation.person.entities">
+                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                    </span>
                                 </td>
                                 <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                             </tr>
@@ -74,7 +84,14 @@
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
                                 <li ng-show="filteredCompetitors.length != 0"><a href ng-click="addAllCompetitors(lunchPeriod)">Add all remaining Competitors</a></li>
-                                <li ng-repeat="person in competitors.persons | filter:inAssociation as filteredCompetitors"><a href ng-click="addPerson(lunchPeriod, person, 'COMPETITOR')">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                <li ng-repeat="person in competitors.persons | filter:inAssociation as filteredCompetitors">
+                                    <a href ng-click="addPerson(lunchPeriod, person, 'COMPETITOR')">
+                                        {{ person.first_name }} {{ person.last_name }}
+                                        <span ng-repeat="entity in person.entities">
+                                            <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                        </span>
+                                    </a>
+                                </li>
                                 <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
                             </ul>
                         </div>
@@ -95,6 +112,9 @@
                             <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'} as filteredAllocations">
                                 <td>
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
+                                    <span ng-repeat="entity in allocation.person.entities">
+                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                    </span>
                                 </td>
                                 <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                             </tr>
