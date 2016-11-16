@@ -59,7 +59,7 @@ angular.module('skillMgmtApp').controller('AdminEventRoomsCtrl', function($scope
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventLunchCtrl', function($scope, $stateParams, $timeout, LunchPeriod) {
+angular.module('skillMgmtApp').controller('AdminEventLunchPeriodsCtrl', function($scope, $stateParams, $timeout, LunchPeriod) {
 
     $scope.lunchPeriods = LunchPeriod.query({eventId: $stateParams.eventId});
 

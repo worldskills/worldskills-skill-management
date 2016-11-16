@@ -225,7 +225,7 @@ angular
             ]
         }
     })
-    .state('admin_event.lunch', {
+    .state('admin_event.lunch_periods', {
         url: '/lunch',
         templateUrl: 'views/admin_event_lunch.html',
         controller: 'AdminEventLunchCtrl',
