@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, WORLDSKILLS_API_SKILLMAN_CODE) {
+angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, PersonSkills, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.selectedLanguage = Language.selectedLanguage;
 
@@ -15,25 +15,49 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     });
 
     $scope.userCanEditForms = false;
+    $scope.userCanEditSkillItems = false;
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'Admin').then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userIsAdmin = true;
+            $scope.userCanViewAllSubmissions = true;
+            $scope.userCanEditForms = true;
+            $scope.userCanEditCompetitionItems = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'ViewAllSubmissions', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanViewAllSubmissions = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanEditForms = true;
+        }
+    });
+
+    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditCompetitionItems', 1).then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userCanEditCompetitionItems = true;
+        }
+    });
+
     auth.user.$promise.then(function () {
 
-        angular.forEach(auth.user.roles, function (role) {
+        $scope.active = {};
 
-            if (role.name == 'Admin' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanViewAllSubmissions = true;
-                $scope.userCanEditForms = true;
+        $scope.skills = PersonSkills.get({personId: auth.user.person_id}, function () {
+
+            if ($scope.skills.skills.length != 0) {
+                $scope.active.skill = $scope.skills.skills[0];
+                $scope.userHasSkillPosition = true;
             }
 
-            if (role.name == 'ViewAllSubmissions' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanViewAllSubmissions = true;
-            }
-
-            if (role.name == 'EditForms' && role.role_application.application_code == WORLDSKILLS_API_SKILLMAN_CODE)
-            {
-                $scope.userCanEditForms = true;
-            }
+        }, function () {
+            // error
+            $scope.loading = false;
         });
     });
 

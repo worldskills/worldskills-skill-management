@@ -10,7 +10,8 @@
                 method: 'PUT'
             },
             query: {
-                method: 'GET'
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/forms',
             }
         });
 

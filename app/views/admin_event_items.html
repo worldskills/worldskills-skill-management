@@ -1,0 +1,73 @@
+
+<uib-tabset ng-show="!loading" active="activeDay">
+    <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.timeline" select="changeDay(day)">
+
+        <p class="pull-right text-muted">
+            <span ng-show="!saving && !saved">Changes are saved automatically</span>
+            <span ng-show="saving">Saving...</span>
+            <span ng-show="!saving && saved">Items saved</span>
+        </p>
+
+        <h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+
+        <hr/>
+
+        <div class="row">
+            <label class="col-sm-1">Start T.</label>
+            <label class="col-sm-1">End Time</label>
+            <label class="col-sm-3">Name</label>
+            <label class="col-sm-3">Description</label>
+            <label class="col-sm-2">Room</label>
+            <label class="col-sm-1">Colour</label>
+        </div>
+
+        <br/>
+
+        <form class="form-horizontal">
+            <div ng-repeat="item in items.items | filter:{timeline:active.day.timeline} as filteredItems" class="form-group form-group-sm">
+                <div class="col-sm-1">
+                    <input class="form-control input-sm" ng-model="item.start_time" ng-change="itemChanged(item)" placeholder="HH:mm">
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control input-sm" ng-model="item.end_time" ng-change="itemChanged(item)" placeholder="HH:mm">
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control input-sm" ng-model="item.name.text" ng-change="itemChanged(item)">
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control input-sm" ng-model="item.description.text" ng-change="itemChanged(item)">
+                </div>
+                <div class="col-sm-2">
+                    <select class="form-control input-sm" ng-options="room.id as room.name.text for room in rooms.rooms" ng-model="item.room.id" ng-change="itemChanged(item)">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <input class="form-control input-sm" ng-model="item.color" ng-change="itemChanged(item)" style="background-color: #{{ item.color }};">
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                </div>
+            </div>
+            <div class="form-group form-group-sm" ng-show="!filteredItems.length">
+                <div class="col-sm-4">
+                    <p>No entries.<br/>&nbsp;</p>
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> Add item</button>
+                </div>
+            </div>
+        </form>
+
+    </uib-tab>
+</uib-tabset>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+<div class="alert alert-warning" ng-show="!loading && !competitionDays.days.length" ng-cloak>
+    <strong>No competition days found!</strong> Please make sure the event has a competition start and end date.
+</div>

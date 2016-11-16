@@ -22,3 +22,14 @@ footer {
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
+
+@media print {
+
+    .nav-tabs {
+        display: none;
+    }
+
+    .tab-content .tab-pane {
+        display: block;
+    }
+}

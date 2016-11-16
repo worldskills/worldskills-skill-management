@@ -19,7 +19,7 @@
             <tr ng-repeat="submission in submissions.submissions">
                 <td>{{ submission.skill.number }}</td>
                 <td>
-                    <a ui-sref="admin_submission({formId: id, skillId: submission.skill.id})" ng-if="submission.state == 'submitted'">{{ submission.skill.name.text }}</a>
+                    <a ui-sref="admin_submission({eventId: event.id, formId: id, skillId: submission.skill.id})" ng-if="submission.state == 'submitted'">{{ submission.skill.name.text }}</a>
                     <span ng-if="submission.state != 'submitted'">{{ submission.skill.name.text }}</span>
                 </td>
                 <td>

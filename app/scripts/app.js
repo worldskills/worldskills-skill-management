@@ -27,7 +27,7 @@ angular
             }
             $state.go(redirectToState, redirectToParams);
         } else {
-            $state.go('form_submission_list');
+            $state.go('index');
         }
     });
 
@@ -60,30 +60,148 @@ angular
   $stateProvider
 
   // //index
+    .state('index', {
+        url: '/',
+        controller: 'IndexCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('sorry', {
+      url: '/sorry',
+      templateUrl: 'views/sorry.html',
+      data: {
+          requireLoggedIn: true
+      }
+    })
     .state('form_submission', {
-        url: '/forms/{formId}/skills/{skillId}',
+        url: '/events/{eventId}/skills/{skillId}/forms/{formId}',
         templateUrl: 'views/form_submission.html',
         controller: 'FormSubmissionCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
         }
     })
     .state('form_submission_list', {
-        url: '/forms',
+        url: '/events/{eventId}/skills/{skillId}/forms',
         templateUrl: 'views/form_submission_list.html',
         controller: 'FormSubmissionListCtrl',
         data: {
-            requireLoggedIn: true
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
         }
     })
-    .state('admin_form', {
-        url: '/admin/forms',
-        templateUrl: 'views/admin_form.html',
-        controller: 'AdminFormCtrl',
+    .state('skill_plan', {
+        url: '/events/{eventId}/skills/{skillId}',
+        templateUrl: 'views/skill_plan.html',
+        controller: 'SkillPlanCtrl',
         abstract: true
     })
-    .state('admin_form.list', {
-        url: '?page',
+    .state('skill_plan.day', {
+        url: '/day/{day}',
+        templateUrl: 'views/skill_plan_day.html',
+        controller: 'SkillPlanDayCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSkillItems'}
+            ]
+        }
+    })
+    .state('plan', {
+        url: '/plan/{skillId}/day/{day}',
+        templateUrl: 'views/plan.html',
+        controller: 'PlanCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewManagementPlan'}
+            ]
+        }
+    })
+    .state('lunch', {
+        url: '/events/{eventId}/skills/{skillId}/lunch',
+        templateUrl: 'views/lunch.html',
+        controller: 'LunchCtrl',
+        abstract: true
+    })
+    .state('lunch.day', {
+        url: '/day/{day}',
+        templateUrl: 'views/lunch_day.html',
+        controller: 'LunchDayCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditLunch'}
+            ]
+        }
+    })
+    .state('lunch_group_list', {
+        url: '/events/{eventId}/skills/{skillId}/groups',
+        templateUrl: 'views/lunch_group_list.html',
+        controller: 'LunchGroupListCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditLunch'}
+            ]
+        }
+    })
+    .state('admin', {
+        url: '/admin',
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event', {
+        url: '/admin/{eventId}',
+        templateUrl: 'views/admin_event.html',
+        controller: 'AdminEventCtrl',
+        abstract: true
+    })
+    .state('admin_event.skills', {
+        url: '',
+        templateUrl: 'views/admin_event_skills.html',
+        controller: 'AdminEventSkillsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event.items', {
+        url: '/items/{day}',
+        templateUrl: 'views/admin_event_items.html',
+        controller: 'AdminEventItemsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditCompetitionItems'}
+            ]
+        }
+    })
+    .state('admin_event.form_list', {
+        url: '/forms',
         templateUrl: 'views/admin_form_list.html',
         controller: 'AdminFormListCtrl',
         data: {
@@ -94,12 +212,12 @@ angular
             ]
         },
         reloadOnSearch: false
-    }).state('admin_form.detail', {
-        url: '/{id}',
+    }).state('admin_form_detail', {
+        url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
         controller: 'AdminFormDetailCtrl',
         abstract: true
-    }).state('admin_form.detail.submissions', {
+    }).state('admin_form_detail.submissions', {
         url: '',
         templateUrl: 'views/admin_form_detail_submissions.html',
         controller: 'AdminFormDetailSubmissionCtrl',
@@ -111,7 +229,7 @@ angular
             ]
         }
     }).state('admin_submission', {
-        url: '/admin/forms/{formId}/skills/{skillId}/submission',
+        url: '/admin/events/{eventId}/forms/{formId}/skills/{skillId}/submission',
         templateUrl: 'views/admin_submission.html',
         controller: 'AdminSubmissionCtrl',
         data: {
@@ -121,8 +239,8 @@ angular
                 {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
-    }).state('admin_form_progress', {
-        url: '/admin/forms_progress',
+    }).state('admin_event.form_progress', {
+        url: '/admin/events/{eventId}/forms_progress',
         templateUrl: 'views/admin_form_progress.html',
         controller: 'AdminFormProgressCtrl',
         data: {

@@ -1,0 +1,19 @@
+<p class="pull-right" ng-show="skills.skills.length > 1">
+    <button class="btn btn-default" ng-click="changeSkill()">Change Skill</button>
+</p>
+
+<h1 class="align-top">
+    <small>{{ skill.event.name || "&nbsp;" }}</small>
+    <br/>
+    {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+</h1>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+<ul class="nav nav-tabs" ng-show="!loading">
+    <li ng-repeat="day in competitionDays.days" ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})">{{ day.timeline }}</a></li>
+</ul>
+
+<div ui-view ng-show="!loading"></div>

@@ -1,0 +1,50 @@
+<p class="pull-right text-muted">
+    <span ng-show="!saving && !saved">Changes are saved automatically</span>
+    <span ng-show="saving">Saving...</span>
+    <span ng-show="!saving && saved">Plan saved</span>
+</p>
+
+<h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+
+<hr/>
+
+<div class="row">
+    <label class="col-sm-1 col-sm-offset-1">Time</label>
+    <label class="col-sm-6">Description</label>
+    <label class="col-sm-3">Responsibility</label>
+</div>
+
+<br/>
+
+<form class="form-horizontal">
+    <div ng-repeat="item in skillItems.items | filter:{timeline:active.day.timeline} as filteredItems" class="form-group form-group-sm">
+        <div class="col-sm-1">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp($index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown($index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <input class="form-control input-sm" ng-model="item.time" ng-change="itemChanged(item)" placeholder="HH:mm">
+        </div>
+        <div class="col-sm-6">
+            <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(item)"></textarea>
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(item)">
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+        </div>
+    </div>
+    <div class="form-group form-group-sm" ng-show="!filteredItems.length">
+        <div class="col-sm-offset-1 col-sm-4">
+            <p>No entries.<br/>&nbsp;</p>
+        </div>
+    </div>
+    <div class="form-group form-group-sm">
+        <div class="col-sm-offset-1 col-sm-4">
+            <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> Add line</button>
+        </div>
+    </div>
+</form>
