@@ -212,7 +212,20 @@ angular
             ]
         },
         reloadOnSearch: false
-    }).state('admin_form_detail', {
+    })
+    .state('admin_event.rooms', {
+        url: '/rooms',
+        templateUrl: 'views/admin_event_rooms.html',
+        controller: 'AdminEventRoomsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditRooms'}
+            ]
+        }
+    })
+    .state('admin_form_detail', {
         url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
         controller: 'AdminFormDetailCtrl',
