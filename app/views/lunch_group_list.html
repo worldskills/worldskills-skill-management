@@ -36,7 +36,12 @@
               </colgroup>
               <tbody>
                   <tr ng-repeat="person in group.persons">
-                      <td>{{ person.first_name }} {{ person.last_name }}</td>
+                      <td>
+                          {{ person.first_name }} {{ person.last_name }}
+                          <span ng-repeat="entity in person.entities">
+                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                          </span>
+                      </td>
                       <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(group, person)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                   </tr>
                   <tr>
@@ -44,7 +49,14 @@
                           <div class="btn-group" uib-dropdown>
                               <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
                               <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="person in experts.persons | filter:inGroup as filteredExperts"><a href ng-click="addPerson(group, person)">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                  <li ng-repeat="person in experts.persons | filter:inGroup as filteredExperts">
+                                      <a href ng-click="addPerson(group, person)">
+                                          {{ person.first_name }} {{ person.last_name }}
+                                          <span ng-repeat="entity in person.entities">
+                                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                          </span>
+                                      </a>
+                                  </li>
                                   <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
                               </ul>
                           </div>
@@ -72,7 +84,12 @@
               </colgroup>
               <tbody>
                   <tr ng-repeat="person in group.persons">
-                      <td>{{ person.first_name }} {{ person.last_name }}</td>
+                      <td>
+                          {{ person.first_name }} {{ person.last_name }}
+                          <span ng-repeat="entity in person.entities">
+                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                          </span>
+                      </td>
                       <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(group, person)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                   </tr>
                   <tr>
@@ -80,7 +97,14 @@
                           <div class="btn-group" uib-dropdown>
                               <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
                               <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="person in competitors.persons | filter:inGroup as filteredCompetitors"><a href ng-click="addPerson(group, person)">{{ person.first_name }} {{ person.last_name }}</a></li>
+                                  <li ng-repeat="person in competitors.persons | filter:inGroup as filteredCompetitors">
+                                      <a href ng-click="addPerson(group, person)">
+                                          {{ person.first_name }} {{ person.last_name }}
+                                          <span ng-repeat="entity in person.entities">
+                                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
+                                          </span>
+                                      </a>
+                                  </li>
                                   <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
                               </ul>
                           </div>
