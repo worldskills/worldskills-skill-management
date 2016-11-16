@@ -58,3 +58,35 @@ angular.module('skillMgmtApp').controller('AdminEventRoomsCtrl', function($scope
         Room.delete({eventId: $stateParams.eventId}, room);
     };
 });
+
+angular.module('skillMgmtApp').controller('AdminEventLunchCtrl', function($scope, $stateParams, $timeout, LunchPeriod) {
+
+    $scope.lunchPeriods = LunchPeriod.query({eventId: $stateParams.eventId});
+
+    var timeoutsLunchPeriods = {};
+    $scope.lunchPeriodChanged = function (lunchPeriod) {
+        var updateLunchPeriod = function () {
+            if (lunchPeriod.id) {
+                LunchPeriod.update({eventId: $stateParams.eventId}, lunchPeriod);
+            } else {
+                LunchPeriod.save({eventId: $stateParams.eventId}, lunchPeriod, function (response) {
+                    lunchPeriod.id = response.id;
+                });
+            }
+        };
+        if (lunchPeriod.id in timeoutsLunchPeriods) {
+            $timeout.cancel(timeoutsLunchPeriods[lunchPeriod.id]);
+        }
+        timeoutsLunchPeriods[lunchPeriod.id] = $timeout(updateLunchPeriod, 1000);
+    };
+
+    $scope.addLunchPeriod = function () {
+        $scope.lunchPeriods.lunch_periods.push({});
+    };
+
+    $scope.removeLunchPeriod = function (lunchPeriod) {
+        var index = $scope.lunchPeriods.lunch_periods.indexOf(lunchPeriod);
+        $scope.lunchPeriods.lunch_periods.splice(index, 1);
+        LunchPeriod.delete({eventId: $stateParams.eventId}, lunchPeriod);
+    };
+});

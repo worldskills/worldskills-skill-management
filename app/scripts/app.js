@@ -225,6 +225,18 @@ angular
             ]
         }
     })
+    .state('admin_event.lunch', {
+        url: '/lunch',
+        templateUrl: 'views/admin_event_lunch.html',
+        controller: 'AdminEventLunchCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditLunchPeriods'}
+            ]
+        }
+    })
     .state('admin_form_detail', {
         url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
