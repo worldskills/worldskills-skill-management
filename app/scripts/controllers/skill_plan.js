@@ -15,7 +15,14 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
         });
 
         $scope.skillItems = SkillItem.query({skillId: $scope.skill.id}, {}, function () {
+
             $scope.loading = false;
+
+            angular.forEach($scope.skillItems.items, function (item) {
+                if (item.time) {
+                    item.time = item.time.substring(0, 5);
+                }
+            });
         });
 
     });

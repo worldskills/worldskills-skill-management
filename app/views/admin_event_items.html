@@ -26,10 +26,10 @@
         <form class="form-horizontal">
             <div ng-repeat="item in items.items | filter:{timeline:active.day.timeline} as filteredItems" class="form-group form-group-sm">
                 <div class="col-sm-1">
-                    <input class="form-control input-sm" ng-model="item.start_time" ng-change="itemChanged(item)">
+                    <input class="form-control input-sm" ng-model="item.start_time" ng-change="itemChanged(item)" placeholder="HH:mm">
                 </div>
                 <div class="col-sm-1">
-                    <input class="form-control input-sm" ng-model="item.end_time" ng-change="itemChanged(item)">
+                    <input class="form-control input-sm" ng-model="item.end_time" ng-change="itemChanged(item)" placeholder="HH:mm">
                 </div>
                 <div class="col-sm-3">
                     <input class="form-control input-sm" ng-model="item.name.text" ng-change="itemChanged(item)">

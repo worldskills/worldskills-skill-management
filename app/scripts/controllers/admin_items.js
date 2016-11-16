@@ -18,7 +18,17 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
     $scope.rooms = Room.query({eventId: $stateParams.eventId}, {});
 
     $scope.items = CompetitionItem.query({eventId: $stateParams.eventId}, {}, function () {
+
         $scope.loading = false;
+
+        angular.forEach($scope.items.items, function (item) {
+            if (item.start_time) {
+                item.start_time = item.start_time.substring(0, 5);
+            }
+            if (item.end_time) {
+                item.end_time = item.end_time.substring(0, 5);
+            }
+        });
     });
 
     $scope.changeDay = function (day) {
