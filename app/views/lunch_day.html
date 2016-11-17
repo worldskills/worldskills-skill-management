@@ -18,7 +18,7 @@
                     {{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}
                 </div>
                 <div class="col-sm-9">
-                    <div class="btn-toolbar">
+                    <div class="btn-toolbar pull-left">
                         <div class="btn-group" uib-dropdown>
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
@@ -38,9 +38,18 @@
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add group <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
                                 <li ng-repeat="group in lunchGroups.groups | filter:{type: 'EXPERT'}"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
+                                <li ng-show="lunchGroups.groups.length == 0"><a href>No Groups</a></li>
                             </ul>
                         </div>
                     </div>
+                    <form class="form-inline">
+                        &nbsp;&nbsp;
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sites[active.day.timeline + '.' + lunchPeriod.id + '.EXPERT']" ng-change="lunchInWorkshopChanged(lunchPeriod, 'EXPERT')"> Lunch in Workshop
+                            </label>
+                        </div>
+                    </form>
                     <br ng-show="filteredAllocations.length || filteredGroups.length" />
                     <table class="table table-hover" ng-show="filteredAllocations.length || filteredGroups.length">
                         <colgroup>
@@ -79,7 +88,7 @@
                     {{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}
                 </div>
                 <div class="col-sm-9">
-                    <div class="btn-toolbar">
+                    <div class="btn-toolbar pull-left">
                         <div class="btn-group" uib-dropdown>
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add person <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
@@ -99,9 +108,18 @@
                             <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add group <span class="caret"></span></button>
                             <ul class="dropdown-menu" uib-dropdown-menu>
                                 <li ng-repeat="group in lunchGroups.groups | filter:{type: 'COMPETITOR'}"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
+                                <li ng-show="lunchGroups.groups.length == 0"><a href>No Groups</a></li>
                             </ul>
                         </div>
                     </div>
+                    <form class="form-inline">
+                        &nbsp;&nbsp;
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sites[active.day.timeline + '.' + lunchPeriod.id + '.COMPETITOR']" ng-change="lunchInWorkshopChanged(lunchPeriod, 'COMPETITOR')"> Lunch in Workshop
+                            </label>
+                        </div>
+                    </form>
                     <br ng-show="filteredAllocations.length || filteredGroups.length" />
                     <table class="table table-hover" ng-show="filteredAllocations.length || filteredGroups.length">
                         <colgroup>

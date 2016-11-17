@@ -23,8 +23,12 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
         $scope.loading = false;
     });
 
+    $scope.sites = {};
     $scope.lunchAllocations = LunchAllocation.query({skillId: $stateParams.skillId}, function () {
         $scope.loading = false;
+        $scope.lunchAllocations.sites.forEach(function (site) {
+            $scope.sites[site.timeline + '.' + site.lunch_period.id + '.' + site.type] = site.in_workshop;
+        });
     }, function () {
         // error
         $scope.loading = false;
@@ -48,7 +52,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
 });
 
-angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup, LunchAllocation) {
+angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup, LunchAllocation, LunchSite) {
 
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
@@ -117,4 +121,8 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         });
     };
 
+    $scope.lunchInWorkshopChanged = function (lunchPeriod, personType) {
+        var inWorkshop = $scope.sites[$scope.active.day.timeline + '.' + lunchPeriod.id + '.' + personType];
+        LunchSite.update({skillId: $stateParams.skillId, timeline: $scope.active.day.timeline, lunchPeriodId: lunchPeriod.id, personType: personType}, {in_workshop: inWorkshop});
+    };
 });

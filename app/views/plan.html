@@ -101,6 +101,9 @@
                                 <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
                             </td>
                             <td>
+                                <div ng-repeat="lunchSite in plan.lunch_sites | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR', in_workshop:true}">
+                                    <span class="text-muted">Lunch in Workshop</span>
+                                </div>
                                 <div ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}">
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
                                     <span ng-repeat="entity in allocation.person.entities">
@@ -112,6 +115,9 @@
                                 </div>
                             </td>
                             <td>
+                                <div ng-repeat="lunchSite in plan.lunch_sites | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'EXPERT', in_workshop:true}">
+                                    <span class="text-muted">Lunch in Workshop</span>
+                                </div>
                                 <div ng-repeat="allocation in plan.lunch_allocations | filter:{timeline:day.timeline, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}">
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
                                     <span ng-repeat="entity in allocation.person.entities">
