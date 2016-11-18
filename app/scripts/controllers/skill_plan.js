@@ -97,7 +97,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     $scope.addItem = function () {
 
         var newItem = {
-            timeline: $scope.active.day.timeline,
+            competition_day_id: $scope.active.day.id,
             order_num: $scope.filteredItems.length + 1,
             description: {
                 lang_code: 'en',

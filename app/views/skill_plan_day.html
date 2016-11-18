@@ -17,7 +17,7 @@
 <br/>
 
 <form class="form-horizontal">
-    <div ng-repeat="item in skillItems.items | filter:{timeline:active.day.timeline} as filteredItems" class="form-group form-group-sm">
+    <div ng-repeat="item in skillItems.items | filter:{competition_day_id:active.day.id} as filteredItems" class="form-group form-group-sm">
         <div class="col-sm-1">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp($index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>

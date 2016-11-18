@@ -62,7 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in plan.skill_items | filter:{timeline:day.timeline} as filteredSkillItems">
+                        <tr ng-repeat="item in plan.skill_items | filter:{competition_day_id:day.id} as filteredSkillItems">
                             <td>
                                 <span class="text-muted">{{ item.time | limitTo:5 }}</span>
                             </td>
