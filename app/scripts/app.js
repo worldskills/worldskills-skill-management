@@ -227,8 +227,8 @@ angular
     })
     .state('admin_event.lunch_periods', {
         url: '/lunch',
-        templateUrl: 'views/admin_event_lunch.html',
-        controller: 'AdminEventLunchCtrl',
+        templateUrl: 'views/admin_event_lunch_periods.html',
+        controller: 'AdminEventLunchPeriodsCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
