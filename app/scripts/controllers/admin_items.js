@@ -4,8 +4,6 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
 
     $scope.loading = true;
 
-    $scope.activeDay = $stateParams.day;
-
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId}, function () {
 
         angular.forEach($scope.competitionDays.days, function (competitionDay) {

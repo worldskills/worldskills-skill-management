@@ -6,8 +6,8 @@
 
 <h1>Skill Management Plan</h1>
 
-<uib-tabset ng-show="!loading" active="activeDay">
-    <uib-tab ng-repeat="day in plan.competition_days" heading="{{ day.timeline }}" index="day.timeline" select="changeDay(day)">
+<uib-tabset ng-show="!loading" active="active.day.id">
+    <uib-tab ng-repeat="day in plan.competition_days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
 
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in plan.competition_items | filter:{timeline:day.timeline}" style="background-color: #{{ item.color }};">
+                        <tr ng-repeat="item in plan.competition_items | filter:{competition_day_id:day.id}" style="background-color: #{{ item.color }};">
                             <td>
                                 <span>{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
                             </td>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="filteredSkillItems.length">
             <div class="panel-heading">
                 <h2 class="panel-title text-center">Skill Specific Items</h2>
             </div>
@@ -62,7 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in plan.skill_items | filter:{timeline:day.timeline}">
+                        <tr ng-repeat="item in plan.skill_items | filter:{timeline:day.timeline} as filteredSkillItems">
                             <td>
                                 <span class="text-muted">{{ item.time | limitTo:5 }}</span>
                             </td>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div class="panel panel-default" ng-show="lunchPeriods.lunch_periods.length">
+        <div class="panel panel-default" ng-show="day.lunch && lunchPeriods.lunch_periods.length">
             <div class="panel-heading">
                 <h2 class="panel-title text-center">Lunch Allocations</h2>
             </div>
@@ -142,5 +142,5 @@
 </div>
 
 <div class="alert alert-warning" ng-show="!loading && !plan.competition_days.length" ng-cloak>
-    <strong>No competition days found!</strong> Please make sure the event has a competition start and end date.
+    No Competition days found!
 </div>

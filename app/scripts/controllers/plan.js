@@ -4,14 +4,18 @@ angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootSco
 
     $scope.loading = true;
 
-    $scope.activeDay = $stateParams.day;
-
     $scope.plan = Plan.get({skillId: $stateParams.skillId}, {}, function () {
 
         $scope.lunchPeriods = LunchPeriod.query({eventId: $scope.plan.skill.event.id}, {}, function () {
 
             $scope.loading = false;
 
+        });
+
+        angular.forEach($scope.plan.competition_days, function (competitionDay) {
+            if (competitionDay.timeline == $stateParams.day) {
+                $scope.active.day = competitionDay;
+            }
         });
 
     });

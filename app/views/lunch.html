@@ -13,11 +13,7 @@
 </div>
 
 <ul class="nav nav-tabs" ng-show="!loading">
-    <li ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C-2'})">C-2</a></li>
-    <li ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">C1</a></li>
-    <li ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C2'})">C2</a></li>
-    <li ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C3'})">C3</a></li>
-    <li ui-sref-active="'active'"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C4'})">C4</a></li>
+    <li ui-sref-active="'active'" ng-repeat="day in competitionDays.days | filter:{lunch:true}"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})">{{ day.timeline }}</a></li>
 </ul>
 
 <div ui-view ng-show="!loading"></div>
