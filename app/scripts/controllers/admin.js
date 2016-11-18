@@ -90,3 +90,38 @@ angular.module('skillMgmtApp').controller('AdminEventLunchPeriodsCtrl', function
         LunchPeriod.delete({eventId: $stateParams.eventId}, lunchPeriod);
     };
 });
+
+angular.module('skillMgmtApp').controller('AdminEventLunchSummaryCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.report = Report.lunchSummary({eventId: $stateParams.eventId});
+
+});
+
+angular.module('skillMgmtApp').controller('AdminEventLunchInWorkshopCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.report = Report.lunchInWorkshop({eventId: $stateParams.eventId}, function () {
+
+        $scope.competitionDays.$promise.then(function () {
+
+            angular.forEach($scope.report.reports, function (report) {
+                angular.forEach($scope.competitionDays.days, function (competitionDay) {
+                    if (competitionDay.id == report.competition_day_id) {
+                        if (typeof competitionDay.total == 'undefined') {
+                            competitionDay.total = 0;
+                        }
+                        competitionDay.total = competitionDay.total + report.total;
+                    }
+                });
+            });
+        });
+    });
+
+});

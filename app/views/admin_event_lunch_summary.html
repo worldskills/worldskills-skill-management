@@ -1,0 +1,43 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="admin">Admin</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Lunch Summary</li>
+</ol>
+
+<h1>Lunch Summary</h1>
+
+<p class="text-muted">Number of people is without people having lunch in workshops.</p>
+
+<hr/>
+
+<div ng-repeat="day in competitionDays.days | filter:{lunch:true}">
+    <h3>Day {{ day.timeline }} <small>{{ day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+
+    <table class="table table-striped">
+        <colgroup>
+            <col width="50%" />
+            <col width="50%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>People</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot
+        <tbody>
+            <tr ng-repeat="report in report.reports | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}}">
+                <td>
+                    {{ report.lunch_period.start_time | limitTo:5 }} - {{ report.lunch_period.end_time | limitTo:5 }}
+                </td>
+                <td>
+                    {{ report.total }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

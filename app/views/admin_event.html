@@ -3,6 +3,16 @@
     <li class="active">{{ event.name }}</li>
 </ol>
 
+<div class="pull-right">
+    <div class="btn-group" uib-dropdown>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Reports <span class="caret"></span></button>
+        <ul class="dropdown-menu" uib-dropdown-menu>
+            <li><a ui-sref="admin_lunch_summary({eventId: event.id})">Lunch Summary</a></li>
+            <li><a ui-sref="admin_lunch_in_workshop({eventId: event.id})">Lunch in Workshop</a></li>
+        </ul>
+    </div>
+</div>
+
 <h1>{{ event.name }}</h1>
 
 <ul class="nav nav-tabs">

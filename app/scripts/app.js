@@ -237,6 +237,30 @@ angular
             ]
         }
     })
+    .state('admin_lunch_summary', {
+        url: '/admin/{eventId}/lunch_summary',
+        templateUrl: 'views/admin_event_lunch_summary.html',
+        controller: 'AdminEventLunchSummaryCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewManagementPlan'}
+            ]
+        }
+    })
+    .state('admin_lunch_in_workshop', {
+        url: '/admin/{eventId}/lunch_in_workshop',
+        templateUrl: 'views/admin_event_lunch_in_workshop.html',
+        controller: 'AdminEventLunchInWorkshopCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewManagementPlan'}
+            ]
+        }
+    })
     .state('admin_form_detail', {
         url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
