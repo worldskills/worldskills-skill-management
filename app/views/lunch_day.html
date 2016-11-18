@@ -57,7 +57,7 @@
                             <col width="20%" />
                         </colgroup>
                         <tbody>
-                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'} as filteredAllocations">
+                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'} as filteredAllocations">
                                 <td>
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
                                     <span ng-repeat="entity in allocation.person.entities">
@@ -66,7 +66,7 @@
                                 </td>
                                 <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                             </tr>
-                            <tr ng-repeat="group in lunchAllocations.groups | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}} as filteredGroups">
+                            <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}} as filteredGroups">
                                 <td>
                                     {{ group.group.name }}
                                 </td>
@@ -127,7 +127,7 @@
                             <col width="20%" />
                         </colgroup>
                         <tbody>
-                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{timeline:active.day.timeline, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'} as filteredAllocations">
+                            <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'} as filteredAllocations">
                                 <td>
                                     {{ allocation.person.first_name }} {{ allocation.person.last_name }}
                                     <span ng-repeat="entity in allocation.person.entities">
@@ -136,7 +136,7 @@
                                 </td>
                                 <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                             </tr>
-                            <tr ng-repeat="group in lunchAllocations.groups | filter:{timeline:active.day.timeline, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}} as filteredGroups">
+                            <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}} as filteredGroups">
                                 <td>
                                     {{ group.group.name }}
                                 </td>

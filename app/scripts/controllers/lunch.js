@@ -65,7 +65,7 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
     $scope.inAssociation = function (person) {
         var inAssociation = false;
         angular.forEach($scope.lunchAllocations.allocations, function (allocation) {
-            if (allocation.timeline == $scope.active.day.timeline && person.id == allocation.person.id) {
+            if (allocation.competition_day_id == $scope.active.day.id && person.id == allocation.person.id) {
                 inAssociation = true;
             }
         });
@@ -76,7 +76,7 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         var allocation = {
             lunch_period: lunchPeriod,
             group: group,
-            timeline: $scope.active.day.timeline
+            competition_day_id: $scope.active.day.id
         };
         $scope.lunchAllocations.groups.push(allocation);
         LunchAllocationGroup.add({skillId: $stateParams.skillId}, allocation);
@@ -92,7 +92,7 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         var allocation = {
             lunch_period: lunchPeriod,
             person: person,
-            timeline: $scope.active.day.timeline,
+            competition_day_id: $scope.active.day.id,
             type: type
         };
         $scope.lunchAllocations.allocations.push(allocation);
