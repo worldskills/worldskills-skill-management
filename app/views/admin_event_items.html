@@ -1,6 +1,6 @@
 
-<uib-tabset ng-show="!loading" active="activeDay">
-    <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.timeline" select="changeDay(day)">
+<uib-tabset ng-show="!loading" active="active.day.id">
+    <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
 
         <p class="pull-right text-muted">
             <span ng-show="!saving && !saved">Changes are saved automatically</span>
@@ -24,7 +24,7 @@
         <br/>
 
         <form class="form-horizontal">
-            <div ng-repeat="item in items.items | filter:{timeline:active.day.timeline} as filteredItems" class="form-group form-group-sm">
+            <div ng-repeat="item in items.items | filter:{competition_day_id:active.day.id} as filteredItems" class="form-group form-group-sm">
                 <div class="col-sm-1">
                     <input class="form-control input-sm" ng-model="item.start_time" ng-change="itemChanged(item)" placeholder="HH:mm">
                 </div>

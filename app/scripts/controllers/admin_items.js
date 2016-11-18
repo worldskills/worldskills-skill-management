@@ -82,7 +82,7 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
 
     $scope.addItem = function () {
         var newItem = {
-            timeline: $scope.active.day.timeline,
+            competition_day_id: $scope.active.day.id,
             name: {
                 lang_code: 'en',
                 text: ''
