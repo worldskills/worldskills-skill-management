@@ -8,29 +8,40 @@
 
 <hr/>
 
-<div class="row">
-    <label class="col-sm-1 col-sm-offset-1">Time</label>
-    <label class="col-sm-6">Description</label>
-    <label class="col-sm-3">Responsibility</label>
-</div>
-
-<br/>
-
 <form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1">
+            <p class="form-control-static"><strong>Time</strong></p>
+        </div>
+        <div class="col-sm-5 col-lg-6">
+            <p class="form-control-static"><strong>Description</strong></p>
+        </div>
+        <div class="col-sm-2 col-lg-3">
+            <p class="form-control-static"><strong>Responsibility</strong></p>
+        </div>
+    </div>
+    <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'} as filteredTimes" class="form-group form-group-sm">
+        <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1">
+            <input class="form-control input-sm" ng-model="time.time" ng-change="skillTimeChanged(time)" placeholder="HH:mm">
+        </div>
+        <div class="col-sm-6">
+            <p class="form-control-static">Competitor Finish Time</p>
+        </div>
+    </div>
     <div ng-repeat="item in skillItems.items | filter:{competition_day_id:active.day.id} as filteredItems" class="form-group form-group-sm">
-        <div class="col-sm-1">
+        <div class="col-sm-2 col-lg-1">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp($index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
                 <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown($index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
             </div>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2 col-lg-1">
             <input class="form-control input-sm" ng-model="item.time" ng-change="itemChanged(item)" placeholder="HH:mm">
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5 col-lg-6">
             <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(item)"></textarea>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2 col-lg-3">
             <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(item)">
         </div>
         <div class="col-sm-1">

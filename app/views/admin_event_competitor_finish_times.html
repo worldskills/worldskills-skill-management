@@ -1,0 +1,48 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="admin">Admin</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Competitor Finish Times</li>
+</ol>
+
+<h1>Competitor Finish Times</h1>
+
+<hr/>
+
+<div ng-repeat="day in competitionDays.days | filter:{competitor_finish_time:true}">
+    <h3>Day {{ day.timeline }} <small>{{ day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+
+    <table class="table table-striped">
+        <colgroup>
+            <col width="20%" />
+            <col width="40%" />
+            <col width="40%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Skill</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+        </tfoot
+        <tbody>
+            <tr ng-repeat="skill in skills.skills">
+                <td>
+                    {{ skill.number }}
+                </td>
+                <td>
+                    {{ skill.name.text }}
+                </td>
+                <td>
+                    <span ng-repeat="time in skillTimes.times | filter:{skill_id:skill.id, competition_day_id:day.id, type:'finish'} as filteredTimes">
+                        {{ time.time | limitTo:5 }}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

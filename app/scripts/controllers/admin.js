@@ -125,3 +125,15 @@ angular.module('skillMgmtApp').controller('AdminEventLunchInWorkshopCtrl', funct
     });
 
 });
+
+angular.module('skillMgmtApp').controller('AdminEventCompetitorFinishCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Skill, SkillTime) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.skills = Skill.query({eventId: $stateParams.eventId});
+
+    $scope.skillTimes = SkillTime.event({eventId: $stateParams.eventId});
+
+});

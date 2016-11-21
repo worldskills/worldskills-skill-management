@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, CompetitionDay, SkillItem) {
+angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $uibModal, auth, alert, Skill, CompetitionDay, SkillItem, SkillTime) {
 
     $scope.loading = true;
 
@@ -24,7 +24,32 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
                 }
             });
         });
+    });
 
+    $scope.skillTimes = SkillTime.query({skillId: $stateParams.skillId}, function () {
+
+        angular.forEach($scope.skillTimes.times, function (time) {
+            if (time.time) {
+                time.time = time.time.substring(0, 5);
+            }
+        });
+
+        $scope.competitionDays.$promise.then(function () {
+
+            // create competition day times
+            angular.forEach($scope.competitionDays.days, function (day) {
+                if (day.competitor_finish_time) {
+                    var matches = $filter('filter')($scope.skillTimes.times, {competition_day_id: day.id, type: 'finish'});
+                    if (matches.length == 0) {
+                        var competitionTime = {
+                            competition_day_id: day.id,
+                            type: 'finish'
+                        };
+                        $scope.skillTimes.times.push(competitionTime);
+                    }
+                }
+            });
+        });
     });
 
     $scope.cancelSkillsModal = function () {
@@ -40,7 +65,7 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
     };
 });
 
-angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, $rootScope, $state, $stateParams, $filter, $timeout, auth, alert, SkillItem) {
+angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, $rootScope, $state, $stateParams, $filter, $timeout, auth, alert, SkillItem, SkillTime) {
 
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
@@ -77,21 +102,21 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
 
     var timeoutsItems = {};
     $scope.itemChanged = function (item) {
-        var updateItem = function () {
-            $scope.saving = true;
-            if (item.id) {
+        if (item.id) {
+            var updateItem = function () {
+                $scope.saving = true;
                 SkillItem.update({skillId: $stateParams.skillId}, item, saved, errored);
-            } else {
-                SkillItem.save({skillId: $stateParams.skillId}, item, function (response) {
-                    item.id = response.id;
-                    saved();
-                }, errored);
+            };
+            if (item.id in timeoutsItems) {
+                $timeout.cancel(timeoutsItems[item.id]);
             }
-        };
-        if (item.id in timeoutsItems) {
-            $timeout.cancel(timeoutsItems[item.id]);
+            timeoutsItems[item.id] = $timeout(updateItem, 1000);
+        } else {
+            SkillItem.save({skillId: $stateParams.skillId}, item, function (response) {
+                item.id = response.id;
+                saved();
+            }, errored);
         }
-        timeoutsItems[item.id] = $timeout(updateItem, 1000);
     };
 
     $scope.addItem = function () {
@@ -137,6 +162,18 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         oldItem.order_num = orderNum;
         $scope.itemChanged(newItem);
         $scope.itemChanged(oldItem);
+    };
+
+    var timeoutsTimes = {};
+    $scope.skillTimeChanged = function (time) {
+        var updateTime = function () {
+            $scope.saving = true;
+            SkillTime.update({skillId: $stateParams.skillId}, time, saved, errored);
+        };
+        if (time.competition_day_id in timeoutsItems) {
+            $timeout.cancel(timeoutsTimes[time.competition_day_id]);
+        }
+        timeoutsTimes[time.competition_day_id] = $timeout(updateTime, 1000);
     };
 });
 
