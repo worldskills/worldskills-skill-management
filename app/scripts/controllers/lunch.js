@@ -52,7 +52,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
 });
 
-angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup, LunchAllocation, LunchSite) {
+angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, LunchAllocationGroup, LunchAllocation) {
 
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
@@ -72,11 +72,38 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         return !inAssociation;
     };
 
+    $scope.inAssociationGroupCompetitor = function (group) {
+        var inAssociation = false;
+        if (group.type !== 'COMPETITOR') {
+            inAssociation = true;
+        }
+        angular.forEach($scope.lunchAllocations.groups, function (allocation) {
+            if (allocation.competition_day_id == $scope.active.day.id && group.id == allocation.group.id) {
+                inAssociation = true;
+            }
+        });
+        return !inAssociation;
+    };
+
+    $scope.inAssociationGroupExpert = function (group) {
+        var inAssociation = false;
+        if (group.type !== 'EXPERT') {
+            inAssociation = true;
+        }
+        angular.forEach($scope.lunchAllocations.groups, function (allocation) {
+            if (allocation.competition_day_id == $scope.active.day.id && group.id == allocation.group.id) {
+                inAssociation = true;
+            }
+        });
+        return !inAssociation;
+    };
+
     $scope.addGroup = function (lunchPeriod, group) {
         var allocation = {
             lunch_period: lunchPeriod,
             group: group,
-            competition_day_id: $scope.active.day.id
+            competition_day_id: $scope.active.day.id,
+            in_workshop: false
         };
         $scope.lunchAllocations.groups.push(allocation);
         LunchAllocationGroup.add({skillId: $stateParams.skillId}, allocation);
@@ -93,7 +120,8 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
             lunch_period: lunchPeriod,
             person: person,
             competition_day_id: $scope.active.day.id,
-            type: type
+            type: type,
+            in_workshop: false
         };
         $scope.lunchAllocations.allocations.push(allocation);
         LunchAllocation.add({skillId: $stateParams.skillId}, allocation);
@@ -121,8 +149,26 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         });
     };
 
-    $scope.lunchInWorkshopChanged = function (lunchPeriod, personType) {
-        var inWorkshop = $scope.sites[$scope.active.day.timeline + '.' + lunchPeriod.id + '.' + personType];
-        LunchSite.update({skillId: $stateParams.skillId, timeline: $scope.active.day.timeline, lunchPeriodId: lunchPeriod.id, personType: personType}, {in_workshop: inWorkshop});
+    $scope.lunchInWorkshopAll = function (lunchPeriod, type, inWorkshop) {
+        angular.forEach($scope.lunchAllocations.allocations, function (allocation) {
+            if (allocation.competition_day_id == $scope.active.day.id && allocation.lunch_period.id == lunchPeriod.id && allocation.type == type) {
+                allocation.in_workshop = inWorkshop;
+                $scope.lunchInWorkshopChanged(allocation);
+            }
+        });
+        angular.forEach($scope.lunchAllocations.groups, function (allocation) {
+            if (allocation.competition_day_id == $scope.active.day.id && group.lunch_period.id == lunchPeriod.id && group.group.type == type) {
+                allocation.in_workshop = inWorkshop;
+                $scope.lunchInWorkshopChanged(allocation);
+            }
+        });
+    };
+
+    $scope.lunchInWorkshopChanged = function (allocation) {
+        LunchAllocation.add({skillId: $stateParams.skillId}, allocation);
+    };
+
+    $scope.lunchInWorkshopGroupChanged = function (allocation) {
+        LunchAllocationGroup.add({skillId: $stateParams.skillId}, allocation);
     };
 });
