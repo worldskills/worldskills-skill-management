@@ -15,9 +15,13 @@
     <button ng-click="rejectSubmission()" class="btn btn-danger">Reject<ws-text-spinner ng-show="rejectLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
-<p>{{ submission.skill.number }} {{ submission.skill.name.text }}</p>
+<p>
+    {{ submission.skill.event.name }}
+    <br/>
+    {{ submission.skill.number }} {{ submission.skill.name.text }}
+</p>
 
-<h1>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h1>
+<h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
 </div>
 
 

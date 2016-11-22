@@ -1,23 +1,19 @@
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
 
-<ol class="breadcrumb">
-    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Forms</a></li>
-    <li class="active">{{ submission.form.name.text }}</li>
-</ol>
+<h1 class="align-top">
+    <small>{{ submission.skill.event.name || "&nbsp;" }}</small>
+    <br/>
+    {{ submission.skill.number }} {{ submission.skill.name.text || "&nbsp;" }}
+</h1>
 
-<div class="page-header">
+<hr/>
+
 <p class="pull-right text-muted">
     <span ng-show="saving">Saving...</span>
     <span ng-show="!saving && saved">Draft saved</span>
 </p>
-<p>
-    <span class="text-muted">{{ submission.skill.event.name }}</span>
-    <br/>
-    {{ submission.skill.number }} {{ submission.skill.name.text }}
-</p>
-<h1>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h1>
-</div>
+<h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
 
 <alerts></alerts>
 
@@ -257,7 +253,7 @@
     <div>
         <br/>
         <button class="btn btn-primary" type="submit">Submit Form<ws-text-spinner ng-show="submitting" class="ng-hide"></ws-text-spinner></button>
-        <a class="btn btn-link pull-right" ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">« Return to form list</button>
+        <a class="btn btn-link pull-right" ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">« Return to Forms</button>
     </div>
 
 
