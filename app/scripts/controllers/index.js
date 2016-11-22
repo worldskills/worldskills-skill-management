@@ -5,7 +5,7 @@ angular.module('skillMgmtApp').controller('IndexCtrl', function ($scope, $rootSc
     auth.user.$promise.then(function () {
         $scope.skills.$promise.then(function () {
 
-            if ($scope.userHasSkillPosition) {
+            if ($scope.active.skill) {
 
                 $state.go('skill_plan.day', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id, day: 'C1'});
 

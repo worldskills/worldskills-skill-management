@@ -52,7 +52,6 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
 
             if ($scope.skills.skills.length != 0) {
                 $scope.active.skill = $scope.skills.skills[0];
-                $scope.userHasSkillPosition = true;
             }
 
         }, function () {
