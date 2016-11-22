@@ -14,7 +14,7 @@
         <tbody>
             <tr ng-show="!loading" ng-repeat="skill in skills">
                 <td>{{ skill.skill.number }} {{ skill.skill.name.text }}</td>
-                <th ng-repeat="form in forms.forms" ng-class="{danger: skill.submissions[form.id].state != 'submitted'}" title="{{ skill.skill.number }} {{ skill.skill.name.text }} - {{ form.timeline }} {{ form.name.text }}" class="text-center">
+                <th ng-repeat="form in forms.forms" ng-class="{danger: skill.submissions[form.id].state != 'submitted'}" title="{{ skill.skill.number }} {{ skill.skill.name.text }} - {{ form.competition_day.timeline }} {{ form.name.text }}" class="text-center">
                     <i class="glyphicon glyphicon-ok text-success" ng-show="skill.submissions[form.id].state == 'submitted'"></i>
                     <i class="glyphicon glyphicon-remove text-danger" ng-show="skill.submissions[form.id].state != 'submitted'"></i>
                 </th>
@@ -38,7 +38,7 @@
             <tr ng-show="!loading" ng-repeat="form in forms.forms">
                 <th>&nbsp;</th>
                 <th class="text-center text-muted">{{ $index + 1 }}</th>
-                <th colspan="{{ forms.forms.length }}" class="text-muted">{{ form.timeline }} {{ form.name.text }}</th>
+                <th colspan="{{ forms.forms.length }}" class="text-muted">{{ form.competition_day.timeline }} {{ form.name.text }}</th>
             </tr>
             <tr>
                 <td colspan="{{ forms.forms.length + 1 }}"></td>

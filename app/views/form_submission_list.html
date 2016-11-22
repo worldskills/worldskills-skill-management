@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="form in forms.forms">
-                        <td>{{ form.timeline }}</td>
+                        <td>{{ form.competition_day.timeline }}</td>
                         <td>
                             <a ui-sref="form_submission({eventId: active.skill.event.id, skillId: active.skill.id, formId: form.id})" ng-if="!form.has_submitted_submission">{{ form.name.text }}</a>
                             <span ng-if="form.has_submitted_submission">{{ form.name.text }}</span>

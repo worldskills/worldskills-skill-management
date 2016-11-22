@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="form in forms.forms">
-                <td>{{ form.timeline }}</td>
+                <td>{{ form.competition_day.timeline }}</td>
                 <td><a ui-sref="admin_form_detail.submissions({eventId: event.id, id: form.id})">{{ form.name.text }}</a></td>
             </tr>
             <tr ng-show="forms.total_count == 0">
