@@ -71,6 +71,15 @@
                             </td>
                             <td>{{ item.responsibility }}</td>
                         </tr>
+                        <tr ng-repeat="time in plan.skill_times | filter:{competition_day_id:day.id, type:'finish'} as filteredTimes">
+                            <td>
+                                <span class="text-muted">{{ time.time | limitTo:5 }}</span>
+                            </td>
+                            <td colspan="2">
+                                Competitor Finish Time
+                            </td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
