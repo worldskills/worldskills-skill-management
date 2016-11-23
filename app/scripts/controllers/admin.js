@@ -91,6 +91,37 @@ angular.module('skillMgmtApp').controller('AdminEventLunchPeriodsCtrl', function
     };
 });
 
+angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', function($scope, $stateParams, $timeout, CompetitionDay) {
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.competitionDayChanged = function (competitionDay) {
+        var updateCompetitionDay = function () {
+            if (competitionDay.id) {
+                CompetitionDay.update({eventId: $stateParams.eventId}, competitionDay);
+            } else {
+                CompetitionDay.save({eventId: $stateParams.eventId}, competitionDay, function (response) {
+                    competitionDay.id = response.id;
+                });
+            }
+        };
+        if (competitionDay.$timeout) {
+            $timeout.cancel(competitionDay.$timeout);
+        }
+        competitionDay.$timeout = $timeout(updateCompetitionDay, 1000);
+    };
+
+    $scope.addCompetitionDay = function () {
+        $scope.competitionDays.days.push({});
+    };
+
+    $scope.removeCompetitionDay = function (competitionDay) {
+        var index = $scope.competitionDays.days.indexOf(competitionDay);
+        $scope.competitionDays.days.splice(index, 1);
+        CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
+    };
+});
+
 angular.module('skillMgmtApp').controller('AdminEventLunchSummaryCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
 
     $scope.event = Event.get({id: $stateParams.eventId});

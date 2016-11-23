@@ -237,6 +237,18 @@ angular
             ]
         }
     })
+    .state('admin_event.competition_days', {
+        url: '/competition_days',
+        templateUrl: 'views/admin_event_competition_days.html',
+        controller: 'AdminEventCompetitionDaysCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditCompetitionDays'}
+            ]
+        }
+    })
     .state('admin_lunch_summary', {
         url: '/admin/{eventId}/lunch_summary',
         templateUrl: 'views/admin_event_lunch_summary.html',
