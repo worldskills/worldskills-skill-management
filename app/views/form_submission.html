@@ -60,6 +60,26 @@
                 </label>
             </div>
 
+            <div ng-if="field.type == 'input_file'">
+                <p>
+                    <button type="button" class="btn btn-default" ngf-select="fieldUploadFiles(field, $files, $invalidFiles)" multiple>Upload file(s)</button>
+                </p>
+                <div class="panel panel-default">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="file in field.files">
+                                <td><a href="{{file.download}}">{{file.filename}}</a></td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="deleteFieldFile(field, file)">Delete file</button></td>
+                            </tr>
+                            <tr ng-repeat="file in field.uploading | filter:{progress: '!100'}">
+                                <td>{{file.name}} {{file.$errorParam}}</td>
+                                <td class="text-right">{{file.progress}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div ng-if="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">

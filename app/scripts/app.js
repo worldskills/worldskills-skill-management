@@ -7,6 +7,7 @@ angular
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
+    'ngFileUpload',
     'pascalprecht.translate',
     'worldskills.utils'
   ])

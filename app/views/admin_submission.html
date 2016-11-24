@@ -58,6 +58,18 @@
                 </label>
             </div>
 
+            <div ng-if="field.type == 'input_file'">
+                <div class="panel panel-default">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="file in field.files">
+                                <td><a href="{{file.download}}">{{file.filename}}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div ng-if="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
                 <span ng-repeat="person in field.people">
                     <div class="col-sm-6">
