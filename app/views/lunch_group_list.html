@@ -35,26 +35,22 @@
                   <col width="30%" />
               </colgroup>
               <tbody>
-                  <tr ng-repeat="person in group.persons">
+                  <tr ng-repeat="registration in group.registrations">
                       <td>
-                          {{ person.first_name }} {{ person.last_name }}
-                          <span ng-repeat="entity in person.entities">
-                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                          </span>
+                          {{ registration.person.first_name }} {{ registration.person.last_name }}
+                          {{ registration.member.code }}
                       </td>
-                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(group, person)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                   </tr>
                   <tr>
                       <td>
                           <div class="btn-group" uib-dropdown>
                               <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
                               <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="person in competitors.persons | filter:inGroup as filteredCompetitors">
-                                      <a href ng-click="addPerson(group, person)">
-                                          {{ person.first_name }} {{ person.last_name }}
-                                          <span ng-repeat="entity in person.entities">
-                                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                                          </span>
+                                  <li ng-repeat="registration in competitors.registrations | filter:inGroup as filteredCompetitors">
+                                      <a href ng-click="addRegistration(group, registration)">
+                                          {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                          {{ registration.member.code }}
                                       </a>
                                   </li>
                                   <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
@@ -83,26 +79,22 @@
                   <col width="30%" />
               </colgroup>
               <tbody>
-                  <tr ng-repeat="person in group.persons">
+                  <tr ng-repeat="registration in group.registrations">
                       <td>
-                          {{ person.first_name }} {{ person.last_name }}
-                          <span ng-repeat="entity in person.entities">
-                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                          </span>
+                          {{ registration.person.first_name }} {{ registration.person.last_name }}
+                          {{ registration.member.code }}
                       </td>
-                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removePerson(group, person)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                   </tr>
                   <tr>
                       <td>
                           <div class="btn-group" uib-dropdown>
                               <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
                               <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="person in experts.persons | filter:inGroup as filteredExperts">
-                                      <a href ng-click="addPerson(group, person)">
-                                          {{ person.first_name }} {{ person.last_name }}
-                                          <span ng-repeat="entity in person.entities">
-                                              <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                                          </span>
+                                  <li ng-repeat="registration in experts.registrations | filter:inGroup as filteredExperts">
+                                      <a href ng-click="addRegistration(group, registration)">
+                                          {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                          {{ registration.member.code }}
                                       </a>
                                   </li>
                                   <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>

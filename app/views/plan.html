@@ -111,10 +111,8 @@
                             </td>
                             <td>
                                 <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}">
-                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
-                                    <span ng-repeat="entity in allocation.person.entities">
-                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                                    </span>
+                                    {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
+                                    {{ allocation.registration.member.code }}
                                     <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
                                 </div>
                                 <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}">
@@ -124,10 +122,8 @@
                             </td>
                             <td>
                                 <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}">
-                                    {{ allocation.person.first_name }} {{ allocation.person.last_name }}
-                                    <span ng-repeat="entity in allocation.person.entities">
-                                        <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89">({{ entity.name.text }})</span>
-                                    </span>
+                                    {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
+                                    {{ allocation.registration.member.code }}
                                     <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
                                 </div>
                                 <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}">

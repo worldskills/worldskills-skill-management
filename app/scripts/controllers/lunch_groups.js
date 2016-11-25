@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchGroup, LunchGroupPerson, Person) {
+angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchGroup, LunchGroupRegistration, Registration) {
 
     $scope.loading = true;
 
@@ -14,8 +14,8 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
 
         $scope.groups = LunchGroup.query({skillId: $scope.skill.id}, function () {
             $scope.loading = false;
-            $scope.competitors = Person.competitors({skillId: $stateParams.skillId});
-            $scope.experts = Person.experts({skillId: $stateParams.skillId});
+            $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
+            $scope.experts = Registration.experts({skillId: $stateParams.skillId});
         }, function () {
             // error
             $scope.loading = false;
@@ -23,11 +23,11 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
 
     });
 
-    $scope.inGroup = function (person) {
+    $scope.inGroup = function (registration) {
         var inGroup = false;
         angular.forEach($scope.groups.groups, function (group) {
-            angular.forEach(group.persons, function (p) {
-                if (p.id == person.id) {
+            angular.forEach(group.registrations, function (r) {
+                if (r.id == registration.id) {
                     inGroup = true;
                 }
             });
@@ -35,23 +35,26 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
         return !inGroup;
     };
 
-    $scope.removePerson = function (group, person) {
-        var index = group.persons.indexOf(person);
-        LunchGroupPerson.remove({skillId: $stateParams.skillId, groupId: group.id, personId: person.id});
-        group.persons.splice(index, 1);
+    $scope.removeRegistration = function (group, registration) {
+        var index = group.registrations.indexOf(registration);
+        LunchGroupRegistration.remove({skillId: $stateParams.skillId, groupId: group.id, registrationId: registration.id});
+        group.registrations.splice(index, 1);
     };
 
-    $scope.addPerson = function (group, person) {
-        group.persons.push(person);
-        LunchGroupPerson.update({skillId: $stateParams.skillId, groupId: group.id, personId: person.id}, {});
+    $scope.addRegistration = function (group, registration) {
+        group.registrations.push(registration);
+        LunchGroupRegistration.update({skillId: $stateParams.skillId, groupId: group.id, registrationId: registration.id}, {});
     };
 
     $scope.addGroup = function (type) {
         var group = {
             name: "New group",
-            type: type
+            type: type,
+            registrations: []
         };
-        $scope.groups.groups.push(group);
+        LunchGroup.save({skillId: $scope.skill.id}, group, function (response) {
+            $scope.groups.groups.push(response);
+        }, errored);
     };
 
     $scope.deleteGroup = function (group) {
@@ -89,14 +92,7 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
     $scope.groupChanged = function (group) {
         var updateGroup = function () {
             $scope.saving = true;
-            if (group.id) {
-                LunchGroup.update({skillId: $scope.skill.id}, group, saved, errored);
-            } else {
-                LunchGroup.save({skillId: $scope.skill.id}, group, function (response) {
-                    group.id = response.id;
-                    saved();
-                }, errored);
-            }
+            LunchGroup.update({skillId: $scope.skill.id}, group, saved, errored);
         };
         if (group.id in timeoutsGroups) {
             $timeout.cancel(timeoutsGroups[group.id]);

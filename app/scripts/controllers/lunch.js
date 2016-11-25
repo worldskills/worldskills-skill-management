@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchPeriod, LunchAllocation, LunchGroup, CompetitionDay, Person) {
+angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchPeriod, LunchAllocation, LunchGroup, CompetitionDay, Registration) {
 
     $scope.loading = true;
 
@@ -23,19 +23,15 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
         $scope.loading = false;
     });
 
-    $scope.sites = {};
     $scope.lunchAllocations = LunchAllocation.query({skillId: $stateParams.skillId}, function () {
         $scope.loading = false;
-        $scope.lunchAllocations.sites.forEach(function (site) {
-            $scope.sites[site.timeline + '.' + site.lunch_period.id + '.' + site.type] = site.in_workshop;
-        });
     }, function () {
         // error
         $scope.loading = false;
     });
 
-    $scope.competitors = Person.competitors({skillId: $stateParams.skillId});
-    $scope.experts = Person.experts({skillId: $stateParams.skillId});
+    $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
+    $scope.experts = Registration.experts({skillId: $stateParams.skillId});
     $scope.lunchGroups = LunchGroup.query({skillId: $stateParams.skillId});
 
     $scope.cancelSkillsModal = function () {
@@ -62,10 +58,10 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         });
     });
 
-    $scope.inAssociation = function (person) {
+    $scope.inAssociation = function (registration) {
         var inAssociation = false;
         angular.forEach($scope.lunchAllocations.allocations, function (allocation) {
-            if (allocation.competition_day_id == $scope.active.day.id && person.id == allocation.person.id) {
+            if (allocation.competition_day_id == $scope.active.day.id && registration.id == allocation.registration.id) {
                 inAssociation = true;
             }
         });
@@ -115,10 +111,10 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         $scope.lunchAllocations.groups.splice(index, 1);
     };
 
-    $scope.addPerson = function (lunchPeriod, person, type) {
+    $scope.addRegistration = function (lunchPeriod, registration, type) {
         var allocation = {
             lunch_period: lunchPeriod,
-            person: person,
+            registration: registration,
             competition_day_id: $scope.active.day.id,
             type: type,
             in_workshop: false
@@ -127,24 +123,24 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         LunchAllocation.add({skillId: $stateParams.skillId}, allocation);
     };
 
-    $scope.removePerson = function (allocation) {
+    $scope.removeAllocation = function (allocation) {
         var index = $scope.lunchAllocations.allocations.indexOf(allocation);
         LunchAllocation.remove({skillId: $stateParams.skillId}, allocation);
         $scope.lunchAllocations.allocations.splice(index, 1);
     };
 
     $scope.addAllCompetitors = function (lunchPeriod) {
-        angular.forEach($scope.competitors.persons, function (person) {
-            if ($scope.inAssociation(person)) {
-                $scope.addPerson(lunchPeriod, person, 'COMPETITOR');
+        angular.forEach($scope.competitors.registrations, function (registration) {
+            if ($scope.inAssociation(registration)) {
+                $scope.addRegistration(lunchPeriod, registration, 'COMPETITOR');
             }
         });
     };
 
     $scope.addAllExperts = function (lunchPeriod) {
-        angular.forEach($scope.experts.persons, function (person) {
-            if ($scope.inAssociation(person)) {
-                $scope.addPerson(lunchPeriod, person, 'EXPERT');
+        angular.forEach($scope.experts.registrations, function (registration) {
+            if ($scope.inAssociation(registration)) {
+                $scope.addRegistration(lunchPeriod, registration, 'EXPERT');
             }
         });
     };

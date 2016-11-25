@@ -5,7 +5,8 @@
 
         return $resource(WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/lunch_groups/:id', {
             id: '@id',
-            skillId: '@skill.id'
+            skillId: '@skill.id',
+            l: 'en'
         }, {
             query: {
                 method: 'GET'
