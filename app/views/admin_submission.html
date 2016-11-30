@@ -77,17 +77,23 @@
                             <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': !person.checked}">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <p>
+                                        <p ng-show="person.id">
+                                            <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                        <p ng-show="!person.id">
                                             <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].thumbnail}}_square" width="60" height="60">
                                             <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
                                     </div>
                                     <div class="col-xs-9">
-                                        <p>
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-repeat="entity in person.person.entities">
-                                                <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                            </span>
+                                        <p ng-show="person.id">
+                                            <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                        </p>
+                                        <p ng-show="!person.id">
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
                                         </p>
                                         <p>
                                             <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
@@ -109,18 +115,25 @@
                             <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': submitted && formFieldPerson.pin.$invalid}">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <p>
+                                        <p ng-show="person.id">
+                                            <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                        <p ng-show="!person.id">
                                             <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].thumbnail}}_square" width="60" height="60">
                                             <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
                                     </div>
                                     <div class="col-xs-9">
-                                        <p>
-                                            <span ng-show="person.position">{{person.position}}<br/></span>
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-repeat="entity in person.person.entities">
-                                                <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                            </span>
+                                        <p ng-show="person.id">
+                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
+                                            <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                        </p>
+                                        <p ng-show="!person.id">
+                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
                                         </p>
                                         <p>
                                             <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>

@@ -94,11 +94,8 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <span ng-show="person.position">{{person.position}}<br/></span>
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-repeat="entity in person.person.entities">
-                                                <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                            </span>
+                                            <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -136,11 +133,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <span ng-show="person.position">{{person.position}}<br/></span>
+                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
                                             <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-repeat="entity in person.person.entities">
-                                                <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                            </span>
+                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">

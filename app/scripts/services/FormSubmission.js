@@ -5,7 +5,8 @@
 
         return $resource(WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission', {
             formId: '@form.id',
-            skillId: '@skill.id'
+            skillId: '@skill.id',
+            l: 'en'
         }, {
             save: {
                 method: 'POST'
