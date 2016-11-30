@@ -55,7 +55,7 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
             $scope.submission.$reject(function () {
                 $scope.rejectLoading = false;
                 alert.success('The submission has been rejected.');
-                $state.go('admin_form.detail.submissions', {id: $scope.formId});
+                $state.go('admin_form_detail.submissions', {eventId: $stateParams.eventId, id: $scope.formId});
             }, function (response) {
                 $scope.rejectLoading = false;
                 alert.error('There was an error rejecting the form.');
