@@ -77,23 +77,15 @@
                             <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': !person.checked}">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <p ng-show="person.id">
+                                        <p>
                                             <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
                                             <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
-                                        <p ng-show="!person.id">
-                                            <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].thumbnail}}_square" width="60" height="60">
-                                            <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
-                                        </p>
                                     </div>
                                     <div class="col-xs-9">
-                                        <p ng-show="person.id">
+                                        <p>
                                             <strong>{{ person.first_name }} {{ person.last_name }}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
-                                        </p>
-                                        <p ng-show="!person.id">
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                            <span class="text-muted"><br/>{{ person.member_name }}</span>
                                         </p>
                                         <p>
                                             <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
@@ -115,25 +107,16 @@
                             <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': submitted && formFieldPerson.pin.$invalid}">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <p ng-show="person.id">
+                                        <p>
                                             <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
                                             <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                         </p>
-                                        <p ng-show="!person.id">
-                                            <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].thumbnail}}_square" width="60" height="60">
-                                            <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
-                                        </p>
                                     </div>
                                     <div class="col-xs-9">
-                                        <p ng-show="person.id">
-                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
+                                        <p>
+                                            <span>{{ person.position_name }}<br/></span>
                                             <strong>{{ person.first_name }} {{ person.last_name }}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
-                                        </p>
-                                        <p ng-show="!person.id">
-                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
-                                            <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                            <span class="text-muted"><br/>{{ person.member_name }}</span>
                                         </p>
                                         <p>
                                             <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
@@ -153,10 +136,8 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <div class="checkbox">
-                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                <span ng-repeat="entity in person.person.entities">
-                                    <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                </span>
+                                <strong>{{ person.first_name }} {{ person.last_name}}</strong>
+                                <span class="text-muted"><br/>{{ person.member_name }}</span>
                             </div>
                         </div>
                         <div class="col-xs-4">
@@ -184,31 +165,31 @@
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="competitiorFirstName{{ person.person.id }}">First name for certificate:</label>
-                                        <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.competitor_first_name" readonly="readonly" />
+                                        <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.first_name" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="competitiorLastName{{ person.person.id }}">Last name:</label>
-                                        <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.competitor_last_name" readonly="readonly" />
+                                        <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.last_name" readonly="readonly" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
-                                <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.competitor_name_official" readonly="readonly" />
+                                <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" readonly="readonly" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
-                                <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.competitor_passport" readonly="readonly" />
+                                <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" readonly="readonly" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth:</label>
-                                <input type="date" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.competitor_date_of_birth" readonly="readonly" />
+                                <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" readonly="readonly" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
-                                <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.competitor_language_test_project" readonly="readonly" />
+                                <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" readonly="readonly" />
                             </div>
                         </div>
                         <div class="col-xs-5">
@@ -217,16 +198,14 @@
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <p>
-                                                <img class="img-circle" ng-show="person.person.images[0]" class="img-responsive" ng-src="{{person.person.images[0].thumbnail}}_square" width="60" height="60">
-                                                <img class="img-circle" ng-show="!person.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                                <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                                <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                                             </p>
                                         </div>
                                         <div class="col-xs-8">
                                             <p>
-                                                <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                                <span ng-repeat="entity in person.person.entities">
-                                                    <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                                </span>
+                                                <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                                <span class="text-muted"><br/>{{ person.member_name }}</span>
                                             </p>
                                             <p>
                                                 <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>

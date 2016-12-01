@@ -95,7 +95,7 @@
                                     <div class="col-xs-9">
                                         <p>
                                             <strong>{{ person.person.first_name }} {{ person.person.last_name }}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                            <span ng-show="person.member" class="text-muted"><br/>{{ person.member.name.text }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -133,9 +133,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <span ng-show="person.position">{{ person.position.position.name.text }}<br/></span>
+                                            <span ng-show="person.position">{{ person.position.name.text }}<br/></span>
                                             <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-show="person.position" class="text-muted"><br/>{{ person.position.member.name.text }}</span>
+                                            <span ng-show="person.member" class="text-muted"><br/>{{ person.member.name.text }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -165,9 +165,7 @@
                         <div class="col-xs-3">
                             <div class="checkbox">
                                 <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                <span ng-repeat="entity in person.person.entities">
-                                    <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                </span>
+                                <span ng-show="person.member" class="text-muted"><br/>{{ person.member.name.text }}</span>
                             </div>
                         </div>
                         <div class="col-xs-4">
@@ -195,31 +193,31 @@
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="competitiorFirstName{{ person.person.id }}">First name for certificate:</label>
-                                        <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.competitor_first_name" ng-change="fieldPersonChanged(field, person)" />
+                                        <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.first_name" ng-change="fieldPersonChanged(field, person)" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label for="competitiorLastName{{ person.person.id }}">Last name:</label>
-                                        <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.competitor_last_name" ng-change="fieldPersonChanged(field, person)" />
+                                        <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.last_name" ng-change="fieldPersonChanged(field, person)" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
-                                <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.competitor_name_official" ng-change="fieldPersonChanged(field, person)" />
+                                <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" ng-change="fieldPersonChanged(field, person)" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
-                                <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.competitor_passport" ng-change="fieldPersonChanged(field, person)" />
+                                <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" ng-change="fieldPersonChanged(field, person)" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth:</label>
-                                <input type="date" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.competitor_date_of_birth" ng-change="fieldPersonChanged(field, person)" placeholder="YYYY-MM-DD" />
+                                <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" ng-change="fieldPersonChanged(field, person)" placeholder="YYYY-MM-DD" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
-                                <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.competitor_language_test_project" ng-change="fieldPersonChanged(field, person)" placeholder="e.g. EN" />
+                                <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" ng-change="fieldPersonChanged(field, person)" placeholder="e.g. EN" />
                             </div>
                         </div>
                         <div class="col-xs-5">
@@ -235,9 +233,7 @@
                                         <div class="col-xs-8">
                                             <p>
                                                 <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                                <span ng-repeat="entity in person.person.entities">
-                                                    <span ng-show="entity.id != 1 && entity.id != 83 && entity.id != 89" class="text-muted"><br/>{{ entity.name.text }}</span>
-                                                </span>
+                                                <span ng-show="person.member" class="text-muted"><br/>{{ person.member.name.text }}</span>
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">
