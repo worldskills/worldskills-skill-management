@@ -32,8 +32,8 @@
         <ng-form name="form">
             <div class="col-sm-2 col-lg-1">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp($index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown($index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp(form, $index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown(form, $index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
                 </div>
             </div>
             <div class="col-sm-2 col-lg-1" ng-class="{'has-error': form.time.$invalid}">

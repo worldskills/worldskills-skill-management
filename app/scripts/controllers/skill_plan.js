@@ -144,7 +144,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         SkillItem.delete({skillId: $stateParams.skillId}, item);
     };
 
-    $scope.moveItemUp = function (orderNum, item) {
+    $scope.moveItemUp = function (form, orderNum, item) {
         var index = $scope.skillItems.items.indexOf(item);
         var newItem = $scope.skillItems.items[index];
         var oldItem = $scope.skillItems.items[index - 1];
@@ -152,11 +152,11 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         $scope.skillItems.items[index] = oldItem;
         newItem.order_num = orderNum - 1;
         oldItem.order_num = orderNum;
-        $scope.itemChanged(newItem);
-        $scope.itemChanged(oldItem);
+        $scope.itemChanged(form, newItem, false);
+        $scope.itemChanged(form, oldItem, false);
     };
 
-    $scope.moveItemDown = function (orderNum, item) {
+    $scope.moveItemDown = function (form, orderNum, item) {
         var index = $scope.skillItems.items.indexOf(item);
         var newItem = $scope.skillItems.items[index];
         var oldItem = $scope.skillItems.items[index + 1];
@@ -164,8 +164,8 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         $scope.skillItems.items[index] = oldItem;
         newItem.order_num = orderNum + 1;
         oldItem.order_num = orderNum;
-        $scope.itemChanged(newItem);
-        $scope.itemChanged(oldItem);
+        $scope.itemChanged(form, newItem, false);
+        $scope.itemChanged(form, oldItem, false);
     };
 
     var timeoutsTimes = {};
