@@ -168,16 +168,20 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         $scope.itemChanged(form, oldItem, false);
     };
 
-    var timeoutsTimes = {};
-    $scope.skillTimeChanged = function (time) {
-        var updateTime = function () {
-            $scope.saving = true;
-            SkillTime.update({skillId: $stateParams.skillId}, time, saved, errored);
-        };
-        if (time.competition_day_id in timeoutsItems) {
-            $timeout.cancel(timeoutsTimes[time.competition_day_id]);
+    $scope.skillTimeChanged = function (form, time) {
+        if (!form.time.$invalid) {
+            var updateTime = function () {
+                $scope.saving = true;
+                if (!time.time) {
+                    time.time = null;
+                }
+                SkillTime.update({skillId: $stateParams.skillId}, time, saved, errored);
+            };
+            if (time.$timeout) {
+                $timeout.cancel(time.$timeout);
+            }
+            time.$timeout = $timeout(updateTime, 1000);
         }
-        timeoutsTimes[time.competition_day_id] = $timeout(updateTime, 1000);
     };
 });
 
