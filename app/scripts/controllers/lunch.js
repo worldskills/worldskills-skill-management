@@ -4,7 +4,16 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
     $scope.loading = true;
 
-    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId}, function () {
+
+        $scope.lunchAllocations = LunchAllocation.query({skillId: $stateParams.skillId}, function () {
+            $scope.loading = false;
+        }, function () {
+            // error
+            $scope.loading = false;
+        });
+
+    });
 
     $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
 
@@ -16,19 +25,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
     });
 
-    $scope.lunchPeriods = LunchPeriod.query({eventId: $stateParams.eventId}, function () {
-        $scope.loading = false;
-    }, function () {
-        // error
-        $scope.loading = false;
-    });
-
-    $scope.lunchAllocations = LunchAllocation.query({skillId: $stateParams.skillId}, function () {
-        $scope.loading = false;
-    }, function () {
-        // error
-        $scope.loading = false;
-    });
+    $scope.lunchPeriods = LunchPeriod.query({eventId: $stateParams.eventId});
 
     $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
     $scope.experts = Registration.experts({skillId: $stateParams.skillId});

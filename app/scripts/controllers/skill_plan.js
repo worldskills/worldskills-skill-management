@@ -4,17 +4,9 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
 
     $scope.loading = true;
 
-    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId}, function () {
 
-    $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
-
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
-            });
-        });
-
-        $scope.skillItems = SkillItem.query({skillId: $scope.skill.id}, {}, function () {
+        $scope.skillItems = SkillItem.query({skillId: $stateParams.skillId}, {}, function () {
 
             $scope.loading = false;
 
@@ -22,6 +14,16 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
                 if (item.time) {
                     item.time = item.time.substring(0, 5);
                 }
+            });
+        });
+
+    });
+
+    $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
+
+        auth.user.$promise.then(function () {
+            $scope.skills.$promise.then(function () {
+                $scope.active.skill = $scope.skill;
             });
         });
     });
