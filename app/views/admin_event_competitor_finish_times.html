@@ -38,7 +38,7 @@
                     {{ skill.name.text }}
                 </td>
                 <td>
-                    <span ng-repeat="time in skillTimes.times | filter:{skill_id:skill.id, competition_day_id:day.id, type:'finish'} as filteredTimes">
+                    <span ng-repeat="time in skillTimes.times | filter:{skill_id:skill.id, competition_day_id:day.id, type:'finish'}:true as filteredTimes">
                         {{ time.time | limitTo:5 }}
                     </span>
                 </td>

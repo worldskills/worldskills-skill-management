@@ -59,7 +59,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'} as filteredAllocations">
+                    <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}:true as filteredAllocations">
                         <td>
                             {{ allocation.registration.person.first_name }} {{ allocation.registration.person.last_name }}
                             {{ allocation.registration.member.code }}
@@ -75,7 +75,7 @@
                         </td>
                         <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                     </tr>
-                    <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}} as filteredGroups">
+                    <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}:true as filteredGroups">
                         <td>
                             {{ group.group.name }}
                         </td>
@@ -145,7 +145,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'} as filteredAllocations">
+                    <tr ng-repeat="allocation in lunchAllocations.allocations | filter:{competition_day_id:active.day.id, lunch_period: {id: lunchPeriod.id}, type:'EXPERT'}:true as filteredAllocations">
                         <td>
                             {{ allocation.registration.person.first_name }} {{ allocation.registration.person.last_name }}
                             {{ allocation.registration.member.code }}
@@ -161,7 +161,7 @@
                         </td>
                         <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                     </tr>
-                    <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}} as filteredGroups">
+                    <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}:true as filteredGroups">
                         <td>
                             {{ group.group.name }}
                         </td>

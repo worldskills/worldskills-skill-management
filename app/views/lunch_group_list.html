@@ -25,7 +25,7 @@
 <div class="row">
     <div class="col-sm-6">
         <h3>Competitor groups</h3>
-        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'} as competitorGroups">
+        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'}:true as competitorGroups">
           <div class="panel-heading">
             <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
           </div>
@@ -69,7 +69,7 @@
     </div>
     <div class="col-sm-6">
         <h3>Expert groups</h3>
-        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'EXPERT'} as expertGroups">
+        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'EXPERT'}:true as expertGroups">
           <div class="panel-heading">
             <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
           </div>
