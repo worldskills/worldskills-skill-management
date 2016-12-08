@@ -17,26 +17,13 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
             });
         });
 
-    });
+        $scope.skillTimes = SkillTime.query({skillId: $stateParams.skillId}, function () {
 
-    $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
-
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
+            angular.forEach($scope.skillTimes.times, function (time) {
+                if (time.time) {
+                    time.time = time.time.substring(0, 5);
+                }
             });
-        });
-    });
-
-    $scope.skillTimes = SkillTime.query({skillId: $stateParams.skillId}, function () {
-
-        angular.forEach($scope.skillTimes.times, function (time) {
-            if (time.time) {
-                time.time = time.time.substring(0, 5);
-            }
-        });
-
-        $scope.competitionDays.$promise.then(function () {
 
             // create competition day times
             angular.forEach($scope.competitionDays.days, function (day) {
@@ -50,6 +37,15 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
                         $scope.skillTimes.times.push(competitionTime);
                     }
                 }
+            });
+        });
+    });
+
+    $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
+
+        auth.user.$promise.then(function () {
+            $scope.skills.$promise.then(function () {
+                $scope.active.skill = $scope.skill;
             });
         });
     });
