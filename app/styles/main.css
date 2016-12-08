@@ -38,4 +38,8 @@ footer {
     .tab-content .tab-pane {
         display: block;
     }
+
+    .skill-management-plan-day {
+        page-break-after: always;
+    }
 }

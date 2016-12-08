@@ -9,132 +9,136 @@
 <uib-tabset ng-show="!loading" active="active.day.id">
     <uib-tab ng-repeat="day in plan.competition_days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title text-center">Day {{ day.timeline }}, {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+        <div class="skill-management-plan-day">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Day {{ day.timeline }}, {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="90%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in plan.competition_items | filter:{competition_day_id:day.id}:true" style="background-color: #{{ item.color }};">
+                                <td>
+                                    <span>{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ item.name.text }}</span>
+                                    <em ng-show="item.description.text">- {{ item.description.text }}</em>
+                                    <em ng-show="item.room">({{ item.room.name.text }})</em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="90%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in plan.competition_items | filter:{competition_day_id:day.id}:true" style="background-color: #{{ item.color }};">
-                            <td>
-                                <span>{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
-                            </td>
-                            <td>
-                                <span>{{ item.name.text }}</span>
-                                <em ng-show="item.description.text">- {{ item.description.text }}</em>
-                                <em ng-show="item.room">({{ item.room.name.text }})</em>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <div class="panel panel-default" ng-show="filteredSkillItems.length">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Skill Specific Items</h2>
+                </div>
 
-        <div class="panel panel-default" ng-show="filteredSkillItems.length">
-            <div class="panel-heading">
-                <h2 class="panel-title text-center">Skill Specific Items</h2>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="60%">
-                        <col width="30%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Description</th>
-                            <th>Responsible</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in plan.skill_items | filter:{competition_day_id:day.id}:true as filteredSkillItems">
-                            <td>
-                                <span class="text-muted">{{ item.time | limitTo:5 }}</span>
-                            </td>
-                            <td>
-                                <span style="white-space: pre-wrap;">{{ item.description.text }}</span>
-                            </td>
-                            <td>{{ item.responsibility }}</td>
-                        </tr>
-                        <tr ng-repeat="time in plan.skill_times | filter:{competition_day_id:day.id, type:'finish'}:true as filteredTimes">
-                            <td>
-                                <span class="text-muted">{{ time.time | limitTo:5 }}</span>
-                            </td>
-                            <td colspan="2">
-                                Competitor Finish Time
-                            </td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="panel panel-default" ng-show="day.lunch && lunchPeriods.lunch_periods.length">
-            <div class="panel-heading">
-                <h2 class="panel-title text-center">Lunch Allocations</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="60%">
+                            <col width="30%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Description</th>
+                                <th>Responsible</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in plan.skill_items | filter:{competition_day_id:day.id}:true as filteredSkillItems">
+                                <td>
+                                    <span class="text-muted">{{ item.time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    <span style="white-space: pre-wrap;">{{ item.description.text }}</span>
+                                </td>
+                                <td>{{ item.responsibility }}</td>
+                            </tr>
+                            <tr ng-repeat="time in plan.skill_times | filter:{competition_day_id:day.id, type:'finish'}:true as filteredTimes">
+                                <td>
+                                    <span class="text-muted">{{ time.time | limitTo:5 }}</span>
+                                </td>
+                                <td colspan="2">
+                                    Competitor Finish Time
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <colgroup>
-                        <col width="10%">
-                        <col width="45%">
-                        <col width="45%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Time</th>
-                            <th>Competitors</th>
-                            <th>Experts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
-                            <td>
-                                <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
-                            </td>
-                            <td>
-                                <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}:true">
-                                    {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
-                                    {{ allocation.registration.member.code }}
-                                    <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
-                                </div>
-                                <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}:true">
-                                    {{ group.group.name }}
-                                    <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}:true">
-                                    {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
-                                    {{ allocation.registration.member.code }}
-                                    <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
-                                </div>
-                                <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}:true">
-                                    {{ group.group.name }}
-                                    <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="panel panel-default" ng-show="day.lunch && lunchPeriods.lunch_periods.length">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Lunch Allocations</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="45%">
+                            <col width="45%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Competitors</th>
+                                <th>Experts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
+                                <td>
+                                    <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}:true">
+                                        {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
+                                        {{ allocation.registration.member.code }}
+                                        <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
+                                    </div>
+                                    <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}:true">
+                                        {{ group.group.name }}
+                                        <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}:true">
+                                        {{ allocation.registration.first_name }} {{ allocation.registration.last_name }}
+                                        {{ allocation.registration.member.code }}
+                                        <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
+                                    </div>
+                                    <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}:true">
+                                        {{ group.group.name }}
+                                        <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
 
     </uib-tab>
