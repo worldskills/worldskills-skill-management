@@ -4,6 +4,8 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
 
     $scope.selectedLanguage = Language.selectedLanguage;
 
+    $scope.active = {};
+
     $scope.auth = auth;
     $scope.logout = function (e) {
         auth.logout();
@@ -45,8 +47,6 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     });
 
     auth.user.$promise.then(function () {
-
-        $scope.active = {};
 
         $scope.skills = PersonSkills.get({personId: auth.user.person_id}, function () {
 
