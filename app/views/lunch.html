@@ -13,7 +13,7 @@
 </div>
 
 <ul class="nav nav-tabs" ng-show="!loading">
-    <li ui-sref-active="'active'" ng-repeat="day in competitionDays.days | filter:{lunch:true}"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})">{{ day.timeline }}</a></li>
+    <li ui-sref-active="'active'" ng-repeat="day in competitionDays.days | filter:{lunch:true}"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})" ui-sref-opts="{location: 'replace'}">{{ day.timeline }}</a></li>
 </ul>
 
 <div ui-view ng-show="!loading"></div>

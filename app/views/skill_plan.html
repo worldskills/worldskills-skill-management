@@ -14,7 +14,7 @@
 </div>
 
 <ul class="nav nav-tabs" ng-show="!loading">
-    <li ng-repeat="day in competitionDays.days" ui-sref-active="'active'"><a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})">{{ day.timeline }}</a></li>
+    <li ng-repeat="day in competitionDays.days" ui-sref-active="'active'"><a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: day.timeline})" ui-sref-opts="{location: 'replace'}">{{ day.timeline }}</a></li>
 </ul>
 
 <div ui-view ng-show="!loading"></div>
