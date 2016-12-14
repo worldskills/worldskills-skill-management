@@ -1,7 +1,8 @@
 <p class="pull-right text-muted">
-    <span ng-show="!saving && !saved">Changes are saved automatically</span>
+    <span ng-show="!changed && !saving && !saved">Changes are saved automatically</span>
+    <span ng-show="changed && !saving">Unsaved changes</span>
     <span ng-show="saving">Saving...</span>
-    <span ng-show="!saving && saved">Plan saved</span>
+    <span ng-show="!changed && !saving && saved">Plan saved</span>
 </p>
 
 <h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>

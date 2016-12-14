@@ -74,9 +74,11 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     });
 
     $scope.saving = false;
+    $scope.changed = false;
     var saved = function () {
         $scope.saving = false;
         $scope.saved = true;
+        $scope.changed = false;
     };
 
     var errored = function (httpResponse) {
@@ -100,6 +102,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
 
     $scope.itemChanged = function (form, item, time) {
         if (!time || !form.time.$invalid) {
+            $scope.changed = true;
             var updateItem = function () {
                 $scope.saving = true;
                 if (!item.time) {
@@ -122,7 +125,6 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     };
 
     $scope.addItem = function () {
-
         var newItem = {
             competition_day_id: $scope.active.day.id,
             order_num: $scope.filteredItems.length + 1,
@@ -168,6 +170,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
 
     $scope.skillTimeChanged = function (form, time) {
         if (!form.time.$invalid) {
+            $scope.changed = true;
             var updateTime = function () {
                 $scope.saving = true;
                 if (!time.time) {
