@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, auth, alert, Plan, LunchPeriod) {
+angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, auth, alert, Plan, LunchPeriod) {
 
     $scope.loading = true;
 
     $scope.plan = Plan.get({skillId: $stateParams.skillId}, {}, function () {
 
-        $scope.lunchPeriods = LunchPeriod.query({eventId: $scope.plan.skill.event.id}, {}, function () {
+        var skill = $scope.plan.skill;
+        $window.document.title = 'Skill Management Plan - ' + skill.event.name + ' - ' + skill.number + ' ' + skill.name.text;
+
+        $scope.lunchPeriods = LunchPeriod.query({eventId: skill.event.id}, {}, function () {
 
             $scope.loading = false;
 
