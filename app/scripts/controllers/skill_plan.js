@@ -125,9 +125,13 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     };
 
     $scope.addItem = function () {
+        var maxOrderNum = 0;
+        $scope.filteredItems.forEach(function (item) {
+            maxOrderNum = Math.max(maxOrderNum, item.order_num);
+        });
         var newItem = {
             competition_day_id: $scope.active.day.id,
-            order_num: $scope.filteredItems.length + 1,
+            order_num: maxOrderNum + 1,
             description: {
                 lang_code: 'en',
                 text: ''
@@ -135,7 +139,8 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
             responsibility: '',
             skill: $scope.skill
         };
-        $scope.skillItems.items.push(newItem);
+        var lastIndex = $scope.skillItems.items.indexOf($scope.filteredItems[$scope.filteredItems.length - 1]);
+        $scope.skillItems.items.splice(lastIndex + 1, 0, newItem);
     };
 
     $scope.removeItem = function (item) {
