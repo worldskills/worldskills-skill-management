@@ -101,11 +101,22 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     };
 
     $scope.itemChanged = function (form, item, time) {
+        if (time && item.time) {
+            item.time = item.time.replace('.', ':');
+            if (item.time.length === 4 && item.time.charAt(1) === ':') {
+                item.time = '0' + item.time;
+            }
+            if (/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(item.time)) {
+                form.time.$setValidity('time', true);
+            } else {
+                form.time.$setValidity('time', false);
+            }
+        }
         if (!time || !form.time.$invalid) {
             $scope.changed = true;
             var updateItem = function () {
                 $scope.saving = true;
-                if (!item.time) {
+                if (!item.time || form.time.$invalid) {
                     item.time = null;
                 }
                 if (item.id) {
@@ -174,6 +185,17 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     };
 
     $scope.skillTimeChanged = function (form, time) {
+        if (time.time) {
+            time.time = time.time.replace('.', ':');
+            if (time.time.length === 4 && time.time.charAt(1) === ':') {
+                time.time = '0' + time.time;
+            }
+            if (/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(time.time)) {
+                form.time.$setValidity('time', true);
+            } else {
+                form.time.$setValidity('time', false);
+            }
+        }
         if (!form.time.$invalid) {
             $scope.changed = true;
             var updateTime = function () {
