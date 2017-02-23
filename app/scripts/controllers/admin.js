@@ -116,9 +116,11 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
     };
 
     $scope.removeCompetitionDay = function (competitionDay) {
-        var index = $scope.competitionDays.days.indexOf(competitionDay);
-        $scope.competitionDays.days.splice(index, 1);
-        CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
+        if (confirm('Deleting the Competition Day will also delete all Competition and Skill Items as well as all Lunch Allocations for this day. Click OK to proceed.')) {
+            var index = $scope.competitionDays.days.indexOf(competitionDay);
+            $scope.competitionDays.days.splice(index, 1);
+            CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
+        }
     };
 });
 
