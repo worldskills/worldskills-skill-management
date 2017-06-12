@@ -25,6 +25,11 @@ footer {
     margin: 20px 0 30px 0;
 }
 
+.navbar-worldskills span.navbar-brand:hover,
+.navbar-worldskills span.navbar-brand:focus {
+    color: #62b5e5 !important;
+}
+
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
