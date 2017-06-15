@@ -8,6 +8,10 @@
         }, {
             query: {
                 method: 'GET'
+            },
+            lock: {
+                method: 'PUT',
+                url: WORLDSKILLS_API_SKILLMAN + '/events/:id/lock',
             }
         });
 

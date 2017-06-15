@@ -124,6 +124,13 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
     };
 });
 
+angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($scope, $stateParams, Event) {
+
+    $scope.lockEvent = function () {
+        $scope.event = Event.lock($scope.event);
+    };
+});
+
 angular.module('skillMgmtApp').controller('AdminEventLunchSummaryCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
 
     $scope.event = Event.get({id: $stateParams.eventId});

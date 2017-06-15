@@ -250,6 +250,17 @@ angular
             ]
         }
     })
+    .state('admin_event.advanced', {
+        url: '/advanced',
+        templateUrl: 'views/admin_event_advanced.html',
+        controller: 'AdminEventAdvancedCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
+            ]
+        }
+    })
     .state('admin_lunch_summary', {
         url: '/admin/{eventId}/lunch_summary',
         templateUrl: 'views/admin_event_lunch_summary.html',
