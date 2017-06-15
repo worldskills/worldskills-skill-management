@@ -5,6 +5,7 @@ angular
     'ngResource',
     'ngCookies',
     'ngSanitize',
+    'ngMessages',
     'ui.router',
     'ui.bootstrap',
     'ngFileUpload',
@@ -126,6 +127,24 @@ angular
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
                 {code: 1200, role: 'ViewManagementPlan'}
+            ]
+        }
+    })
+    .state('skill_timetable', {
+        url: '/events/{eventId}/skills/{skillId}/timetable',
+        templateUrl: 'views/skill_timetable.html',
+        controller: 'SkillTimetableCtrl',
+        abstract: true
+    })
+    .state('skill_timetable.day', {
+        url: '/day/{day}',
+        templateUrl: 'views/skill_timetable_day.html',
+        controller: 'SkillTimetableDayCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSkillItems'}
             ]
         }
     })

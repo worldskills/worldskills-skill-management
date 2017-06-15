@@ -47,6 +47,7 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav" ng-show="active.skill && !active.preview">
                         <li ui-sref-active="{active: 'skill_plan'}"><a ui-sref="skill_plan.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Plans</a></li>
+                        <li ui-sref-active="{active: 'skill_timetable'}"><a ui-sref="skill_timetable.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Timetables</a></li>
                         <li ui-sref-active="'active'"><a ui-sref="form_submission_list({eventId: active.skill.event.id, skillId: active.skill.id})">Forms</a></li>
                         <li ui-sref-active="{active: 'lunch'}"><a ui-sref="lunch.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Lunches</a></li>
                         <li ui-sref-active="'active'"><a ui-sref="lunch_group_list({eventId: active.skill.event.id, skillId: active.skill.id})">Groups</a></li>
@@ -107,6 +108,7 @@
     <script src="bower_components/worldskills-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
@@ -128,6 +130,7 @@
         <script src="scripts/controllers/form_submission.js"></script>
         <script src="scripts/controllers/plan.js"></script>
         <script src="scripts/controllers/skill_plan.js"></script>
+        <script src="scripts/controllers/skill_timetable.js"></script>
         <script src="scripts/controllers/lunch.js"></script>
         <script src="scripts/controllers/lunch_groups.js"></script>
         <script src="scripts/controllers/admin.js"></script>
@@ -160,6 +163,7 @@
         <script src="scripts/services/Report.js"></script>
         <script src="scripts/services/Skill.js"></script>
         <script src="scripts/services/SkillItem.js"></script>
+        <script src="scripts/services/SkillTimetableItem.js"></script>
         <script src="scripts/services/CompetitionDay.js"></script>
         <script src="scripts/services/Event.js"></script>
         <!-- endbuild -->
