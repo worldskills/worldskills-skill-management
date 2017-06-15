@@ -12,7 +12,7 @@
 
 <div class="page-header">
 <p class="pull-right" ng-show="userCanRejectAllSubmissions">
-    <button ng-click="rejectSubmission()" class="btn btn-danger">Reject<ws-text-spinner ng-show="rejectLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-click="rejectSubmission()" class="btn btn-danger" ng-disabled="submission.form.event.locked">Reject<ws-text-spinner ng-show="rejectLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <p>

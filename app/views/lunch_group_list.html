@@ -4,9 +4,10 @@
     </p>
     <br/>
     <p class="text-muted">
-        <span ng-show="!saving && !saved">Saving automatically</span>
+        <span ng-show="!saving && !saved && !skill.event.locked">Saving automatically</span>
         <span ng-show="saving">Saving...</span>
         <span ng-show="!saving && saved">Groups saved</span>
+        <span ng-show="skill.event.locked">Event is locked</span>
     </p>
 </div>
 
@@ -22,93 +23,95 @@
     <ws-spinner></ws-spinner>
 </div>
 
-<div class="row">
-    <div class="col-sm-6">
-        <h3>Competitor groups</h3>
-        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'}:true as competitorGroups">
-          <div class="panel-heading">
-            <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
-          </div>
-          <table class="table table-striped">
-              <colgroup>
-                  <col width="70%" />
-                  <col width="30%" />
-              </colgroup>
-              <tbody>
-                  <tr ng-repeat="registration in group.registrations">
-                      <td>
-                          {{ registration.person.first_name }} {{ registration.person.last_name }}
-                          {{ registration.member.code }}
-                      </td>
-                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="btn-group" uib-dropdown>
-                              <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
-                              <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="registration in competitors.registrations | filter:inGroup as filteredCompetitors">
-                                      <a href ng-click="addRegistration(group, registration)">
-                                          {{ registration.person.first_name }} {{ registration.person.last_name }}
-                                          {{ registration.member.code }}
-                                      </a>
-                                  </li>
-                                  <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
-                              </ul>
-                          </div>
-                      </td>
-                      <td class="text-right">
-                          <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
+<fieldset ng-disabled="skill.event.locked">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Competitor groups</h3>
+            <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'}:true as competitorGroups">
+              <div class="panel-heading">
+                <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
+              </div>
+              <table class="table table-striped">
+                  <colgroup>
+                      <col width="70%" />
+                      <col width="30%" />
+                  </colgroup>
+                  <tbody>
+                      <tr ng-repeat="registration in group.registrations">
+                          <td>
+                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                              {{ registration.member.code }}
+                          </td>
+                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="btn-group" uib-dropdown>
+                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
+                                  <ul class="dropdown-menu" uib-dropdown-menu>
+                                      <li ng-repeat="registration in competitors.registrations | filter:inGroup as filteredCompetitors">
+                                          <a href ng-click="addRegistration(group, registration)">
+                                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                              {{ registration.member.code }}
+                                          </a>
+                                      </li>
+                                      <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                          <td class="text-right">
+                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+            <p ng-show="competitorGroups.length == 0">No groups yet</p>
+            <p><button type="button" class="btn btn-success" ng-click="addGroup('COMPETITOR')">Add Competitor group</button></p>
         </div>
-        <p ng-show="competitorGroups.length == 0">No groups yet</p>
-        <p><button type="button" class="btn btn-success" ng-click="addGroup('COMPETITOR')">Add Competitor group</button></p>
-    </div>
-    <div class="col-sm-6">
-        <h3>Expert groups</h3>
-        <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'EXPERT'}:true as expertGroups">
-          <div class="panel-heading">
-            <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
-          </div>
-          <table class="table table-striped">
-              <colgroup>
-                  <col width="70%" />
-                  <col width="30%" />
-              </colgroup>
-              <tbody>
-                  <tr ng-repeat="registration in group.registrations">
-                      <td>
-                          {{ registration.person.first_name }} {{ registration.person.last_name }}
-                          {{ registration.member.code }}
-                      </td>
-                      <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="btn-group" uib-dropdown>
-                              <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
-                              <ul class="dropdown-menu" uib-dropdown-menu>
-                                  <li ng-repeat="registration in experts.registrations | filter:inGroup as filteredExperts">
-                                      <a href ng-click="addRegistration(group, registration)">
-                                          {{ registration.person.first_name }} {{ registration.person.last_name }}
-                                          {{ registration.member.code }}
-                                      </a>
-                                  </li>
-                                  <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
-                              </ul>
-                          </div>
-                      </td>
-                      <td class="text-right">
-                          <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
+        <div class="col-sm-6">
+            <h3>Expert groups</h3>
+            <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'EXPERT'}:true as expertGroups">
+              <div class="panel-heading">
+                <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
+              </div>
+              <table class="table table-striped">
+                  <colgroup>
+                      <col width="70%" />
+                      <col width="30%" />
+                  </colgroup>
+                  <tbody>
+                      <tr ng-repeat="registration in group.registrations">
+                          <td>
+                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                              {{ registration.member.code }}
+                          </td>
+                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <div class="btn-group" uib-dropdown>
+                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
+                                  <ul class="dropdown-menu" uib-dropdown-menu>
+                                      <li ng-repeat="registration in experts.registrations | filter:inGroup as filteredExperts">
+                                          <a href ng-click="addRegistration(group, registration)">
+                                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                              {{ registration.member.code }}
+                                          </a>
+                                      </li>
+                                      <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
+                                  </ul>
+                              </div>
+                          </td>
+                          <td class="text-right">
+                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+            <p ng-show="expertGroups.length == 0">No groups yet</p>
+            <p><button type="button" class="btn btn-success" ng-click="addGroup('EXPERT')">Add Expert group</button></p>
         </div>
-        <p ng-show="expertGroups.length == 0">No groups yet</p>
-        <p><button type="button" class="btn btn-success" ng-click="addGroup('EXPERT')">Add Expert group</button></p>
     </div>
-</div>
+</fieldset>

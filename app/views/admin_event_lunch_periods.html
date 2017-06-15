@@ -2,27 +2,29 @@
     <div class="col-lg-6 col-lg-offset-3">
 
         <form class="form-horizontal">
-            <div ng-repeat="lunchPeriod in lunchPeriods.lunch_periods" class="form-group">
-                <div class="col-sm-5">
-                    <input class="form-control input-sm" ng-model="lunchPeriod.start_time" ng-change="lunchPeriodChanged(lunchPeriod)">
+            <fieldset ng-disabled="event.locked">
+                <div ng-repeat="lunchPeriod in lunchPeriods.lunch_periods" class="form-group">
+                    <div class="col-sm-5">
+                        <input class="form-control input-sm" ng-model="lunchPeriod.start_time" ng-change="lunchPeriodChanged(lunchPeriod)">
+                    </div>
+                    <div class="col-sm-5">
+                        <input class="form-control input-sm" ng-model="lunchPeriod.end_time" ng-change="lunchPeriodChanged(lunchPeriod)">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeLunchPeriod(lunchPeriod)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <input class="form-control input-sm" ng-model="lunchPeriod.end_time" ng-change="lunchPeriodChanged(lunchPeriod)">
+                <div class="form-group form-group-sm" ng-show="!lunchPeriods.lunch_periods.length">
+                    <div class="col-sm-4">
+                        <p>No lunch times.</p>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeLunchPeriod(lunchPeriod)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                <div class="form-group form-group-sm">
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-success btn-sm" ng-click="addLunchPeriod()"><span class="glyphicon glyphicon-plus"></span> Add lunch time</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group form-group-sm" ng-show="!lunchPeriods.lunch_periods.length">
-                <div class="col-sm-4">
-                    <p>No lunch times.</p>
-                </div>
-            </div>
-            <div class="form-group form-group-sm">
-                <div class="col-sm-4">
-                    <button type="button" class="btn btn-success btn-sm" ng-click="addLunchPeriod()"><span class="glyphicon glyphicon-plus"></span> Add lunch time</button>
-                </div>
-            </div>
+            </fieldset>
         </form>
 
     </div>

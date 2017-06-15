@@ -1,8 +1,9 @@
 <p class="pull-right text-muted">
-    <span ng-show="!changed && !saving && !saved">Changes are saved automatically</span>
+    <span ng-show="!changed && !saving && !saved && !skill.event.locked">Changes are saved automatically</span>
     <span ng-show="changed && !saving">Unsaved changes</span>
     <span ng-show="saving">Saving...</span>
     <span ng-show="!changed && !saving && saved">Plan saved</span>
+    <span ng-show="skill.event.locked">Event is locked</span>
 </p>
 
 <h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
@@ -10,57 +11,59 @@
 <hr/>
 
 <form class="form-horizontal">
-    <div class="form-group">
-        <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1">
-            <p class="form-control-static"><strong>Time</strong></p>
-        </div>
-        <div class="col-sm-5 col-lg-6">
-            <p class="form-control-static"><strong>Description</strong></p>
-        </div>
-        <div class="col-sm-2 col-lg-3">
-            <p class="form-control-static"><strong>Responsibility</strong></p>
-        </div>
-    </div>
-    <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'}:true as filteredTimes" class="form-group form-group-sm">
-        <ng-form name="form">
-            <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1" ng-class="{'has-error': form.time.$invalid}">
-                <input class="form-control input-sm" name="time" ng-model="time.time" ng-change="skillTimeChanged(form, time)" placeholder="HH:mm" autocomplete="off">
-            </div>
-            <div class="col-sm-6">
-                <p class="form-control-static">Competitor Finish Time</p>
-            </div>
-        </ng-form>
-    </div>
-    <div ng-repeat="item in skillItems.items | filter:{competition_day_id:active.day.id}:true as filteredItems" class="form-group form-group-sm">
-        <ng-form name="form">
-            <div class="col-sm-2 col-lg-1">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp(form, $index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown(form, $index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
-                </div>
-            </div>
-            <div class="col-sm-2 col-lg-1" ng-class="{'has-error': form.time.$invalid}">
-                <input class="form-control input-sm" name="time" ng-model="item.time" ng-change="itemChanged(form, item, true)" placeholder="HH:mm" autocomplete="off">
+    <fieldset ng-disabled="skill.event.locked">
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1">
+                <p class="form-control-static"><strong>Time</strong></p>
             </div>
             <div class="col-sm-5 col-lg-6">
-                <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(form, item, false)"></textarea>
+                <p class="form-control-static"><strong>Description</strong></p>
             </div>
             <div class="col-sm-2 col-lg-3">
-                <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(form, item, false)">
+                <p class="form-control-static"><strong>Responsibility</strong></p>
             </div>
-            <div class="col-sm-1">
-                <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+        </div>
+        <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'}:true as filteredTimes" class="form-group form-group-sm">
+            <ng-form name="form">
+                <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1" ng-class="{'has-error': form.time.$invalid}">
+                    <input class="form-control input-sm" name="time" ng-model="time.time" ng-change="skillTimeChanged(form, time)" placeholder="HH:mm" autocomplete="off">
+                </div>
+                <div class="col-sm-6">
+                    <p class="form-control-static">Competitor Finish Time</p>
+                </div>
+            </ng-form>
+        </div>
+        <div ng-repeat="item in skillItems.items | filter:{competition_day_id:active.day.id}:true as filteredItems" class="form-group form-group-sm">
+            <ng-form name="form">
+                <div class="col-sm-2 col-lg-1">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp(form, $index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown(form, $index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-lg-1" ng-class="{'has-error': form.time.$invalid}">
+                    <input class="form-control input-sm" name="time" ng-model="item.time" ng-change="itemChanged(form, item, true)" placeholder="HH:mm" autocomplete="off">
+                </div>
+                <div class="col-sm-5 col-lg-6">
+                    <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(form, item, false)"></textarea>
+                </div>
+                <div class="col-sm-2 col-lg-3">
+                    <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(form, item, false)">
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                </div>
+            </ng-form>
+        </div>
+        <div class="form-group form-group-sm" ng-show="!filteredItems.length">
+            <div class="col-sm-offset-1 col-sm-4">
+                <p>No entries.<br/>&nbsp;</p>
             </div>
-        </ng-form>
-    </div>
-    <div class="form-group form-group-sm" ng-show="!filteredItems.length">
-        <div class="col-sm-offset-1 col-sm-4">
-            <p>No entries.<br/>&nbsp;</p>
         </div>
-    </div>
-    <div class="form-group form-group-sm">
-        <div class="col-sm-offset-1 col-sm-4">
-            <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> Add line</button>
+        <div class="form-group form-group-sm">
+            <div class="col-sm-offset-1 col-sm-4">
+                <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> Add line</button>
+            </div>
         </div>
-    </div>
+    </fieldset>
 </form>
