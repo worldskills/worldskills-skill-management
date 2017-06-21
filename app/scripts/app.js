@@ -148,6 +148,29 @@ angular
             ]
         }
     })
+    .state('timetable_index', {
+        url: '/timetable/events/{eventId}',
+        controller: 'TimetableIndexCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewTimetable'}
+            ]
+        }
+    })
+    .state('timetable', {
+        url: '/timetable/events/{eventId}/competitors/{memberRegPositionId}/day/{day}',
+        templateUrl: 'views/timetable.html',
+        controller: 'TimetableCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewTimetable'}
+            ]
+        }
+    })
     .state('lunch', {
         url: '/events/{eventId}/skills/{skillId}/lunch',
         templateUrl: 'views/lunch.html',

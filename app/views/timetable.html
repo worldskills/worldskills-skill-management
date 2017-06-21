@@ -1,0 +1,65 @@
+<p class="pull-right">
+    <button class="btn btn-default" ng-click="changeRegistration()" ng-show="registrations.registrations.length > 1">Change Competitor</button>
+</p>
+
+<p>
+    <span class="text-muted">{{ timetable.registration.skill.event.name || "&nbsp;" }}</span>
+    <br/>
+    {{ timetable.registration.skill.number }} {{ timetable.registration.skill.name.text || "&nbsp;" }}
+    <br/>
+    {{ timetable.registration.person.first_name }} {{ timetable.registration.person.last_name || "&nbsp;" }}
+</p>
+
+<h1>Competitor Timetable</h1>
+
+<uib-tabset ng-show="!loading" active="active.day.id">
+    <uib-tab ng-repeat="day in timetable.competition_days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
+
+        <div class="skill-management-plan-day">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Day {{ day.timeline }}, {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="80%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in timetable.timetable_items | filter:{competition_day_id:day.id}:true as filteredItems">
+                                <td>
+                                    <span class="text-muted">{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    {{ item.description.text }}
+                                </td>
+                            </tr>
+                            <tr ng-show="!filteredItems.length">
+                                <td colspan="2">No entries.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </uib-tab>
+</uib-tabset>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+<div class="alert alert-warning" ng-show="!loading && !timetable.competition_days.length" ng-cloak>
+    No Competition days found!
+</div>
