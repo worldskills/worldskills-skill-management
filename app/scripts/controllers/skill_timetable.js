@@ -103,6 +103,49 @@ angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($s
 
     $scope.submitted = false;
 
+    var errored = function (httpResponse) {
+        $scope.loading = false;
+        if (httpResponse.status == 401) {
+            // Unauthorized
+
+            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+
+            // reload page
+            window.location.reload(false)
+
+        } else {
+            if (httpResponse.data.user_msg) {
+                window.alert('Error: ' + httpResponse.data.user_msg);
+            } else {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            }
+        }
+        $scope.saving = false;
+    };
+
+    $scope.startTimeChanged = function () {
+        if ($scope.item.start_time) {
+            $scope.item.start_time = $scope.item.start_time.replace('.', ':');
+            if ($scope.item.start_time.length === 4 && $scope.item.start_time.charAt(1) === ':') {
+                $scope.item.start_time = '0' + $scope.item.start_time;
+            }
+        }
+    };
+
+    $scope.endTimeChanged = function (time) {
+        if ($scope.item.end_time) {
+            $scope.item.end_time = $scope.item.end_time.replace('.', ':');
+            if ($scope.item.end_time.length === 4 && $scope.item.end_time.charAt(1) === ':') {
+                $scope.item.end_time = '0' + $scope.item.end_time;
+            }
+            if ($scope.item.end_time < $scope.item.start_time) {
+                $scope.form.endTime.$setValidity('before', false);
+            } else {
+                $scope.form.endTime.$setValidity('before', true);
+            }
+        }
+    };
+
     $scope.save = function () {
         $scope.submitted = true;
         if ($scope.form.$valid) {
@@ -117,13 +160,13 @@ angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($s
                     $scope.skillItems.items.push(response);
                     $scope.loading = false;
                     $uibModalInstance.close();
-                });
+                }, errored);
             } else {
                 SkillTimetableItem.save({skillId: $scope.skill.id}, $scope.item, function (response) {
                     $scope.skillItems.items.push(response);
                     $scope.loading = false;
                     $uibModalInstance.close();
-                });
+                }, errored);
             }
         }
     }
