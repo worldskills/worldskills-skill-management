@@ -29,14 +29,17 @@
 
 <div ng-show="submission.form.description.text">
     <p>{{ submission.form.description.text }}</p>
-    <br/>
 </div>
+
+<br/>
 
 <form name="form" role="form" novalidate ng-submit="submit()">
     <div ng-repeat="field in submission.fields">
         <div class="form-group">
             <h4>{{ field.title.text }}</h4>
-            <p ng-show="field.type != 'input_checkbox'">{{ field.text.text }}</p>
+            <p ng-show="field.type != 'input_checkbox' && field.type != 'link'">{{ field.text.text }}</p>
+
+            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}">Download</a></p>
 
             <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
 
