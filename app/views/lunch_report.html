@@ -1,0 +1,75 @@
+<p>
+    <span class="text-muted">{{ lunchReport.event.name || "&nbsp;" }}</span>
+    <br/>
+    {{ lunchReport.member.name.text || "&nbsp;" }}
+</p>
+
+<h1>Lunch Times</h1>
+
+<uib-tabset ng-show="!loading" active="active.day.id">
+    <uib-tab ng-repeat="day in lunchReport.competition_days | filter:{lunch:true}:true" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
+
+        <div class="skill-management-plan-day">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">Day {{ day.timeline }}, {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="50%">
+                            <col width="40%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Lunch</th>
+                                <th>Competitors</th>
+                                <th>Experts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="lunchPeriod in lunchReport.lunch_periods">
+                                <td>
+                                    <span class="text-muted">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    <div ng-repeat="lunchAllocation in lunchReport.lunch_allocations | filter:{type:'COMPETITOR', competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}}:true">
+                                        {{ lunchAllocation.registration.person.first_name }} {{ lunchAllocation.registration.person.last_name }},
+                                        <span class="text-muted">{{ lunchAllocation.skill.number }} {{ lunchAllocation.skill.name.text }}</span><span ng-show="lunchAllocation.in_workshop"> (Workshop)</span><span ng-repeat="time in lunchReport.skill_times | filter:{skill_id:lunchAllocation.skill.id, competition_day_id:day.id, type:'finish'}:true">, Finish {{ time.time | limitTo:5 }}</span>
+                                    </div>
+                                    <div ng-repeat="group in lunchReport.lunch_allocation_groups | filter:{group: {type: 'COMPETITOR'}, competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}}:true">
+                                        <div ng-repeat="registration in group.group.registrations | filter:{member:{id:lunchReport.member.id}}:true">
+                                            {{ registration.person.first_name }} {{ registration.person.last_name }},
+                                            <span class="text-muted">{{ group.group.skill.number }} {{ group.group.skill.name.text }}</span><span ng-if="group.in_workshop">(Workshop)</span><span ng-repeat="time in lunchReport.skill_times | filter:{skill_id:group.group.skill.id, competition_day_id:day.id, type:'finish'}:true">, Finish {{ time.time | limitTo:5 }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-repeat="lunchAllocation in lunchReport.lunch_allocations | filter:{type:'EXPERT', competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}}:true">
+                                        {{ lunchAllocation.registration.person.first_name }} {{ lunchAllocation.registration.person.last_name }}, 
+                                        <span class="text-muted">{{ lunchAllocation.skill.number }} {{ lunchAllocation.skill.name.text }}</span><span ng-show="lunchAllocation.in_workshop"> (Workshop)</span>
+                                    </div>
+                                    <div ng-repeat="group in lunchReport.lunch_allocation_groups | filter:{group: {type: 'EXPERT'}, competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}}:true">
+                                        <div ng-repeat="registration in group.group.registrations | filter:{member:{id:lunchReport.member.id}}:true">
+                                            {{ registration.person.first_name }} {{ registration.person.last_name }},
+                                            <span class="text-muted">{{ group.group.skill.number }} {{ group.group.skill.name.text }}</span><span ng-if="group.in_workshop">(Workshop)</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </uib-tab>
+</uib-tabset>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>

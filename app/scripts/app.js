@@ -171,6 +171,29 @@ angular
             ]
         }
     })
+    .state('lunch_report_index', {
+        url: '/lunch_report/events/{eventId}',
+        controller: 'LunchReportIndexCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewLunchReport'}
+            ]
+        }
+    })
+    .state('lunch_report', {
+        url: '/lunch_report/events/{eventId}/members/{memberId}/day/{day}',
+        templateUrl: 'views/lunch_report.html',
+        controller: 'LunchReportCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewLunchReport'}
+            ]
+        }
+    })
     .state('lunch', {
         url: '/events/{eventId}/skills/{skillId}/lunch',
         templateUrl: 'views/lunch.html',
