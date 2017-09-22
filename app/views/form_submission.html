@@ -59,7 +59,7 @@
             <div ng-if="field.type == 'input_checkbox'" class="checkbox">
                 <label>
                     <input type="checkbox" ng-model="field.checked" ng-change="fieldChecked(field)" value="true" >
-                    {{ field.text.text }}
+                    <span style="white-space: pre-line;">{{ field.text.text }}</span>
                 </label>
             </div>
 
