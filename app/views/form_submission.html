@@ -102,8 +102,8 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
@@ -142,8 +142,8 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
-                                                <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
                                                 <div class="form-control-static">
@@ -240,8 +240,8 @@
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">
-                                                    <input type="password" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
-                                                    <input type="password" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
+                                                    <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                    <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                                 </div>
                                                 <div class="col-xs-7">
                                                     <div class="form-control-static">
