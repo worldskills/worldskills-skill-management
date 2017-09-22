@@ -138,7 +138,7 @@
                                         <p>
                                             <span ng-show="person.position">{{ person.position.name.text }}<br/></span>
                                             <strong>{{ person.person.first_name }} {{ person.person.last_name}}</strong>
-                                            <span ng-show="person.member" class="text-muted"><br/>{{ person.member.name.text }}</span>
+                                            <span ng-style="{'visibility': person.member && person.position.shortName != 'scm' ? 'visible' : 'hidden'}" class="text-muted"><br/>{{ person.member.name.text }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
