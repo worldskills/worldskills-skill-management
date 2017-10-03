@@ -226,6 +226,18 @@ module.exports = function (grunt) {
       }
     },
 
+    ngtemplates: {
+        dist: {
+            cwd: '<%= yeoman.app %>',
+            src: 'views/*.html',
+            dest: '.tmp/template.js'
+        },
+        options: {
+            module: 'skillMgmtApp',
+            usemin: 'scripts/scripts.js',
+        }
+    },
+
     // ngmin tries to make the code safe for minification automatically by
     // using the Angular long form for dependency injection. It doesn't work on
     // things like resolve or inject so those have to be done manually.
@@ -334,14 +346,15 @@ module.exports = function (grunt) {
     'useminPrepare',
     'imagemin',
     'svgmin',
+    'htmlmin',
+    'ngtemplates',
     'concat',
     'ngmin',
     'copy:dist',
     'cssmin',
     'uglify',
     'rev',
-    'usemin',
-    'htmlmin'
+    'usemin'
   ]);
 
   grunt.registerTask('default', [
