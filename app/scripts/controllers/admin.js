@@ -177,3 +177,20 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorFinishCtrl', func
     $scope.skillTimes = SkillTime.event({eventId: $stateParams.eventId});
 
 });
+
+angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.report = Report.competitorNames({eventId: $stateParams.eventId});
+
+    $scope.nameMismatch = function (competitor) {
+        var empty = competitor.first_name && competitor.last_name;
+        var firstName = competitor.first_name != competitor.person.first_name;
+        var lastName = competitor.last_name != competitor.person.last_name;
+        return empty && (firstName || lastName);
+    };
+
+});

@@ -362,6 +362,18 @@ angular
             ]
         }
     })
+    .state('admin_competitor_names', {
+        url: '/admin/{eventId}/competitor_names',
+        templateUrl: 'views/admin_event_competitor_names.html',
+        controller: 'AdminEventCompetitorNamesCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
     .state('admin_form_detail', {
         url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',

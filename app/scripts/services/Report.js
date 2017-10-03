@@ -11,6 +11,10 @@
             lunchInWorkshop: {
                 method: 'GET',
                 url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/reports/lunch_in_workshop',
+            },
+            competitorNames: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/reports/competitor_names',
             }
         });
 

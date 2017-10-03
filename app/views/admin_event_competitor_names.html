@@ -1,0 +1,42 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="admin">Admin</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Competitor Names</li>
+</ol>
+
+<h1>Competitor Names</h1>
+
+<hr/>
+
+<table class="table table-striped">
+    <colgroup>
+        <col width="20%" />
+        <col width="40%" />
+        <col width="40%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Name in People</th>
+            <th>Name in Skill Management</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr ng-repeat="r in report.reports | filter:nameMismatch">
+            <td>
+                {{ r.member_name }}
+            </td>
+            <td>
+                <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.first_name }} {{ r.person.last_name }}
+            </td>
+            <td>
+                {{ r.first_name }} {{ r.last_name }}
+            </td>
+        </tr>
+    </tbody>
+</table>
