@@ -198,3 +198,21 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
     };
 
 });
+
+angular.module('skillMgmtApp').controller('AdminEventCompetitorDateOfBirthCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+
+    $scope.loading = true;
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.report = Report.competitorNames({eventId: $stateParams.eventId}, function () {
+        $scope.loading = false;
+    });
+
+    $scope.dateOfBirthMismatch = function (competitor) {
+        return competitor.date_of_birth != competitor.person.date_of_birth;
+    };
+
+});
