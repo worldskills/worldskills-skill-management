@@ -27,7 +27,7 @@
         </tr>
     </tfoot>
     <tbody>
-        <tr ng-repeat="r in report.reports | filter:nameMismatch">
+        <tr ng-repeat="r in report.reports | filter:nameMismatch as filteredReports">
             <td>
                 {{ r.member_name }}
             </td>
@@ -37,6 +37,12 @@
             <td>
                 {{ r.first_name }} {{ r.last_name }}
             </td>
+        </tr>
+        <tr ng-show="filteredReports.length == 0">
+            <td colspan="3">No Competitors found</td>
+        </tr>
+        <tr ng-show="loading">
+            <td colspan="3"><ws-spinner></ws-spinner></td>
         </tr>
     </tbody>
 </table>

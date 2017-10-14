@@ -180,11 +180,15 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorFinishCtrl', func
 
 angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
 
+    $scope.loading = true;
+
     $scope.event = Event.get({id: $stateParams.eventId});
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
-    $scope.report = Report.competitorNames({eventId: $stateParams.eventId});
+    $scope.report = Report.competitorNames({eventId: $stateParams.eventId}, function () {
+        $scope.loading = false;
+    });
 
     $scope.nameMismatch = function (competitor) {
         var empty = competitor.first_name && competitor.last_name;
