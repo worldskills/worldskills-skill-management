@@ -186,7 +186,7 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
-    $scope.report = Report.competitorNames({eventId: $stateParams.eventId}, function () {
+    $scope.report = Report.competitors({eventId: $stateParams.eventId}, function () {
         $scope.loading = false;
     });
 
@@ -207,7 +207,7 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorDateOfBirthCtrl',
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
-    $scope.report = Report.competitorNames({eventId: $stateParams.eventId}, function () {
+    $scope.report = Report.competitors({eventId: $stateParams.eventId}, function () {
         $scope.loading = false;
     });
 
