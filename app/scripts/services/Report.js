@@ -12,9 +12,9 @@
                 method: 'GET',
                 url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/reports/lunch_in_workshop',
             },
-            competitorNames: {
+            competitors: {
                 method: 'GET',
-                url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/reports/competitor_names',
+                url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/reports/competitors',
             }
         });
 
