@@ -8,22 +8,24 @@
 
 <hr/>
 
-<table class="table table-striped">
+<table class="table table-hover">
     <colgroup>
         <col width="20%" />
-        <col width="40%" />
-        <col width="40%" />
+        <col width="30%" />
+        <col width="30%" />
+        <col width="20%" />
     </colgroup>
     <thead>
         <tr>
             <th>Member</th>
             <th>Name in People</th>
             <th>Name in Skill Management</th>
+            <th>Submitted</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="3"></td>
+            <td colspan="4"></td>
         </tr>
     </tfoot>
     <tbody>
@@ -37,12 +39,15 @@
             <td>
                 {{ r.first_name }} {{ r.last_name }}
             </td>
+            <td>
+                {{ r.submission.submitted|date:'d MMMM yyyy HH:mm' }}
+            </td>
         </tr>
         <tr ng-show="filteredReports.length == 0">
-            <td colspan="3">No Competitors found</td>
+            <td colspan="4">No Competitors found</td>
         </tr>
         <tr ng-show="loading">
-            <td colspan="3"><ws-spinner></ws-spinner></td>
+            <td colspan="4"><ws-spinner></ws-spinner></td>
         </tr>
     </tbody>
 </table>
