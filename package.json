@@ -29,7 +29,7 @@
     "load-grunt-tasks": "~3.5.2",
     "time-grunt": "~1.4.0",
     "karma-ng-scenario": "~1.0.0",
-    "karma": "~1.7.0",
+    "karma": "~2.0.0",
     "karma-ng-html2js-preprocessor": "~1.0.0",
     "grunt-karma": "~2.0.0",
     "karma-jasmine": "~1.1.0",
