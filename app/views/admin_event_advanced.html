@@ -7,6 +7,7 @@
                     <button type="button" class="btn btn-danger" ng-click="lockEvent()" ng-disabled="event.locked">Lock Event</button>
                 </p>
                 <p>After locking an event it is no longer possible to edit Competition Items, Skills Items, Forms, or any other event related information.</p>
+                <p ng-show="event.locked" class="text-muted">Event is locked.</p>
             </div>
         </div>
     </div>
