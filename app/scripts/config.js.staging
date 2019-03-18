@@ -2,12 +2,12 @@
     'use strict';
 
     var wsApp = angular.module('skillMgmtApp');
-    wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'https://staging-api.worldskills.org/skillman');
+    wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'https://api.worldskills.show/skillman');
     wsApp.constant('WORLDSKILLS_API_SKILLMAN_CODE', 1200);
     wsApp.constant('WORLDSKILLS_CLIENT_ID', '55169e05a468');
-    wsApp.constant('WORLDSKILLS_API_EVENTS', 'https://staging-api.worldskills.org//events');
-    wsApp.constant('WORLDSKILLS_API_AUTH', 'https://staging-api.worldskills.org/auth');
-    wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://staging-auth.worldskills.org/oauth/authorize');
+    wsApp.constant('WORLDSKILLS_API_EVENTS', 'https://api.worldskills.show//events');
+    wsApp.constant('WORLDSKILLS_API_AUTH', 'https://api.worldskills.show/auth');
+    wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.show/oauth/authorize');
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [1200]); // Skill Management
 
