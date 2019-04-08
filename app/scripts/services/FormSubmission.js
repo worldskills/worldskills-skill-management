@@ -3,24 +3,26 @@
 
     angular.module('skillMgmtApp').service('FormSubmission', function ($resource, WORLDSKILLS_API_SKILLMAN) {
 
-        return $resource(WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission', {
+        return $resource(WORLDSKILLS_API_SKILLMAN + '/forms/:formId/submissions/:id', {
+            id: '@id',
             formId: '@form.id',
             skillId: '@skill.id',
             l: 'en'
         }, {
             save: {
-                method: 'POST'
+                method: 'POST',
+                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission'
             },
             update: {
-                method: 'PUT'
+                method: 'PUT',
+                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission'
             },
             query: {
-                method: 'GET',
-                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/submissions',
+                method: 'GET'
             },
             reject: {
                 method: 'PUT',
-                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/skills/:skillId/submission/reject',
+                url: WORLDSKILLS_API_SKILLMAN + '/forms/:formId/submissions/:id/reject',
             }
         });
 

@@ -11,7 +11,7 @@
 <div class="col-lg-8 col-lg-offset-2">
 
 <div class="page-header">
-<p class="pull-right" ng-show="userCanRejectAllSubmissions">
+<p class="pull-right" ng-show="!submission.form.multiple_submissions && userCanRejectAllSubmissions">
     <button ng-click="rejectSubmission()" class="btn btn-danger" ng-disabled="submission.form.event.locked">Reject<ws-text-spinner ng-show="rejectLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
@@ -21,9 +21,10 @@
     {{ submission.skill.number }} {{ submission.skill.name.text }}
 </p>
 
+<p class="text-muted">Submitted on {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</p>
+
 <h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
 </div>
-
 
 <div ng-show="submission.form.description.text">
     <p>{{ submission.form.description.text }}</p>
@@ -64,6 +65,9 @@
                         <tbody>
                             <tr ng-repeat="file in field.files">
                                 <td><a href="{{file.download}}">{{file.filename}}</a></td>
+                            </tr>
+                            <tr ng-show="field.files.length == 0">
+                                <td>No files</td>
                             </tr>
                         </tbody>
                     </table>
@@ -223,6 +227,13 @@
         </div>
         <div class="clearfix"></div>
     </div>
+
+    <div>
+        <br/>
+        <a class="btn btn-link pull-right" ui-sref="admin_form_detail.submissions({eventId: submission.form.event.id, id: submission.form.id})">« Return to Submissions</a>
+    </div>
+
+    <br/><br/><br/>
 </form>
 
 </div>

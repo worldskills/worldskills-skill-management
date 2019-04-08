@@ -33,11 +33,12 @@
                     <tr ng-repeat="form in forms.forms">
                         <td>{{ form.competition_day.timeline }}</td>
                         <td>
-                            <a ui-sref="form_submission({eventId: active.skill.event.id, skillId: active.skill.id, formId: form.id})" ng-if="!form.has_submitted_submission && !active.skill.event.locked">{{ form.name.text }}</a>
-                            <span ng-if="form.has_submitted_submission || active.skill.event.locked">{{ form.name.text }}</span>
+                            <a ui-sref="form_submission({eventId: active.skill.event.id, skillId: active.skill.id, formId: form.id})" ng-if="(form.multiple_submissions || !form.has_submitted_submission) && !active.skill.event.locked">{{ form.name.text }}</a>
+                            <span ng-if="!((form.multiple_submissions || !form.has_submitted_submission) && !active.skill.event.locked)">{{ form.name.text }}</span>
                         </td>
                         <td>
-                            <span class="glyphicon glyphicon-ok text-success" ng-show="form.has_submitted_submission"></span>
+                            <span class="glyphicon glyphicon-ok text-success" ng-show="!form.multiple_submissions && form.has_submitted_submission"></span>
+                            <span class="glyphicon glyphicon-repeat text-info" ng-show="form.multiple_submissions" title="Can be submitted again"></span>
                         </td>
                     </tr>
                     <tr ng-show="forms.total_count == 0">

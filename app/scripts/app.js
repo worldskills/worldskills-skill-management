@@ -403,7 +403,7 @@ angular
             ]
         }
     }).state('admin_submission', {
-        url: '/admin/events/{eventId}/forms/{formId}/skills/{skillId}/submission',
+        url: '/admin/events/{eventId}/forms/{formId}/submissions/{id}',
         templateUrl: 'views/admin_submission.html',
         controller: 'AdminSubmissionCtrl',
         data: {

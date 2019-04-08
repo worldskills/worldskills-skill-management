@@ -3,24 +3,29 @@
     <table class="table table-striped">
         <colgroup>
             <col width="10%" />
-            <col width="90%" />
+            <col width="80%" />
+            <col width="10%" />
         </colgroup>
         <thead>
             <tr>
                 <th>Day</th>
                 <th>Name</th>
+                <th>Multi</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="form in forms.forms">
                 <td>{{ form.competition_day.timeline }}</td>
                 <td><a ui-sref="admin_form_detail.submissions({eventId: event.id, id: form.id})">{{ form.name.text }}</a></td>
+                <td>
+                    <span class="glyphicon glyphicon-repeat text-info" ng-show="form.multiple_submissions" title="Can be submitted again"></span>
+                </td>
             </tr>
             <tr ng-show="forms.total_count == 0">
-                <td colspan="2">No forms found</td>
+                <td colspan="3">No forms found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="2"><ws-spinner></ws-spinner></td>
+                <td colspan="3"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>

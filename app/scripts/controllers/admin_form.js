@@ -33,7 +33,7 @@ angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', funct
 
     $scope.loading = true;
 
-    $scope.submissions = FormSubmission.query({formId: $scope.id}, function () {
+    $scope.submissions = FormSubmission.query({formId: $scope.id, state: 'submitted'}, function () {
         $scope.loading = false;
     });
 });
@@ -43,9 +43,9 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
     $scope.loading = true;
 
     $scope.formId = $stateParams.formId;
-    $scope.skillId = $stateParams.skillId;
+    $scope.id = $stateParams.id;
 
-    $scope.submission = FormSubmission.get({formId: $scope.formId, skillId: $scope.skillId}, function () {
+    $scope.submission = FormSubmission.get({formId: $scope.formId, id: $scope.id}, function () {
         $scope.loading = false;
     });
 
@@ -90,7 +90,7 @@ angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($sco
     var skills = {}
     $scope.skills = [];
 
-    $scope.forms = Form.query({eventId: $stateParams.eventId, limit: 99}, function () {
+    $scope.forms = Form.query({eventId: $stateParams.eventId, multiple_submissions: false, limit: 99}, function () {
 
         var submissionsPromises = [];
 

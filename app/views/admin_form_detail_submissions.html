@@ -2,46 +2,32 @@
 <div class="table-responsive">
     <table class="table table-striped resource_list">
         <colgroup>
-            <col width="10%" />
             <col width="40%" />
-            <col width="20%" />
-            <col width="30%" />
+            <col width="60%" />
         </colgroup>
         <thead>
             <tr>
-                <th>Skill Number</th>
-                <th>Skill Name</th>
-                <th>State</th>
-                <th>Submitted</th>
+                <th>Submitted on</th>
+                <th>Skill</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="submission in submissions.submissions">
-                <td>{{ submission.skill.number }}</td>
                 <td>
-                    <a ui-sref="admin_submission({eventId: event.id, formId: id, skillId: submission.skill.id})" ng-if="submission.state == 'submitted'">{{ submission.skill.name.text }}</a>
-                    <span ng-if="submission.state != 'submitted'">{{ submission.skill.name.text }}</span>
+                    <a ui-sref="admin_submission({eventId: event.id, formId: id, id: submission.id})">{{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</a>
                 </td>
-                <td>
-                    <span class="glyphicon glyphicon-ok text-success" ng-show="submission.state == 'submitted'"></span>
-                    <span class="glyphicon glyphicon-remove text-danger" ng-show="submission.state != 'submitted'"></span>
-                </td>
-                <td>
-                    <span ng-show="submission.state == 'submitted'">
-                        {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}
-                    </span>
-                </td>
+                <td>{{ submission.skill.number }} {{ submission.skill.name.text }}</td>
             </tr>
             <tr ng-show="!loading && submissions.submissions.length == 0">
-                <td colspan="4">No submissions found</td>
+                <td colspan="2">No submissions found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="4"><ws-spinner></ws-spinner></td>
+                <td colspan="2"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4"></td>
+                <td colspan="2"></td>
             </tr>
         </tfoot>
     </table>
