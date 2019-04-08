@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
@@ -33,7 +33,11 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             }
         }
         $scope.saving = false;
+
+        return {};
     };
+
+    var promises = [];
 
     $scope.loading = true;
     $scope.submitted = false;
@@ -43,7 +47,8 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.fieldChanged = function (field) {
         var updateField = function () {
             $scope.saving = true;
-            FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
+            var fieldUpdate = FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
+            promises.push(fieldUpdate.$promise);
         };
         if (field.id in timeoutsFields) {
             $timeout.cancel(timeoutsFields[field.id]);
@@ -53,13 +58,14 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.fieldChecked = function (field) {
         $scope.saving = true;
-        FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
+        var fieldUpdate = FormSubmissionField.update({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id}, field, saved, errored);
+        promises.push(fieldUpdate.$promise);
     };
 
     $scope.fieldUploadFiles = function(field, $files) {
         field.uploading = $files;
         angular.forEach($files, function(file) {
-            Upload.upload({
+            var uploadPromise = Upload.upload({
                 url: WORLDSKILLS_API_SKILLMAN + '/forms/' + $scope.submission.form.id + '/skills/' + $scope.submission.skill.id + '/submission/fields/' + field.id + '/file',
                 data: {file: file}
             }).then(function (response) {
@@ -67,13 +73,15 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             }, errored, function (evt) {
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
+            promises.push(uploadPromise);
         });
     };
 
     $scope.deleteFieldFile = function (field, file) {
         var index = field.files.indexOf(file);
         field.files.splice(index, 1);
-        FormSubmissionFieldFile.delete({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id, fieldId: field.id}, file);
+        var fieldUpdate = FormSubmissionFieldFile.delete({formId: $scope.submission.form.id, skillId: $scope.submission.skill.id, fieldId: field.id}, file);
+        promises.push(fieldUpdate.$promise);
     };
 
     var timeoutsFieldPersons = {};
@@ -81,12 +89,13 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         var key = field.id + '_' + person.person.id;
         var updateField = function () {
             $scope.saving = true;
-            FormSubmissionFieldPerson.update({
+            var fieldUpdate = FormSubmissionFieldPerson.update({
                 formId: $scope.submission.form.id,
                 skillId: $scope.submission.skill.id,
                 fieldId: field.id,
                 personId: person.person.id
             }, person, saved, errored);
+            promises.push(fieldUpdate.$promise);
         };
         if (key in timeoutsFieldPersons) {
             $timeout.cancel(timeoutsFieldPersons[key]);
@@ -96,18 +105,19 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.personChecked = function (field, person) {
         $scope.saving = true;
-        FormSubmissionFieldPerson.update({
+        var fieldUpdate = FormSubmissionFieldPerson.update({
             formId: $scope.submission.form.id,
             skillId: $scope.submission.skill.id,
             fieldId: field.id,
             personId: person.person.id
         }, person, saved, errored);
+        promises.push(fieldUpdate.$promise);
     };
 
     $scope.pinChanged = function (field, person) {
         if (person.pin.length == 4) {
             $scope.saving = true;
-            FormSubmissionFieldPerson.update({
+            var fieldUpdate = FormSubmissionFieldPerson.update({
                 formId: $scope.submission.form.id,
                 skillId: $scope.submission.skill.id,
                 fieldId: field.id,
@@ -120,8 +130,9 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
                 saved();
             }, function (httpResponse) {
                 person.pin = '';
-                errored(httpResponse);
+                return errored(httpResponse);
             });
+            promises.push(fieldUpdate.$promise);
         }
     };
 
@@ -129,15 +140,17 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         $scope.submitted = true;
         if ($scope.form.$valid) {
             if (confirm('Please only submit the form if you have filled out all fields. Click OK to proceed.')) {
-                $scope.submitting = true;
-                $scope.submission.state = 'submitted';
-                $scope.submission.$update(function () {
-                    alert.success('The form has been submitted successfully.');
-                    $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
-                }, function (response) {
-                    $scope.submitting = false;
-                    alert.error('There was an error submitting the form.');
-                    $('body,html').animate({scrollTop: 0});
+                $q.all(angular.extend(promises, timeoutsFields)).then(function() {
+                    $scope.submitting = true;
+                    $scope.submission.state = 'submitted';
+                    $scope.submission.$update(function () {
+                        alert.success('The form has been submitted successfully.');
+                        $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
+                    }, function (response) {
+                        $scope.submitting = false;
+                        alert.error('There was an error submitting the form.');
+                        $('body,html').animate({scrollTop: 0});
+                    });
                 });
             }
         } else {
