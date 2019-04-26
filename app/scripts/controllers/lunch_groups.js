@@ -4,7 +4,7 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
 
     $scope.loading = true;
 
-    $scope.skill = Skill.get({eventId: $stateParams.eventId, id: $stateParams.skillId}, {}, function () {
+    $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
 
         auth.user.$promise.then(function () {
             $scope.skills.$promise.then(function () {

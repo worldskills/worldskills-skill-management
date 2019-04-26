@@ -17,7 +17,7 @@ angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $st
 
 angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scope, $stateParams, Skill) {
 
-    $scope.skills = Skill.query({eventId: $stateParams.eventId});
+    $scope.skills = Skill.query({event: $stateParams.eventId});
 
 });
 
@@ -172,7 +172,7 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorFinishCtrl', func
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
-    $scope.skills = Skill.query({eventId: $stateParams.eventId});
+    $scope.skills = Skill.query({event: $stateParams.eventId});
 
     $scope.skillTimes = SkillTime.event({eventId: $stateParams.eventId});
 

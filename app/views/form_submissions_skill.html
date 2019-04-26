@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <p>
+            <span class="text-muted">{{ skill.event.name || "&nbsp;" }}</span>
+            <br/>
+            {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+        </p>
+
+        <h2>{{ form.name.text }}</h2>
+
+        <hr>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Submitted on</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="submission in submissions.submissions">
+                        <td>
+                            <a ui-sref="form_submissions_submission({skillId: skill.id, formId: form.id, id: submission.id})">{{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</a>
+                        </td>
+                    </tr>
+                    <tr ng-show="!loading && submissions.submissions.length == 0">
+                        <td>No submissions found</td>
+                    </tr>
+                    <tr ng-show="loading">
+                        <td><ws-spinner></ws-spinner></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>

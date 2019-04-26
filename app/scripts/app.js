@@ -130,6 +130,42 @@ angular
             ]
         }
     })
+    .state('form_submissions', {
+        url: '/form_submissions/{formId}',
+        templateUrl: 'views/form_submissions.html',
+        controller: 'FormSubmissionsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewSubmissions'}
+            ]
+        }
+    })
+    .state('form_submissions_skill', {
+        url: '/form_submissions/{formId}/skills/{skillId}',
+        templateUrl: 'views/form_submissions_skill.html',
+        controller: 'FormSubmissionsSkillCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewSubmissions'}
+            ]
+        }
+    })
+    .state('form_submissions_submission', {
+        url: '/form_submissions/{formId}/skills/{skillId}/submission/{id}',
+        templateUrl: 'views/form_submissions_submission.html',
+        controller: 'FormSubmissionsSubmissionCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewSubmissions'}
+            ]
+        }
+    })
     .state('skill_timetable', {
         url: '/events/{eventId}/skills/{skillId}/timetable',
         templateUrl: 'views/skill_timetable.html',
