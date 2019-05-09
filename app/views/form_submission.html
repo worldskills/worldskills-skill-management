@@ -1,5 +1,9 @@
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
+  
+<p class="pull-right" ng-show="submission.form.multiple_submissions">
+    <a class="btn btn-default btn-sm" ui-sref="form_submissions_skill({formId: submission.form.id, skillId: submission.skill.id})" target="_blank">Submissions</a>
+</p>
 
 <h1 class="align-top">
     <small>{{ submission.skill.event.name || "&nbsp;" }}</small>
