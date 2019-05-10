@@ -44,6 +44,18 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.submitting = false;
 
     var timeoutsFields = {};
+    $scope.submissionChanged = function () {
+        var updateSubmission = function () {
+            $scope.saving = true;
+            var submissionUpdate = $scope.submission.$update(saved, errored);
+            promises.push(submissionUpdate.$promise);
+        };
+        if (0 in timeoutsFields) {
+            $timeout.cancel(timeoutsFields[0]);
+        }
+        timeoutsFields[0] = $timeout(updateSubmission, 1000);
+    };
+
     $scope.fieldChanged = function (field) {
         var updateField = function () {
             $scope.saving = true;

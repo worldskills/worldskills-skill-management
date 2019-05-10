@@ -19,6 +19,14 @@
 </div>
 
 <form role="form" novalidate>
+    <div ng-show="submission.form.multiple_submissions">
+        <div class="form-group">
+            <h4>Title</h4>
+            <input type="text" class="form-control" ng-model="submission.title" readonly="readonly" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
     <div ng-repeat="field in submission.fields">
         <div class="form-group">
             <h4>{{ field.title.text }}</h4>

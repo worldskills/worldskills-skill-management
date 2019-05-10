@@ -13,9 +13,14 @@
 
         <div class="table-responsive">
             <table class="table table-striped">
+                <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                </colgroup>
                 <thead>
                     <tr>
                         <th>Submitted on</th>
+                        <th>Title</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,12 +28,15 @@
                         <td>
                             <a ui-sref="form_submissions_submission({skillId: skill.id, formId: form.id, id: submission.id})">{{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</a>
                         </td>
+                        <td>
+                            <a ui-sref="form_submissions_submission({skillId: skill.id, formId: form.id, id: submission.id})">{{ submission.title }}</a>
+                        </td>
                     </tr>
                     <tr ng-show="!loading && submissions.submissions.length == 0">
-                        <td>No submissions found</td>
+                        <td colspan="2">No submissions found</td>
                     </tr>
                     <tr ng-show="loading">
-                        <td><ws-spinner></ws-spinner></td>
+                        <td colspan="2"><ws-spinner></ws-spinner></td>
                     </tr>
                 </tbody>
                 <tfoot>
