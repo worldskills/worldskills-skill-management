@@ -39,8 +39,8 @@
                         <span class="text-muted">{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
                     </td>
                     <td>
-                        <a href ng-if="!(skill.event.locked || item.lunch)" ng-click="editItem(item)">{{ item.description.text }}</a>
-                        <span ng-if="skill.event.locked || item.lunch">{{ item.description.text }}</span>
+                        <a href ng-if="!skill.event.locked" ng-click="editItem(item)">{{ item.description.text }}</a>
+                        <span ng-if="skill.event.locked">{{ item.description.text }}</span>
                     </td>
                     <td>
                         {{ item.group.name }}
