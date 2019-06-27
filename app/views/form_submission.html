@@ -41,7 +41,7 @@
 
     <div ng-show="submission.form.multiple_submissions">
         <div class="form-group">
-            <h4>Title</h4>
+            <h4>{{ submission.form.title_label.text || "Title" }}</h4>
             <input type="text" class="form-control" ng-model="submission.title" ng-change="submissionChanged()" />
         </div>
         <div class="clearfix"></div>
