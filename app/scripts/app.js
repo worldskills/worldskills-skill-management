@@ -155,7 +155,7 @@ angular
         }
     })
     .state('form_submissions_submission', {
-        url: '/form_submissions/{formId}/skills/{skillId}/submission/{id}',
+        url: '/form_submissions/{formId}/skills/{skillId}/submissions/{id}',
         templateUrl: 'views/form_submissions_submission.html',
         controller: 'FormSubmissionsSubmissionCtrl',
         data: {
