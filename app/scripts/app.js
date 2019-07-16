@@ -387,7 +387,7 @@ angular
         }
     })
     .state('report_competitor_finish_times', {
-        url: '/competitor_finish_times/events/{eventId}',
+        url: '/events/{eventId}/reports/competitor_finish_times',
         templateUrl: 'views/report_competitor_finish_times.html',
         controller: 'ReportCompetitorFinishCtrl',
         data: {
