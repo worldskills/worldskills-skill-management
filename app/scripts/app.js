@@ -207,9 +207,9 @@ angular
             ]
         }
     })
-    .state('lunch_report_index', {
+    .state('report_lunch_index', {
         url: '/lunch_report/events/{eventId}',
-        controller: 'LunchReportIndexCtrl',
+        controller: 'ReportLunchIndexCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
@@ -218,10 +218,10 @@ angular
             ]
         }
     })
-    .state('lunch_report', {
+    .state('report_lunch', {
         url: '/lunch_report/events/{eventId}/members/{memberId}/day/{day}',
-        templateUrl: 'views/lunch_report.html',
-        controller: 'LunchReportCtrl',
+        templateUrl: 'views/report_lunch.html',
+        controller: 'ReportLunchCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
@@ -362,34 +362,34 @@ angular
             ]
         }
     })
-    .state('admin_lunch_summary', {
-        url: '/admin/{eventId}/lunch_summary',
-        templateUrl: 'views/admin_event_lunch_summary.html',
-        controller: 'AdminEventLunchSummaryCtrl',
+    .state('report_lunch_summary', {
+        url: '/events/{eventId}/reports/lunch_summary',
+        templateUrl: 'views/report_lunch_summary.html',
+        controller: 'ReportLunchSummaryCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewManagementPlan'}
+                {code: 1200, role: 'ViewLunchReport'}
             ]
         }
     })
-    .state('admin_lunch_in_workshop', {
-        url: '/admin/{eventId}/lunch_in_workshop',
-        templateUrl: 'views/admin_event_lunch_in_workshop.html',
-        controller: 'AdminEventLunchInWorkshopCtrl',
+    .state('report_lunch_in_workshop', {
+        url: '/events/{eventId}/reports/lunch_in_workshop',
+        templateUrl: 'views/report_lunch_in_workshop.html',
+        controller: 'ReportLunchInWorkshopCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewManagementPlan'}
+                {code: 1200, role: 'ViewLunchReport'}
             ]
         }
     })
-    .state('admin_competitor_finish_times', {
-        url: '/admin/{eventId}/competitor_finish_times',
-        templateUrl: 'views/admin_event_competitor_finish_times.html',
-        controller: 'AdminEventCompetitorFinishCtrl',
+    .state('report_competitor_finish_times', {
+        url: '/competitor_finish_times/events/{eventId}',
+        templateUrl: 'views/report_competitor_finish_times.html',
+        controller: 'ReportCompetitorFinishCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [

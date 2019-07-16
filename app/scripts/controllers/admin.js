@@ -131,53 +131,6 @@ angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($sc
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventLunchSummaryCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
-
-    $scope.event = Event.get({id: $stateParams.eventId});
-
-    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
-
-    $scope.report = Report.lunchSummary({eventId: $stateParams.eventId});
-
-});
-
-angular.module('skillMgmtApp').controller('AdminEventLunchInWorkshopCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
-
-    $scope.event = Event.get({id: $stateParams.eventId});
-
-    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
-
-    $scope.report = Report.lunchInWorkshop({eventId: $stateParams.eventId}, function () {
-
-        $scope.competitionDays.$promise.then(function () {
-
-            angular.forEach($scope.report.reports, function (report) {
-                angular.forEach($scope.competitionDays.days, function (competitionDay) {
-                    if (competitionDay.id == report.competition_day_id) {
-                        if (typeof competitionDay.total == 'undefined') {
-                            competitionDay.total = 0;
-                        }
-                        competitionDay.total = competitionDay.total + report.total;
-                    }
-                });
-            });
-        });
-    });
-
-});
-
-angular.module('skillMgmtApp').controller('AdminEventCompetitorFinishCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Skill, SkillTime) {
-
-    $scope.event = Event.get({id: $stateParams.eventId});
-
-    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
-
-    $scope.skills = Skill.query({event: $stateParams.eventId});
-
-    $scope.skillTimes = SkillTime.event({eventId: $stateParams.eventId});
-
-});
-
 angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
 
     $scope.loading = true;
