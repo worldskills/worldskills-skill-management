@@ -30,24 +30,9 @@ angular.module('skillMgmtApp').controller('TimetableCtrl', function ($scope, $ro
         $scope.loading = false;
 
         angular.forEach($scope.timetable.competition_days, function (competitionDay) {
-            console.log(competitionDay.timeline, $stateParams.day, competitionDay.timeline == $stateParams.day);
             if (competitionDay.timeline == $stateParams.day) {
                 $scope.active.day = competitionDay;
             }
-        });
-
-        angular.forEach($scope.timetable.lunch_allocations, function(allocation) {
-            allocation.description = {text: 'Lunch'};
-            allocation.start_time = allocation.lunch_period.start_time;
-            allocation.end_time = allocation.lunch_period.end_time;
-            $scope.timetable.timetable_items.push(allocation);
-        });
-
-        angular.forEach($scope.timetable.lunch_allocation_groups, function(allocation) {
-            allocation.description = {text: 'Lunch'};
-            allocation.start_time = allocation.lunch_period.start_time;
-            allocation.end_time = allocation.lunch_period.end_time;
-            $scope.timetable.timetable_items.push(allocation);
         });
 
     });

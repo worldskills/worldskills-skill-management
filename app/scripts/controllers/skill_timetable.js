@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillTimetableCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $uibModal, auth, alert, Skill, CompetitionDay, SkillTimetableItem, LunchAllocation, LunchGroup) {
+angular.module('skillMgmtApp').controller('SkillTimetableCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $uibModal, auth, alert, Skill, CompetitionDay, SkillTimetableItem, LunchGroup) {
 
     $scope.loading = false;
 
@@ -8,17 +8,6 @@ angular.module('skillMgmtApp').controller('SkillTimetableCtrl', function ($scope
 
         $scope.skillItems = SkillTimetableItem.query({skillId: $stateParams.skillId}, {}, function () {
 
-            LunchAllocation.query({skillId: $stateParams.skillId}, {}, function (response) {
-                angular.forEach(response.groups, function(allocation) {
-                    if (allocation.group.type == 'COMPETITOR') {
-                        allocation.lunch = true;
-                        allocation.description = {text: 'Lunch'};
-                        allocation.start_time = allocation.lunch_period.start_time;
-                        allocation.end_time = allocation.lunch_period.end_time;
-                        $scope.skillItems.items.push(allocation);
-                    }
-                });
-            });
         });
 
     });
