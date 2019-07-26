@@ -10,5 +10,6 @@
     wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.org/oauth/authorize');
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [1200]); // Skill Management
+    wsApp.constant('ENVIRONMENT_WARNING', false);
 
 })();

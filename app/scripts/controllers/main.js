@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, PersonSkills, WORLDSKILLS_API_SKILLMAN_CODE) {
+angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, PersonSkills, WORLDSKILLS_API_SKILLMAN_CODE, ENVIRONMENT_WARNING) {
 
     $scope.selectedLanguage = Language.selectedLanguage;
 
@@ -80,5 +80,7 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
             $scope.loading = false;
         });
     });
+
+    $scope.environmentWarning = ENVIRONMENT_WARNING;
 
 });
