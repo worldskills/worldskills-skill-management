@@ -26,6 +26,8 @@
 <h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
 </div>
 
+<p ng-if="submission.fields.length == 0">No fields need to be filled out.</p>
+
 <div ng-show="submission.form.description.text">
     <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
     <br/>
