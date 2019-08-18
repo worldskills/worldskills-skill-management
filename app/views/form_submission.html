@@ -228,8 +228,8 @@
                                 <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" ng-change="fieldPersonChanged(field, person)" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (YYYY-MM-DD):</label>
-                                <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" ng-change="fieldPersonChanged(field, person)" placeholder="YYYY-MM-DD" />
+                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (DD.MM.YYYY):</label>
+                                <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.dob" ng-change="fieldPersonDateOfBirthChanged(field, person)" placeholder="DD.MM.YYYY" />
                             </div>
                             <div class="form-group">
                                 <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>

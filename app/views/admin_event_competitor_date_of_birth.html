@@ -39,10 +39,10 @@
                 <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.first_name }} {{ r.person.last_name }}
             </td>
             <td>
-                {{ r.person.date_of_birth }}
+                {{ r.person.date_of_birth | date:'dd.MM.yyyy' }}
             </td>
             <td>
-                {{ r.date_of_birth }}
+                {{ r.date_of_birth | date:'dd.MM.yyyy' }}
             </td>
             <td>
                 {{ r.submission.submitted|date:'d MMMM yyyy HH:mm' }}

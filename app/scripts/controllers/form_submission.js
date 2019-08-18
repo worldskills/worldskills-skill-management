@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, $filter, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
@@ -113,6 +113,24 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             $timeout.cancel(timeoutsFieldPersons[key]);
         }
         timeoutsFieldPersons[key] = $timeout(updateField, 1000);
+    };
+
+    $scope.fieldPersonDateOfBirthChanged =  function (field, person) {
+        if (person.dob.length == 10) {
+            $scope.saving = true;
+            var dateOfBirth = person.dob.substring(6, 10) + '-' + person.dob.substring(3, 5) + '-' + person.dob.substring(0, 2);
+            person.date_of_birth = dateOfBirth;
+            var fieldUpdate = FormSubmissionFieldPerson.update({
+                formId: $scope.submission.form.id,
+                skillId: $scope.submission.skill.id,
+                fieldId: field.id,
+                personId: person.person.id
+            }, person, saved, function (httpResponse) {
+                person.dob = '';
+                return errored(httpResponse);
+            });
+            promises.push(fieldUpdate.$promise);
+        }
     };
 
     $scope.personChecked = function (field, person) {
