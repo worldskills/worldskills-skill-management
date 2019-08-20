@@ -12,9 +12,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-show="!loading" ng-repeat="skill in skills">
-                <td>{{ skill.skill.number }} {{ skill.skill.name.text }}</td>
-                <th ng-repeat="form in forms.forms" ng-class="{danger: skill.submissions[form.id].state != 'submitted'}" title="{{ skill.skill.number }} {{ skill.skill.name.text }} - {{ form.competition_day.timeline }} {{ form.name.text }}" class="text-center">
+            <tr ng-show="!loading" ng-repeat="skill in skills.skills">
+                <td>{{ skill.number }} {{ skill.name.text }}</td>
+                <th ng-repeat="form in forms.forms" ng-class="{danger: skill.submissions[form.id].state != 'submitted'}" title="{{ skill.number }} {{ skill.name.text }} - {{ form.competition_day.timeline }} {{ form.name.text }}" class="text-center">
                     <i class="glyphicon glyphicon-ok text-success" ng-show="skill.submissions[form.id].state == 'submitted'"></i>
                     <i class="glyphicon glyphicon-remove text-danger" ng-show="skill.submissions[form.id].state != 'submitted'"></i>
                 </th>

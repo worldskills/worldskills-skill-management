@@ -81,35 +81,39 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
 });
 
 
-angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $stateParams, $q, Form, FormSubmission, Event) {
+angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $stateParams, $q, Form, FormSubmission, Event, Skill) {
 
     $scope.loading = true;
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
-    var skills = {}
-    $scope.skills = [];
+    $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
-    $scope.forms = Form.query({eventId: $stateParams.eventId, multiple_submissions: false, limit: 99}, function () {
+        angular.forEach($scope.skills.skills, function (skill) {
+            skill.submissions = {};
+        });
 
-        var submissionsPromises = [];
+        $scope.forms = Form.query({eventId: $stateParams.eventId, multiple_submissions: false, limit: 99}, function () {
 
-        angular.forEach($scope.forms.forms, function (form) {
-            var s = FormSubmission.query({formId: form.id}, function (submissions) {
-                angular.forEach(submissions.submissions, function (submission) {
-                    if (!(submission.skill.id in skills)) {
-                        var skill = {skill: submission.skill, submissions: {}};
-                        skills[submission.skill.id] = skill;
-                        $scope.skills.push(skill);
-                    }
-                    skills[submission.skill.id].submissions[form.id] = submission;
+            var submissionsPromises = [];
+
+            angular.forEach($scope.forms.forms, function (form) {
+                var s = FormSubmission.query({formId: form.id}, function (submissions) {
+                    angular.forEach(submissions.submissions, function (submission) {
+                        angular.forEach($scope.skills.skills, function (skill) {
+                            if (skill.id == submission.skill.id) {
+                                skill.submissions[form.id] = submission;
+                            }
+                        });
+                    });
                 });
+                submissionsPromises.push(s.$promise);
             });
-            submissionsPromises.push(s.$promise);
+
+            $q.all(submissionsPromises).then(function() {
+                $scope.loading = false;
+            });
         });
 
-        $q.all(submissionsPromises).then(function() {
-            $scope.loading = false;
-        });
     });
 });
