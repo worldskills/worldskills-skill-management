@@ -115,7 +115,7 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" ng-keypress="pinKeypress($event)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" />
                                                 <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
@@ -155,7 +155,7 @@
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
-                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" ng-keypress="pinKeypress($event)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
                                                 <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                             </div>
                                             <div class="col-xs-7">
@@ -253,7 +253,7 @@
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">
-                                                    <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
+                                                    <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" ng-model="person.pin" ng-change="pinChanged(field, person)" ng-keypress="pinKeypress($event)" placeholder="PIN" ng-if="!person.checked || person.pin" ng-disabled="person.checked || person.pin.length == 4" required />
                                                     <input type="password" inputmode="numeric" autocomplete="off" class="form-control" value="0000" disabled="disabled" ng-if="person.checked && !person.pin" />
                                                 </div>
                                                 <div class="col-xs-7">

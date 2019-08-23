@@ -166,6 +166,13 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         }
     };
 
+    $scope.pinKeypress = function (e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    };
+
     $scope.submit = function () {
         $scope.submitted = true;
         if ($scope.form.$valid) {
