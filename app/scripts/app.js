@@ -150,7 +150,8 @@ angular
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewSubmissions'}
+                {code: 1200, role: 'ViewSubmissions'},
+                {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
     })
@@ -162,7 +163,8 @@ angular
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewSubmissions'}
+                {code: 1200, role: 'ViewSubmissions'},
+                {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
     })
