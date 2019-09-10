@@ -131,7 +131,7 @@ angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($sc
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report, PeoplePerson) {
 
     $scope.loading = true;
 
@@ -150,9 +150,21 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
         return empty && (firstName || lastName);
     };
 
+    $scope.overwritePeople = function (competitor) {
+        competitor.loading = true;
+        PeoplePerson.get({id: competitor.person.id}, function (person) {
+            person.first_name = competitor.first_name;
+            person.last_name = competitor.last_name;
+            person.$update(function (person) {
+                competitor.person = person;
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        });
+    };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventCompetitorDateOfBirthCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report) {
+angular.module('skillMgmtApp').controller('AdminEventCompetitorDateOfBirthCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report, PeoplePerson) {
 
     $scope.loading = true;
 
@@ -166,6 +178,18 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorDateOfBirthCtrl',
 
     $scope.dateOfBirthMismatch = function (competitor) {
         return competitor.date_of_birth != competitor.person.date_of_birth;
+    };
+
+    $scope.overwritePeople = function (competitor) {
+        competitor.loading = true;
+        PeoplePerson.get({id: competitor.person.id}, function (person) {
+            person.date_of_birth = competitor.date_of_birth;
+            person.$update(function (person) {
+                competitor.person = person;
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        });
     };
 
 });

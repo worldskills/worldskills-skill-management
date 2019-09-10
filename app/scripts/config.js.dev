@@ -7,6 +7,7 @@
     wsApp.constant('WORLDSKILLS_CLIENT_ID', '55169e05a468');
     wsApp.constant('WORLDSKILLS_API_EVENTS', 'http://localhost:8080/events');
     wsApp.constant('WORLDSKILLS_API_AUTH', 'http://localhost:8080/auth');
+    wsApp.constant('WORLDSKILLS_API_PEOPLE', 'http://localhost:8080/people');
     wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.localhost/oauth/authorize');
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [1200]); // Skill Management

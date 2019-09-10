@@ -11,10 +11,11 @@
 <table class="table table-hover">
     <colgroup>
         <col width="20%" />
-        <col width="30%" />
+        <col width="20%" />
         <col width="15%" />
         <col width="15%" />
         <col width="20%" />
+        <col width="10%" />
     </colgroup>
     <thead>
         <tr>
@@ -23,11 +24,12 @@
             <th>Date of Birth in People</th>
             <th>in Skill Management</th>
             <th>Submitted</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="5"></td>
+            <td colspan="6"></td>
         </tr>
     </tfoot>
     <tbody>
@@ -47,12 +49,15 @@
             <td>
                 {{ r.submission.submitted|date:'d MMMM yyyy HH:mm' }}
             </td>
+            <td>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="overwritePeople(r)" ng-disabled="r.loading">Overwrite in People</button>
+            </td>
         </tr>
         <tr ng-show="filteredReports.length == 0">
-            <td colspan="5">No Competitors found</td>
+            <td colspan="6">No Competitors found</td>
         </tr>
         <tr ng-show="loading">
-            <td colspan="5"><ws-spinner></ws-spinner></td>
+            <td colspan="6"><ws-spinner></ws-spinner></td>
         </tr>
     </tbody>
 </table>
