@@ -11,16 +11,17 @@
 <table class="table table-hover">
     <colgroup>
         <col width="15%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
+        <col width="15%" />
         <col width="15%" />
         <col width="10%" />
     </colgroup>
     <thead>
         <tr>
             <th>Member</th>
-            <th>Name in People</th>
+            <th colspan="2">Name in People</th>
             <th colspan="2">Name in Skill Management</th>
             <th>Submitted</th>
             <th>Actions</th>
@@ -28,7 +29,7 @@
     </thead>
     <tfoot>
         <tr>
-            <td colspan="6"></td>
+            <td colspan="7"></td>
         </tr>
     </tfoot>
     <tbody>
@@ -37,7 +38,10 @@
                 {{ r.member_name }}
             </td>
             <td>
-                <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.first_name }} {{ r.person.last_name }}
+                <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.first_name }}</a>
+            </td>
+            <td>
+                <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.last_name }}</a>
             </td>
             <td>
                 {{ r.first_name }}
@@ -53,10 +57,10 @@
             </td>
         </tr>
         <tr ng-show="filteredReports.length == 0">
-            <td colspan="6">No Competitors found</td>
+            <td colspan="7">No Competitors found</td>
         </tr>
         <tr ng-show="loading">
-            <td colspan="6"><ws-spinner></ws-spinner></td>
+            <td colspan="7"><ws-spinner></ws-spinner></td>
         </tr>
     </tbody>
 </table>
