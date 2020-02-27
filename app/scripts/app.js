@@ -381,6 +381,17 @@ angular
             ]
         }
     })
+    .state('admin_skill.form_submissions', {
+        url: '/forms',
+        templateUrl: 'views/admin_skill_form_submissions.html',
+        controller: 'AdminSkillFormSubmissionsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
+            ]
+        }
+    })
     .state('report_lunch_summary', {
         url: '/events/{eventId}/reports/lunch_summary',
         templateUrl: 'views/report_lunch_summary.html',

@@ -19,3 +19,13 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
     };
 
 });
+
+angular.module('skillMgmtApp').controller('AdminSkillFormSubmissionsCtrl', function($scope, $stateParams, SkillSubmission) {
+
+    $scope.loading = true;
+
+    $scope.submissions = SkillSubmission.query({skillId: $stateParams.skillId, state: 'submitted'}, function () {
+        $scope.loading = false;
+    });
+
+});

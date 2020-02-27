@@ -1,0 +1,37 @@
+
+<div class="table-responsive">
+    <table class="table table-striped resource_list">
+        <colgroup>
+            <col width="20%" />
+            <col width="30%" />
+            <col width="50%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Submitted on</th>
+                <th>Form</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="submission in submissions.submissions">
+                <td>
+                    <a ui-sref="admin_submission({eventId: skill.event.id, formId: submission.form.id, id: submission.id})">{{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</a>
+                </td>
+                <td>{{ submission.form.name.text }}</td>
+                <td>{{ submission.title }}</td>
+            </tr>
+            <tr ng-show="!loading && submissions.submissions.length == 0">
+                <td colspan="3">No submissions found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="3"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
