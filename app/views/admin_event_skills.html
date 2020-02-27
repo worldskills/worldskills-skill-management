@@ -2,21 +2,18 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="10%" />
-            <col width="50%" />
+            <col width="60%" />
             <col width="40%" />
         </colgroup>
         <thead>
             <tr>
-                <th>Number</th>
-                <th>Name</th>
+                <th>Skill</th>
                 <th>Skill Management Team view</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="skill in skills.skills">
-                <td>{{ skill.number }}</td>
-                <td>{{ skill.name.text }}</td>
+                <td><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
                 <td>
                     <span ng-show="!userIsAdmin">
                         <a ui-sref="plan({skillId: skill.id, day: 'C1'})">Plan</a>
@@ -35,10 +32,10 @@
                 </td>
             </tr>
             <tr ng-show="skills.skills.length == 0">
-                <td colspan="3">No skills found</td>
+                <td colspan="2">No skills found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="3"><ws-spinner></ws-spinner></td>
+                <td colspan="2"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>

@@ -1,0 +1,42 @@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="5%" />
+            <col width="25%" />
+            <col width="70%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Expert</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="expert in experts.registration_people">
+                <td>
+                    <img class="img-circle" ng-show="expert.person.images[0]" class="img-responsive" ng-src="{{expert.person.images[0].thumbnail}}_square" width="60" height="60">
+                    <img class="img-circle" ng-show="!expert.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                </td>
+                <td>
+                    {{ expert.person.first_name }} {{ expert.person.last_name }}
+                    <span class="text-muted"><br/>{{ expert.member.name.text }}</span>
+                </td>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="excludeFromFormsChanged(expert)"> Exclude Expert from Forms
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-show="experts.registration_people.length == 0">
+                <td colspan="3">No Experts found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="3"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

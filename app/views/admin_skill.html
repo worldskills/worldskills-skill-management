@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="admin">Admin</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li class="active">{{ skill.name.text }}</li>
+</ol>
+
+<h1 class="align-top">
+    <small>{{ skill.event.name || "&nbsp;" }}</small>
+    <br/>
+    {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+</h1>
+
+<ul class="nav nav-tabs">
+    <li ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">Experts</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>

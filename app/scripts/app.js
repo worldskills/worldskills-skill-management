@@ -364,6 +364,23 @@ angular
             ]
         }
     })
+    .state('admin_skill', {
+        url: '/admin/{eventId}/skills/{skillId}',
+        templateUrl: 'views/admin_skill.html',
+        controller: 'AdminSkillCtrl',
+        abstract: true
+    })
+    .state('admin_skill.experts', {
+        url: '/experts',
+        templateUrl: 'views/admin_skill_experts.html',
+        controller: 'AdminSkillExpertsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
+            ]
+        }
+    })
     .state('report_lunch_summary', {
         url: '/events/{eventId}/reports/lunch_summary',
         templateUrl: 'views/report_lunch_summary.html',
