@@ -2,15 +2,15 @@
     'use strict';
 
     var wsApp = angular.module('skillMgmtApp');
-    wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'http://localhost:8080/skillman');
+    wsApp.constant('WORLDSKILLS_API_SKILLMAN', 'https://api.worldskills.dev/skillman');
     wsApp.constant('WORLDSKILLS_API_SKILLMAN_CODE', 1200);
     wsApp.constant('WORLDSKILLS_CLIENT_ID', '55169e05a468');
-    wsApp.constant('WORLDSKILLS_API_EVENTS', 'http://localhost:8080/events');
-    wsApp.constant('WORLDSKILLS_API_AUTH', 'http://localhost:8080/auth');
-    wsApp.constant('WORLDSKILLS_API_PEOPLE', 'http://localhost:8080/people');
-    wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'http://worldskills-auth.localhost/oauth/authorize');
+    wsApp.constant('WORLDSKILLS_API_EVENTS', 'https://api.worldskills.dev/events');
+    wsApp.constant('WORLDSKILLS_API_AUTH', 'https://api.worldskills.dev/auth');
+    wsApp.constant('WORLDSKILLS_API_PEOPLE', 'https://api.worldskills.dev/people');
+    wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.dev/oauth/authorize');
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [1200]); // Skill Management
-    wsApp.constant('ENVIRONMENT_WARNING', 'This is the local development environment. Happy coding!');
+    wsApp.constant('ENVIRONMENT_WARNING', 'This is the dev environment. Changes in this environment might get overwritten.');
 
 })();
