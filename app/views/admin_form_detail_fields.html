@@ -1,0 +1,42 @@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col class="col-xs-1">
+            <col class="col-xs-8">
+            <col class="col-xs-3">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Field</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="field in fields.fields" class="form-group form-group-sm">
+                <td>
+                    {{ field.id }}
+                </td>
+                <td>
+                    <a href ng-if="!event.locked" ng-click="editField(field)">
+                        <div ng-if="field.title">{{ field.title.text }}</div>
+                        {{ field.text.text }}
+                    </a>
+                    <span ng-if="event.locked">
+                        <div ng-if="field.title">{{ field.title.text }}</div>
+                        {{ field.text.text }}
+                    </span>
+                </td>
+                <td>
+                    {{ field.type | translate }}
+                </td>
+            </tr>
+            <tr ng-show="!fields.fields.length">
+                <td colspan="3">No fields.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<button type="button" class="btn btn-success btn-sm" ng-click="addField()" ng-disabled="event.locked"><span class="glyphicon glyphicon-plus"></span> Add Field</button>

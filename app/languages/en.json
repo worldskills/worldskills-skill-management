@@ -8,5 +8,20 @@
 	
 	"Day": "Day",
 	"Form": "Form",
-	"NoForms": "No Forms Found"
+	"NoForms": "No Forms Found",
+
+	"input_text": "Textfield",
+	"input_textarea": "Textarea",
+	"input_yesno": "Yes/No",
+	"input_checkbox": "Checkbox",
+	"input_file": "File upload",
+	"expert_agreement": "Expert Agreement",
+	"smt_agreement": "SMT Agreement",
+	"ce_agreement": "CE Agreement",
+	"ccd_agreement": "CCD Agreement",
+	"ce_ccd_agreement": "CE/CCD Agreement",
+	"competitor_agreement": "Competitor Agreement",
+	"competitor_check": "Competitor Check",
+	"competitor_toolbox": "Competitor Toolbox Check",
+	"link": "Link"
 }

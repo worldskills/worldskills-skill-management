@@ -468,6 +468,17 @@ angular
                 {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
+    }).state('admin_form_detail.fields', {
+        url: '/fields',
+        templateUrl: 'views/admin_form_detail_fields.html',
+        controller: 'AdminFormDetailFieldsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
     }).state('admin_submission', {
         url: '/admin/events/{eventId}/forms/{formId}/submissions/{id}',
         templateUrl: 'views/admin_submission.html',

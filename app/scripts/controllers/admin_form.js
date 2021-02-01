@@ -38,6 +38,84 @@ angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', funct
     });
 });
 
+angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function ($scope, $uibModal, FormField) {
+
+    $scope.loading = true;
+
+    $scope.loadFields = function () {
+        $scope.fields = FormField.query({formId: $scope.id}, function () {
+            $scope.loading = false;
+        });
+    };
+    $scope.loadFields();
+
+    $scope.addField = function () {
+        $scope.field = new FormField();
+        //$scope.field.type = '';
+        $scope.field.title = {lang_code: 'en', text: ''};
+        $scope.field.text = {lang_code: 'en', text: ''};
+        $scope.skillsModal = $uibModal.open({
+            templateUrl: 'views/admin_form_detail_field.html',
+            controller: 'AdminFormDetailFieldCtrl',
+            scope: $scope,
+            animation: false
+        });
+    };
+
+    $scope.editField = function (field) {
+        $scope.field = angular.copy(field);
+        $scope.fieldModal = $uibModal.open({
+            templateUrl: 'views/admin_form_detail_field.html',
+            controller: 'AdminFormDetailFieldCtrl',
+            scope: $scope,
+            animation: false
+        });
+    };
+});
+
+angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function ($scope, $uibModalInstance, alert, FormField) {
+
+    $scope.submitted = false;
+
+    $scope.save = function () {
+        $scope.submitted = true;
+        if ($scope.form.$valid) {
+            $scope.loading = true;
+            if ($scope.field.id) {
+                FormField.update({formId: $scope.id}, $scope.field, function (response) {
+                    $scope.loadFields();
+                    alert.success('The field has been updated.');
+                    $uibModalInstance.close();
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            } else {
+                FormField.save({formId: $scope.id}, $scope.field, function (response) {
+                    $scope.loadFields();
+                    alert.success('The field has been added.');
+                    $uibModalInstance.close();
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            }
+        }
+    }
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.delete = function () {
+        FormField.delete({formId: $scope.id}, $scope.field, function () {
+            $scope.loadFields();
+            alert.success('The field has been deleted.');
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+});
+
 angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, auth, alert, FormSubmission, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.loading = true;
