@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="admin">Admin</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Forms</a></li>
+    <li class="active">Add Form</li>
+</ol>
+
+<h1>Add Form</h1>
+
+<alerts></alerts>
+
+<hr/>
+
+<div id="content" ui-view autoscroll>
+</div>

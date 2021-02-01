@@ -1,16 +1,22 @@
 <ol class="breadcrumb">
     <li><a ui-sref="admin">Admin</a></li>
-    <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Forms</a></li>
     <li class="active">{{title || " "}}</li>
 </ol>
 
 <alerts></alerts>
+
+<p class="pull-right"">
+    <button ng-click="deleteForm()" class="btn btn-danger" ng-hide="event.locked">Delete Form<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+</p>
 
 <h1>{{title || " "}}</h1>
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="{active: 'admin_form_detail.submissions'}"><a ui-sref="admin_form_detail.submissions">Submissions</a></li>
     <li ui-sref-active="{active: 'admin_form_detail.fields'}"><a ui-sref="admin_form_detail.fields">Fields</a></li>
+    <li ui-sref-active="{active: 'admin_form_detail.form'}"><a ui-sref="admin_form_detail.form">Form</a></li>
 </ul>
 
 <div id="content" ui-view>

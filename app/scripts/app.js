@@ -452,6 +452,23 @@ angular
             ]
         }
     })
+    .state('admin_form_create', {
+        url: '/admin/{eventId}/forms/create',
+        templateUrl: 'views/admin_form_create.html',
+        controller: 'AdminFormCreateCtrl',
+        abstract: true
+    }).state('admin_form_create.form', {
+        url: '',
+        templateUrl: 'views/admin_form_detail_form.html',
+        controller: 'AdminFormDetailFormCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditForms'}
+            ]
+        }
+    })
     .state('admin_form_detail', {
         url: '/admin/{eventId}/forms/{id}',
         templateUrl: 'views/admin_form_detail.html',
@@ -472,6 +489,17 @@ angular
         url: '/fields',
         templateUrl: 'views/admin_form_detail_fields.html',
         controller: 'AdminFormDetailFieldsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditForms'}
+            ]
+        }
+    }).state('admin_form_detail.form', {
+        url: '/form',
+        templateUrl: 'views/admin_form_detail_form.html',
+        controller: 'AdminFormDetailFormCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [

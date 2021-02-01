@@ -14,7 +14,7 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, Form, Event) {
+angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, alert, Form, Event) {
 
     $scope.id = $stateParams.id;
 
@@ -23,10 +23,22 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
         if (!$scope.model.description) {
             $scope.model.description = {text: '', lang_code: 'en'};
         }
+        if (!$scope.model.title_label) {
+            $scope.model.title_label = {text: '', lang_code: 'en'};
+        }
     });
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
+    $scope.deleteForm = function() {
+       if (window.confirm('Deleting the Form will also delete all data associated with this Form. Click OK to proceed.')) {
+           $scope.deleteLoading = true;
+           $scope.model.$delete(function () {
+               alert.success('The Form has been deleted successfully.');
+               $state.go('admin_event.form_list', {eventId: $scope.event.id});
+           });
+       }
+    };
 });
 
 angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
@@ -51,7 +63,6 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function 
 
     $scope.addField = function () {
         $scope.field = new FormField();
-        //$scope.field.type = '';
         $scope.field.title = {lang_code: 'en', text: ''};
         $scope.field.text = {lang_code: 'en', text: ''};
         $scope.skillsModal = $uibModal.open({
@@ -99,7 +110,7 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function (
                 });
             }
         }
-    }
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
@@ -113,6 +124,36 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function (
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
         });
+    };
+});
+
+angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($scope, $state, $stateParams, alert, Form, CompetitionDay) {
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
+
+    $scope.save = function () {
+        $scope.submitted = true;
+        if ($scope.form.$valid) {
+            $scope.loading = true;
+            if ($scope.model.competition_day && !$scope.model.competition_day.id) {
+                $scope.model.competition_day = null;
+            }
+            if ($scope.model.id) {
+                Form.update($scope.model, function (response) {
+                    alert.success('The Form has been updated.');
+                    $state.go('admin_event.form_list', {eventId: $scope.event.id});
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            } else {
+                Form.save($scope.model, function (response) {
+                    alert.success('The Form has been added. Please add the fields below.');
+                    $state.go('admin_form_detail.fields', {eventId: $scope.event.id, id: response.id});
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            }
+        }
     };
 });
 
@@ -158,6 +199,18 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
     });
 });
 
+angular.module('skillMgmtApp').controller('AdminFormCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $location, Form, Event) {
+
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        $scope.model = new Form();
+        $scope.model.event = $scope.event;
+        $scope.model.name = {text: '', lang_code: 'en'};
+        $scope.model.description = {text: '', lang_code: 'en'};
+        $scope.model.title_label = {text: '', lang_code: 'en'};
+    });
+
+});
 
 angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $stateParams, $q, Form, FormSubmission, Event, Skill) {
 
