@@ -485,10 +485,10 @@ angular
                 {code: 1200, role: 'ViewAllSubmissions'}
             ]
         }
-    }).state('admin_form_detail.fields', {
-        url: '/fields',
-        templateUrl: 'views/admin_form_detail_fields.html',
-        controller: 'AdminFormDetailFieldsCtrl',
+    }).state('admin_form_detail.form', {
+        url: '/form',
+        templateUrl: 'views/admin_form_detail_form.html',
+        controller: 'AdminFormDetailFormCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
@@ -496,10 +496,10 @@ angular
                 {code: 1200, role: 'EditForms'}
             ]
         }
-    }).state('admin_form_detail.form', {
-        url: '/form',
-        templateUrl: 'views/admin_form_detail_form.html',
-        controller: 'AdminFormDetailFormCtrl',
+    }).state('admin_form_detail.fields', {
+        url: '/fields',
+        templateUrl: 'views/admin_form_detail_fields.html',
+        controller: 'AdminFormDetailFieldsCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
