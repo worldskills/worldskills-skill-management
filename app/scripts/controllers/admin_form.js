@@ -62,7 +62,12 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function 
     $scope.loadFields();
 
     $scope.addField = function () {
+        var maxSort = -1;
+        $scope.fields.fields.forEach(function (field) {
+            maxSort = Math.max(maxSort, field.sort);
+        });
         $scope.field = new FormField();
+        $scope.field.sort = maxSort + 1;
         $scope.field.title = {lang_code: 'en', text: ''};
         $scope.field.text = {lang_code: 'en', text: ''};
         $scope.skillsModal = $uibModal.open({
@@ -82,6 +87,31 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function 
             animation: false
         });
     };
+
+    $scope.moveFieldUp = function (sort, field) {
+        var index = $scope.fields.fields.indexOf(field);
+        var newField = $scope.fields.fields[index];
+        var oldField = $scope.fields.fields[index - 1];
+        $scope.fields.fields[index - 1] = newField;
+        $scope.fields.fields[index] = oldField;
+        newField.sort = sort - 1;
+        oldField.sort = sort;
+        FormField.update({formId: $scope.id}, newField);
+        FormField.update({formId: $scope.id}, oldField);
+    };
+
+    $scope.moveFieldDown = function (sort, field) {
+        var index = $scope.fields.fields.indexOf(field);
+        var newField = $scope.fields.fields[index];
+        var oldField = $scope.fields.fields[index + 1];
+        $scope.fields.fields[index + 1] = newField;
+        $scope.fields.fields[index] = oldField;
+        newField.sort = sort + 1;
+        oldField.sort = sort;
+        FormField.update({formId: $scope.id}, newField);
+        FormField.update({formId: $scope.id}, oldField);
+    };
+
 });
 
 angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function ($scope, $uibModalInstance, alert, FormField) {
