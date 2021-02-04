@@ -1,0 +1,302 @@
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+
+<h1 class="align-top">
+    <small>{{ event.name || "&nbsp;" }}</small>
+    <br/>
+    00 Skill Name
+</h1>
+
+<hr/>
+
+<h2>{{ model.name.text }} <small>{{ model.competition_day.timeline }}</small></h2>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+<p ng-if="fields.fields.length == 0">No fields need to be filled out.</p>
+
+<div ng-show="model.description.text">
+    <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
+</div>
+
+<br/>
+
+<form name="form" role="form">
+
+    <div ng-show="model.multiple_submissions">
+        <div class="form-group">
+            <h4>{{ model.title_label.text || "Title" }}</h4>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+  
+    <div ng-repeat="field in fields.fields">
+        <div class="form-group">
+            <h4>{{ field.title.text }}</h4>
+            <p ng-show="field.type != 'input_checkbox' && field.type != 'link'">{{ field.text.text }}</p>
+
+            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}">Download</a></p>
+
+            <input ng-if="field.type == 'input_text'" type="text" class="form-control" />
+
+            <textarea ng-if="field.type == 'input_textarea'" class="form-control" rows="3"></textarea>
+
+            <div ng-if="field.type == 'input_yesno'">
+                <label class="radio-inline">
+                    <input type="radio">
+                    Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio">
+                    No
+                </label>
+            </div>
+
+            <div ng-if="field.type == 'input_checkbox'" class="checkbox">
+                <label>
+                    <input type="checkbox" value="true" >
+                    <span style="white-space: pre-line;">{{ field.text.text }}</span>
+                </label>
+            </div>
+
+            <div ng-if="field.type == 'input_file'">
+                <p>
+                    <button type="button" class="btn btn-default" multiple>Upload file(s)</button>
+                </p>
+                <div class="panel panel-default">
+                    <table class="table table-striped">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div ng-if="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
+                <span>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <strong>Expert 1</strong>
+                                            <span class="text-muted"><br/>Country/Region 1</span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" placeholder="PIN" />
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-remove text-danger"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+                <span>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <strong>Expert 2</strong>
+                                            <span class="text-muted"><br/>Country/Region 2</span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" placeholder="PIN" />
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-remove text-danger"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+            <div ng-if="field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_ccd_agreement' || field.type == 'ccd_agreement'" class="row">
+                <span>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <span>Chief Expert<br/></span>
+                                            <strong>Person Name</strong>
+                                            <span class="text-muted"><br/>Country/Region</span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" placeholder="PIN" />
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="form-control-static">
+                                                    <i class="glyphicon glyphicon-remove text-danger"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+            <div ng-if="field.type == 'competitor_toolbox'">
+                <div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox">
+                                <strong>Competitor 1</strong>
+                                <span class="text-muted"><br/>Country/Region 1</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="true">
+                                    Toolbox checked
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <textarea class="form-control" rows="2" placeholder="Notes"></textarea>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox">
+                                <strong>Competitor 2</strong>
+                                <span class="text-muted"><br/>Country/Region 2</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="true">
+                                    Toolbox checked
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <textarea class="form-control" rows="2" placeholder="Notes"></textarea>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+
+            <div ng-if="field.type == 'competitor_check'">
+                <div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label>First name for certificate:</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label>Last name:</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Name on passport or identity card:</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Passport or identity card number:</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Date of birth (DD.MM.YYYY):</label>
+                                <input type="text" class="form-control" placeholder="DD.MM.YYYY" />
+                            </div>
+                            <div class="form-group">
+                                <label>Language for Test Project:</label>
+                                <input type="text" class="form-control" placeholder="e.g. EN" />
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <p>
+                                                <img class="img-circle" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <p>
+                                                <strong>Competitor Name</strong>
+                                                <span class="text-muted"><br/>Country/Region</span>
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-xs-5">
+                                                    <input type="password" inputmode="numeric" autocomplete="off" class="form-control" name="pin" placeholder="PIN" />
+                                                </div>
+                                                <div class="col-xs-7">
+                                                    <div class="form-control-static">
+                                                        <i class="glyphicon glyphicon-remove text-danger"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <br/><br/><br/>
+</form>
+
+</div>
+</div>

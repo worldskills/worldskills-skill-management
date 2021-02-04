@@ -157,6 +157,16 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($
     };
 });
 
+angular.module('skillMgmtApp').controller('AdminFormDetailPreviewCtrl', function ($scope, FormField) {
+
+    $scope.loading = true;
+
+    $scope.fields = FormField.query({formId: $scope.id}, function () {
+        $scope.loading = false;
+    });
+
+});
+
 angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, auth, alert, FormSubmission, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.loading = true;

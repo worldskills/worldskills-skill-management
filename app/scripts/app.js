@@ -507,6 +507,17 @@ angular
                 {code: 1200, role: 'EditForms'}
             ]
         }
+    }).state('admin_form_detail.preview', {
+        url: '/preview',
+        templateUrl: 'views/admin_form_detail_preview.html',
+        controller: 'AdminFormDetailPreviewCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditForms'}
+            ]
+        }
     }).state('admin_submission', {
         url: '/admin/events/{eventId}/forms/{formId}/submissions/{id}',
         templateUrl: 'views/admin_submission.html',
