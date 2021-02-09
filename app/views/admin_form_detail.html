@@ -8,7 +8,8 @@
 <alerts></alerts>
 
 <p class="pull-right"">
-    <button ng-click="deleteForm()" class="btn btn-danger" ng-hide="event.locked">Delete Form<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <span class="text-muted" ng-show="model.has_submissions">Form can't be deleted because it has Submissions.</span>
+    <button ng-click="deleteForm()" class="btn btn-danger" ng-disabled="event.locked || model.has_submissions">Delete Form<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{title || " "}}</h1>

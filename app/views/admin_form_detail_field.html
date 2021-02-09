@@ -7,7 +7,7 @@
         <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
             <label for="group" class="col-sm-3 control-label">Type <span class="required">*</span></label>
             <div class="col-sm-6">
-                <select class="form-control" name="type" ng-model="field.type" required>
+                <select class="form-control" name="type" ng-model="field.type" ng-disabled="field.id && model.has_submissions" required>
                     <option value="input_text">{{ 'input_text' | translate }}</option>
                     <option value="input_textarea">{{ 'input_textarea' | translate }}</option>
                     <option value="input_yesno">{{ 'input_yesno' | translate }}</option>
@@ -45,6 +45,9 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
         <button type="submit" class="btn btn-primary">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-        <div class="pull-left"><button type="button" class="btn btn-danger" ng-click="delete()" ng-show="field.id">Delete</button></div>
+        <div class="pull-left">
+          <button type="button" class="btn btn-danger" ng-click="delete()" ng-show="field.id" ng-disabled="model.has_submissions">Delete</button>
+          <span class="text-muted" ng-show="field.id && model.has_submissions">Has submissions, field can't be deleted.</span>
+        </div>
     </div>
 </form>

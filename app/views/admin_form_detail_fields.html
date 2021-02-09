@@ -1,4 +1,3 @@
-
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
@@ -17,8 +16,8 @@
             <tr ng-repeat="field in fields.fields" class="form-group form-group-sm">
                 <td>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveFieldUp($index, field)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
-                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveFieldDown($index, field)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveFieldUp($index, field)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveFieldDown($index, field)" ng-disabled="$last || event.locked"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
                     </div>
                 </td>
                 <td>
