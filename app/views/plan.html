@@ -1,10 +1,22 @@
-<p>
-    <span class="text-muted">{{ plan.skill.event.name || "&nbsp;" }}</span>
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: plan.skill.event.id})">{{ plan.skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: plan.skill.event.id, skillId: plan.skill.id})">{{ plan.skill.number }} {{ plan.skill.name.text }}</a></li>
+    <li class="active">Skill Management Plan</li>
+</ol>
+
+
+<p class="pull-right">
+    <a  ng-show="userCanEditSkillItems" class="btn btn-warning" ui-sref="skill_plan.day({eventId: plan.skill.event.id, skillId: plan.skill.id, day: active.day.timeline})">Edit Plan</a>
+</p>
+
+<p class="text-muted">
+    {{ plan.skill.event.name || "&nbsp;" }}
     <br/>
     {{ plan.skill.number }} {{ plan.skill.name.text || "&nbsp;" }}
 </p>
 
-<h1>Skill Management Plan</h1>
+<h1 class="align-top">Skill Management Plan</h1>
 
 <uib-tabset ng-show="!loading" active="active.day.id">
     <uib-tab ng-repeat="day in plan.competition_days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">

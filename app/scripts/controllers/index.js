@@ -11,16 +11,12 @@ angular.module('skillMgmtApp').controller('IndexCtrl', function ($scope, $rootSc
 
             } else {
 
-                if ($scope.userCanViewAllSubmissions || $scope.userCanEditForms) {
-                    $state.go('admin');
-                } else {
-                    $state.go('sorry');
-                }
+                $state.go('events');
 
             }
 
         }, function () {
-            $state.go('sorry');
+            $state.go('events');
         });
     });
 

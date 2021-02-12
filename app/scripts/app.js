@@ -69,6 +69,36 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('events', {
+        url: '/events',
+        templateUrl: 'views/events.html',
+        controller: 'EventsCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('event', {
+        url: '/events/{eventId}',
+        templateUrl: 'views/event.html',
+        controller: 'EventCtrl',
+        abstract: true
+    })
+    .state('event.skills', {
+        url: '/skills',
+        templateUrl: 'views/event_skills.html',
+        controller: 'EventSkillsCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('skill', {
+        url: '/events/{eventId}/skills/{skillId}',
+        templateUrl: 'views/skill.html',
+        controller: 'SkillCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('sorry', {
       url: '/sorry',
       templateUrl: 'views/sorry.html',

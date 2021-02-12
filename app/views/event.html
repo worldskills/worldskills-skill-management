@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li class="active">{{ event.name }}</li>
+</ol>
+
+<div class="pull-right">
+    <div class="btn-group" uib-dropdown ng-show="userCanViewAllSubmissions || userCanEditForms">
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Tools <span class="caret"></span></button>
+        <ul class="dropdown-menu" uib-dropdown-menu>
+            <li><a ui-sref="admin_event.skills({eventId: event.id})">Admin</a></li>
+        </ul>
+    </div>
+</div>
+
+<h1>{{ event.name }}</h1>
+
+<div id="content" ui-view>
+</div>

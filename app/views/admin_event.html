@@ -1,6 +1,7 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="admin">Admin</a></li>
-    <li class="active">{{ event.name }}</li>
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Admin</li>
 </ol>
 
 <div class="pull-right">
@@ -17,7 +18,7 @@
     </div>
 </div>
 
-<h1>{{ event.name }}</h1>
+<h1>Admin <small class="text-muted">{{ event.name || "&nbsp;" }}</small></h1>
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="{active: 'admin_event.skills'}"><a ui-sref="admin_event.skills">Skills</a></li>

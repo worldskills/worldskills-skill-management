@@ -26,6 +26,7 @@ angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootSco
 
     $scope.changeDay = function (day) {
         $state.go('.', {day: day.timeline}, {location: 'replace', notify: false});
+        $scope.active.day = day;
     };
 
 });

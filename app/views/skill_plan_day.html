@@ -1,3 +1,4 @@
+<div style="margin-top: -12px;">
 <p class="pull-right text-muted">
     <span ng-show="!changed && !saving && !saved && !skill.event.locked">Changes are saved automatically</span>
     <span ng-show="changed && !saving">Unsaved changes</span>
@@ -6,9 +7,8 @@
     <span ng-show="skill.event.locked">Event is locked</span>
 </p>
 
-<h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
-
-<hr/>
+<p class="text-muted">{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</p>
+</div>
 
 <form class="form-horizontal">
     <fieldset ng-disabled="skill.event.locked">

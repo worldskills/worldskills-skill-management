@@ -22,24 +22,13 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'Admin').then(function (hasUserRole) {
         if (hasUserRole) {
             $scope.userIsAdmin = true;
+            $scope.userCanEditSkillItems = true;
             $scope.userCanViewAllSubmissions = true;
             $scope.userCanEditForms = true;
             $scope.userCanEditCompetitionItems = true;
             $scope.userCanEditCompetitionDays = true;
             $scope.userCanEditRooms = true;
             $scope.userCanEditLunchPeriods = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'ViewAllSubmissions', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanViewAllSubmissions = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanEditForms = true;
         }
     });
 

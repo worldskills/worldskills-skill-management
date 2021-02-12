@@ -1,0 +1,70 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li class="active">{{ skill.number }} {{ skill.name.text || "&nbsp;" }}</li>
+</ol>
+
+<div>
+    <span class="text-muted">{{ skill.event.name || "&nbsp;" }}</span>
+</div>
+
+<h1 class="align-top">{{ skill.number }} {{ skill.name.text || "&nbsp;" }}</h1>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Tools</div>
+      <div class="panel-body">
+        <p><a ui-sref="plan({skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Skill Management Plan</a></p>
+        <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})"><span class="glyphicon glyphicon-list-alt"></span> Competition Timetable</a></p>
+        <p><a href="https://il.worldskills.org/#/events/{{skill.event.id}}" target="_blank"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List</a></p>
+      </div>
+    </div>
+    <!--
+    <div class="panel panel-default">
+      <div class="panel-heading">Competitors</div>
+      <div class="panel-body">
+        
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Experts</div>
+      <div class="panel-body">
+        
+      </div>
+    </div>
+    -->
+  </div>
+  <div class="col-md-4">
+    <!--
+    <div class="panel panel-default">
+      <div class="panel-heading">Test Projects</div>
+      <div class="panel-body">
+        <p><a href><span class="glyphicon glyphicon-file"></span> Test Project Actual (ZIP)</a></p>
+      </div>
+    </div>
+    -->
+    <!--
+    <div class="panel panel-default">
+      <div class="panel-heading">Votes</div>
+      <div class="panel-body">
+        
+      </div>
+    </div>
+    -->
+  </div>
+  <div class="col-md-4">
+    <!--
+    <div class="panel panel-default">
+      <div class="panel-heading">Resources</div>
+      <div class="panel-body">
+        <p><a href><span class="glyphicon glyphicon-file"></span> Technical Description (PDF)</a></p>
+        <p><a href><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
+        <p><a href><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
+      </div>
+    </div>
+    -->
+  </div>
+</div>
