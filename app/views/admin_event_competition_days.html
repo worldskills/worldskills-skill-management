@@ -5,10 +5,10 @@
             <fieldset ng-disabled="event.locked">
                 <div ng-repeat="competitionDay in competitionDays.days" class="form-group">
                     <div class="col-sm-2">
-                        <input class="form-control input-sm" ng-model="competitionDay.timeline" ng-change="competitionDayChanged(competitionDay)">
+                        <input class="form-control input-sm" ng-model="competitionDay.timeline" ng-change="competitionDayChanged(competitionDay)" placeholder="e.g. C+1">
                     </div>
                     <div class="col-sm-2">
-                        <input class="form-control input-sm" ng-model="competitionDay.date" ng-change="competitionDayChanged(competitionDay)">
+                        <input class="form-control input-sm" ng-model="competitionDay.date" ng-change="competitionDayChanged(competitionDay)" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="col-sm-2">
                         <div class="checkbox">
