@@ -19,7 +19,7 @@
       <div class="panel-body">
         <p ng-show="userCanViewManagementPlan"><a ui-sref="plan({skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Skill Management Plan</a></p>
         <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})"><span class="glyphicon glyphicon-list-alt"></span> Competition Timetable</a></p>
-        <p><a href="https://il.worldskills.org/#/events/{{skill.event.id}}" target="_blank"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List</a></p>
+        <p><a href="https://il.worldskills.org/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List</a></p>
       </div>
     </div>
     <!--
