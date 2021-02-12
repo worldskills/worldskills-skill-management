@@ -2,32 +2,35 @@
     <li class="active">Events</li>
 </ol>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="100%" />
+            <col width="5%" />
+            <col width="40%" />
+            <col width="25%" />
+            <col width="30%" />
         </colgroup>
         <thead>
             <tr>
-                <th>Events</th>
+                <th>ID</th>
+                <th>Event</th>
+                <th>Start Date</th>
+                <th>Entity</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="event in events.events">
+                <td>{{ event.id }}</td>
                 <td><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></td>
+                <td>{{ event.start_date | date:'d MMMM yyyy' }}</td>
+                <td>{{ event.highest_parent_entity.name.text }}</td>
             </tr>
             <tr ng-show="events.events.length == 0">
-                <td colspan="1">No events found</td>
+                <td colspan="4">No events found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="1"><ws-spinner></ws-spinner></td>
+                <td colspan="4"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>
-</div>
-
-    </div>
 </div>
