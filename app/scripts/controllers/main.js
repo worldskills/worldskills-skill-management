@@ -25,34 +25,6 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
             $scope.userCanEditSkillItems = true;
             $scope.userCanViewAllSubmissions = true;
             $scope.userCanEditForms = true;
-            $scope.userCanEditCompetitionItems = true;
-            $scope.userCanEditCompetitionDays = true;
-            $scope.userCanEditRooms = true;
-            $scope.userCanEditLunchPeriods = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditCompetitionItems', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanEditCompetitionItems = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditCompetitionDays', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanEditCompetitionDays = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditRooms', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanEditRooms = true;
-        }
-    });
-
-    auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditLunchPeriods', 1).then(function (hasUserRole) {
-        if (hasUserRole) {
-            $scope.userCanEditLunchPeriods = true;
         }
     });
 

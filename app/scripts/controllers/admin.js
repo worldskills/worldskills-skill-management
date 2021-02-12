@@ -9,9 +9,35 @@ angular.module('skillMgmtApp').controller('AdminCtrl', function($scope, $statePa
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $stateParams, Event) {
+angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $stateParams, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event) {
 
-    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditCompetitionItems'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditCompetitionItems = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditLunchPeriods'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditLunchPeriods = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditCompetitionDays'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditCompetitionDays = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditRooms'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditRooms = true;
+            }
+        });
+
+    });
 
 });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, Skill) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, WORLDSKILLS_API_SKILLMAN_CODE, auth, Skill) {
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
 
