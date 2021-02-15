@@ -8,7 +8,10 @@
     wsApp.constant('WORLDSKILLS_API_EVENTS', 'https://api.worldskills.show/events');
     wsApp.constant('WORLDSKILLS_API_AUTH', 'https://api.worldskills.show/auth');
     wsApp.constant('WORLDSKILLS_API_PEOPLE', 'https://api.worldskills.show/people');
+    wsApp.constant('WORLDSKILLS_API_URL', 'https://api.worldskills.show');
     wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.show/oauth/authorize');
+    wsApp.constant('WORLDSKILLS_WEB_PROTOCOL', 'https://');
+    wsApp.constant('WORLDSKILLS_WEB_DOMAIN', 'worldskills.show');
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [1200]); // Skill Management
     wsApp.constant('ENVIRONMENT_WARNING', 'This is the staging environment. Changes in this environment might get overwritten.');
