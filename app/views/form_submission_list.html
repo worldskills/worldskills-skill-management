@@ -1,3 +1,10 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li class="active">Competition Forms</li>
+</ol>
+
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
 
@@ -7,11 +14,7 @@
             <button class="btn btn-default" ng-click="changeSkill()">Change Skill</button>
         </p>
 
-        <h1 class="align-top">
-            <small>{{ skill.event.name || "&nbsp;" }}</small>
-            <br/>
-            {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
-        </h1>
+        <h1 class="align-top">Competition Forms</h1>
 
         <hr/>
 
