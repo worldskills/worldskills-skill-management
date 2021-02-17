@@ -17,8 +17,16 @@
     <div class="panel panel-default">
       <div class="panel-heading">Tools</div>
       <div class="panel-body">
-        <p ng-show="userCanViewManagementPlan"><a ui-sref="plan({skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Skill Management Plan</a></p>
+        <p ng-show="userCanViewManagementPlan">
+          <a ui-sref="plan({skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Skill Management Plan</a>
+          <span> </span>
+          <a ng-show="userCanEditSkillItems" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
+        </p>
         <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})"><span class="glyphicon glyphicon-list-alt"></span> Competition Timetable</a></p>
+        <p ng-show="userCanEditSkillItems"><a ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Edit Competition Timetable</a></p>
+        <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-paste"></span> Check Forms</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-cutlery"></span> Edit Lunch Times</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-modal-window"></span> Edit Groups</a></p>
         <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List</a></p>
       </div>
     </div>

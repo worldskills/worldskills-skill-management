@@ -17,12 +17,10 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
     });
 
     $scope.userCanEditForms = false;
-    $scope.userCanEditSkillItems = false;
 
     auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'Admin').then(function (hasUserRole) {
         if (hasUserRole) {
             $scope.userIsAdmin = true;
-            $scope.userCanEditSkillItems = true;
             $scope.userCanViewAllSubmissions = true;
             $scope.userCanEditForms = true;
         }
