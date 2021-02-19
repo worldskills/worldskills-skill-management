@@ -1,3 +1,12 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
+    <li><a ui-sref="form_submissions_experts({eventId: submission.skill.event.id, skillId: submission.skill.id})">Form Submissions</a></li>
+    <li><a ui-sref="form_submissions_experts_form({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">{{ submission.form.name.text }}</a></li>
+</ol>
+
+
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
 
@@ -7,7 +16,7 @@
     {{ submission.skill.number }} {{ submission.skill.name.text || "&nbsp;" }}
 </p>
 
-<h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
+<h2 class="align-top">{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
 
 <hr>
 
@@ -225,7 +234,7 @@
 
     <div>
         <br/>
-        <a class="btn btn-link pull-right" ui-sref="form_submissions_skill({formId: submission.form.id, skillId: submission.skill.id})">« Return to Submissions</a>
+        <a class="btn btn-link pull-right" ui-sref="form_submissions_experts_form({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">« Return to Submissions</a>
     </div>
 
     <br/><br/><br/>

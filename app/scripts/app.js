@@ -160,41 +160,42 @@ angular
             ]
         }
     })
-    .state('form_submissions', {
-        url: '/form_submissions/{formId}',
-        templateUrl: 'views/form_submissions.html',
-        controller: 'FormSubmissionsCtrl',
+    .state('form_submissions_experts', {
+        url: '/events/{eventId}/skills/{skillId}/form_submissions_experts',
+        templateUrl: 'views/form_submissions_experts.html',
+        controller: 'FormSubmissionsExpertsCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewSubmissions'}
+                {code: 1200, role: 'ViewAllSubmissions'},
+                {code: 1200, role: 'ViewSubmissionsExperts'}
             ]
         }
     })
-    .state('form_submissions_skill', {
-        url: '/form_submissions/{formId}/skills/{skillId}',
-        templateUrl: 'views/form_submissions_skill.html',
-        controller: 'FormSubmissionsSkillCtrl',
+    .state('form_submissions_experts_form', {
+        url: '/events/{eventId}/skills/{skillId}/form_submissions_experts/{formId}',
+        templateUrl: 'views/form_submissions_experts_form.html',
+        controller: 'FormSubmissionsExpertsFormCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewSubmissions'},
-                {code: 1200, role: 'ViewAllSubmissions'}
+                {code: 1200, role: 'ViewAllSubmissions'},
+                {code: 1200, role: 'ViewSubmissionsExperts'}
             ]
         }
     })
-    .state('form_submissions_submission', {
-        url: '/form_submissions/{formId}/skills/{skillId}/submissions/{id}',
-        templateUrl: 'views/form_submissions_submission.html',
-        controller: 'FormSubmissionsSubmissionCtrl',
+    .state('form_submissions_experts_submission', {
+        url: '/events/{eventId}/skills/{skillId}/form_submissions_experts/{formId}/submissions/{id}',
+        templateUrl: 'views/form_submissions_experts_submission.html',
+        controller: 'FormSubmissionsExpertsSubmissionCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'ViewSubmissions'},
-                {code: 1200, role: 'ViewAllSubmissions'}
+                {code: 1200, role: 'ViewAllSubmissions'},
+                {code: 1200, role: 'ViewSubmissionsExperts'}
             ]
         }
     })
