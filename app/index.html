@@ -47,7 +47,7 @@
             </div>
             <div ng-show="auth.loggedIn">
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav" ng-show="active.skill && !active.preview">
+                    <ul class="nav navbar-nav" ng-show="active.skill">
                         <li ui-sref-active="{active: 'skill_plan'}"><a ui-sref="skill_plan.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Plans</a></li>
                         <li ui-sref-active="{active: 'skill_timetable'}"><a ui-sref="skill_timetable.day({eventId: active.skill.event.id, skillId: active.skill.id, day: 'C1'})">Timetables</a></li>
                         <li ui-sref-active="'active'"><a ui-sref="form_submission_list({eventId: active.skill.event.id, skillId: active.skill.id})">Forms</a></li>

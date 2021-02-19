@@ -17,11 +17,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
 
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
-            });
-        });
+        $scope.active.skill = $scope.skill;
 
     });
 

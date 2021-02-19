@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, auth, alert, Plan, LunchPeriod) {
+angular.module('skillMgmtApp').controller('PlanCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, WORLDSKILLS_API_SKILLMAN_CODE, auth, alert, Plan, LunchPeriod) {
 
     $scope.loading = true;
-    $scope.active.preview = true;
 
     $scope.plan = Plan.get({skillId: $stateParams.skillId}, {}, function () {
 

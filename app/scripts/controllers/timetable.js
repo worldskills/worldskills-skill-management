@@ -21,7 +21,6 @@ angular.module('skillMgmtApp').controller('TimetableIndexCtrl', function ($scope
 angular.module('skillMgmtApp').controller('TimetableCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, $uibModal, auth, alert, Timetable, PersonRegistration) {
 
     $scope.loading = true;
-    $scope.active.preview = true;
 
     $window.document.title = 'Competitor Timetable';
 

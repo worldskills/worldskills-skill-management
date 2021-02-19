@@ -15,12 +15,7 @@ angular.module('skillMgmtApp').controller('SkillTimetableCtrl', function ($scope
     $scope.groups = LunchGroup.query({skillId: $stateParams.skillId});
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
-
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
-            });
-        });
+        $scope.active.skill = $scope.skill;
     });
 
     $scope.active.group = null;

@@ -2,8 +2,6 @@
 
 angular.module('skillMgmtApp').controller('FormSubmissionsCtrl', function ($scope, $rootScope, $state, $stateParams, auth, ExpertSkills) {
 
-    $scope.active.preview = true;
-
     auth.user.$promise.then(function () {
 
         $scope.skills = ExpertSkills.get({personId: auth.user.person_id}, function () {
@@ -21,7 +19,6 @@ angular.module('skillMgmtApp').controller('FormSubmissionsCtrl', function ($scop
 angular.module('skillMgmtApp').controller('FormSubmissionsSkillCtrl', function ($scope, $rootScope, $state, $stateParams, auth, Skill, Form, SkillFormSubmission) {
 
     $scope.loading = true;
-    $scope.active.preview = true;
 
     $scope.form = Form.get({id: $stateParams.formId});
 
@@ -44,7 +41,6 @@ angular.module('skillMgmtApp').controller('FormSubmissionsSkillCtrl', function (
 angular.module('skillMgmtApp').controller('FormSubmissionsSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, auth, Skill, Form, SkillFormSubmission) {
 
     $scope.loading = true;
-    $scope.active.preview = true;
 
     $scope.submission = SkillFormSubmission.get({formId: $stateParams.formId, skillId: $stateParams.skillId, id: $stateParams.id}, function () {
         $scope.loading = false;

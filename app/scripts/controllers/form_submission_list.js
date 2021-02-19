@@ -6,11 +6,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionListCtrl', function ($s
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
 
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
-            });
-        });
+        $scope.active.skill = $scope.skill;
 
         $scope.forms = SkillForms.get({skillId: $scope.skill.id}, function () {
             $scope.loading = false;

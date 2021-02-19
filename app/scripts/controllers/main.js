@@ -26,20 +26,6 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
         }
     });
 
-    auth.user.$promise.then(function () {
-
-        $scope.skills = PersonSkills.get({personId: auth.user.person_id}, function () {
-
-            if ($scope.skills.skills.length != 0) {
-                $scope.active.skill = $scope.skills.skills[0];
-            }
-
-        }, function () {
-            // error
-            $scope.loading = false;
-        });
-    });
-
     $scope.environmentWarning = ENVIRONMENT_WARNING;
 
 });

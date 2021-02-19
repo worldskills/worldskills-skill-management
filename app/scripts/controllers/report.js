@@ -21,7 +21,6 @@ angular.module('skillMgmtApp').controller('ReportLunchIndexCtrl', function ($sco
 angular.module('skillMgmtApp').controller('ReportLunchCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, $uibModal, auth, alert, LunchReport) {
 
     $scope.loading = true;
-    $scope.active.preview = true;
 
     $window.document.title = 'Lunch Times';
 
@@ -46,8 +45,6 @@ angular.module('skillMgmtApp').controller('ReportLunchCtrl', function ($scope, $
 
 angular.module('skillMgmtApp').controller('ReportCompetitorFinishCtrl', function($scope, $stateParams, $window, Event, CompetitionDay, Skill, SkillTime) {
 
-    $scope.active.preview = true;
-
     $window.document.title = 'Competitor Finish Times';
 
     $scope.event = Event.get({id: $stateParams.eventId});
@@ -62,8 +59,6 @@ angular.module('skillMgmtApp').controller('ReportCompetitorFinishCtrl', function
 
 angular.module('skillMgmtApp').controller('ReportLunchSummaryCtrl', function($scope, $stateParams, $window, Event, CompetitionDay, Report) {
 
-    $scope.active.preview = true;
-
     $window.document.title = 'Lunch Summary';
 
     $scope.event = Event.get({id: $stateParams.eventId});
@@ -75,8 +70,6 @@ angular.module('skillMgmtApp').controller('ReportLunchSummaryCtrl', function($sc
 });
 
 angular.module('skillMgmtApp').controller('ReportLunchInWorkshopCtrl', function($scope, $stateParams, $window, Event, CompetitionDay, Report) {
-
-    $scope.active.preview = true;
 
     $window.document.title = 'Lunch Summary';
 

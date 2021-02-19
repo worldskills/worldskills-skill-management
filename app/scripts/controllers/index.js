@@ -2,22 +2,14 @@
 
 angular.module('skillMgmtApp').controller('IndexCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, auth, alert) {
 
-    auth.user.$promise.then(function () {
-        $scope.skills.$promise.then(function () {
+    if ($scope.active.skill) {
 
-            if ($scope.active.skill) {
+        $state.go('skill_plan.day', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id, day: 'C1'});
 
-                $state.go('skill_plan.day', {eventId: $scope.active.skill.event.id, skillId: $scope.active.skill.id, day: 'C1'});
+    } else {
 
-            } else {
+        $state.go('events');
 
-                $state.go('events');
-
-            }
-
-        }, function () {
-            $state.go('events');
-        });
-    });
+    }
 
 });

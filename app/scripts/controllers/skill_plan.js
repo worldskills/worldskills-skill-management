@@ -42,12 +42,7 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
     });
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
-
-        auth.user.$promise.then(function () {
-            $scope.skills.$promise.then(function () {
-                $scope.active.skill = $scope.skill;
-            });
-        });
+        $scope.active.skill = $scope.skill;
     });
 
     $scope.cancelSkillsModal = function () {
