@@ -5,11 +5,13 @@
     <li class="active">Skill Admin</li>
 </ol>
 
-<h1 class="align-top">
-    <small>{{ skill.event.name || "&nbsp;" }}</small>
+<p class="text-muted">
+    {{ skill.event.name || "&nbsp;" }}
     <br/>
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
-</h1>
+</p>
+
+<h1 class="align-top">Skill Admin</h1>
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">Experts</a></li>
