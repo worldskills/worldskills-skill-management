@@ -9,6 +9,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
     var DOCUMENT_TYPE_TECHNICAL_DESCRIPTION = 4;
     var DOCUMENT_TYPE_HALL_LAYOUTS = 6;
     var DOCUMENT_TYPE_HEALTH_SAFETY_ENVIRONMENT = 20;
+    var DOCUMENT_TYPE_STANDARD_SPECIFICATION = 19;
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -23,6 +24,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         $scope.technicalDescription = Resource.query({type: DOCUMENT_TYPE_TECHNICAL_DESCRIPTION, tags: tags, limit: 1});
         $scope.workshopLayouts = Resource.query({type: DOCUMENT_TYPE_HALL_LAYOUTS, tags: tags, limit: 1});
         $scope.healthSafetyEnvironment = Resource.query({type: DOCUMENT_TYPE_HEALTH_SAFETY_ENVIRONMENT, tags: tags, limit: 1});
+        $scope.occupationalStandard = Resource.query({type: DOCUMENT_TYPE_STANDARD_SPECIFICATION, tags: tags, limit: 1});
 
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewManagementPlan'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
