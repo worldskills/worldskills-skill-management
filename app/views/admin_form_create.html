@@ -1,6 +1,7 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="admin">Admin</a></li>
-    <li><a ui-sref="admin_event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Admin</a></li>
     <li><a ui-sref="admin_event.form_list({eventId: event.id})">Forms</a></li>
     <li class="active">Add Form</li>
 </ol>

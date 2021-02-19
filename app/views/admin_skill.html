@@ -1,7 +1,8 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="admin">Admin</a></li>
-    <li><a ui-sref="admin_event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
-    <li class="active">{{ skill.name.text }}</li>
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li class="active">Skill Admin</li>
 </ol>
 
 <h1 class="align-top">
