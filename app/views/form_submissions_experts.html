@@ -29,12 +29,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="form in forms.forms | filter:{view_submissions_experts: true}:true">
+                    <tr ng-repeat="form in forms.forms | filter:{view_submissions_experts: true}:true as filteredForms">
                         <td>
                             <a ui-sref="form_submissions_experts_form({eventId: skill.event.id, skillId: skill.id, formId: form.id})">{{ form.name.text }}</a>
                         </td>
                     </tr>
-                    <tr ng-show="forms.total_count == 0">
+                    <tr ng-show="filteredForms.length == 0">
                         <td>No forms found</td>
                     </tr>
                 </tbody>
