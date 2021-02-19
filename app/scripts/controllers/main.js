@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, PersonSkills, WORLDSKILLS_API_SKILLMAN_CODE, ENVIRONMENT_WARNING) {
+angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, WORLDSKILLS_API_SKILLMAN_CODE, ENVIRONMENT_WARNING) {
 
     $scope.selectedLanguage = Language.selectedLanguage;
 
