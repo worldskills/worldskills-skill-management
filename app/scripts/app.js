@@ -1,6 +1,6 @@
 'use strict';
 
-angular
+var skillmanApp = angular
   .module('skillMgmtApp', [
     'ngResource',
     'ngCookies',
@@ -11,8 +11,14 @@ angular
     'ngFileUpload',
     'pascalprecht.translate',
     'worldskills.utils'
-  ])
-  .config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+  ]);
+
+skillmanApp.constant('WORLDSKILLS_API_SKILLMAN_CODE', 1200);
+skillmanApp.constant('WORLDSKILLS_API_IL_CODE', 2200);
+skillmanApp.constant('FILTER_AUTH_ROLES', [1200, 2200]); // Skill Management, IL
+skillmanApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
+
+skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise(function ($injector, $location) {
         // check for existing redirect

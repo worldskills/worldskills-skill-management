@@ -37,7 +37,7 @@
         <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-paste"></span> Form Submissions (Experts)</a></p>
         <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-cutlery"></span> Edit Lunch Times</a></p>
         <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-modal-window"></span> Edit Groups</a></p>
-        <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List <span class="glyphicon glyphicon-new-window"></span></a></p>
+        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List <span class="glyphicon glyphicon-new-window"></span></a></p>
       </div>
     </div>
     <!--
