@@ -14,5 +14,7 @@
 
 <h1>{{ event.name }}</h1>
 
+<p class="lead">{{ event.start_date | date:'d MMMM yyyy' }} - {{ event.end_date | date:'d MMMM yyyy' }}</p>
+
 <div id="content" ui-view>
 </div>
