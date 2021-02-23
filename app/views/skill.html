@@ -24,20 +24,25 @@
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">Tools</div>
+      <div class="panel-heading">Skill Management</div>
       <div class="panel-body">
         <p ng-show="userCanViewManagementPlan">
-          <a ui-sref="plan({skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Skill Management Plan</a>
+          <a ui-sref="plan({skillId: skill.id, day: 'C1'})">Skill Management Plan</a>
           <span> </span>
           <a ng-show="userCanEditSkillItems" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
         </p>
-        <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})"><span class="glyphicon glyphicon-list-alt"></span> Competition Timetable</a></p>
-        <p ng-show="userCanEditSkillItems"><a ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-list-alt"></span> Edit Competition Timetable</a></p>
-        <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-paste"></span> Check Forms</a></p>
-        <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-paste"></span> Form Submissions (Experts)</a></p>
-        <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})"><span class="glyphicon glyphicon-cutlery"></span> Edit Lunch Times</a></p>
-        <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})"><span class="glyphicon glyphicon-modal-window"></span> Edit Groups</a></p>
-        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-th-list"></span> Infrastructure List <span class="glyphicon glyphicon-new-window"></span></a></p>
+        <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})">Competition Timetable</a></p>
+        <p ng-show="userCanEditSkillItems"><a ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Edit Competition Timetable</a></p>
+        <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Check Forms</a></p>
+        <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})">Form Submissions (Experts)</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Edit Lunch Times</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Edit Groups</a></p>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Related Apps</div>
+      <div class="panel-body">
+        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window">Infrastructure Lists <span class="glyphicon glyphicon-new-window"></span></a></p>
       </div>
     </div>
     <!--
@@ -56,14 +61,12 @@
     -->
   </div>
   <div class="col-md-4">
-    <!--
-    <div class="panel panel-default">
-      <div class="panel-heading">Test Projects</div>
+    <div class="panel panel-default" ng-show="testProject.resources.length">
+      <div class="panel-heading">Test Project</div>
       <div class="panel-body">
-        <p><a href><span class="glyphicon glyphicon-file"></span> Test Project Actual (ZIP)</a></p>
+        <p ng-repeat="resource in testProject.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> {{resource.name.text}}</a></p>
       </div>
     </div>
-    -->
     <!--
     <div class="panel panel-default">
       <div class="panel-heading">Votes</div>
@@ -74,7 +77,7 @@
     -->
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default" ng-show="technicalDescription.resources.length || workshopLayouts.resources.length || healthSafetyEnvironment.resources.length">
+    <div class="panel panel-default" ng-show="technicalDescription.resources.length || workshopLayouts.resources.length || healthSafetyEnvironment.resources.length || occupationalStandard.resources.length">
       <div class="panel-heading">Resources</div>
       <div class="panel-body">
         <p ng-repeat="resource in technicalDescription.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Technical Description (PDF)</a></p>
