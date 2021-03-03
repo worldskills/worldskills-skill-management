@@ -71,5 +71,5 @@
 </div>
 
 <div class="alert alert-warning" ng-show="!loading && !competitionDays.days.length" ng-cloak>
-    <strong>No competition days found!</strong> Please make sure the event has a competition start and end date.
+    <strong>No competition days found!</strong> <a ng-show="userCanEditCompetitionDays" ui-sref="admin_event.competition_days">Please add Competition Days.</a>
 </div>
