@@ -23,7 +23,7 @@
 
 <div class="row">
   <div class="col-md-4">
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="userCanViewManagementPlan || userCanViewTimetable || userCanEditSkillItems || userCanEditSubmissions || userCanViewSubmissionsExperts || userCanEditLunch">
       <div class="panel-heading">Skill Management</div>
       <div class="panel-body">
         <p ng-show="userCanViewManagementPlan">
@@ -39,7 +39,7 @@
         <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Edit Groups</a></p>
       </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="userCanViewInfrastructureList">
       <div class="panel-heading">Related Apps</div>
       <div class="panel-body">
         <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> Infrastructure Lists</a></p>
