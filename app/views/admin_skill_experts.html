@@ -4,13 +4,15 @@
         <colgroup>
             <col width="5%" />
             <col width="25%" />
-            <col width="70%" />
+            <col width="35%" />
+            <col width="35%" />
         </colgroup>
         <thead>
             <tr>
                 <th>&nbsp;</th>
                 <th>Expert</th>
-                <th>Options</th>
+                <th>Forms</th>
+                <th>Nominations</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +28,14 @@
                 <td>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="excludeFromFormsChanged(expert)"> Exclude Expert from Forms
+                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="expertChanged(expert)"> Exclude Expert from Forms
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> Nominated for SMT position
                         </label>
                     </div>
                 </td>

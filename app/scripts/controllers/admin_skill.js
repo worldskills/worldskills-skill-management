@@ -14,7 +14,7 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
         $scope.loading = false;
     });
 
-    $scope.excludeFromFormsChanged = function (expert) {
+    $scope.expertChanged = function (expert) {
        SkillExpert.update({skillId: $stateParams.skillId}, expert);
     };
 
