@@ -2,34 +2,19 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="60%" />
-            <col width="40%" />
+            <col width="5%" />
+            <col width="95%" />
         </colgroup>
         <thead>
             <tr>
-                <th>Skill</th>
-                <th>Skill Management Team view</th>
+                <th>ID</th>
+                <th>Skill Admin</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="skill in skills.skills">
+                <td>{{ skill.id }}</td>
                 <td><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
-                <td>
-                    <span ng-show="!userIsAdmin">
-                        <a ui-sref="plan({skillId: skill.id, day: 'C1'})">Plan</a>
-                    </span>
-                    <span ng-show="userIsAdmin">
-                        <a ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Plans</a>
-                        &nbsp;&nbsp;
-                        <a ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Timetables</a>
-                        &nbsp;&nbsp;
-                        <a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Forms</a>
-                        &nbsp;&nbsp;
-                        <a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Lunches</a>
-                        &nbsp;&nbsp;
-                        <a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Groups</a>
-                    </span>
-                </td>
             </tr>
             <tr ng-show="skills.skills.length == 0">
                 <td colspan="2">No skills found</td>
