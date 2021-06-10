@@ -3,25 +3,42 @@
     <table class="table table-striped">
         <colgroup>
             <col width="5%" />
-            <col width="95%" />
+            <col width="45%" />
+            <col width="26%" />
+            <col width="24%" />
         </colgroup>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Skill Admin</th>
+                <th>Nominations</th>
+                <th>Create poll for SMT position</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="skill in skills.skills">
                 <td>{{ skill.id }}</td>
                 <td><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
+                <td>
+                    <span ng-if="skill.nominated_smt_total > 0">{{ skill.nominated_smt_total }} Experts nominated for SMT position</span>
+                    <span ng-if="skill.nominated_smt_total == 0" class="text-danger">No Experts nominated!</span>
+                </td>
+                <td>
+                    <input type="checkbox" ng-model="skill.create_poll" ng-disabled="skill.nominated_smt_total == 0">
+                </td>
             </tr>
             <tr ng-show="skills.skills.length == 0">
-                <td colspan="2">No skills found</td>
+                <td colspan="3">No skills found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="2"><ws-spinner></ws-spinner></td>
+                <td colspan="3"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="form-group form-group-sm">
+    <div class="col-sm-offset-9 col-sm-3">
+        <button type="button" class="btn btn-warning btn-sm" ng-click="createPolls()"><span class="glyphicon glyphicon-flash"></span> Create selected polls</button>
+    </div>
 </div>

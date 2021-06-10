@@ -41,9 +41,31 @@ angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $st
 
 });
 
-angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scope, $stateParams, Skill) {
+angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scope, $stateParams, Skill, SkillExpert) {
 
-    $scope.skills = Skill.query({event: $stateParams.eventId});
+    $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
+        angular.forEach($scope.skills.skills, function (skill) {
+            skill.experts = SkillExpert.query({skillId: skill.id}, function (experts) {
+                skill.nominated_smt_total = skill.experts.registration_people.reduce(function (sum, expert) {
+                  if (expert.nominated_smt) {
+                    sum += 1;
+                  }
+                  return sum;
+                }, 0);
+                if (skill.nominated_smt_total > 0) {
+                  skill.create_poll = true;
+                }
+            });
+        });
+    });
+
+    $scope.createPolls = function () {
+        angular.forEach($scope.skills.skills, function (skill) {
+            if (skill.create_poll) {
+                // TODO create poll
+            }
+        });
+    };
 
 });
 
