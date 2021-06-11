@@ -1,0 +1,5 @@
+<div>
+  <div ng-repeat="expert in skill.experts.registration_people | filter:{nominated_smt:true}:true">
+    {{ expert.person.first_name }} {{ expert.person.last_name }} {{ expert.member.code }}
+  </div>
+</div>

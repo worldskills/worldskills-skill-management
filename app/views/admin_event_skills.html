@@ -20,7 +20,7 @@
                 <td>{{ skill.id }}</td>
                 <td><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
                 <td>
-                    <span ng-if="skill.nominated_smt_total > 0">{{ skill.nominated_smt_total }} Experts nominated for SMT position</span>
+                    <span ng-if="skill.nominated_smt_total > 0" uib-popover-template="'views/admin_event_skills_nominated_smt.html'" popover-trigger="mouseenter">{{ skill.nominated_smt_total }} Experts nominated for SMT position</span>
                     <span ng-if="skill.nominated_smt_total == 0" class="text-danger">No Experts nominated!</span>
                 </td>
                 <td>
