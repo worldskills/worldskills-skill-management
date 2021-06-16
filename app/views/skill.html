@@ -62,7 +62,7 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="polls.items.length">
-      <div class="panel-heading">Votes</div>
+      <div class="panel-heading">Polls</div>
       <div class="panel-body">
         <div ng-repeat="poll in polls.items">
           <p><strong>{{poll.title.text}}</strong></p>
@@ -70,7 +70,7 @@
           <ul class="list-unstyled">
             <li ng-repeat="option in poll.options">- {{option.text.text}}</li>
           </ul>
-          <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}votes.{{WORLDSKILLS_WEB_DOMAIN}}/polls/{{poll.id}}/result" class="btn btn-primary btn-sm" target="_blank">Open Vote</a></p>
+          <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}votes.{{WORLDSKILLS_WEB_DOMAIN}}/polls/{{poll.id}}/result" class="btn btn-primary btn-sm" target="_blank">Go to poll</a></p>
           <hr ng-hide="$last" />
         </div>
       </div>
