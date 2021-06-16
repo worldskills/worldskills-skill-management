@@ -1,17 +1,21 @@
 
+<alerts></alerts>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
             <col width="5%" />
-            <col width="45%" />
-            <col width="26%" />
-            <col width="24%" />
+            <col width="30%" />
+            <col width="25%" />
+            <col width="10%" />
+            <col width="20%" />
         </colgroup>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Skill Admin</th>
                 <th>Nominations</th>
+                <th>Active Polls</th>
                 <th>Create poll for SMT position</th>
             </tr>
         </thead>
@@ -24,14 +28,17 @@
                     <span ng-if="skill.nominated_smt_total == 0" class="text-danger">No Experts nominated!</span>
                 </td>
                 <td>
+                    <span ng-if="skill.polls.items.length > 0" uib-popover-template="'views/admin_event_skills_polls.html'" popover-trigger="mouseenter">{{skill.polls.items.length}} polls</span>
+                </td>
+                <td>
                     <input type="checkbox" ng-model="skill.create_poll" ng-disabled="skill.nominated_smt_total == 0">
                 </td>
             </tr>
             <tr ng-show="skills.skills.length == 0">
-                <td colspan="3">No skills found</td>
+                <td colspan="5">No skills found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="3"><ws-spinner></ws-spinner></td>
+                <td colspan="5"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>

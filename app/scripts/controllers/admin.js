@@ -41,33 +41,94 @@ angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $st
 
 });
 
-angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scope, $stateParams, Skill, SkillExpert) {
+angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scope, $state, $stateParams, $q, alert, Skill, SkillExpert, Poll) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
         angular.forEach($scope.skills.skills, function (skill) {
 
-            skill.experts = SkillExpert.query({skillId: skill.id}, function (experts) {
+            var skillPromises = [];
+
+            skill.experts = SkillExpert.query({skillId: skill.id});
+            skillPromises.push(skill.experts.$promise);
+
+            skill.polls = Poll.query({entity: skill.entity_id});
+            skillPromises.push(skill.polls.$promise);
+
+            $q.all(skillPromises).then(function () {
 
                 skill.nominated_smt_total = skill.experts.registration_people.reduce(function (sum, expert) {
-                  if (expert.nominated_smt) {
-                    sum += 1;
-                  }
-                  return sum;
+                    if (expert.nominated_smt) {
+                        sum += 1;
+                    }
+                    return sum;
                 }, 0);
 
-                if (skill.nominated_smt_total > 0) {
-                  skill.create_poll = true;
+                if (skill.nominated_smt_total > 0 && skill.polls.items.length == 0) {
+                    skill.create_poll = true;
+                } else {
+                    skill.create_poll = false;
                 }
             });
         });
     });
 
     $scope.createPolls = function () {
+
+        var pollPromises = [];
+
         angular.forEach($scope.skills.skills, function (skill) {
             if (skill.create_poll) {
-                // TODO create poll
+
+              var numberOfSelections = Math.min(3, skill.nominated_smt_total);
+
+              var options = [];
+              angular.forEach(skill.experts.registration_people, function (expert) {
+                  if (expert.nominated_smt) {
+                      options.push({
+                          'text': {
+                              'lang_code': 'en',
+                              'text': expert.person.first_name + ' ' + expert.person.last_name + ' ' + expert.member.code
+                          }
+                      });
+                  }
+              });
+
+              var poll = {
+                start: new Date(),
+                expiry: new Date(),
+                entity: {
+                  id: skill.entity_id
+                },
+                title: { lang_code: 'en', text: 'SMT position election - ' + skill.name.text },
+                question: { lang_code: 'en', text: 'Please select your choices for the SMT positions in order of preference:' },
+                type: 'weighted',
+                numberOfSelections: numberOfSelections,
+                anonymousResults: true,
+                anonymousVoting: false,
+                showingResults: false,
+                allowingReVote: true,
+                allowingAbstain: false,
+                options: options
+              };
+
+              // C+1 14:00, see Competitions Rules 6.5.5 Nomination, election, and approval
+              poll.expiry.setDate(poll.expiry.getDate() + 1);
+              poll.expiry.setHours(14);
+              poll.expiry.setMinutes(0);
+
+              var p = Poll.save(poll, function (response) {
+              }, function (response) {
+                  window.alert('An error has occured: ' + JSON.stringify(response.data));
+              });
+
+              pollPromises.push(p.$promise);
             }
+        });
+
+        $q.all(pollPromises).then(function() {
+            alert.success('The selected poll(s) have been created.');
+            $state.go('.', {}, {reload: true});
         });
     };
 
