@@ -96,7 +96,7 @@
           </div>
           <div class="media-body">
             {{ expert.person.first_name }} {{ expert.person.last_name }}
-            <span class="text-muted"><br/>{{ expert.member.name.text }}</span>
+            <span class="text-muted"><br/>{{ expert.member.code }} - {{ expert.member.name.text }}</span>
             <span class="text-info" ng-if="expert.nominated_smt"><br/>Nominated for SMT position</span>
           </div>
         </div>
