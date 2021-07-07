@@ -52,12 +52,6 @@
         
       </div>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">Experts</div>
-      <div class="panel-body">
-        
-      </div>
-    </div>
     -->
   </div>
   <div class="col-md-4">
@@ -90,6 +84,22 @@
         <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
         <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
         <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-show="experts.registration_people.length && userCanViewSubmissionsExperts">
+      <div class="panel-heading">Experts</div>
+      <div class="panel-body">
+        <div class="media" ng-repeat="expert in experts.registration_people">
+          <div class="media-left media-middle">
+            <img class="img-circle media-object" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!expert.person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+          </div>
+          <div class="media-body">
+            {{ expert.person.first_name }} {{ expert.person.last_name }}
+            <span class="text-muted"><br/>{{ expert.member.name.text }}</span>
+            <span class="text-info" ng-if="expert.nominated_smt"><br/>Nominated for SMT position</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -18,8 +18,8 @@
         <tbody>
             <tr ng-repeat="expert in experts.registration_people">
                 <td>
-                    <img class="img-circle" ng-show="expert.person.images[0]" class="img-responsive" ng-src="{{expert.person.images[0].thumbnail}}_square" width="60" height="60">
-                    <img class="img-circle" ng-show="!expert.person.images[0]" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                    <img class="img-circle img-responsive" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="60" height="60">
+                    <img class="img-circle img-responsive" ng-show="!expert.person.images[0]" src="https://people.worldskills.org/images/user.png" width="60" height="60">
                 </td>
                 <td>
                     {{ expert.person.first_name }} {{ expert.person.last_name }}
