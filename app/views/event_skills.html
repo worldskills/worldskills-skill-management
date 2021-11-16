@@ -1,15 +1,28 @@
 
 <div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Skills</div>
-            <div class="panel-body">
-                <p ng-repeat="skill in skills.skills"><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></p>
-                <p ng-show="skills.skills.length == 0">No skills found</p>
-                <div ng-show="loading">
-                    <ws-spinner></ws-spinner>
-                </div>
-            </div>
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="10%" />
+                    <col width="90%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Skill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="skill in skills.skills">
+                        <td>{{ skill.number }}</td>
+                        <td><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.name.text }}</a></td>
+                    </tr>
+                    <tr ng-show="skills.skills.length == 0">
+                        <td colspan="2">No skills found</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="col-md-4">
