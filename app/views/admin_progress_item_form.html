@@ -1,0 +1,33 @@
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+    <div class="form-group" ng-class="{'has-error': submitted && form.title.$invalid}">
+        <label for="title" class="col-sm-2 control-label">Title <span class="required">*</span></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="title" name="title" required ng-model="item.title.text">
+        </div>
+        <div class="col-sm-4">
+            <span class="help-block" ng-show="submitted" ng-messages="form.title.$error">
+                <span ng-message="required">Please enter a title!</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Statuses</label>
+        <div class="col-sm-6">
+            <div class="row" ng-repeat="status in item.statuses">
+                <div class="col-md-4">
+                    <p><span class="btn btn-block" style="background-color: {{status.color}}; color: #fff;">{{status.name.text}}</span></p>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="status.description.text" placeholder="Status Description" ng-change="itemChanged(item)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-success">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="admin_event.progress_items({eventId: event.id})" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>

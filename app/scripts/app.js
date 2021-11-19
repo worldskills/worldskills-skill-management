@@ -429,6 +429,17 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('admin_skill.progress', {
+        url: '/progress',
+        templateUrl: 'views/admin_skill_progress.html',
+        controller: 'AdminSkillProgressCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
+            ]
+        }
+    })
     .state('report_lunch_summary', {
         url: '/events/{eventId}/reports/lunch_summary',
         templateUrl: 'views/report_lunch_summary.html',
@@ -575,6 +586,51 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
                 {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event.progress_items', {
+        url: '/admin/events/{eventId}/progress_items',
+        templateUrl: 'views/admin_progress_items.html',
+        controller: 'AdminEventProgressItemsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
+            ]
+        }
+    })
+    .state('admin_progress_item_create', {
+        url: '/admin/events/{eventId}/progress_items/create',
+        templateUrl: 'views/admin_progress_item.html',
+        controller: 'AdminEventProgressItemCreateCtrl',
+        abstract: true
+    })
+    .state('admin_progress_item_create.form', {
+        url: '',
+        templateUrl: 'views/admin_progress_item_form.html',
+        controller: 'AdminEventProgressItemFormCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+            ]
+        }
+    })
+    .state('admin_progress_item', {
+        url: '/admin/events/{eventId}/progress_items/{itemId}',
+        templateUrl: 'views/admin_progress_item.html',
+        controller: 'AdminEventProgressItemCtrl',
+        abstract: true
+    })
+    .state('admin_progress_item.form', {
+        url: '',
+        templateUrl: 'views/admin_progress_item_form.html',
+        controller: 'AdminEventProgressItemFormCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'}
             ]
         }
     });

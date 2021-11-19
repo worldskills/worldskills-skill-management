@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
+    <li><a ui-sref="admin_event.progress_items({eventId: event.id})">Progress Items</a></li>
+    <li class="active">Add Progress Item</li>
+</ol>
+
+<ws-alerts></ws-alerts>
+
+<p class="pull-right">
+    <button ng-click="deleteSession()" class="btn btn-danger">Delete Progress Item<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+</p>
+
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+
+<h1>{{id ? "Progress Item" : "Add Progress Item"}}</h1>
+
+<br>
+
+<div id="content" ui-view autoscroll>
+</div>
+
+</div>
+</div>

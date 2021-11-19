@@ -1,0 +1,31 @@
+
+<alerts></alerts>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="90%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items.progress_items">
+                <td>{{ item.id }}</td>
+                <td><a ui-sref="admin_progress_item.form({eventId: event.id, itemId: item.id})">{{ item.title.text }}</a></td>
+            </tr>
+            <tr ng-show="items.progress_items.length == 0">
+                <td colspan="2">No progress items found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="2"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<a class="btn btn-success btn-sm" ui-sref="admin_progress_item_create.form({eventId: event.id})" ng-hide="event.locked"><span class="glyphicon glyphicon-plus"></span> Add Progress Item</a>
