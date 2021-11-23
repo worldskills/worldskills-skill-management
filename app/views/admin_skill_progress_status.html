@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancelModal()"><span>&times;</span></button>
+    <h2 class="modal-title">{{item.progress_item.title.text}}</h2>
+</div>
+<div class="modal-body">
+    <div class="row" ng-repeat="status in item.progress_item.statuses">
+        <div class="col-md-3">
+            <p><button class="btn btn-block" style="background-color: {{status.color}}; color: #fff;" ng-click="confirmStatus(status)">{{status.name.text}}</button></p>
+        </div>
+        <div class="col-md-9">
+            <p class="form-control-static text-muted">{{status.description.text}}</p>
+        </div>
+    </div>
+</div>

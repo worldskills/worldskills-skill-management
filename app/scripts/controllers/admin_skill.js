@@ -29,3 +29,43 @@ angular.module('skillMgmtApp').controller('AdminSkillFormSubmissionsCtrl', funct
     });
 
 });
+
+angular.module('skillMgmtApp').controller('AdminSkillProgressCtrl', function($scope, $stateParams, $uibModal, $timeout, SkillProgressItem) {
+
+    $scope.skillId = $stateParams.skillId;
+
+    $scope.items = SkillProgressItem.query({skillId: $scope.skillId});
+
+    var timeouts = {};
+    $scope.itemChanged = function (item) {
+        var updateItem = function () {
+            SkillProgressItem.update({skillId: $scope.skillId, progressItemId: item.progress_item.id}, item);
+        };
+        if (item.id in timeouts) {
+            $timeout.cancel(timeouts[item.id]);
+        }
+        timeouts[item.id] = $timeout(updateItem, 300);
+    };
+
+    $scope.changeStatus = function (item) {
+        $scope.item = item;
+        $scope.skillsModal = $uibModal.open({
+            templateUrl: 'views/admin_skill_progress_status.html',
+            controller: 'AdminSkillProgressStatusCtrl',
+            scope: $scope
+        });
+
+    };
+});
+
+angular.module('skillMgmtApp').controller('AdminSkillProgressStatusCtrl', function($scope, $uibModalInstance, SkillProgressItem) {
+
+    $scope.confirmStatus = function (status) {
+        $scope.item.status = status;
+        SkillProgressItem.update({skillId: $scope.skillId, progressItemId: $scope.item.progress_item.id}, $scope.item, function () {
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+});
