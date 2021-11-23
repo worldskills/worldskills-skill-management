@@ -35,9 +35,11 @@ angular.module('skillMgmtApp').controller('AdminEventProgressItemCtrl', function
     $scope.deleteItem = function() {
        if (confirm('Are you sure you want to delete this progress item for all skills? Click OK to proceed.')) {
            $scope.deleteLoading = true;
-           $scope.item.$delete(function () {
+           $scope.item.$delete({eventId: $scope.event.id}, function () {
                alert.success('The progress item has been deleted successfully.');
                $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+           }, function (httpResponse) {
+               window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
            });
        }
     };
