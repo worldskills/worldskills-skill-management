@@ -2,24 +2,26 @@
 
 angular.module('skillMgmtApp').controller('AdminEventProgressItemsCtrl', function($scope, $state, $stateParams, $q, alert, ProgressItem) {
 
-    $scope.items = ProgressItem.query({eventId: $stateParams.eventId}, function () {
-
-    });
+    $scope.items = ProgressItem.query({eventId: $stateParams.eventId});
 
 });
 
-angular.module('skillMgmtApp').controller('AdminEventProgressItemCreateCtrl', function($scope, $state, $stateParams, $q, Event, ProgressItem) {
+angular.module('skillMgmtApp').controller('AdminEventProgressItemCreateCtrl', function($scope, $state, $stateParams, $q, Event, ProgressItem, ProgressItemStatus) {
+
+    $scope.items = ProgressItem.query({eventId: $stateParams.eventId}, function () {
+        $scope.item.sort = $scope.items.progress_items.length + 1;
+    });
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
     $scope.item = new ProgressItem();
     $scope.item.title = {text: '', lang_code: 'en'};
-    $scope.item.statuses = [
-        {sort: 1, color: '#5db85b', name: {text: 'Green', lang_code: 'en'}, description: {text: '', lang_code: 'en'}},
-        {sort: 2, color: '#FDBF02', name: {text: 'Yellow', lang_code: 'en'}, description: {text: '', lang_code: 'en'}},
-        {sort: 3, color: '#FE7E03', name: {text: 'Orange', lang_code: 'en'}, description: {text: '', lang_code: 'en'}},
-        {sort: 4, color: '#c9312c', name: {text: 'Red', lang_code: 'en'}, description: {text: '', lang_code: 'en'}}
-    ];
+    ProgressItemStatus.query({eventId: $stateParams.eventId}, function (statuses) {
+        $scope.item.statuses = statuses.progress_item_statuses;
+        angular.forEach($scope.item.statuses, function (status) {
+            status.description = {text: '', lang_code: 'en'};
+        });
+    });
 });
 
 angular.module('skillMgmtApp').controller('AdminEventProgressItemCtrl', function($scope, $state, $stateParams, alert, Event, ProgressItem) {
