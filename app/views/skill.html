@@ -55,6 +55,24 @@
     -->
   </div>
   <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Preparation Progress</div>
+      <div class="panel-body">
+        <div>Summary:</div>
+        <div class="progress">
+          <div
+            ng-repeat="item in progress.skill_progress_items"
+            ng-style="{'background-color': item.status.color, 'border-bottom-color': item.status.color}"
+            class="progress-bar" style="width: {{1 / progress.skill_progress_items.length * 100}}%">
+            <span uib-tooltip="{{status.status.name.text}}" tooltip-placement="top" tooltip-trigger="mouseenter" class="">{{status.count}}</span>
+          </div>
+        </div>
+        <div class="row" ng-repeat="item in progress.skill_progress_items">
+          <div class="col-xs-8"><p>{{item.progress_item.title.text}}</p></div>
+          <div class="col-xs-4"><p><span class="label" style="background-color: {{item.status.color || '#999'}}; color: #fff;" ng-click="changeStatus(item)">{{item.status.name.text || "Unknown"}}</span></p></div>
+        </div>
+      </div>
+    </div>
     <div class="panel panel-default" ng-show="polls.items.length">
       <div class="panel-heading">Polls</div>
       <div class="panel-body">

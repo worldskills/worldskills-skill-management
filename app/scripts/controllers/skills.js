@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, Poll, Resource) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, SkillProgressItem, Poll, Resource) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
@@ -63,6 +63,8 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
                 $scope.userCanViewTimetable = true;
             }
         });
+
+        $scope.progress = SkillProgressItem.query({skillId: $stateParams.skillId});
 
         $scope.polls = Poll.query({entity: $scope.skill.entity_id});
 
