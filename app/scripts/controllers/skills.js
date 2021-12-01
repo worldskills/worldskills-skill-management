@@ -64,7 +64,15 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             }
         });
 
-        $scope.progress = SkillProgressItem.query({skillId: $stateParams.skillId});
+        $scope.progressItemsReportTotal = 0;
+        $scope.progressItemsReport = SkillProgressItem.report({skillId: $stateParams.skillId}, function () {
+          
+            angular.forEach($scope.progressItemsReport.reports, function (report) {
+                $scope.progressItemsReportTotal += report.total;
+            });
+        });
+
+        $scope.progressItems = SkillProgressItem.query({skillId: $stateParams.skillId});
 
         $scope.polls = Poll.query({entity: $scope.skill.entity_id});
 

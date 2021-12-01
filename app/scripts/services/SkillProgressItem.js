@@ -11,6 +11,10 @@
             update: {
                 method: 'PUT'
             },
+            report: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/progress_items_report',
+            },
         });
 
     });
