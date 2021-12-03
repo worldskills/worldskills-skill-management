@@ -14,9 +14,9 @@
 <h1 class="align-top">Skill Admin</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">Experts</a></li>
+    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">Experts</a></li>
     <li ui-sref-active="{active: 'admin_skill.progress'}"><a ui-sref="admin_skill.progress">Preparation Progress</a></li>
-    <li ui-sref-active="{active: 'admin_skill.form_submissions'}"><a ui-sref="admin_skill.form_submissions">Form Submissions</a></li>
+    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_skill.form_submissions'}"><a ui-sref="admin_skill.form_submissions">Form Submissions</a></li>
 </ul>
 
 <div id="content" ui-view>
