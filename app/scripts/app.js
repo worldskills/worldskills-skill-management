@@ -436,7 +436,8 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         data: {
             requireLoggedIn: true,
             requiredRoles: [
-                {code: 1200, role: 'Admin'}
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSkillProgressItems'}
             ]
         }
     })
