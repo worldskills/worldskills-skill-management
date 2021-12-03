@@ -59,13 +59,15 @@
       <div class="panel-heading">Preparation Progress</div>
       <div class="panel-body">
         <p ng-show="userCanEditSkillProgressItems"><a ui-sref="admin_skill.progress({eventId: skill.event.id, skillId: skill.id})">Edit Progress Items</a></p>
-        <div>Summary:</div>
-        <div class="progress">
-          <div
-            ng-repeat="report in progressItemsReport.reports"
-            ng-style="{'background-color': report.status.color, 'border-bottom-color': report.status.color}"
-            class="progress-bar" style="width: {{report.total / progressItemsReportTotal * 100}}%">
-            <span uib-tooltip="{{report.status.name.text}}" tooltip-placement="top" tooltip-trigger="mouseenter" class="">{{report.total}}</span>
+        <div ng-show="userCanViewProgressItemsReport">
+          <div>Summary:</div>
+          <div class="progress">
+            <div
+              ng-repeat="report in progressItemsReport.reports"
+              ng-style="{'background-color': report.status.color, 'border-bottom-color': report.status.color}"
+              class="progress-bar" style="width: {{report.total / progressItemsReportTotal * 100}}%">
+              <span uib-tooltip="{{report.status.name.text}}" tooltip-placement="top" tooltip-trigger="mouseenter" class="">{{report.total}}</span>
+            </div>
           </div>
         </div>
         <div class="row" ng-repeat="item in progressItems.skill_progress_items">
