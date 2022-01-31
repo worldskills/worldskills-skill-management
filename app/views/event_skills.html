@@ -30,7 +30,7 @@
         <div class="panel-heading">Resources</div>
         <div class="panel-body">
           <p ng-repeat="resource in resources.resources">
-              <a href="{{ resource.link }}" target="{{ resource.storage_type == 'REDIRECT_LINK' ? '_blank' : '_self'">
+              <a href="{{ resource.link }}" target="_blank" rel="noopener">
                   <span class="glyphicon glyphicon-link" ng-if="resource.storage_type == 'REDIRECT_LINK'"></span>
                   <span class="glyphicon glyphicon-file" ng-if="resource.storage_type != 'REDIRECT_LINK'"></span>
                   {{ resource.title }}

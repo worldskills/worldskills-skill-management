@@ -93,7 +93,7 @@
     <div class="panel panel-default" ng-show="testProject.resources.length">
       <div class="panel-heading">Test Project</div>
       <div class="panel-body">
-        <p ng-repeat="resource in testProject.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> {{resource.name.text}}</a></p>
+        <p ng-repeat="resource in testProject.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{resource.name.text}}</a></p>
       </div>
     </div>
   </div>
@@ -101,10 +101,10 @@
     <div class="panel panel-default" ng-show="technicalDescription.resources.length || workshopLayouts.resources.length || healthSafetyEnvironment.resources.length || occupationalStandard.resources.length">
       <div class="panel-heading">Resources</div>
       <div class="panel-body">
-        <p ng-repeat="resource in technicalDescription.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Technical Description (PDF)</a></p>
-        <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
-        <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
-        <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
+        <p ng-repeat="resource in technicalDescription.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Technical Description (PDF)</a></p>
+        <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
+        <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
+        <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
       </div>
     </div>
     <div class="panel panel-default" ng-show="experts.registration_people.length && userCanViewSubmissionsExperts">
