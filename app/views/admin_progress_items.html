@@ -16,7 +16,7 @@
         <tbody>
             <tr ng-repeat="item in items.progress_items">
                 <td>{{ item.id }}</td>
-                <td><a ui-sref="admin_progress_item.form({eventId: event.id, itemId: item.id})">{{ item.title.text }}</a></td>
+                <td><a ui-sref="admin_progress_item.form({eventId: event.id, itemId: item.id})" ng-class="{'font-weight-bold': item.is_header}">{{ item.title.text }}</a></td>
             </tr>
             <tr ng-show="items.progress_items.length == 0">
                 <td colspan="2">No progress items found</td>

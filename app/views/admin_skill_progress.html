@@ -1,31 +1,31 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
-            <col width="40%" />
+            <col width="30%" />
+            <col width="50%" />
             <col width="20%" />
-            <col width="40%" />
         </colgroup>
         <thead>
             <tr>
                 <th>Progress Item</th>
-                <th>Status</th>
                 <th>Internal Notes</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in items.skill_progress_items">
-                <td>
+                <td ng-class="{'font-weight-bold': item.progress_item.is_header}">
                     {{item.progress_item.title.text}}
                 </td>
                 <td>
-                    <div class="row">
+                    <textarea ng-if="!item.progress_item.is_header" class="form-control" rows="2" ng-model="item.internal_notes" ng-change="itemChanged(item)"></textarea>
+                </td>
+                <td>
+                    <div class="row" ng-if="item.progress_item.has_status">
                         <div class="col-md-8">
                             <a class="btn btn-block" style="background-color: {{item.status.color || '#999'}}; color: #fff;" ng-click="changeStatus(item)">{{item.status.name.text || "Unknown"}}</a>
                         </div>
                     </div>
-                </td>
-                <td>
-                    <textarea class="form-control" rows="3" ng-model="item.internal_notes" ng-change="itemChanged(item)"></textarea>
                 </td>
             </tr>
         </tbody>

@@ -70,7 +70,7 @@
             </div>
           </div>
         </div>
-        <div class="row" ng-repeat="item in progressItems.skill_progress_items">
+        <div class="row" ng-repeat="item in progressItems.skill_progress_items | filter:{progress_item: {has_status: true}}">
           <div class="col-xs-8"><p>{{item.progress_item.title.text}}</p></div>
           <div class="col-xs-4"><p class="text-right"><span class="label" style="background-color: {{item.status.color || '#999'}}; color: #fff;" ng-click="changeStatus(item)">{{item.status.name.text || "Unknown"}}</span></p></div>
         </div>
