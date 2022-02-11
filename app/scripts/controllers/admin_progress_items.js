@@ -16,6 +16,8 @@ angular.module('skillMgmtApp').controller('AdminEventProgressItemCreateCtrl', fu
 
     $scope.item = new ProgressItem();
     $scope.item.title = {text: '', lang_code: 'en'};
+    $scope.item.is_header = false;
+    $scope.item.has_status = true;
     ProgressItemStatus.query({eventId: $stateParams.eventId}, function (statuses) {
         $scope.item.statuses = statuses.progress_item_statuses;
         angular.forEach($scope.item.statuses, function (status) {
