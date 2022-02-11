@@ -38,6 +38,10 @@ footer {
     cursor: pointer;
 }
 
+.font-weight-normal {
+  font-weight: normal;
+}
+
 .font-weight-bold {
   font-weight: bold;
 }

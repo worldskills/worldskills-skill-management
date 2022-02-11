@@ -30,16 +30,23 @@ angular.module('skillMgmtApp').controller('AdminSkillFormSubmissionsCtrl', funct
 
 });
 
-angular.module('skillMgmtApp').controller('AdminSkillProgressCtrl', function($scope, $stateParams, $uibModal, $timeout, SkillProgressItem) {
+angular.module('skillMgmtApp').controller('AdminSkillProgressCtrl', function($scope, $stateParams, $uibModal, $q, $timeout, SkillProgressItem) {
 
     $scope.skillId = $stateParams.skillId;
 
     $scope.items = SkillProgressItem.query({skillId: $scope.skillId});
 
+    $scope.saved = false;
+    $scope.saving = 0;
+
     var timeouts = {};
     $scope.itemChanged = function (item) {
         var updateItem = function () {
-            SkillProgressItem.update({skillId: $scope.skillId, progressItemId: item.progress_item.id}, item);
+            $scope.saving++;
+            SkillProgressItem.update({skillId: $scope.skillId, progressItemId: item.progress_item.id}, item, function () {
+              $scope.saved = true;
+              $scope.saving--;
+            });
         };
         if (item.id in timeouts) {
             $timeout.cancel(timeouts[item.id]);

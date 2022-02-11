@@ -1,3 +1,4 @@
+
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
@@ -8,7 +9,14 @@
         <thead>
             <tr>
                 <th>Progress Item</th>
-                <th>Internal Notes</th>
+                <th>
+                  <span>Internal Notes</span>
+                  <span class="text-muted font-weight-normal">
+                    <span ng-show="!saving && !saved">Changes are saved automatically</span>
+                    <span ng-show="saving">Saving...</span>
+                    <span ng-show="!saving && saved">Saved</span>
+                  </span>
+                </th>
                 <th>Status</th>
             </tr>
         </thead>
