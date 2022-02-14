@@ -1,23 +1,23 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
+    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Competition Forms</a></li>
+    <li class="active">{{ submission.form.name.text }}</li>
+</ol>
+
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
   
 <p class="pull-right" ng-show="submission.form.multiple_submissions">
-    <a class="btn btn-default btn-sm" ui-sref="form_submissions_skill({formId: submission.form.id, skillId: submission.skill.id})" target="_blank">Submissions</a>
+    <a class="btn btn-default btn-sm" ui-sref="form_submission_submissions({formId: submission.form.id, skillId: submission.skill.id, eventId: submission.skill.event.id})">Submissions</a>
 </p>
-
-<h1 class="align-top">
-    <small>{{ submission.skill.event.name || "&nbsp;" }}</small>
-    <br/>
-    {{ submission.skill.number }} {{ submission.skill.name.text || "&nbsp;" }}
-</h1>
-
-<hr/>
 
 <p class="pull-right text-muted">
     <span ng-show="saving">Saving...</span>
     <span ng-show="!saving && saved">Draft saved</span>
 </p>
-<h2>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h2>
+<h1 class="align-top">{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h1>
 
 <alerts></alerts>
 

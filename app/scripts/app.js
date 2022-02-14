@@ -136,6 +136,30 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('form_submission_submissions', {
+        url: '/events/{eventId}/skills/{skillId}/forms/{formId}/submissions',
+        templateUrl: 'views/form_submission_submissions.html',
+        controller: 'FormSubmissionSubmissionsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
+        }
+    })
+    .state('form_submission_submissions_submission', {
+        url: '/events/{eventId}/skills/{skillId}/forms/{formId}/submissions/{id}',
+        templateUrl: 'views/form_submission_submissions_submission.html',
+        controller: 'FormSubmissionSubmissionsSubmissionCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditSubmissions'}
+            ]
+        }
+    })
     .state('skill_plan', {
         url: '/events/{eventId}/skills/{skillId}',
         templateUrl: 'views/skill_plan.html',

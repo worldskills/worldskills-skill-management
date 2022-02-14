@@ -1,0 +1,238 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
+    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Competition Forms</a></li>
+    <li><a ui-sref="form_submission({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">{{ submission.form.name.text }}</a></li>
+    <li><a ui-sref="form_submission_submissions({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">Submissions</a></li>
+</ol>
+
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+
+<h1>{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h1>
+
+<hr>
+
+<p class="text-muted">Submitted on {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</p>
+
+<div ng-show="submission.form.description.text">
+    <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
+    <br/>
+</div>
+
+<form role="form" novalidate>
+    <div ng-show="submission.form.multiple_submissions">
+        <div class="form-group">
+            <h4>Title</h4>
+            <input type="text" class="form-control" ng-model="submission.title" readonly="readonly" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div ng-repeat="field in submission.fields">
+        <div class="form-group">
+            <h4>{{ field.title.text }}</h4>
+            <p ng-show="field.type != 'input_checkbox'">{{ field.text.text }}</p>
+
+            <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" readonly="readonly" />
+
+            <textarea ng-if="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" readonly="readonly"></textarea>
+
+            <div ng-if="field.type == 'input_yesno'">
+                <label class="radio-inline">
+                    <input type="radio" ng-model="field.checked" disabled="disabled" ng-value="true" >
+                    Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="field.checked" disabled="disabled" ng-value="false" >
+                    No
+                </label>
+            </div>
+
+            <div ng-if="field.type == 'input_checkbox'" class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="field.checked" disabled="disabled" value="true" >
+                    {{ field.text.text }}
+                </label>
+            </div>
+
+            <div ng-if="field.type == 'input_file'">
+                <div class="panel panel-default">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="file in field.files">
+                                <td><a href="{{file.download}}">{{file.filename}}</a></td>
+                            </tr>
+                            <tr ng-show="field.files.length == 0">
+                                <td>No files</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div ng-if="field.type == 'expert_agreement' || field.type == 'competitor_agreement'" class="row">
+                <span ng-repeat="person in field.people">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': !person.checked}">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                            <span class="text-muted"><br/>{{ person.member_name }}</span>
+                                        </p>
+                                        <p>
+                                            <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                            <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="$index % 2 == 1" class="clearfix"></div>
+                </span>
+            </div>
+
+            <div ng-if="field.type == 'smt_agreement' || field.type == 'ce_agreement' || field.type == 'ce_ccd_agreement' || field.type == 'ccd_agreement'" class="row">
+                <span ng-repeat="person in field.people" ng-form="formFieldPerson">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': submitted && formFieldPerson.pin.$invalid}">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <p>
+                                            <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                            <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <p>
+                                            <span>{{ person.position_name }}<br/></span>
+                                            <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                            <span class="text-muted"><br/>{{ person.member_name }}</span>
+                                        </p>
+                                        <p>
+                                            <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                            <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="$index % 2 == 1" class="clearfix"></div>
+                </span>
+            </div>
+
+            <div ng-if="field.type == 'competitor_toolbox'">
+                <div ng-repeat="person in field.people">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="checkbox">
+                                <strong>{{ person.first_name }} {{ person.last_name}}</strong>
+                                <span class="text-muted"><br/>{{ person.member_name }}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="person.checked" disabled="disabled" value="true">
+                                    Toolbox checked
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <textarea class="form-control" rows="2" ng-model="person.value" readonly="readonly"></textarea>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+
+            <div ng-if="field.type == 'competitor_check'">
+                <div ng-repeat="person in field.people" ng-form="formFieldPerson">
+                    <hr/>
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="competitiorFirstName{{ person.person.id }}">First name for certificate:</label>
+                                        <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.first_name" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="competitiorLastName{{ person.person.id }}">Last name:</label>
+                                        <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.last_name" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
+                                <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
+                                <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (DD.MM.YYYY):</label>
+                                <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" readonly="readonly" />
+                            </div>
+                            <div class="form-group">
+                                <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
+                                <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="panel panel-default">
+                                <div class="panel-body" ng-class="{'bg-success': person.checked, 'bg-danger': !person.checked}">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <p>
+                                                <img class="img-circle" ng-show="person.image" class="img-responsive" ng-src="{{person.image.thumbnail}}_square" width="60" height="60">
+                                                <img class="img-circle" ng-show="!person.image" class="img-responsive" src="https://people.worldskills.org/images/user.png" width="60" height="60">
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <p>
+                                                <strong>{{ person.first_name }} {{ person.last_name }}</strong>
+                                                <span class="text-muted"><br/>{{ person.member_name }}</span>
+                                            </p>
+                                            <p>
+                                                <i class="glyphicon glyphicon-ok text-success" ng-show="person.checked"></i>
+                                                <i class="glyphicon glyphicon-remove text-danger" ng-show="!person.checked"></i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div>
+        <br/>
+        <a class="btn btn-link pull-right" ui-sref="form_submission_submissions({formId: submission.form.id, skillId: submission.skill.id, eventId: submission.skill.event.id})">« Return to Submissions</a>
+    </div>
+
+    <br/><br/><br/>
+</form>
+
+</div>
+</div>

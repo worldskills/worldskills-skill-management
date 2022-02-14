@@ -1,0 +1,54 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Competition Forms</a></li>
+    <li><a ui-sref="form_submission({eventId: skill.event.id, skillId: skill.id, formId: form.id})">{{ form.name.text }}</a></li>
+    <li class="active">Submissions</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <h1>{{ form.name.text }}</h1>
+
+        <hr>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Submitted on</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="submission in submissions.submissions">
+                        <td>
+                            <a ui-sref="form_submission_submissions_submission({eventId: skill.event.id, skillId: skill.id, formId: form.id, id: submission.id})">{{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</a>
+                        </td>
+                        <td>
+                            <a ui-sref="form_submission_submissions_submission({eventId: skill.event.id, skillId: skill.id, formId: form.id, id: submission.id})">{{ submission.title }}</a>
+                        </td>
+                    </tr>
+                    <tr ng-show="!loading && submissions.submissions.length == 0">
+                        <td colspan="2">No submissions found</td>
+                    </tr>
+                    <tr ng-show="loading">
+                        <td colspan="2"><ws-spinner></ws-spinner></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
