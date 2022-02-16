@@ -12,6 +12,14 @@ li.active a {
     overflow-x: hidden;
 }
 
+.break-container {
+    width: 100vw;
+    position: relative;
+    left: calc(-1 * (100vw - 100%) / 2);
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 /** NG CLOAK */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;

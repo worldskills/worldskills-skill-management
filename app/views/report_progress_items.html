@@ -1,0 +1,54 @@
+<div class="break-container">
+
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Preparation Progress Report</li>
+</ol>
+
+<div class="pull-right">
+    <div class="btn-group" uib-dropdown ng-show="userCanViewAllSubmissions || userCanEditForms">
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Skills <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+            <li ng-repeat="skill in skills.skills"><a href ng-click="checkSkill(skill)"><span ng-style="{'visibility' : skill.checked ? 'visible' : 'hidden'}" class="glyphicon glyphicon-ok-sign"></span> {{skill.number}} {{skill.name.text}}</a></li>
+        </ul>
+    </div>
+</div>
+
+<h1 class="h3">Preparation Progress Report</h1>
+
+<div class="table-responsive" ng-hide="loading">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                  <span style="white-space: nowrap;">Progress Item</span>
+                </th>
+                <th ng-repeat="skill in skills.skills | filter:{checked: true}">
+                  <span style="white-space: nowrap;">{{skill.number}} {{skill.name.text}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items.progress_items">
+                <td ng-class="{'font-weight-bold': item.is_header}">
+                    {{item.title.text}}
+                </td>
+                <td ng-repeat="skill in skills.skills | filter:{checked: true}">
+                    <div ng-repeat="skillItem in skill.progress.skill_progress_items" ng-if="skillItem.progress_item.id == item.id">
+                        <div ng-if="item.has_status">
+                            <span class="label" style="background-color: {{skillItem.status.color || '#999'}}; color: #fff;">{{skillItem.status.name.text || "Unknown"}}</span>
+                        </div>
+                        {{skillItem.internal_notes}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
+
+</div>

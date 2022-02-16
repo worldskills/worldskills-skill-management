@@ -335,6 +335,17 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('report_progress_items', {
+        url: '/events/{eventId}/reports/progress',
+        templateUrl: 'views/report_progress_items.html',
+        controller: 'ReportProgressItems',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+            ]
+        }
+    })
     .state('admin_event', {
         url: '/admin/{eventId}',
         templateUrl: 'views/admin_event.html',
