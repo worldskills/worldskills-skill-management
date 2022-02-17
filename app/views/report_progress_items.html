@@ -7,8 +7,14 @@
 </ol>
 
 <div class="pull-right">
-    <div class="btn-group" uib-dropdown ng-show="userCanViewAllSubmissions || userCanEditForms">
-        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Skills <span class="caret"></span></button>
+    <div class="btn-group" uib-dropdown>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>Skill Advisors <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
+            <li ng-repeat="person in skillAdvisors.people"><a href ng-click="checkSkillAvisor(person)">{{person.first_name}} {{person.last_name}}</a></li>
+        </ul>
+    </div>
+    <div class="btn-group" uib-dropdown>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>Skills <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
             <li ng-repeat="skill in skills.skills"><a href ng-click="checkSkill(skill)"><span ng-style="{'visibility' : skill.checked ? 'visible' : 'hidden'}" class="glyphicon glyphicon-ok-sign"></span> {{skill.number}} {{skill.name.text}}</a></li>
         </ul>

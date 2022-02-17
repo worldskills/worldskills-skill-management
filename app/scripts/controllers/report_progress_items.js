@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('ReportProgressItems', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, $uibModal, auth, alert, Event, Skill, ProgressItem, SkillProgressItem) {
+angular.module('skillMgmtApp').controller('ReportProgressItems', function ($scope, $rootScope, $state, $stateParams, $window, $timeout, $uibModal, auth, alert, Event, Skill, PeoplePerson, ProgressItem, SkillProgressItem) {
 
     $scope.loading = true;
 
@@ -24,6 +24,29 @@ angular.module('skillMgmtApp').controller('ReportProgressItems', function ($scop
           skill.progress = SkillProgressItem.query({skillId: skill.id});
           skill.checked = true;
         }
+    };
+
+    var skillAdvisorPositionIdWSC2022 = 404;
+
+    $scope.skillAdvisors = PeoplePerson.query({event: $stateParams.eventId, position: skillAdvisorPositionIdWSC2022});
+
+    $scope.checkSkillAvisor = function (skillAdvisor) {
+
+        // uncheck all skills first
+        angular.forEach($scope.skills.skills, function (skill) {
+            skill.checked = false;
+        });
+
+        angular.forEach(skillAdvisor.positions, function (position) {
+            if (position.position.id == skillAdvisorPositionIdWSC2022) {
+                angular.forEach($scope.skills.skills, function (skill) {
+                    if (skill.id == position.skill.id) {
+                        skill.progress = SkillProgressItem.query({skillId: skill.id});
+                        skill.checked = true;
+                    }
+                });
+            }
+        });
     };
 
 });
