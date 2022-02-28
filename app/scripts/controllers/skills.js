@@ -22,6 +22,8 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         tags.push($scope.event.code ? $scope.event.code : $scope.event.name);
         tags.push('Skill ' + $scope.skill.number);
 
+        $scope.progressItemsReportTotal = 0;
+
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewManagementPlan'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewManagementPlan = true;
@@ -61,12 +63,21 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewProgressItems'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewProgressItems = true;
+        
+                $scope.progressItems = SkillProgressItem.query({skillId: $stateParams.skillId});
             }
         });
 
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewProgressItemsReport'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewProgressItemsReport = true;
+
+                $scope.progressItemsReport = SkillProgressItem.report({skillId: $stateParams.skillId}, function () {
+
+                    angular.forEach($scope.progressItemsReport.reports, function (report) {
+                        $scope.progressItemsReportTotal += report.total;
+                    });
+                });
             }
         });
 
@@ -82,15 +93,6 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             }
         });
 
-        $scope.progressItemsReportTotal = 0;
-        $scope.progressItemsReport = SkillProgressItem.report({skillId: $stateParams.skillId}, function () {
-          
-            angular.forEach($scope.progressItemsReport.reports, function (report) {
-                $scope.progressItemsReportTotal += report.total;
-            });
-        });
-
-        $scope.progressItems = SkillProgressItem.query({skillId: $stateParams.skillId});
 
         $scope.polls = Poll.query({entity: $scope.skill.entity_id});
 
