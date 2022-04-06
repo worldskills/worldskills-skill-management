@@ -143,6 +143,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
                 text: ''
             },
             responsibility: '',
+            internal_notes: '',
             skill: $scope.skill
         };
         var lastIndex = $scope.skillItems.items.indexOf($scope.filteredItems[$scope.filteredItems.length - 1]);
