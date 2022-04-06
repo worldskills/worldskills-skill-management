@@ -206,5 +206,13 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
             time.$timeout = $timeout(updateTime, 1000);
         }
     };
+    
+    $scope.editNote = function (item) {
+        var internalNotes = window.prompt('Internal Notes:', item.internal_notes);
+        if (internalNotes !== null) {
+            item.internal_notes = internalNotes;
+            SkillItem.update({skillId: $stateParams.skillId}, item);
+        }
+    };
 });
 

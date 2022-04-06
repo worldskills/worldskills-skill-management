@@ -45,7 +45,14 @@
                     <input class="form-control input-sm" name="time" ng-model="item.time" ng-change="itemChanged(form, item, true)" placeholder="HH:mm" autocomplete="off">
                 </div>
                 <div class="col-sm-5 col-lg-6">
-                    <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(form, item, false)"></textarea>
+                    <div class="row">
+                        <div class="col-sm-10 col-lg-11">
+                            <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(form, item, false)"></textarea>
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <button type="button" class="btn btn-xs" ng-class="{'btn-warning': item.internal_notes, 'btn-default': !item.internal_notes}" uib-popover="{{item.internal_notes}}" popover-trigger="mouseenter" popover-enable="item.internal_notes" popover-append-to-body="true" ng-click="editNote(item)"><span class="glyphicon glyphicon-comment"></span></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-2 col-lg-3">
                     <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(form, item, false)">
