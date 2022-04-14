@@ -26,7 +26,13 @@ angular.module('skillMgmtApp').controller('EventCtrl', function($scope, $statePa
                 $scope.userCanViewAllSubmissions = true;
             }
         });
-  
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'ViewProgressItemsInternalNotes', $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanViewProgressItemsInternalNotes = true;
+            }
+        });
+
         var tags = [];
         tags.push($scope.event.code ? $scope.event.code : $scope.event.name);
 
