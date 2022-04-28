@@ -51,7 +51,7 @@ angular.module('skillMgmtApp').controller('AdminSkillProgressCtrl', function($sc
         if (item.id in timeouts) {
             $timeout.cancel(timeouts[item.id]);
         }
-        timeouts[item.id] = $timeout(updateItem, 300);
+        timeouts[item.id] = $timeout(updateItem, 1000);
     };
 
     $scope.changeStatus = function (item) {
