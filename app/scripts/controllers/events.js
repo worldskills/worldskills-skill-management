@@ -27,7 +27,7 @@ angular.module('skillMgmtApp').controller('EventCtrl', function($scope, $statePa
             }
         });
 
-        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'ViewProgressItemsInternalNotes', $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewProgressItemsInternalNotes'], $scope.event.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewProgressItemsInternalNotes = true;
             }
