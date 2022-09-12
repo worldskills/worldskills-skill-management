@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, SkillProgressItem, Poll, Resource) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, Registration, SkillProgressItem, Poll, Resource) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
@@ -103,6 +103,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         $scope.occupationalStandard = Resource.query({type: DOCUMENT_TYPE_STANDARD_SPECIFICATION, tags: tags, limit: 1});
 
         $scope.experts = SkillExpert.query({skillId: $stateParams.skillId});
+        $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
 
     });
 

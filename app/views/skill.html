@@ -123,5 +123,20 @@
         </div>
       </div>
     </div>
+    <div class="panel panel-default" ng-show="competitors.registrations.length && userCanEditLunch">
+      <div class="panel-heading">Competitors ({{ competitors.registrations.length }})</div>
+      <div class="panel-body">
+        <div class="media" ng-repeat="competitor in competitors.registrations">
+          <div class="media-left media-middle">
+            <img class="img-circle media-object" ng-show="competitor.person.images[0]" ng-src="{{competitor.person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!competitor.person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+          </div>
+          <div class="media-body">
+            {{ competitor.person.first_name }} {{ competitor.person.last_name }}
+            <span class="text-muted"><br/>{{ competitor.member.code }} - {{ competitor.member.name.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
