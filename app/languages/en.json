@@ -18,7 +18,7 @@
 	"expert_agreement": "Expert Agreement",
 	"smt_agreement": "SMT Agreement",
 	"ce_agreement": "CE Agreement",
-	"ccd_agreement": "CCD Agreement",
+	"scm_ccd_agreement": "SCM/CCD Agreement",
 	"ce_ccd_agreement": "CE/CCD Agreement",
 	"competitor_agreement": "Competitor Agreement",
 	"competitor_check": "Competitor Check",
