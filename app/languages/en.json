@@ -16,7 +16,7 @@
 	"input_checkbox": "Checkbox",
 	"input_file": "File upload",
 	"expert_agreement": "Expert Agreement",
-	"smt_agreement": "SMT Agreement",
+	"smt_ccd_agreement": "SMT/CCD Agreement",
 	"ce_agreement": "CE Agreement",
 	"scm_ccd_agreement": "SCM/CCD Agreement",
 	"ce_ccd_agreement": "CE/CCD Agreement",
