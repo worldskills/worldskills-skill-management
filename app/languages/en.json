@@ -19,7 +19,7 @@
 	"smt_ccd_agreement": "SMT/CCD Agreement",
 	"ce_agreement": "CE Agreement",
 	"scm_ccd_agreement": "SCM/CCD Agreement",
-	"ce_ccd_agreement": "CE/CCD Agreement",
+	"ce_scm_ccd_agreement": "CE/SCM/CCD Agreement",
 	"competitor_agreement": "Competitor Agreement",
 	"competitor_check": "Competitor Check",
 	"competitor_toolbox": "Competitor Toolbox Check",
