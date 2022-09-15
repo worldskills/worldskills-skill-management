@@ -107,9 +107,10 @@
         <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
       </div>
     </div>
-    <div class="panel panel-default" ng-show="experts.registration_people.length && userCanViewSubmissionsExperts">
+    <div class="panel panel-default" ng-show="experts.registration_people.length && (userCanEditExperts || userCanViewSubmissionsExperts)">
       <div class="panel-heading">Experts ({{ experts.registration_people.length }})</div>
       <div class="panel-body">
+        <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">Edit Experts</a></p>
         <div class="media" ng-repeat="expert in experts.registration_people">
           <div class="media-left media-middle">
             <img class="img-circle media-object" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="30" height="30">

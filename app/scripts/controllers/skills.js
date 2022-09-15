@@ -60,6 +60,12 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             }
         });
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditExperts'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditExperts = true;
+            }
+        });
+
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewProgressItems'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewProgressItems = true;

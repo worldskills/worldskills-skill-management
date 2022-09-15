@@ -2,7 +2,20 @@
 
 angular.module('skillMgmtApp').controller('AdminSkillCtrl', function($scope, $stateParams, Skill) {
 
-    $scope.skill = Skill.get({id: $stateParams.skillId});
+    $scope.skill = Skill.get({id: $stateParams.skillId}, function () {
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditExperts'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditExperts = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditSkillProgressItems'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditSkillProgressItems = true;
+            }
+        });
+    });
 
 });
 
