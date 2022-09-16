@@ -250,6 +250,13 @@ angular.module('skillMgmtApp').controller('AdminFormCreateCtrl', function ($scop
         $scope.model.title_label = {text: '', lang_code: 'en'};
     });
 
+    $scope.forms = Form.query({eventId: $stateParams.eventId, limit: 99}, function (data) {
+        var maxSort = 0;
+        $scope.forms.forms.forEach(function (form) {
+            maxSort = Math.max(maxSort, form.sort);
+        });
+        $scope.model.sort = maxSort + 1;
+    });
 });
 
 angular.module('skillMgmtApp').controller('AdminFormProgressCtrl', function($scope, $stateParams, $q, Form, FormSubmission, Event, Skill) {
