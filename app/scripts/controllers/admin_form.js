@@ -251,7 +251,7 @@ angular.module('skillMgmtApp').controller('AdminFormCreateCtrl', function ($scop
     });
 
     $scope.forms = Form.query({eventId: $stateParams.eventId, limit: 99}, function (data) {
-        var maxSort = 0;
+        var maxSort = -1;
         $scope.forms.forms.forEach(function (form) {
             maxSort = Math.max(maxSort, form.sort);
         });
