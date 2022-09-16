@@ -22,7 +22,7 @@
                 </td>
                 <td>
                     <a href ng-if="!event.locked" ng-click="editField(field)">
-                        <div ng-if="field.title">{{ field.title.text }}</div>
+                        <div ng-if="field.title">{{ field.title.text || "-" }}</div>
                         {{ field.text.text }}
                     </a>
                     <span ng-if="event.locked">
