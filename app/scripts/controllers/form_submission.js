@@ -167,7 +167,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     };
 
     $scope.pinKeypress = function (e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13) { // prevent enter key
             e.preventDefault();
             e.stopPropagation();
         }
