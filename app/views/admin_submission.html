@@ -51,7 +51,7 @@
 
             <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" readonly="readonly" />
 
-            <textarea ng-if="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" readonly="readonly"></textarea>
+            <div ng-if="field.type == 'input_textarea'" class="well well-sm" style="white-space: pre-line;">{{field.value}}</div>
 
             <div ng-if="field.type == 'input_yesno'">
                 <label class="radio-inline">
