@@ -82,8 +82,10 @@ angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scop
 
               var numberOfSelections = Math.min(3, skill.nominated_smt_total);
 
+              var experts = [];
               var options = [];
               angular.forEach(skill.experts.registration_people, function (expert) {
+                  experts.push(expert);
                   if (expert.nominated_smt) {
                       options.push({
                           'text': {
@@ -109,7 +111,9 @@ angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scop
                 showingResults: false,
                 allowingReVote: true,
                 allowingAbstain: false,
-                options: options
+                whitelist: true,
+                options: options,
+                allowedVoters: experts
               };
 
               // C+1 14:00, see Competitions Rules 6.5.5 Nomination, election, and approval
