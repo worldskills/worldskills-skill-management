@@ -85,7 +85,7 @@ angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scop
               var experts = [];
               var options = [];
               angular.forEach(skill.experts.registration_people, function (expert) {
-                  experts.push(expert);
+                  experts.push(expert.person);
                   if (expert.nominated_smt) {
                       options.push({
                           'text': {
