@@ -38,7 +38,7 @@
                 {{ r.member_name }}
             </td>
             <td>
-                <a href="https://people.worldskills.org/#/people/person/{{r.person.id}}" target="_blank">{{ r.person.first_name }} {{ r.person.last_name }}</a>
+                <a href="https://people.worldskills.org/people/{{r.person.id}}" target="_blank">{{ r.person.first_name }} {{ r.person.last_name }}</a>
                 <br>
                 <a ui-sref="admin_submission({eventId: event.id, formId: r.submission.form.id, id: r.submission.id})" target="_blank">{{ r.first_name }} {{ r.last_name }}</a>
             </td>
