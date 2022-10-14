@@ -31,8 +31,11 @@
           <span> </span>
           <a ng-show="userCanEditSkillItems" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
         </p>
-        <p ng-show="userCanViewTimetable"><a ui-sref="timetable_index({eventId: skill.event.id})">Competition Timetable</a></p>
-        <p ng-show="userCanEditSkillItems"><a ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Edit Competition Timetable</a></p>
+        <p ng-show="userCanViewTimetable">
+          <a ui-sref="timetable_index({eventId: skill.event.id, skillId: skill.id})">Competition Timetable</a>
+          <span> </span>
+          <a ng-show="userCanEditSkillItems" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
+        </p>
         <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Check Forms</a></p>
         <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})">Form Submissions (Experts)</a></p>
         <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Edit Lunch Times</a></p>

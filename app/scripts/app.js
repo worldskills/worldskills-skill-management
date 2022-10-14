@@ -247,8 +247,20 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('skill_timetable_view', {
+        url: '/events/{eventId}/skills/{skillId}/timetable/view/day/{day}',
+        templateUrl: 'views/skill_timetable_view.html',
+        controller: 'SkillTimetableViewCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewTimetable'}
+            ]
+        }
+    })
     .state('timetable_index', {
-        url: '/timetable/events/{eventId}',
+        url: '/timetable/events/{eventId}?skillId',
         controller: 'TimetableIndexCtrl',
         data: {
             requireLoggedIn: true,

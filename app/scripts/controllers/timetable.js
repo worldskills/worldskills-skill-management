@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('TimetableIndexCtrl', function ($scope, $state, $stateParams, auth, PersonRegistration) {
+angular.module('skillMgmtApp').controller('TimetableIndexCtrl', function ($scope, $state, $stateParams, WORLDSKILLS_API_SKILLMAN_CODE, auth, PersonRegistration, Skill) {
 
     auth.user.$promise.then(function () {
 
@@ -9,7 +9,11 @@ angular.module('skillMgmtApp').controller('TimetableIndexCtrl', function ($scope
             if ($scope.registrations.registrations.length != 0) {
                 $state.go('timetable', {eventId: $stateParams.eventId, memberRegPositionId: $scope.registrations.registrations[0].id, day: 'C1'});
             } else {
-                $state.go('sorry');
+                if ($stateParams.skillId) {
+                    $state.go('skill_timetable_view', {eventId: $stateParams.eventId, skillId: $stateParams.skillId, day: 'C1'});
+                } else {
+                    $state.go('sorry');
+                }
             }
 
         }, function () {

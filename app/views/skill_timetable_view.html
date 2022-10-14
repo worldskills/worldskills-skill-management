@@ -1,0 +1,69 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li class="active">Competition Timetable</li>
+</ol>
+
+
+<p class="pull-right">
+    <a ng-show="userCanEditSkillItems" class="btn btn-warning" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Edit Competition Timetable</a>
+</p>
+
+<p class="text-muted">
+    {{ skill.event.name || "&nbsp;" }}
+    <br/>
+    {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+</p>
+
+<h1 class="align-top">Competition Timetable</h1>
+
+<uib-tabset ng-show="!loading" active="active.day.id">
+    <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
+
+        <div class="skill-management-plan-day">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title text-center">{{ day.timeline }} {{ day.date|date:'EEEE, d MMMM yyyy' }}</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <colgroup>
+                            <col width="20%">
+                            <col width="50%">
+                            <col width="30%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Description</th>
+                                <th>Group</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in skillItems.items | filter:{competition_day_id:day.id}:true | orderBy:['start_time','end_time'] as filteredItems">
+                                <td>
+                                    <span>{{ item.start_time | limitTo:5 }} - {{ item.end_time | limitTo:5 }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ item.description.text }}</span>
+                                </td>
+                                <td>{{ item.group.name }}</td>
+                            </tr>
+                            <tr ng-show="!filteredItems.length">
+                                <td colspan="3">No entries.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </uib-tab>
+</uib-tabset>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>

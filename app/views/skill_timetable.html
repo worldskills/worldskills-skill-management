@@ -5,7 +5,8 @@
     <li class="active">Competition Timetable</li>
 </ol>
 
-<div class="pull-right">
+<p class="pull-right">
+    <a class="btn btn-primary" ui-sref="skill_timetable_view({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Preview Competition Timetable</a>
     <button class="btn btn-default" ng-click="changeSkill()" ng-show="skills.skills.length > 1">Change Skill</button>
 </div>
 

@@ -169,3 +169,37 @@ angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($s
         $uibModalInstance.close();
     };
 });
+
+angular.module('skillMgmtApp').controller('SkillTimetableViewCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, alert, Skill, CompetitionDay, SkillTimetableItem, LunchGroup) {
+
+    $scope.loading = true;
+
+    $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId}, function () {
+
+        $scope.skillItems = SkillTimetableItem.query({skillId: $stateParams.skillId}, {}, function () {
+            $scope.loading = false;
+        });
+
+        angular.forEach($scope.competitionDays.days, function (competitionDay) {
+            if (competitionDay.timeline == $stateParams.day) {
+                $scope.active.day = competitionDay;
+            }
+        });
+    });
+
+    $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
+        $scope.active.skill = $scope.skill;
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditSkillItems'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditSkillItems = true;
+            }
+        });
+    });
+
+    $scope.changeDay = function (day) {
+        $state.go('.', {day: day.timeline}, {location: 'replace', notify: false});
+        $scope.active.day = day;
+    };
+
+});
