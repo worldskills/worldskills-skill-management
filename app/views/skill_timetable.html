@@ -2,11 +2,11 @@
     <li><a ui-sref="events">Events</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li class="active">Competition Timetable</li>
+    <li class="active">Competitor Timetable</li>
 </ol>
 
 <p class="pull-right">
-    <a class="btn btn-primary" ui-sref="skill_timetable_view({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Preview Competition Timetable</a>
+    <a class="btn btn-primary" ui-sref="skill_timetable_view({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Preview Competitor Timetable</a>
     <button class="btn btn-default" ng-click="changeSkill()" ng-show="skills.skills.length > 1">Change Skill</button>
 </div>
 
@@ -16,7 +16,7 @@
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
 </p>
 
-<h1 class="align-top">Competition Timetable</h1>
+<h1 class="align-top">Competitor Timetable</h1>
 
 <div ng-show="loading">
     <ws-spinner></ws-spinner>

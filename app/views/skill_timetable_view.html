@@ -2,12 +2,12 @@
     <li><a ui-sref="events">Events</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li class="active">Competition Timetable</li>
+    <li class="active">Competitor Timetable</li>
 </ol>
 
 
 <p class="pull-right">
-    <a ng-show="userCanEditSkillItems" class="btn btn-warning" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Edit Competition Timetable</a>
+    <a ng-show="userCanEditSkillItems" class="btn btn-warning" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: active.day.timeline})">Edit Competitor Timetable</a>
 </p>
 
 <p class="text-muted">
@@ -16,7 +16,7 @@
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
 </p>
 
-<h1 class="align-top">Competition Timetable</h1>
+<h1 class="align-top">Competitor Timetable</h1>
 
 <uib-tabset ng-show="!loading" active="active.day.id">
     <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
