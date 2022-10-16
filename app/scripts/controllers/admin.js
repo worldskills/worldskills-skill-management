@@ -106,7 +106,7 @@ angular.module('skillMgmtApp').controller('AdminEventSkillsCtrl', function($scop
                 question: { lang_code: 'en', text: 'Please select your choices for the SMT positions in order of preference:' },
                 type: 'weighted',
                 numberOfSelections: numberOfSelections,
-                anonymousResults: false,
+                anonymousResults: true,
                 anonymousVoting: false,
                 showingResults: false,
                 allowingReVote: true,
