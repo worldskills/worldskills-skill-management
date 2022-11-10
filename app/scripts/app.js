@@ -97,6 +97,13 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requireLoggedIn: true
         }
     })
+    .state('event.skill_redirect', {
+        url: '/skill_redirect',
+        controller: 'EventSkillRedirectCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('skill', {
         url: '/events/{eventId}/skills/{skillId}',
         templateUrl: 'views/skill.html',
