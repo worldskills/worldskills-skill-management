@@ -33,6 +33,89 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
 
 });
 
+angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, Poll) {
+
+    $scope.loading = true;
+
+    $scope.experts = SkillExpert.query({skillId: $stateParams.skillId}, function () {
+        $scope.loading = false;
+    });
+
+    $scope.expertChanged = function (expert) {
+       SkillExpert.update({skillId: $stateParams.skillId}, expert);
+    };
+
+    $scope.getNominatedTotal = function () {
+        return $scope.experts.registration_people.reduce(function (sum, expert) {
+            if (expert.nominated_smt) {
+                sum += 1;
+            }
+            return sum;
+        }, 0);
+    };
+
+    $scope.createPoll = function () {
+
+        var numberOfSelections = Math.min(3, $scope.getNominatedTotal());
+
+        var experts = [];
+        var options = [];
+        var ces = [];
+        angular.forEach($scope.experts.registration_people, function (expert) {
+            experts.push(expert.person);
+            if (expert.nominated_smt) {
+                var name = expert.person.first_name + ' ' + expert.person.last_name;
+                if (expert.member) {
+                    name += ' ' + expert.member.code;
+                }
+                options.push({
+                    'text': {
+                        'lang_code': 'en',
+                        'text': name
+                    }
+                });
+                ces.push(name);
+            }
+        });
+
+        if (confirm('Are you sure you want to create the poll for the Chief Expert election with these Experts?\n\n' + ces.join('\n') + '\n\n Click OK to proceed.')) {
+    
+            var poll = {
+                start: new Date(),
+                expiry: new Date(),
+                entity: {
+                    id: $scope.skill.entity_id
+                },
+                title: { lang_code: 'en', text: 'Chief Expert election - ' + $scope.skill.name.text },
+                question: { lang_code: 'en', text: 'Please select your choices for the Chief Expert position in order of preference:' },
+                type: 'weighted',
+                numberOfSelections: numberOfSelections,
+                anonymousResults: true,
+                anonymousVoting: false,
+                showingResults: false,
+                allowingReVote: true,
+                allowingAbstain: false,
+                whitelist: true,
+                options: options,
+                allowedVoters: experts
+            };
+
+            // C+1 14:00, see Competitions Rules 6.5.5 Nomination, election, and approval
+            poll.expiry.setDate(poll.expiry.getDate() + 1);
+            poll.expiry.setHours(14);
+            poll.expiry.setMinutes(0);
+
+            var p = Poll.save(poll, function (response) {
+                alert.success('The poll has been created. Please ask all Experts to login to the Skill Management app and vote.');
+                $state.go('skill', {eventId: $scope.skill.event.id, skillId: $scope.skill.id});
+            }, function (response) {
+                window.alert('An error has occured: ' + JSON.stringify(response.data));
+            });
+        }
+    };
+
+});
+
 angular.module('skillMgmtApp').controller('AdminSkillFormSubmissionsCtrl', function($scope, $stateParams, SkillSubmission) {
 
     $scope.loading = true;

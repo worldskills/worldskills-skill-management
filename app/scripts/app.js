@@ -455,6 +455,18 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         controller: 'AdminSkillCtrl',
         abstract: true
     })
+    .state('admin_skill.expert_nominations', {
+        url: '/expert_nominations',
+        templateUrl: 'views/admin_skill_expert_nominations.html',
+        controller: 'AdminSkillExpertNominationsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditExperts'}
+            ]
+        }
+    })
     .state('admin_skill.experts', {
         url: '/experts',
         templateUrl: 'views/admin_skill_experts.html',

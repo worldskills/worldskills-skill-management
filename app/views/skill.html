@@ -8,7 +8,7 @@
     <div class="btn-group" uib-dropdown ng-show="userIsAdmin">
         <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Tools <span class="caret"></span></button>
         <ul class="dropdown-menu" uib-dropdown-menu>
-            <li><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">Skill Admin</a></li>
+            <li><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Skill Admin</a></li>
         </ul>
     </div>
 </div>
@@ -113,7 +113,7 @@
     <div class="panel panel-default" ng-show="experts.registration_people.length && (userCanEditExperts || userCanViewSubmissionsExperts)">
       <div class="panel-heading">Experts ({{ experts.registration_people.length }})</div>
       <div class="panel-body">
-        <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.experts({eventId: skill.event.id, skillId: skill.id})">Edit Experts</a></p>
+        <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Edit Chief Expert Nominations</a></p>
         <div class="media" ng-repeat="expert in experts.registration_people">
           <div class="media-left media-middle">
             <img class="img-circle media-object" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="30" height="30">
@@ -122,7 +122,7 @@
           <div class="media-body">
             {{ expert.person.first_name }} {{ expert.person.last_name }}
             <span class="text-muted"><br/>{{ expert.member.code }} - {{ expert.member.name.text }}</span>
-            <span class="text-info" ng-if="expert.nominated_smt"><br/>Nominated for SMT position</span>
+            <span class="text-info" ng-if="expert.nominated_smt"><br/>Nominated for Chief Expert</span>
           </div>
         </div>
       </div>

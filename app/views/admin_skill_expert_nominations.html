@@ -1,18 +1,18 @@
 
+<ws-alerts></ws-alerts>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
             <col width="5%" />
-            <col width="25%" />
-            <col width="35%" />
-            <col width="35%" />
+            <col width="45%" />
+            <col width="50%" />
         </colgroup>
         <thead>
             <tr>
                 <th>&nbsp;</th>
                 <th>Expert</th>
-                <th>Forms</th>
-                <th></th>
+                <th>Nominations</th>
             </tr>
         </thead>
         <tbody>
@@ -28,12 +28,9 @@
                 <td>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="expertChanged(expert)"> Exclude Expert from Forms
+                            <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> Nominated for Chief Expert
                         </label>
                     </div>
-                </td>
-                <td>
-                    
                 </td>
             </tr>
             <tr ng-show="experts.registration_people.length == 0">
@@ -44,4 +41,10 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="form-group form-group-sm">
+    <div class="col-sm-offset-6 col-sm-6">
+        <button ng-click="createPoll()" class="btn btn-sm btn-warning" ng-disabled="getNominatedTotal() == 0"><span class="glyphicon glyphicon-flash"></span> Create poll for Chief Expert election<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    </div>
 </div>
