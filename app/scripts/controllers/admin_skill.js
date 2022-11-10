@@ -46,12 +46,15 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
     };
 
     $scope.getNominatedTotal = function () {
-        return $scope.experts.registration_people.reduce(function (sum, expert) {
-            if (expert.nominated_smt) {
-                sum += 1;
-            }
-            return sum;
-        }, 0);
+        if ($scope.experts.registration_people) {
+            return $scope.experts.registration_people.reduce(function (sum, expert) {
+                if (expert.nominated_smt) {
+                    sum += 1;
+                }
+                return sum;
+            }, 0);
+        }
+        return 0;
     };
 
     $scope.createPoll = function () {
