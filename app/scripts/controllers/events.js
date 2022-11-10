@@ -66,25 +66,3 @@ angular.module('skillMgmtApp').controller('EventSkillsCtrl', function($scope, $s
     $scope.skills = Skill.query({event: $stateParams.eventId});
 
 });
-
-angular.module('skillMgmtApp').controller('EventSkillRedirectCtrl', function($scope, $state, $stateParams, auth, PeoplePerson) {
-
-    auth.user.$promise.then(function () {
-        
-        var redirected = false;
-
-        PeoplePerson.get({id: auth.user.person_id}, function (person) {
-            angular.forEach(person.positions, function (position) {
-                if (position.skill && position.skill.event.id == $stateParams.eventId) {
-                    redirected = true;
-                    $state.go('skill', {eventId: $stateParams.eventId, skillId: position.skill.id});
-                }
-            });
-        });
-
-        if (!redirected) {
-            $state.go('event.skills', {eventId: $stateParams.eventId});
-        }
-    });
-
-});
