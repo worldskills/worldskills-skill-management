@@ -5,13 +5,15 @@
     <table class="table table-striped">
         <colgroup>
             <col width="5%" />
-            <col width="45%" />
+            <col width="25%" />
+            <col width="20%" />
             <col width="50%" />
         </colgroup>
         <thead>
             <tr>
                 <th>&nbsp;</th>
                 <th>Expert</th>
+                <th>History</th>
                 <th>Nominations</th>
             </tr>
         </thead>
@@ -27,6 +29,11 @@
                 </td>
                 <td>
                     <div class="checkbox">
+                        <u class="text-success" ng-if="expert.history.length > 0" uib-popover-template="'views/admin_skill_expert_nominations_history.html'" popover-trigger="mouseenter">{{expert.history.length}} Expert position(s)</u>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox">
                         <label>
                             <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> Nominated for Chief Expert
                         </label>
@@ -34,10 +41,10 @@
                 </td>
             </tr>
             <tr ng-show="experts.registration_people.length == 0">
-                <td colspan="3">No Experts found</td>
+                <td colspan="4">No Experts found</td>
             </tr>
             <tr ng-show="loading">
-                <td colspan="3"><ws-spinner></ws-spinner></td>
+                <td colspan="4"><ws-spinner></ws-spinner></td>
             </tr>
         </tbody>
     </table>

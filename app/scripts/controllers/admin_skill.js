@@ -33,11 +33,21 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
 
 });
 
-angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, Poll) {
+angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, PeoplePerson, Poll) {
 
     $scope.loading = true;
 
     $scope.experts = SkillExpert.query({skillId: $stateParams.skillId}, function () {
+        angular.forEach($scope.experts.registration_people, function (expert) {
+            PeoplePerson.get({id: expert.person.id, include_history: 1}, function (person) {
+                expert.history = [];
+                angular.forEach(person.positions, function (position) {
+                    if (position.position.ws_entity.parent_id === 1 && position.timestamp_end !== null && position.position.name.text === 'Expert') {
+                        expert.history.push(position);
+                    }
+                });
+            });
+        });
         $scope.loading = false;
     });
 
