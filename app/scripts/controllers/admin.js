@@ -140,7 +140,11 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
     };
 
     $scope.addCompetitionDay = function () {
-        $scope.competitionDays.days.push({});
+        var maxSort = 0;
+        $scope.competitionDays.days.forEach(function (day) {
+            maxSort = Math.max(maxSort, day.sort);
+        });
+        $scope.competitionDays.days.push({sort: maxSort + 1});
     };
 
     $scope.removeCompetitionDay = function (competitionDay) {
@@ -150,6 +154,31 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
             CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
         }
     };
+
+    $scope.moveDayUp = function (index) {
+        var newDay = $scope.competitionDays.days[index];
+        var oldDay = $scope.competitionDays.days[index - 1];
+        $scope.competitionDays.days[index - 1] = newDay;
+        $scope.competitionDays.days[index] = oldDay;
+        var sort = newDay.sort;
+        newDay.sort = oldDay.sort;
+        oldDay.sort = sort;
+        CompetitionDay.update({eventId: $stateParams.eventId}, newDay);
+        CompetitionDay.update({eventId: $stateParams.eventId}, oldDay);
+    };
+
+    $scope.moveDayDown = function (index) {
+        var newDay = $scope.competitionDays.days[index];
+        var oldDay = $scope.competitionDays.days[index + 1];
+        $scope.competitionDays.days[index + 1] = newDay;
+        $scope.competitionDays.days[index] = oldDay;
+        var sort = newDay.sort;
+        newDay.sort = oldDay.sort;
+        oldDay.sort = sort;
+        CompetitionDay.update({eventId: $stateParams.eventId}, newDay);
+        CompetitionDay.update({eventId: $stateParams.eventId}, oldDay);
+    };
+
 });
 
 angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($scope, $stateParams, Event) {
