@@ -4,10 +4,12 @@
         <form class="form-horizontal">
             <fieldset ng-disabled="event.locked">
                 <div ng-repeat="competitionDay in competitionDays.days" class="form-group">
-                    <div class="col-sm-1">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-xs" ng-click="moveDayUp($index)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
-                            <button type="button" class="btn btn-primary btn-xs" ng-click="moveDayDown($index)" ng-disabled="$last || event.locked"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                    <div class="col-sm-2">
+                        <div class="text-right"> 
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="swapDay($index, $index - 1)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="swapDay($index, $index + 1)" ng-disabled="$last || event.locked"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-1">
@@ -30,7 +32,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <button type="button" class="btn btn-danger btn-xs" ng-click="removeCompetitionDay(competitionDay)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
                     </div>
                 </div>

@@ -155,30 +155,17 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
         }
     };
 
-    $scope.moveDayUp = function (index) {
-        var newDay = $scope.competitionDays.days[index];
-        var oldDay = $scope.competitionDays.days[index - 1];
-        $scope.competitionDays.days[index - 1] = newDay;
-        $scope.competitionDays.days[index] = oldDay;
+    $scope.swapDay = function (oldIndex, newIndex) {
+        var newDay = $scope.competitionDays.days[oldIndex];
+        var oldDay = $scope.competitionDays.days[newIndex];
+        $scope.competitionDays.days[newIndex] = newDay;
+        $scope.competitionDays.days[oldIndex] = oldDay;
         var sort = newDay.sort;
         newDay.sort = oldDay.sort;
         oldDay.sort = sort;
         CompetitionDay.update({eventId: $stateParams.eventId}, newDay);
         CompetitionDay.update({eventId: $stateParams.eventId}, oldDay);
     };
-
-    $scope.moveDayDown = function (index) {
-        var newDay = $scope.competitionDays.days[index];
-        var oldDay = $scope.competitionDays.days[index + 1];
-        $scope.competitionDays.days[index + 1] = newDay;
-        $scope.competitionDays.days[index] = oldDay;
-        var sort = newDay.sort;
-        newDay.sort = oldDay.sort;
-        oldDay.sort = sort;
-        CompetitionDay.update({eventId: $stateParams.eventId}, newDay);
-        CompetitionDay.update({eventId: $stateParams.eventId}, oldDay);
-    };
-
 });
 
 angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($scope, $stateParams, Event) {
