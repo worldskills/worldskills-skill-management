@@ -1,0 +1,34 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li class="active">{{ document.name.text }}</li>
+</ol>
+
+<br/>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <p class="pull-right">
+            <button class="btn btn-default" ng-click="downloadPDF()">Download PDF</button>
+        </p>
+
+        <h1 class="align-top">
+            {{ document.name.text }}
+            <br/>
+            {{ skill.name.text }}
+        </h1>
+
+        <div ng-bind-html="document.introduction.text"></div>
+
+        <ol>
+            <li ng-repeat="chapter in document.chapters"><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: chapter.id})">{{ chapter.title.text }}</a></li>
+        </ol>
+
+        <br><br>
+
+        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}}</p>
+
+    </div>
+</div>

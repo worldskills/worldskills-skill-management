@@ -1,0 +1,60 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ document.name.text }}</a></li>
+    <li class="active">{{ chapter.number }} {{ chapter.title.text }}</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        
+        <h2>{{ chapter.number }} {{ chapter.title.text }}</h2>
+
+        <div ng-repeat="(index, section) in chapter.sections">
+            <h3>{{ section.number }} {{ section.title.text }}</h3>
+            <div ng-bind-html="section.introduction.text"></div>
+            <div ng-show="section.skill_editable">
+                <div ng-show="!userCanEditDocument">
+                    <div class="worldskills-document-edited-text">
+                        <div ng-bind-html="section.text.text"></div>
+                    </div>
+                </div>
+                <div ng-show="userCanEditDocument">
+                    <div class="worldskills-document-edited-text">
+                        <div ng-bind-html="section.latest_revision.text"></div>
+                    </div>
+                    <div>
+                        <button class="btn btn-xs btn-primary" ng-click="editSection(section, index)">Edit</button>
+                        <small class="text-muted" ng-show="section.latest_revision && section.latest_revision.id != section.approved_revision_id">
+                            Pending changes by {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}
+                            <button class="btn btn-xs btn-success" ng-click="approveRevision(section.latest_revision, index)">Approve</button>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br/><br/>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div ng-show="previousChapter">
+                    <h5>Previous</h5>
+                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: previousChapter.id})">{{ previousChapter.title.text }}</a></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right" ng-show="nextChapter">
+                    <h5 class="text-right">Next</h5>
+                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: nextChapter.id})">{{ nextChapter.title.text }}</a></p>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}}</p>
+
+    </div>
+</div>

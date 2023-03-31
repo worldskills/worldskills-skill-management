@@ -54,6 +54,27 @@ footer {
   font-weight: bold;
 }
 
+.worldskills-document-edited-text {
+    color: #0084AD;
+}
+
+.worldskills-document-edited-text table {
+    margin-bottom: 1em;
+}
+
+.worldskills-document-edited-text th,
+.worldskills-document-edited-text td {
+    padding: 0.5em 1em;
+    text-align: left;
+    border-bottom: 1px solid #0084AD;
+}
+
+.worldskills-document-edited-text th {
+    background-color: #0084AD;
+    color: #fff;
+}
+
+
 @media print {
 
     .nav-tabs {
