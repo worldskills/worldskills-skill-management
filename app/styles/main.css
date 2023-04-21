@@ -74,6 +74,11 @@ footer {
     color: #fff;
 }
 
+.worldskills-document-edited-text tr.green-background td {
+    background-color: #8AE2D1;
+    color: #003764;
+}
+
 
 @media print {
 

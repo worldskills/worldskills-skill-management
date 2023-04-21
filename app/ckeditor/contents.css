@@ -47,3 +47,9 @@ th {
     background-color: #0084AD;
     color: #fff;
 }
+
+tr.green-background td {
+    background-color: #8AE2D1;
+    color: #003764;
+}
+

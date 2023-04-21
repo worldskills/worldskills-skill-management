@@ -3,29 +3,37 @@
 
     CKEDITOR.disableAutoInline = true;
 
+    CKEDITOR.plugins.addExternal('worldskillsimages', '/ckeditor/worldskillsimages/', 'plugin.js');
+
+    CKEDITOR.stylesSet.add('worldskillsstyles', [
+        { name: 'Green Background', element: 'tr', attributes: { 'class': 'green-background' } }
+    ]);
+
     angular.module('skillMgmtApp').directive('ckEditor', function(alert) {
         return {
             require: '?ngModel',
             link: function ($scope, elm, attr, ngModel) {
-
-                CKEDITOR.plugins.addExternal('worldskillsimages', '/ckeditor/worldskillsimages/', 'plugin.js');
 
                 var isReady = false;
                 var data = [];
                 var options = {
                     height: 400,
                     contentsCss: 'ckeditor/contents.css',
-                    removePlugins : 'stylescombo,elementspath,image,specialchar',
+                    removePlugins : 'elementspath,image,specialchar',
                     removeButtons : 'Underline',
-                    extraPlugins : 'worldskillsimages,tabletools',
+                    extraPlugins : 'worldskillsimages',
                     toolbarGroups : [
                         {name : 'basicstyles', groups : [ 'basicstyles', 'cleanup' ]},
+                        {name : 'paragraph',   groups: [ 'list', 'indent' ] },
                         {name : 'styles'},
+                        {name : 'links' },
                         {name : 'insert'},
                         {name : 'tools'},
                         {name : 'document', groups : [ 'mode' ]}
                     ],
-                    uiColor: '#e8e8e8'
+                    uiColor: '#e8e8e8',
+                    stylesSet: 'worldskillsstyles',
+                    disallowedContent: '*{*}'
                 };
                 var ck = CKEDITOR.replace(elm[0], options);
 
