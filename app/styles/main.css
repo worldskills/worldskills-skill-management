@@ -58,6 +58,11 @@ footer {
     color: #0084AD;
 }
 
+.worldskills-document-edited-text img {
+    vertical-align: top;
+    max-width: 100%;
+}
+
 .worldskills-document-edited-text table {
     margin-bottom: 1em;
 }

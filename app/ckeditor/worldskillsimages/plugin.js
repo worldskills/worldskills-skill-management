@@ -19,7 +19,7 @@ CKEDITOR.plugins.add( 'worldskillsimages', {
             var injector = angular.element(document.body).injector();
 
             // get the services
-            var $upload = injector.get('$upload'),
+            var $http = injector.get('$http'),
                 $q = injector.get('$q'),
                 WorldSkills = injector.get('WorldSkills'),
                 WORLDSKILLS_API_IMAGES = injector.get('WORLDSKILLS_API_IMAGES');
@@ -38,22 +38,18 @@ CKEDITOR.plugins.add( 'worldskillsimages', {
 
                     this.getContentElement('upload', 'image').getInputElement().$.addEventListener('change', function (evt) {
 
-                        var files = [],
-                            fileList,
-                            i;
-                        fileList = evt.__files_ || evt.target.files;
+                        var fileList = evt.__files_ || (evt.target && evt.target.files);
                         if (fileList != null) {
-                            for (i = 0; i < fileList.length; i++) {
-                                files.push(fileList.item(i));
-                            }
+                            var data = new FormData();
+                            data.append('file', fileList[0]);
+                            $http.post(WORLDSKILLS_API_IMAGES, data, {
+                                headers: {'Content-Type': undefined}
+                            }).then(function(response) {
+                                deferred.resolve(response.data);
+                            }, function (error) {
+                                alert('Error uploading image: ' + error.data.message);
+                            });
                         }
-
-                        $upload.upload({
-                            url: WORLDSKILLS_API_IMAGES,
-                            file: files[0],
-                        }).success(function(data, status, headers, config) {
-                            deferred.resolve(data);
-                        });
 
                     });
 
