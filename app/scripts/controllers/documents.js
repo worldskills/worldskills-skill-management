@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $stateParams, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapter, DocumentSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $stateParams, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapterSkill, DocumentSectionSkillRevision) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -31,7 +31,7 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
     });
 
     if ($stateParams.chapterId) {
-        $scope.chapter = DocumentChapter.get({documentId: $stateParams.documentId, id: $stateParams.chapterId, skillId: $stateParams.skillId, l: 'en'}, {});
+        $scope.chapter = DocumentChapterSkill.get({documentId: $stateParams.documentId, id: $stateParams.chapterId, skillId: $stateParams.skillId, l: 'en'}, {});
 
     }
 

@@ -682,6 +682,42 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('admin_event.documents', {
+        url: '/admin/events/{eventId}/documents',
+        templateUrl: 'views/admin_documents.html',
+        controller: 'AdminEventDocumentsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditDocuments'}
+            ]
+        }
+    })
+    .state('admin_document', {
+        url: '/admin/events/{eventId}/documents/{documentId}',
+        templateUrl: 'views/admin_document.html',
+        controller: 'AdminDocumentCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditDocuments'}
+            ]
+        }
+    })
+    .state('admin_document_name', {
+        url: '/admin/events/{eventId}/documents/{documentId}/name',
+        templateUrl: 'views/admin_document_name.html',
+        controller: 'AdminDocumentNameCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'EditDocuments'}
+            ]
+        }
+    })
     .state('admin_event.progress_items', {
         url: '/admin/events/{eventId}/progress_items',
         templateUrl: 'views/admin_progress_items.html',

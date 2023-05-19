@@ -33,6 +33,15 @@ footer {
     margin-bottom: 0;
 }
 
+.table-nested {
+    width: 100%;
+    max-width: 100%;
+}
+
+.table-nested td {
+    padding: 2px 0;
+}
+
 .nav.nav-tabs {
     margin: 20px 0 30px 0;
 }

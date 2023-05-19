@@ -1,0 +1,95 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
+    <li><a ui-sref="admin_event.documents({eventId: event.id})">Documents</a></li>
+    <li class="active">{{ title }}</li>
+</ol>
+
+<ws-alerts></ws-alerts>
+
+<div class="row">
+<div class="col-lg-10 col-lg-offset-1">
+
+<h1>{{ title }}</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="10%" />
+            <col width="80%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Ordering</th>
+                <th>Number</th>
+                <th>Chapter/Section</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td><a ui-sref="admin_document_name({eventId: event.id, documentId: document.id})"><em>Name and Introduction</em></a></td>
+            </tr>
+            <tr ng-repeat-start="chapter in document.chapters" class="form-group form-group-sm">
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveChapterUp($index, field)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveChapterDown($index, field)" ng-disabled="$last || event.locked"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                    </div>
+                </td>
+                <td>{{ chapter.number }} </td>
+                <td>{{ chapter.title.text }}</td>
+            </tr>
+            <tr ng-repeat-end>
+                <td colspan="3">
+                    <table class="table-nested">
+                        <colgroup>
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="60%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                        </colgroup>
+                        <tbody>
+                            <tr ng-repeat="section in chapter.chapter.sections" class="form-group form-group-sm">
+                                <td>&nbsp;</td>
+                                <td>{{ section.number }}</td>
+                                <td><span ng-repeat="i in [].constructor(section.level) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ section.title.text }}</td>
+                                <td><em title="Editable by Skill" ng-show="section.skill_editable">(Skill)</em></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveSectionUp($index, field)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveSectionDown($index, field)" ng-disabled="$last || event.locked"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success btn-xs" ng-click="addChapter()">Add Section</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td><button type="button" class="btn btn-success btn-xs" ng-click="addChapter()">Add Chapter</button></td>
+            </tr>
+            <tr ng-show="document.chapters.length == 0">
+                <td colspan="2">No chapters found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="2"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</div>
+</div>

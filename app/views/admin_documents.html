@@ -1,0 +1,29 @@
+
+<alerts></alerts>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="90%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="document in documents.documents">
+                <td>{{ document.id }}</td>
+                <td><a ui-sref="admin_document({eventId: event.id, documentId: document.id})">{{ document.name.text }}</a></td>
+            </tr>
+            <tr ng-show="documents.documents.length == 0">
+                <td colspan="2">No documents found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="2"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
