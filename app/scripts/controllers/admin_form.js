@@ -41,13 +41,70 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, FormSubmission) {
+angular.module('skillMgmtApp').controller('AdminFormDetailSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, FormField, FormSubmission) {
 
     $scope.loading = true;
 
     $scope.submissions = FormSubmission.query({formId: $scope.id, state: 'submitted'}, function () {
         $scope.loading = false;
     });
+
+    $scope.fields = FormField.query({formId: $scope.id});
+
+    $scope.export = function () {
+
+        $scope.loadingExport = true;
+
+        var submissionsPromises = [];
+
+        angular.forEach($scope.submissions.submissions, function (submission) {
+            var s = FormSubmission.get({formId: $scope.id, id: submission.id});
+            submissionsPromises.push(s.$promise);
+        });
+
+        $q.all(submissionsPromises).then(function(submissions) {
+
+            $scope.loadingExport = false;
+
+            var aoa = [
+                [
+                    'ID',
+                    'Submitted',
+                    'Title',
+                    'Skill Number',
+                    'Skill Name'
+                ]
+            ];
+    
+            angular.forEach($scope.fields.fields, function (field) {
+                aoa[0].push(field.title.text);
+            });
+    
+            angular.forEach(submissions, function (submission) {
+                var data = [
+                    submission.id,
+                    submission.submitted.substring(0, 19),
+                    submission.title,
+                    submission.skill.number,
+                    submission.skill.name.text
+                ];
+    
+                angular.forEach(submission.fields, function (field) {
+                    data.push(field.value);
+                });
+        
+                aoa.push(data);
+            });
+    
+            var workbook = XLSX.utils.book_new();
+    
+            var worksheet = XLSX.utils.aoa_to_sheet(aoa);
+    
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'submissions');
+    
+            XLSX.writeFile(workbook, 'submissions.xlsx');
+        });
+    };
 });
 
 angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function ($scope, $uibModal, FormField) {
