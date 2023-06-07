@@ -5,6 +5,16 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
+            <label for="level" class="col-sm-3 control-label">Number Level</label>
+            <div class="col-sm-2">
+                <select class="form-control" ng-model="section.level">
+                    <option ng-value="1">X.X</option>
+                    <option ng-value="2">X.X.X</option>
+                    <option ng-value="3">X.X.X.X</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="title" class="col-sm-3 control-label">Title</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="title" ng-model="section.title.text">
