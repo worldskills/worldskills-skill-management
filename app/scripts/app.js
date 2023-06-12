@@ -690,7 +690,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'EditDocuments'}
+                {code: 1200, role: 'ManageDocument'}
             ]
         }
     })
@@ -702,7 +702,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'EditDocuments'}
+                {code: 1200, role: 'ManageDocument'}
             ]
         }
     })
@@ -714,7 +714,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requireLoggedIn: true,
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
-                {code: 1200, role: 'EditDocuments'}
+                {code: 1200, role: 'ManageDocument'}
             ]
         }
     })

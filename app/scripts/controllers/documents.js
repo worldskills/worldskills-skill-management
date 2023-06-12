@@ -6,9 +6,9 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
 
-        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditDocument'], $scope.skill.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditSkillDocument'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
-                $scope.userCanEditDocument = true;
+                $scope.userCanEditSkillDocument = true;
             }
         });
     });

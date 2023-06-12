@@ -15,12 +15,12 @@
             <h3>{{ section.number }} {{ section.title.text }}</h3>
             <div ng-bind-html="section.introduction.text"></div>
             <div ng-show="section.skill_editable">
-                <div ng-show="!userCanEditDocument">
+                <div ng-show="!userCanEditSkillDocument">
                     <div class="worldskills-document-edited-text">
                         <div ng-bind-html="section.text.text"></div>
                     </div>
                 </div>
-                <div ng-show="userCanEditDocument">
+                <div ng-show="userCanEditSkillDocument">
                     <div class="worldskills-document-edited-text">
                         <div ng-bind-html="section.latest_revision.text"></div>
                     </div>
