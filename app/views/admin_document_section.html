@@ -23,13 +23,7 @@
         <div class="form-group">
             <label for="introduction" class="col-sm-3 control-label">Introduction</label>
             <div class="col-sm-9">
-                <textarea class="form-control" rows="4" ng-model="section.introduction.text" name="introduction"></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="explanation" class="col-sm-3 control-label">Explanation</label>
-            <div class="col-sm-9">
-                <textarea class="form-control" rows="4" ng-model="section.explanation.text" name="explanation"></textarea>
+                <textarea class="form-control" rows="4" ng-model="section.introduction.text" name="introduction" ck-editor></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -40,6 +34,12 @@
                         Editable by Skill
                     </label>
                 </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="section.skill_editable">
+            <label for="explanation" class="col-sm-3 control-label">Explanation</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="4" ng-model="section.explanation.text" name="explanation" ck-editor></textarea>
             </div>
         </div>
     </div>
