@@ -182,8 +182,8 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
     };
 
     $scope.delete = function () {
-        if (confirm('Really delete the section? Click OK to proceed.')) {
-            DocumentSection.delete({documentId: $scope.document.id, sectionId: $scope.section.id}, function () {
+        if (confirm('Really delete the section and all edits from all Skills? Click OK to proceed.')) {
+            DocumentSection.delete({documentId: $scope.document.id, id: $scope.section.id}, function () {
                 alert.success('The section has been deleted.');
                 $uibModalInstance.close();
             }, function (httpResponse) {
