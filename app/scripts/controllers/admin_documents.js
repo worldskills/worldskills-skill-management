@@ -44,6 +44,29 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
         });
     };
 
+    $scope.addSection = function (chapter) {
+
+        $scope.section = {};
+        $scope.section.chapter_id = chapter.id;
+        $scope.section.title = {lang_code: 'en', text: ''};
+        $scope.section.introduction = {lang_code: 'en', text: ''};
+        $scope.section.explanation = {lang_code: 'en', text: ''};
+        $scope.section.level = 1;
+        $scope.section.sort = chapter.chapter.sections.length + 1;
+        $scope.sectionModal = $uibModal.open({
+            templateUrl: 'views/admin_document_section.html',
+            controller: 'AdminDocumentSectionCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+
+        $scope.sectionModal.result.then(function (result) {
+            chapter.chapter.sections.push(result);
+        });
+
+    };
+
     $scope.editChapter = function (index, chapter) {
 
         // open modal for editing chapter
