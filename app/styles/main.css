@@ -67,15 +67,19 @@ footer {
     color: #0084AD;
 }
 
+.worldskills-document-text img,
 .worldskills-document-edited-text img {
     vertical-align: top;
     max-width: 100%;
 }
 
+.worldskills-document-text table,
 .worldskills-document-edited-text table {
     margin-bottom: 1em;
 }
 
+.worldskills-document-text th,
+.worldskills-document-text td,
 .worldskills-document-edited-text th,
 .worldskills-document-edited-text td {
     padding: 0.5em 1em;
@@ -83,11 +87,13 @@ footer {
     border-bottom: 1px solid #0084AD;
 }
 
+.worldskills-document-text th,
 .worldskills-document-edited-text th {
     background-color: #0084AD;
     color: #fff;
 }
 
+.worldskills-document-text tr.green-background td,
 .worldskills-document-edited-text tr.green-background td {
     background-color: #8AE2D1;
     color: #003764;
