@@ -26,7 +26,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
     $scope.editSection = function (index, chapter, section) {
 
         // open modal for editing section
-        $scope.section = section;
+        $scope.section = angular.copy(section);
         $scope.sectionModal = $uibModal.open({
             templateUrl: 'views/admin_document_section.html',
             controller: 'AdminDocumentSectionCtrl',
