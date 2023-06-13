@@ -21,6 +21,16 @@
             </div>
         </div>
         <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="section.publicly_visible">
+                        Publicly visible
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="introduction" class="col-sm-3 control-label">Introduction</label>
             <div class="col-sm-9">
                 <textarea class="form-control" rows="4" ng-model="section.introduction.text" name="introduction" ck-editor></textarea>
