@@ -49,8 +49,8 @@
                         <colgroup>
                             <col width="10%" />
                             <col width="10%" />
-                            <col width="60%" />
-                            <col width="10%" />
+                            <col width="50%" />
+                            <col width="20%" />
                             <col width="10%" />
                         </colgroup>
                         <tbody>
@@ -58,7 +58,7 @@
                                 <td>&nbsp;</td>
                                 <td>{{ section.number }}</td>
                                 <td><span ng-repeat="i in [].constructor(section.level) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;</span><a href ng-click="editSection($index, chapter.chapter, section)">{{ section.title.text }}</a></td>
-                                <td><em title="Editable by Skill" ng-show="section.skill_editable">(Skill)</em></td>
+                                <td><em ng-show="section.skill_editable">(Editable by Skill)</em></td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary btn-xs" ng-click="moveSectionUp($index, chapter.chapter, section)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
