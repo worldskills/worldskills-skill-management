@@ -23,6 +23,10 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
         $scope.loading = false;
     });
 
+});
+
+angular.module('skillMgmtApp').controller('AdminDocumentChaptersCtrl', function($scope, $state, $stateParams, $uibModal, Event, Document, DocumentChapter, DocumentSection) {
+
     $scope.editSection = function (index, chapter, section) {
 
         // open modal for editing section

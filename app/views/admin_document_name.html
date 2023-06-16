@@ -1,20 +1,7 @@
-<ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
-    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
-    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
-    <li><a ui-sref="admin_event.documents({eventId: event.id})">Documents</a></li>
-    <li><a ui-sref="admin_document({eventId: event.id, documentId: document.id})">{{ title }}</a></li>
-    <li class="active">Name and Introduction</li>
-</ol>
-
 <ws-alerts></ws-alerts>
 
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
-
-<h1>{{ title }}</h1>
-
-<br>
 
 <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
@@ -37,7 +24,6 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-success">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-            <a ui-sref="admin_document({eventId: event.id, documentId: document.id})" class="btn btn-default">Cancel</a>
         </div>
     </div>
 </form>

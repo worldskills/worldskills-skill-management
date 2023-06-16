@@ -698,6 +698,12 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         url: '/admin/events/{eventId}/documents/{documentId}',
         templateUrl: 'views/admin_document.html',
         controller: 'AdminDocumentCtrl',
+        abstract: true
+    })
+    .state('admin_document.chapters', {
+        url: '/admin/events/{eventId}/documents/{documentId}/chapters',
+        templateUrl: 'views/admin_document_chapters.html',
+        controller: 'AdminDocumentChaptersCtrl',
         data: {
             requireLoggedIn: true,
             requiredRoles: [
@@ -706,7 +712,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
-    .state('admin_document_name', {
+    .state('admin_document.name', {
         url: '/admin/events/{eventId}/documents/{documentId}/name',
         templateUrl: 'views/admin_document_name.html',
         controller: 'AdminDocumentNameCtrl',
