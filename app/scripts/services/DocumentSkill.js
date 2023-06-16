@@ -18,6 +18,10 @@
             },
             delete: {
                 method: 'DELETE'
+            },
+            unapprovedSections: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/documents/:id/skills/:skillId/sections/unapproved',
             }
         });
 

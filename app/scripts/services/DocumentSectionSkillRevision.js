@@ -7,6 +7,9 @@
             documentId: '@document.id',
             id: '@id'
         }, {
+            query: {
+                method: 'GET'
+            },
             approve: {
                 method: 'PUT',
                 url: WORLDSKILLS_API_SKILLMAN + '/documents/:documentId/revisions/:id/approve'

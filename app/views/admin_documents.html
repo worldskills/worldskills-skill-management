@@ -16,7 +16,7 @@
         <tbody>
             <tr ng-repeat="document in documents.documents">
                 <td>{{ document.id }}</td>
-                <td><a ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">{{ document.name.text }}</a></td>
+                <td><a ui-sref="admin_document.skills({eventId: event.id, documentId: document.id})">{{ document.name.text }}</a></td>
             </tr>
             <tr ng-show="documents.documents.length == 0">
                 <td colspan="2">No documents found</td>

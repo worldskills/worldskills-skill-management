@@ -25,6 +25,17 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, Skill, DocumentSkill) {
+
+    $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
+
+        angular.forEach($scope.skills.skills, function (skill) {
+            skill.unapprovedSections = DocumentSkill.unapprovedSections({id: $stateParams.documentId, skillId: skill.id});
+        });
+    });
+
+});
+
 angular.module('skillMgmtApp').controller('AdminDocumentChaptersCtrl', function($scope, $state, $stateParams, $uibModal, Event, Document, DocumentChapter, DocumentSection) {
 
     $scope.editSection = function (index, chapter, section) {
