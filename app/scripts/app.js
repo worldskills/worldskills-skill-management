@@ -10,6 +10,7 @@ var skillmanApp = angular
     'ui.bootstrap',
     'ngFileUpload',
     'pascalprecht.translate',
+    'htmldiff',
     'worldskills.utils'
   ]);
 

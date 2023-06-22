@@ -99,6 +99,14 @@ footer {
     color: #003764;
 }
 
+.worldskills-document-diff ins {
+    background-color: lightgreen;
+}
+
+.worldskills-document-diff del {
+    background-color: pink;
+}
+
 
 @media print {
 

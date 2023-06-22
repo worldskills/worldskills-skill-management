@@ -47,15 +47,18 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
         });
     };
 
-    $scope.approveRevision = function (revision, index) {
-        DocumentSectionSkillRevision.approve({documentId: $stateParams.documentId, id: revision.id}, {}, function (section) {
-            $scope.chapter.sections[index] = section;
-            $scope.document.last_updated = revision.created;
-        }, function (httpResponse) {
-            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+    // show diff between two revisions in new modal window
+    $scope.diffRevision = function (section, index) {
+        $scope.section = section;
+        $scope.sectionIndex = index;
+        $scope.diffRevisionModal = $uibModal.open({
+            templateUrl: 'views/document_section_diff.html',
+            controller: 'DocumentSectionDiffCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
         });
     };
-
 });
 
 angular.module('skillMgmtApp').controller('DocumentSectionEditFormCtrl', function ($scope, $stateParams, $uibModalInstance, DocumentSectionSkill) {
@@ -71,6 +74,31 @@ angular.module('skillMgmtApp').controller('DocumentSectionEditFormCtrl', functio
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
         });
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+});
+
+angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentSectionSkillRevision) {
+
+    $scope.diff = $sce.trustAsHtml(htmldiff($scope.section.text.text, $scope.section.latest_revision.text));
+
+    $scope.approve = function () {
+        DocumentSectionSkillRevision.approve({documentId: $stateParams.documentId, id: $scope.section.latest_revision.id}, {}, function (section) {
+            $scope.chapter.sections[$scope.sectionIndex] = section;
+            $scope.document.last_updated = $scope.section.latest_revision.created;
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+
+    $scope.edit = function () {
+        $uibModalInstance.dismiss('edit');
+        $scope.editSection($scope.section, $scope.sectionIndex);
     };
 
     $scope.cancel = function () {

@@ -29,8 +29,7 @@
                     <div>
                         <button class="btn btn-xs btn-primary" ng-click="editSection(section, index)">Edit</button>
                         <small class="text-muted" ng-show="section.latest_revision && section.latest_revision.id != section.approved_revision_id">
-                            Pending changes by {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}
-                            <button class="btn btn-xs btn-success" ng-click="approveRevision(section.latest_revision, index)">Approve</button>
+                            <a href ng-click="diffRevision(section, index)">Pending changes by {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}</a>
                         </small>
                     </div>
                 </div>
