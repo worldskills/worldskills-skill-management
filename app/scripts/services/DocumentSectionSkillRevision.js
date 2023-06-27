@@ -8,7 +8,8 @@
             id: '@id'
         }, {
             query: {
-                method: 'GET'
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/documents/:documentId/skills/:skillId/revisions'
             },
             approve: {
                 method: 'PUT',

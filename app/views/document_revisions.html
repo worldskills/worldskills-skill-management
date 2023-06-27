@@ -1,0 +1,52 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ document.name.text }}</a></li>
+    <li class="active">Change log</li>
+</ol>
+
+<p>
+    {{ document.name.text }}
+    <br/>
+    {{ skill.name.text }}
+</p>
+
+<h1 class="align-top">Change log</h1>
+
+<br>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="15%" />
+            <col width="35%" />
+            <col width="30%" />
+            <col width="20%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Date/Time</th>
+                <th>Section</th>
+                <th>Author</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="revision in revisions.revisions">
+                <td>{{ revision.created|date:'dd.MM.yyyy HH:mm' }}</td>
+                <td>
+                    {{ revision.parent.number }} {{ revision.parent.title.text }}
+                </td>
+                <td>{{ revision.author.first_name }} {{ revision.author.last_name }}</td>
+                <td><a href ng-click="diffRevision(revision)" ng-show="revision.previous">Show change</a></td>
+            </tr>
+            <tr ng-show="revisions.revisions.length == 0">
+                <td colspan="4">No changes found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="4"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

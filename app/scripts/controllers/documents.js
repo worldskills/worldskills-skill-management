@@ -61,6 +61,29 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
     };
 });
 
+angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($scope, $stateParams, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapterSkill, DocumentSectionSkillRevision) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+    $scope.skill = Skill.get({id: $stateParams.skillId});
+
+    $scope.document = DocumentSkill.get({id: $stateParams.documentId, skillId: $stateParams.skillId});
+
+    $scope.revisions = DocumentSectionSkillRevision.query({documentId: $stateParams.documentId, skillId: $stateParams.skillId});
+
+    $scope.diffRevision = function (revision) {
+        $scope.revision = revision;
+        $scope.diffRevisionModal = $uibModal.open({
+            templateUrl: 'views/document_revision_diff.html',
+            controller: 'DocumentRevisionDiffCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+    };
+
+});
+
 angular.module('skillMgmtApp').controller('DocumentSectionEditFormCtrl', function ($scope, $stateParams, $uibModalInstance, DocumentSectionSkill) {
 
     $scope.save = function () {
@@ -103,6 +126,16 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
+    };
+
+});
+
+angular.module('skillMgmtApp').controller('DocumentRevisionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff) {
+
+    $scope.diff = $sce.trustAsHtml(htmldiff($scope.revision.previous.text, $scope.revision.text));
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('close');
     };
 
 });

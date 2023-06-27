@@ -28,7 +28,7 @@
 
         <br><br>
 
-        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}}</p>
+        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}} - <a ui-sref="document_revisions({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">Change log</a></p>
 
     </div>
 </div>

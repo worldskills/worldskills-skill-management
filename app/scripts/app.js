@@ -210,6 +210,18 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('document_revisions', {
+        url: '/events/{eventId}/documents/{documentId}/skills/{skillId}/revisions',
+        templateUrl: 'views/document_revisions.html',
+        controller: 'DocumentRevisionsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewDocument'}
+            ]
+        }
+    })
     .state('plan', {
         url: '/plan/{skillId}/day/{day}',
         templateUrl: 'views/plan.html',
