@@ -39,7 +39,7 @@
                             {{ revision.created|date:'dd.MM.yyyy HH:mm' }}
                         </td>
                         <td>
-                            <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: revision.parent.chapter_id})">{{ revision.parent.number }} {{ revision.parent.title.text }}</a>
+                            <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: revision.parent.chapter_id, '#': 'section' + revision.parent.id})">{{ revision.parent.number }} {{ revision.parent.title.text }}</a>
                         </td>
                         <td>
                             <a href ng-click="diffRevision(revision)">Show change</a>

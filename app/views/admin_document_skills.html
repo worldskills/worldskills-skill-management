@@ -19,7 +19,7 @@
                 <td><a ui-sref="document({eventId: event.id, documentId: document.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
                 <td>
                     <div ng-repeat="section in skill.unapprovedSections.sections">
-                        <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: section.chapter_id})">{{ section.number }} {{ section.title.text }}</a> - {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}, {{ section.latest_revision.created|date:'dd.MM.yyyy HH:mm' }} 
+                        <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: section.chapter_id, '#': 'section' + section.id})">{{ section.number }} {{ section.title.text }}</a> - {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}, {{ section.latest_revision.created|date:'dd.MM.yyyy HH:mm' }} 
                     </div>
                 </td>
             </tr>

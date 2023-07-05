@@ -11,7 +11,7 @@
         
         <h2>{{ chapter.number }} {{ chapter.title.text }}</h2>
 
-        <div ng-repeat="(index, section) in chapter.sections">
+        <div ng-repeat="(index, section) in chapter.sections" id="section{{section.id}}">
             <h3>{{ section.number }} {{ section.title.text }}</h3>
             <div class="worldskills-document-text">
                 <div ng-bind-html="section.introduction.text"></div>
