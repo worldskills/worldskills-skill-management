@@ -6,47 +6,55 @@
     <li class="active">Change log</li>
 </ol>
 
-<p>
-    {{ document.name.text }}
-    <br/>
-    {{ skill.name.text }}
-</p>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        
+        <p>
+            {{ document.name.text }}
+            <br/>
+            {{ skill.name.text }}
+        </p>
 
-<h1 class="align-top">Change log</h1>
+        <h1 class="align-top">Change log</h1>
 
-<br>
+        <br>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <colgroup>
-            <col width="15%" />
-            <col width="35%" />
-            <col width="30%" />
-            <col width="20%" />
-        </colgroup>
-        <thead>
-            <tr>
-                <th>Date/Time</th>
-                <th>Section</th>
-                <th>Author</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="revision in revisions.revisions">
-                <td>{{ revision.created|date:'dd.MM.yyyy HH:mm' }}</td>
-                <td>
-                    {{ revision.parent.number }} {{ revision.parent.title.text }}
-                </td>
-                <td>{{ revision.author.first_name }} {{ revision.author.last_name }}</td>
-                <td><a href ng-click="diffRevision(revision)" ng-show="revision.previous">Show change</a></td>
-            </tr>
-            <tr ng-show="revisions.revisions.length == 0">
-                <td colspan="4">No changes found</td>
-            </tr>
-            <tr ng-show="loading">
-                <td colspan="4"><ws-spinner></ws-spinner></td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="20%" />
+                    <col width="40%" />
+                    <col width="40%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Section</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="revision in revisions.revisions" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
+                        <td>
+                            {{ revision.created|date:'dd.MM.yyyy HH:mm' }}
+                        </td>
+                        <td>
+                            <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: revision.parent.chapter_id})">{{ revision.parent.number }} {{ revision.parent.title.text }}</a>
+                        </td>
+                        <td>
+                            <a href ng-click="diffRevision(revision)">Show change</a>
+                            <span ng-show="revision.author">({{ revision.author.first_name }} {{ revision.author.last_name }})</span>
+                        </td>
+                    </tr>
+                    <tr ng-show="revisions.revisions.length == 0">
+                        <td colspan="3">No changes found</td>
+                    </tr>
+                    <tr ng-show="loading">
+                        <td colspan="3"><ws-spinner></ws-spinner></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>

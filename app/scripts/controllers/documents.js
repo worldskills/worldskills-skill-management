@@ -132,7 +132,9 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
 
 angular.module('skillMgmtApp').controller('DocumentRevisionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff) {
 
-    $scope.diff = $sce.trustAsHtml(htmldiff($scope.revision.previous.text, $scope.revision.text));
+    var previousText = $scope.revision.previous ? $scope.revision.previous.text : '';
+
+    $scope.diff = $sce.trustAsHtml(htmldiff(previousText, $scope.revision.text));
 
     $scope.close = function () {
         $uibModalInstance.dismiss('close');
