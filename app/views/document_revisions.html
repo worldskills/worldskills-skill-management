@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="revision in revisions.revisions" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
+                    <tr ng-repeat="revision in revisions track by $index" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
                         <td>
                             {{ revision.created|date:'dd.MM.yyyy HH:mm' }}
                         </td>
@@ -46,7 +46,7 @@
                             <span ng-show="revision.author">({{ revision.author.first_name }} {{ revision.author.last_name }})</span>
                         </td>
                     </tr>
-                    <tr ng-show="revisions.revisions.length == 0">
+                    <tr ng-show="revisions.length == 0">
                         <td colspan="3">No changes found</td>
                     </tr>
                     <tr ng-show="loading">

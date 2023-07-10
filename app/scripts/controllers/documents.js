@@ -64,7 +64,7 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
     };
 });
 
-angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($scope, $stateParams, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapterSkill, DocumentSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($scope, $stateParams, $uibModal, $filter, Event, Skill, DocumentSkill, DocumentSectionRevision, DocumentSectionSkillRevision) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -72,7 +72,24 @@ angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($sc
 
     $scope.document = DocumentSkill.get({id: $stateParams.documentId, skillId: $stateParams.skillId});
 
-    $scope.revisions = DocumentSectionSkillRevision.query({documentId: $stateParams.documentId, skillId: $stateParams.skillId});
+    $scope.revisions = [];
+    
+    DocumentSectionSkillRevision.query({documentId: $stateParams.documentId, skillId: $stateParams.skillId}, function (revisions) {
+        angular.forEach(revisions.revisions, function (revision) {
+            $scope.revisions.push(revision);
+        });
+    });
+
+    DocumentSectionRevision.query({documentId: $stateParams.documentId}, function (revisions) {
+        angular.forEach(revisions.revisions, function (revision) {
+            $scope.revisions.push(revision);
+        });
+    });
+
+    // sort revisions by revision date created
+    $scope.revisions.sort(function (a, b) {
+        return $filter('date')(b.created, 'yyyy-MM-ddTHH:mm:ssZ') - $filter('date')(a.created, 'yyyy-MM-ddTHH:mm:ssZ');
+    });
 
     $scope.diffRevision = function (revision) {
         $scope.revision = revision;
