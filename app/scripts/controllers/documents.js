@@ -98,11 +98,6 @@ angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($sc
         });
     });
 
-    // sort revisions by revision date created
-    $scope.revisions.sort(function (a, b) {
-        return $filter('date')(b.created, 'yyyy-MM-ddTHH:mm:ssZ') - $filter('date')(a.created, 'yyyy-MM-ddTHH:mm:ssZ');
-    });
-
     $scope.diffRevision = function (revision) {
         $scope.revision = revision;
         $scope.diffRevisionModal = $uibModal.open({

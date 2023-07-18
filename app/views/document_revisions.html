@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="revision in revisions track by $index" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
+                    <tr ng-repeat="revision in revisions | orderBy:'created':true track by $index" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
                         <td>
                             {{ revision.created|date:'dd.MM.yyyy HH:mm' }}
                         </td>
