@@ -11,6 +11,7 @@
     <div class="col-lg-8 col-lg-offset-2">
 
         <p class="pull-right">
+            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">Edit Chapters</button>
             <button class="btn btn-default" ng-click="downloadPDF()">Download PDF</button>
         </p>
 
