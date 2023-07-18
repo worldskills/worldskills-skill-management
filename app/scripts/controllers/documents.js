@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $stateParams, $uibModal, $timeout, $anchorScroll, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapterSkill, DocumentSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $stateParams, $uibModal, $timeout, $http, WORLDSKILLS_API_SKILLMAN, $anchorScroll, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Skill, DocumentSkill, DocumentChapterSkill, Downloader) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -37,6 +37,18 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
             });
         });
     }
+
+    $scope.downloadPDF = function () {
+
+        $http({url: WORLDSKILLS_API_SKILLMAN + '/documents/' + $stateParams.documentId + '/skills/' + $stateParams.skillId + '/pdf', params: {l: 'en'}, method: 'GET', responseType : 'blob'})
+            .success( function(data, status, headers) {
+                var filename = 'document.pdf';
+                Downloader.handleDownload(data, status, headers, filename);
+            })
+            .error(function(data, status) {
+                alert("Error downloading PDF");
+            });
+    };
 
     $scope.editSection = function (section, index) {
         $scope.section = angular.copy(section);
