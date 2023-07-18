@@ -2,6 +2,10 @@
   margin-top: 0;
 }
 
+h1 small {
+    letter-spacing: normal;
+}
+
 li.active a {
   color: #111;
 }
