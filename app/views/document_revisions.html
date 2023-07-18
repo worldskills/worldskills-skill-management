@@ -8,11 +8,11 @@
 
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
-        
-        <p>
+
+        <p class="text-muted">
             {{ document.name.text }}
             <br/>
-            {{ skill.name.text }}
+            {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
         </p>
 
         <h1 class="align-top">Change log</h1>
