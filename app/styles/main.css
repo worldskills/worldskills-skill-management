@@ -97,6 +97,14 @@ footer {
     color: #fff;
 }
 
+
+.worldskills-document-text td p:last-child,
+.worldskills-document-text th p:last-child,
+.worldskills-document-edited-text td p:last-child,
+.worldskills-document-edited-text th p:last-child {
+    margin-bottom: 0;
+}
+
 .worldskills-document-text tr.green-background td,
 .worldskills-document-edited-text tr.green-background td {
     background-color: #8AE2D1;
