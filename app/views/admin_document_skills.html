@@ -1,0 +1,35 @@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="10%" />
+            <col width="40%" />
+            <col width="50%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Document for Skill</th>
+                <th>Pending changes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="skill in skills.skills">
+                <td>{{ skill.id }}</td>
+                <td><a ui-sref="document({eventId: event.id, documentId: document.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
+                <td>
+                    <div ng-repeat="section in skill.unapprovedSections.sections">
+                        <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: section.chapter_id, '#': 'section' + section.id})">{{ section.number }} {{ section.title.text }}</a> - {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}, {{ section.latest_revision.created|date:'dd.MM.yyyy HH:mm' }} 
+                    </div>
+                </td>
+            </tr>
+            <tr ng-show="skills.length == 0">
+                <td>&nbsp;</td>
+                <td colspan="2">No skills found</td>
+            </tr>
+            <tr ng-show="loading">
+                <td colspan="3"><ws-spinner></ws-spinner></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

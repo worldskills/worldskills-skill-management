@@ -271,6 +271,13 @@ module.exports = function (grunt) {
           ]
         }, {
           expand: true,
+          cwd: '<%= yeoman.app %>/ckeditor',
+          dest: '<%= yeoman.dist %>/ckeditor',
+          src: [
+            '**'
+          ]
+        }, {
+          expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
@@ -278,6 +285,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/bower_components/worldskills-bootstrap/dist/fonts',
           dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '**'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/bower_components/ckeditor',
+          dest: '<%= yeoman.dist %>/bower_components/ckeditor',
           src: [
             '**'
           ]

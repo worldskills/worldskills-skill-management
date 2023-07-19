@@ -1,0 +1,60 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
+    <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
+    <li><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ document.name.text }}</a></li>
+    <li class="active">Change log</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <p class="text-muted">
+            {{ document.name.text }}
+            <br/>
+            {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
+        </p>
+
+        <h1 class="align-top">Change log</h1>
+
+        <br>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="20%" />
+                    <col width="40%" />
+                    <col width="40%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Section</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="revision in revisions | orderBy:'created':true track by $index" ng-class="{'text-muted': !revision.approved}" ng-style="{'font-style': revision.approved ? '' : 'italic'}" ng-attr-title="{{revision.approved ? '' : 'Pending approval'}}">
+                        <td>
+                            {{ revision.created|date:'dd.MM.yyyy HH:mm' }}
+                        </td>
+                        <td>
+                            <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: revision.parent.chapter_id, '#': 'section' + revision.parent.id})">{{ revision.parent.number }} {{ revision.parent.title.text }}</a>
+                        </td>
+                        <td>
+                            <a href ng-click="diffRevision(revision)">Show change</a>
+                            <span ng-show="revision.author">({{ revision.author.first_name }} {{ revision.author.last_name }})</span>
+                        </td>
+                    </tr>
+                    <tr ng-show="revisions.length == 0">
+                        <td colspan="3">No changes found</td>
+                    </tr>
+                    <tr ng-show="loading">
+                        <td colspan="3"><ws-spinner></ws-spinner></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

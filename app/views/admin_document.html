@@ -1,0 +1,20 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
+    <li><a ui-sref="admin_event.documents({eventId: event.id})">Documents</a></li>
+    <li class="active">{{ title }}</li>
+</ol>
+
+<ws-alerts></ws-alerts>
+
+<h1 class="align-top">{{ title }}</h1>
+
+<ul class="nav nav-tabs">
+    <li ui-sref-active="{active: 'admin_document.skills'}"><a ui-sref="admin_document.skills">Skills</a></li>
+    <li ui-sref-active="{active: 'admin_document.chapters'}"><a ui-sref="admin_document.chapters">Chapters</a></li>
+    <li ui-sref-active="{active: 'admin_document.name'}"><a ui-sref="admin_document.name">Settings</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>

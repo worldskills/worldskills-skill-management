@@ -1,0 +1,63 @@
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
+        <h2 class="modal-title">Section</h2>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="level" class="col-sm-3 control-label">Number Level</label>
+            <div class="col-sm-2">
+                <select class="form-control" ng-model="section.level">
+                    <option ng-value="1">X.X</option>
+                    <option ng-value="2">X.X.X</option>
+                    <option ng-value="3">X.X.X.X</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="col-sm-3 control-label">Title</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="title" ng-model="section.title.text">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="section.publicly_visible">
+                        Publicly visible
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="introduction" class="col-sm-3 control-label">Introduction</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="4" ng-model="section.introduction.text" name="introduction" ck-editor></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="section.skill_editable">
+                        Editable by Skill
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="section.skill_editable">
+            <label for="explanation" class="col-sm-3 control-label">Explanation</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="4" ng-model="section.explanation.text" name="explanation" ck-editor></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <div class="pull-left">
+          <button type="button" class="btn btn-danger" ng-click="delete()" ng-show="section.id">Delete</button>
+        </div>
+    </div>
+</form>

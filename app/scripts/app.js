@@ -10,6 +10,7 @@ var skillmanApp = angular
     'ui.bootstrap',
     'ngFileUpload',
     'pascalprecht.translate',
+    'htmldiff',
     'worldskills.utils'
   ]);
 
@@ -182,6 +183,42 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
                 {code: 1200, role: 'EditSkillItems'}
+            ]
+        }
+    })
+    .state('document', {
+        url: '/events/{eventId}/documents/{documentId}/skills/{skillId}',
+        templateUrl: 'views/document.html',
+        controller: 'DocumentCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewDocument'}
+            ]
+        }
+    })
+    .state('document_chapter', {
+        url: '/events/{eventId}/documents/{documentId}/chapters/{chapterId}/skills/{skillId}',
+        templateUrl: 'views/document_chapter.html',
+        controller: 'DocumentCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewDocument'}
+            ]
+        }
+    })
+    .state('document_revisions', {
+        url: '/events/{eventId}/documents/{documentId}/skills/{skillId}/revisions',
+        templateUrl: 'views/document_revisions.html',
+        controller: 'DocumentRevisionsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ViewDocument'}
             ]
         }
     })
@@ -655,6 +692,60 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requiredRoles: [
                 {code: 1200, role: 'Admin'},
                 {code: 1200, role: 'ViewAllSubmissions'}
+            ]
+        }
+    })
+    .state('admin_event.documents', {
+        url: '/admin/events/{eventId}/documents',
+        templateUrl: 'views/admin_documents.html',
+        controller: 'AdminEventDocumentsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ManageDocument'}
+            ]
+        }
+    })
+    .state('admin_document', {
+        url: '/admin/events/{eventId}/documents/{documentId}',
+        templateUrl: 'views/admin_document.html',
+        controller: 'AdminDocumentCtrl',
+        abstract: true
+    })
+    .state('admin_document.skills', {
+        url: '/admin/events/{eventId}/documents/{documentId}/skills',
+        templateUrl: 'views/admin_document_skills.html',
+        controller: 'AdminDocumentSkillsCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ManageDocument'}
+            ]
+        }
+    })
+    .state('admin_document.chapters', {
+        url: '/admin/events/{eventId}/documents/{documentId}/chapters',
+        templateUrl: 'views/admin_document_chapters.html',
+        controller: 'AdminDocumentChaptersCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ManageDocument'}
+            ]
+        }
+    })
+    .state('admin_document.name', {
+        url: '/admin/events/{eventId}/documents/{documentId}/name',
+        templateUrl: 'views/admin_document_name.html',
+        controller: 'AdminDocumentNameCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ManageDocument'}
             ]
         }
     })

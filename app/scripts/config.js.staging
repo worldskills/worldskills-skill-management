@@ -7,6 +7,7 @@
     wsApp.constant('WORLDSKILLS_API_EVENTS', 'https://api.worldskills.show/events');
     wsApp.constant('WORLDSKILLS_API_AUTH', 'https://api.worldskills.show/auth');
     wsApp.constant('WORLDSKILLS_API_PEOPLE', 'https://api.worldskills.show/people');
+    wsApp.constant('WORLDSKILLS_API_IMAGES', 'https://api.worldskills.show/images');
     wsApp.constant('WORLDSKILLS_API_URL', 'https://api.worldskills.show');
     wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', 'https://auth.worldskills.show/oauth/authorize');
     wsApp.constant('WORLDSKILLS_WEB_PROTOCOL', 'https://');

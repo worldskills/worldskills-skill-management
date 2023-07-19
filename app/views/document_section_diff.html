@@ -1,0 +1,16 @@
+<form class="form" name="form" novalidate focus-error ng-submit="approve()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
+        <h2 class="modal-title">{{ section.number }} {{ section.title.text }}</h2>
+    </div>
+    <div class="modal-body">
+        <div class="worldskills-document-text worldskills-document-diff" ng-bind-html="diff"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-success">Approve<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <div class="pull-left">
+          <button type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
+        </div>
+    </div>
+</form>
