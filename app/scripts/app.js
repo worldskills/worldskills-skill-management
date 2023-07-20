@@ -684,7 +684,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     }).state('admin_event.form_progress', {
-        url: '/admin/events/{eventId}/forms_progress',
+        url: '/forms_progress',
         templateUrl: 'views/admin_form_progress.html',
         controller: 'AdminFormProgressCtrl',
         data: {
@@ -696,7 +696,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         }
     })
     .state('admin_event.documents', {
-        url: '/admin/events/{eventId}/documents',
+        url: '/documents',
         templateUrl: 'views/admin_documents.html',
         controller: 'AdminEventDocumentsCtrl',
         data: {
@@ -714,7 +714,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         abstract: true
     })
     .state('admin_document.skills', {
-        url: '/admin/events/{eventId}/documents/{documentId}/skills',
+        url: '/skills',
         templateUrl: 'views/admin_document_skills.html',
         controller: 'AdminDocumentSkillsCtrl',
         data: {
@@ -726,7 +726,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         }
     })
     .state('admin_document.chapters', {
-        url: '/admin/events/{eventId}/documents/{documentId}/chapters',
+        url: '/chapters',
         templateUrl: 'views/admin_document_chapters.html',
         controller: 'AdminDocumentChaptersCtrl',
         data: {
@@ -738,7 +738,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         }
     })
     .state('admin_document.name', {
-        url: '/admin/events/{eventId}/documents/{documentId}/name',
+        url: '/name',
         templateUrl: 'views/admin_document_name.html',
         controller: 'AdminDocumentNameCtrl',
         data: {
@@ -750,7 +750,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
         }
     })
     .state('admin_event.progress_items', {
-        url: '/admin/events/{eventId}/progress_items',
+        url: '/progress_items',
         templateUrl: 'views/admin_progress_items.html',
         controller: 'AdminEventProgressItemsCtrl',
         data: {
