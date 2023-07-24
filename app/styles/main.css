@@ -77,6 +77,28 @@ footer {
     max-width: 100%;
 }
 
+.worldskills-document-text ul,
+.worldskills-document-edited-text ul {
+    padding-left: 0;
+}
+
+.worldskills-document-text li,
+.worldskills-document-edited-text li {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.worldskills-document-text li:before,
+.worldskills-document-edited-text li:before {
+    content: '';
+    float: left;
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    width: 1em;
+    margin-left: -1em;
+}
+
 .worldskills-document-text table,
 .worldskills-document-edited-text table {
     margin-bottom: 1em;
