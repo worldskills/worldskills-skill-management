@@ -99,6 +99,11 @@ footer {
     margin-left: -1em;
 }
 
+.worldskills-document-text ul li ul li:before,
+.worldskills-document-edited-text ul li ul li:before {
+    list-style-type: circle;
+}
+
 .worldskills-document-text table,
 .worldskills-document-edited-text table {
     margin-bottom: 1em;
