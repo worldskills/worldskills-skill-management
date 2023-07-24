@@ -82,14 +82,14 @@ footer {
     padding-left: 0;
 }
 
-.worldskills-document-text li,
-.worldskills-document-edited-text li {
+.worldskills-document-text ul li,
+.worldskills-document-edited-text ul li {
     list-style-type: none;
     padding-left: 20px;
 }
 
-.worldskills-document-text li:before,
-.worldskills-document-edited-text li:before {
+.worldskills-document-text ul li:before,
+.worldskills-document-edited-text ul li:before {
     content: '';
     float: left;
     display: list-item;
