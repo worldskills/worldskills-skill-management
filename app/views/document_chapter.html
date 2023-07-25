@@ -48,13 +48,13 @@
             <div class="col-md-6">
                 <div ng-show="previousChapter">
                     <h5>Previous</h5>
-                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: previousChapter.id})">{{ previousChapter.title.text }}</a></p>
+                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: previousChapter.id})"><span class="glyphicon glyphicon-chevron-left"></span> {{ previousChapter.title.text }}</a></p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="pull-right" ng-show="nextChapter">
                     <h5 class="text-right">Next</h5>
-                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: nextChapter.id})">{{ nextChapter.title.text }}</a></p>
+                    <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: nextChapter.id})">{{ nextChapter.title.text }} <span class="glyphicon glyphicon-chevron-right"></span></a></p>
                 </div>
             </div>
         </div>
