@@ -87,7 +87,8 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <strong>Expert 1</strong>
+                                            <strong ng-if="field.type == 'expert_agreement'">Expert 1</strong>
+                                            <strong ng-if="field.type == 'competitor_agreement'">Competitor 1</strong>
                                             <span class="text-muted"><br/>Country/Region 1</span>
                                         </p>
                                         <div class="row">
@@ -118,7 +119,8 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <strong>Expert 2</strong>
+                                            <strong ng-if="field.type == 'expert_agreement'">Expert 2</strong>
+                                            <strong ng-if="field.type == 'competitor_agreement'">Competitor 2</strong>
                                             <span class="text-muted"><br/>Country/Region 2</span>
                                         </p>
                                         <div class="row">
