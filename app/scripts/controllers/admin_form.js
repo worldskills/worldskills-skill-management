@@ -14,7 +14,7 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, alert, Form, Event) {
+angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, alert, auth, WORLDSKILLS_API_SKILLMAN_CODE, Form, Event) {
 
     $scope.id = $stateParams.id;
 
@@ -28,7 +28,14 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
         }
     });
 
-    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditForms = true;
+            }
+        });
+    });
 
     $scope.deleteForm = function() {
        if (window.confirm('Deleting the Form will also delete all data associated with this Form. Click OK to proceed.')) {

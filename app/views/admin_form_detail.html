@@ -8,7 +8,7 @@
 
 <alerts></alerts>
 
-<p class="pull-right"">
+<p class="pull-right" ng-show="userCanEditForms">
     <span class="text-muted" ng-show="model.has_submissions">Form can't be deleted because it has Submissions.</span>
     <button ng-click="deleteForm()" class="btn btn-danger" ng-disabled="event.locked || model.has_submissions">Delete Form<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
@@ -16,9 +16,9 @@
 <h1>{{title || " "}}</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="{active: 'admin_form_detail.form'}"><a ui-sref="admin_form_detail.form">Form</a></li>
-    <li ui-sref-active="{active: 'admin_form_detail.fields'}"><a ui-sref="admin_form_detail.fields">Fields</a></li>
-    <li ui-sref-active="{active: 'admin_form_detail.preview'}"><a ui-sref="admin_form_detail.preview">Preview</a></li>
+    <li ng-show="userCanEditForms" ui-sref-active="{active: 'admin_form_detail.form'}"><a ui-sref="admin_form_detail.form">Form</a></li>
+    <li ng-show="userCanEditForms" ui-sref-active="{active: 'admin_form_detail.fields'}"><a ui-sref="admin_form_detail.fields">Fields</a></li>
+    <li ng-show="userCanEditForms" ui-sref-active="{active: 'admin_form_detail.preview'}"><a ui-sref="admin_form_detail.preview">Preview</a></li>
     <li ui-sref-active="{active: 'admin_form_detail.submissions'}"><a ui-sref="admin_form_detail.submissions">Submissions</a></li>
 </ul>
 
