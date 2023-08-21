@@ -9,7 +9,7 @@
         { name: 'Green Background', element: 'tr', attributes: { 'class': 'green-background' } }
     ]);
 
-    angular.module('skillMgmtApp').directive('ckEditor', function(alert) {
+    angular.module('skillMgmtApp').directive('ckEditor', function(WORLDSKILLS_API_IMAGES) {
         return {
             require: '?ngModel',
             link: function ($scope, elm, attr, ngModel) {
@@ -19,9 +19,11 @@
                 var options = {
                     height: 400,
                     contentsCss: 'ckeditor/contents.css',
-                    removePlugins : 'elementspath,image,specialchar',
+                    removePlugins : 'elementspath,specialchar',
                     removeButtons : 'Underline',
-                    extraPlugins : 'worldskillsimages',
+                    extraPlugins : 'worldskillsimages,uploadimage',
+                    filebrowserUploadUrl: WORLDSKILLS_API_IMAGES,
+                    uploadUrl: WORLDSKILLS_API_IMAGES,
                     toolbarGroups : [
                         {name : 'basicstyles', groups : [ 'basicstyles', 'cleanup' ]},
                         {name : 'paragraph',   groups: [ 'list', 'indent' ] },
@@ -31,6 +33,7 @@
                         {name : 'tools'},
                         {name : 'document', groups : [ 'mode' ]}
                     ],
+                    clipboard_handleImages: false,
                     uiColor: '#e8e8e8',
                     stylesSet: 'worldskillsstyles',
                     disallowedContent: '*{*}'
