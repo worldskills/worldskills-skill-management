@@ -101,7 +101,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default" ng-show="userCanViewDocument">
+    <div class="panel panel-default" ng-show="userCanViewDocument && documents.documents.length">
       <div class="panel-heading">Documents</div>
       <div class="panel-body">
         <p ng-repeat="document in documents.documents"><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
