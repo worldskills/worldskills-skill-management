@@ -6,7 +6,8 @@
     CKEDITOR.plugins.addExternal('worldskillsimages', '/ckeditor/worldskillsimages/', 'plugin.js');
 
     CKEDITOR.stylesSet.add('worldskillsstyles', [
-        { name: 'Green Background', element: 'tr', attributes: { 'class': 'green-background' } }
+        { name: 'Green Background', element: 'tr', attributes: { 'class': 'green-background' } },
+        { name: 'Bordered Table', element: 'table', attributes: { 'class': 'table-bordered' } }
     ]);
 
     angular.module('skillMgmtApp').directive('ckEditor', function(WORLDSKILLS_API_IMAGES) {

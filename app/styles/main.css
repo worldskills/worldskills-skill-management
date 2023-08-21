@@ -109,6 +109,25 @@ footer {
     margin-bottom: 1em;
 }
 
+.worldskills-document-text .table-bordered,
+.worldskills-document-edited-text .table-bordered {
+    border-color: #0084AD;
+}
+.worldskills-document-text .table-bordered > thead > tr > th,
+.worldskills-document-text .table-bordered > tbody > tr > th,
+.worldskills-document-text .table-bordered > tfoot > tr > th,
+.worldskills-document-text .table-bordered > thead > tr > td,
+.worldskills-document-text .table-bordered > tbody > tr > td,
+.worldskills-document-text .table-bordered > tfoot > tr > td,
+.worldskills-document-edited-text .table-bordered > thead > tr > th,
+.worldskills-document-edited-text .table-bordered > tbody > tr > th,
+.worldskills-document-edited-text .table-bordered > tfoot > tr > th,
+.worldskills-document-edited-text .table-bordered > thead > tr > td,
+.worldskills-document-edited-text .table-bordered > tbody > tr > td,
+.worldskills-document-edited-text .table-bordered > tfoot > tr > td {
+    border-color: #0084AD;
+}
+
 .worldskills-document-text th,
 .worldskills-document-text td,
 .worldskills-document-edited-text th,
@@ -123,7 +142,6 @@ footer {
     background-color: #0084AD;
     color: #fff;
 }
-
 
 .worldskills-document-text td p:last-child,
 .worldskills-document-text th p:last-child,
