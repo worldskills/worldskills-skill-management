@@ -35,6 +35,7 @@
                         {name : 'document', groups : [ 'mode' ]}
                     ],
                     clipboard_handleImages: false,
+                    image2_prefillDimensions: false,
                     uiColor: '#e8e8e8',
                     stylesSet: 'worldskillsstyles',
                     disallowedContent: '*{*}'
