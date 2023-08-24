@@ -37,6 +37,10 @@ table {
     margin-bottom: 1em;
 }
 
+.color-alternative {
+    color: #D51067;
+}
+
 .table-bordered {
     border: 1px solid #0084AD !important;
 }

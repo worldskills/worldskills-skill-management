@@ -71,6 +71,11 @@ footer {
     color: #0084AD;
 }
 
+.worldskills-document-text .color-alternative,
+.worldskills-document-edited-text .color-alternative {
+    color: #D51067;
+}
+
 .worldskills-document-text img,
 .worldskills-document-edited-text img {
     vertical-align: top;

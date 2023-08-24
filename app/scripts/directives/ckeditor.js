@@ -7,7 +7,8 @@
 
     CKEDITOR.stylesSet.add('worldskillsstyles', [
         { name: 'Green Background', element: 'tr', attributes: { 'class': 'green-background' } },
-        { name: 'Bordered Table', element: 'table', attributes: { 'class': 'table-bordered' } }
+        { name: 'Bordered Table', element: 'table', attributes: { 'class': 'table-bordered' } },
+        { name: 'Alternative Color', element: 'p', attributes: { 'class': 'color-alternative' } }
     ]);
 
     angular.module('skillMgmtApp').directive('ckEditor', function(WORLDSKILLS_API_IMAGES) {
@@ -22,7 +23,7 @@
                     contentsCss: 'ckeditor/contents.css',
                     removePlugins : 'elementspath,specialchar,image',
                     removeButtons : 'Underline',
-                    extraPlugins : 'worldskillsimages,uploadimage,image2',
+                    extraPlugins : 'worldskillsimages,uploadimage,image2,tableresize',
                     filebrowserUploadUrl: WORLDSKILLS_API_IMAGES,
                     uploadUrl: WORLDSKILLS_API_IMAGES,
                     toolbarGroups : [
