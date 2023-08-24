@@ -39,14 +39,17 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
     }
 
     $scope.downloadPDF = function () {
+        $scope.loadingPDF = true;
 
         $http({url: WORLDSKILLS_API_SKILLMAN + '/documents/' + $stateParams.documentId + '/skills/' + $stateParams.skillId + '/pdf', params: {l: 'en'}, method: 'GET', responseType : 'blob'})
             .success( function(data, status, headers) {
                 var filename = 'document.pdf';
                 Downloader.handleDownload(data, status, headers, filename);
+                $scope.loadingPDF = false;
             })
             .error(function(data, status) {
                 alert("Error downloading PDF");
+                $scope.loadingPDF = false;
             });
     };
 
