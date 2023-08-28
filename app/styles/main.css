@@ -139,6 +139,7 @@ footer {
 .worldskills-document-edited-text td {
     padding: 0.5em 1em;
     text-align: left;
+    vertical-align: top;
     border-bottom: 1px solid #0084AD;
 }
 
