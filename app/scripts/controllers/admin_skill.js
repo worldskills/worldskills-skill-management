@@ -99,8 +99,8 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
                 entity: {
                     id: $scope.skill.entity_id
                 },
-                title: { lang_code: 'en', text: 'Chief Expert election - ' + $scope.skill.name.text },
-                question: { lang_code: 'en', text: 'Please select your choices for the Chief Expert position in order of preference:' },
+                title: { lang_code: 'en', text: 'Chief Expert and Deputy Chief Expert election - ' + $scope.skill.name.text },
+                question: { lang_code: 'en', text: 'Please select your choices for the Chief Expert and Deputy Chief Expert position in order of preference:' },
                 type: 'weighted',
                 numberOfSelections: numberOfSelections,
                 anonymousResults: true,
