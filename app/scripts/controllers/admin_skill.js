@@ -33,22 +33,27 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
 
 });
 
-angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, PeoplePerson, Poll) {
+angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, Event, SkillExpert, PeoplePerson, Poll) {
 
     $scope.loading = true;
 
+    $scope.event = Event.get({id: $stateParams.eventId});
+    
     $scope.experts = SkillExpert.query({skillId: $stateParams.skillId}, function () {
-        angular.forEach($scope.experts.registration_people, function (expert) {
-            PeoplePerson.get({id: expert.person.id, include_history: 1}, function (person) {
-                expert.history = [];
-                angular.forEach(person.positions, function (position) {
-                    if (position.position.ws_entity.parent_id === 1 && position.timestamp_end !== null && (position.position.name.text === 'Expert' || position.position.name.text === 'Deputy Chief Expert' || position.position.name.text === 'Chief Expert')) {
-                        expert.history.push(position);
-                    }
+        $scope.event.$promise.then(function () {
+
+            angular.forEach($scope.experts.registration_people, function (expert) {
+                PeoplePerson.get({id: expert.person.id, include_history: 1}, function (person) {
+                    expert.history = [];
+                    angular.forEach(person.positions, function (position) {
+                        if (position.position.ws_entity.parent_id === $scope.event.highest_parent_entity.id && position.timestamp_end !== null && (position.position.name.text === 'Expert' || position.position.name.text === 'Deputy Chief Expert' || position.position.name.text === 'Chief Expert')) {
+                            expert.history.push(position);
+                        }
+                    });
                 });
             });
+            $scope.loading = false;
         });
-        $scope.loading = false;
     });
 
     $scope.expertChanged = function (expert) {
