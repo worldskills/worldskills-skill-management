@@ -59,6 +59,10 @@ footer {
     cursor: pointer;
 }
 
+.popover {
+    max-width: 900px;
+}
+
 .font-weight-normal {
   font-weight: normal;
 }
