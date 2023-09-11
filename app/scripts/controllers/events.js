@@ -33,6 +33,12 @@ angular.module('skillMgmtApp').controller('EventCtrl', function($scope, $statePa
             }
         });
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewDocument'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanViewDocument = true;
+            }
+        });
+
         var tags = [];
         tags.push($scope.event.code ? $scope.event.code : $scope.event.name);
 
@@ -61,8 +67,19 @@ angular.module('skillMgmtApp').controller('EventCtrl', function($scope, $statePa
 
 });
 
-angular.module('skillMgmtApp').controller('EventSkillsCtrl', function($scope, $stateParams, Skill) {
+angular.module('skillMgmtApp').controller('EventSkillsCtrl', function($scope, $stateParams, Skill, Document) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId});
+
+    $scope.documents = Document.query({eventId: $stateParams.eventId});
+
+});
+
+angular.module('skillMgmtApp').controller('EventDocumentCtrl', function ($scope, $stateParams, Event, Skill, Document) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.skills = Skill.query({event: $stateParams.eventId});
+
+    $scope.document = Document.get({id: $stateParams.documentId});
 
 });
