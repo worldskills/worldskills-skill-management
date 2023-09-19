@@ -59,7 +59,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
                         alert("Error downloading PDF");
                         doCountdown();
                     });
-            }, i * 5000);
+            }, i * 10000);
         });
     };
 
