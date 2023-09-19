@@ -25,7 +25,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $q, $timeout, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN) {
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $timeout, $interval, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN, WORLDSKILLS_API_AUTH) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
@@ -40,10 +40,16 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
         var skills = $scope.skills.skills;
         var countdown = skills.length;
 
+        // keep session alive
+        var intervalPromise = $interval(function () {
+            $http({method: 'GET', url: WORLDSKILLS_API_AUTH + '/ping'});
+        }, 2000);
+
         var doCountdown = function () {
             countdown--;
             if (countdown == 0) {
                 $scope.loadingPDF = false;
+                $interval.cancel(intervalPromise);
             }
         };
 
