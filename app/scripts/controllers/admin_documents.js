@@ -25,7 +25,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, Skill, DocumentSkill) {
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
@@ -33,6 +33,24 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
             skill.unapprovedSections = DocumentSkill.unapprovedSections({id: $stateParams.documentId, skillId: skill.id});
         });
     });
+
+    $scope.downloadPDFs = function () {
+        $scope.loadingPDF = true;
+
+
+        angular.forEach($scope.skills.skills, function (skill) {
+            $http({url: WORLDSKILLS_API_SKILLMAN + '/documents/' + $stateParams.documentId + '/skills/' + skill.id + '/pdf', params: {l: 'en'}, method: 'GET', responseType : 'blob'})
+                .success( function(data, status, headers) {
+                    var filename = 'document.pdf';
+                    Downloader.handleDownload(data, status, headers, filename);
+                    $scope.loadingPDF = false;
+                })
+                .error(function(data, status) {
+                    alert("Error downloading PDF");
+                    $scope.loadingPDF = false;
+                });
+        });
+    };
 
 });
 

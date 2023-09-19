@@ -33,3 +33,7 @@
         </tbody>
     </table>
 </div>
+
+<p>
+    <button class="btn btn-default btn-sm" ng-show="userIsAdmin" ng-click="downloadPDFs()" ng-disabled="loadingPDF">Download all PDFs<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
+</p>
