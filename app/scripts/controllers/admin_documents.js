@@ -25,7 +25,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN) {
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $q, $timeout, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
@@ -37,18 +37,29 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
     $scope.downloadPDFs = function () {
         $scope.loadingPDF = true;
 
+        var skills = $scope.skills.skills;
+        var countdown = skills.length;
 
-        angular.forEach($scope.skills.skills, function (skill) {
-            $http({url: WORLDSKILLS_API_SKILLMAN + '/documents/' + $stateParams.documentId + '/skills/' + skill.id + '/pdf', params: {l: 'en'}, method: 'GET', responseType : 'blob'})
-                .success( function(data, status, headers) {
-                    var filename = 'document.pdf';
-                    Downloader.handleDownload(data, status, headers, filename);
-                    $scope.loadingPDF = false;
-                })
-                .error(function(data, status) {
-                    alert("Error downloading PDF");
-                    $scope.loadingPDF = false;
-                });
+        var doCountdown = function () {
+            countdown--;
+            if (countdown == 0) {
+                $scope.loadingPDF = false;
+            }
+        };
+
+        angular.forEach(skills, function (skill, i) {
+            $timeout(function () {
+                $http({url: WORLDSKILLS_API_SKILLMAN + '/documents/' + $stateParams.documentId + '/skills/' + skill.id + '/pdf', params: {l: 'en'}, method: 'GET', responseType : 'blob'})
+                    .success( function(data, status, headers) {
+                        var filename = 'document.pdf';
+                        Downloader.handleDownload(data, status, headers, filename);
+                        doCountdown();
+                    })
+                    .error(function(data, status) {
+                        alert("Error downloading PDF");
+                        doCountdown();
+                    });
+            }, i * 5000);
         });
     };
 
