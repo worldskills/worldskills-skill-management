@@ -211,14 +211,14 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
             $scope.loading = true;
             if ($scope.section.id) {
                 DocumentSection.update({documentId: $scope.document.id}, $scope.section, function (response) {
-                    alert.success('The section has been updated.');
+                    alert.success('The subsection has been updated.');
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
             } else {
                 DocumentSection.save({documentId: $scope.document.id}, $scope.section, function (response) {
-                    alert.success('The section has been created.');
+                    alert.success('The subsection has been created.');
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -232,9 +232,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
     };
 
     $scope.delete = function () {
-        if (confirm('Really delete the section and all edits from all Skills? Click OK to proceed.')) {
+        if (confirm('Really delete the subsection and all edits from all Skills? Click OK to proceed.')) {
             DocumentSection.delete({documentId: $scope.document.id, id: $scope.section.id}, function () {
-                alert.success('The section has been deleted.');
+                alert.success('The subsection has been deleted.');
                 $uibModalInstance.close();
             }, function (httpResponse) {
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -254,7 +254,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
             $scope.loading = true;
             if ($scope.chapter.id) {
                 DocumentChapter.update({documentId: $scope.document.id}, $scope.chapter.chapter, function (response) {
-                    alert.success('The chapter has been updated.');
+                    alert.success('The section has been updated.');
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -262,7 +262,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
                 });
             } else {
                 DocumentChapter.save({documentId: $scope.document.id}, $scope.chapter.chapter, function (response) {
-                    alert.success('The chapter has been created.');
+                    alert.success('The section has been created.');
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -273,9 +273,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
     };
 
     $scope.delete = function () {
-        if (confirm('Deleting the chapter will also delete all of its sections! Click OK to proceed.')) {
+        if (confirm('Deleting the section will also delete all of its subsections! Click OK to proceed.')) {
             DocumentChapter.delete({documentId: $scope.document.id, id: $scope.chapter.id}, $scope.chapter, function () {
-                alert.success('The chapter has been deleted.');
+                alert.success('The section has been deleted.');
                 $uibModalInstance.close();
             }, function (httpResponse) {
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));

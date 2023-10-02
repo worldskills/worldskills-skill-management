@@ -11,7 +11,7 @@
     <div class="col-lg-8 col-lg-offset-2">
 
         <p class="pull-right">
-            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">Edit Chapters</button>
+            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">Edit Sections</button>
             <button class="btn btn-default" ng-show="userIsAdmin" ng-click="downloadPDF()" ng-disabled="loadingPDF">Download PDF<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
         </p>
 
