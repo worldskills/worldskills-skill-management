@@ -116,6 +116,7 @@ footer {
 .worldskills-document-text table,
 .worldskills-document-edited-text table {
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .worldskills-document-text .table-bordered,
