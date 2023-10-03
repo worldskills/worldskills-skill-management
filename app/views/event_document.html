@@ -30,7 +30,7 @@
                     <tr ng-repeat="documentSkill in documentSkills.documents">
                         <td>{{ documentSkill.skill.number }}</td>
                         <td><a ui-sref="document({eventId: event.id, documentId: document.id, skillId: documentSkill.skill.id})">{{ documentSkill.skill.name.text }}</a></td>
-                        <td>{{ documentSkill.last_updated | date: 'dd.MM.yyyy HH:mm' }}</td>
+                        <td>{{ documentSkill.last_updated | date: 'dd.MM.yyyy HH:mm' }} <span class="label label-success" ng-show="isNew(documentSkill.last_updated)">New</span></td>
                     </tr>
                     <tr ng-show="documentSkills.documents.length == 0">
                         <td colspan="3">No skills found</td>
