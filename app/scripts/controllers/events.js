@@ -75,10 +75,10 @@ angular.module('skillMgmtApp').controller('EventSkillsCtrl', function($scope, $s
 
 });
 
-angular.module('skillMgmtApp').controller('EventDocumentCtrl', function ($scope, $stateParams, Event, Skill, Document) {
+angular.module('skillMgmtApp').controller('EventDocumentCtrl', function ($scope, $stateParams, Event, Skill, DocumentSkill, Document) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
-    $scope.skills = Skill.query({event: $stateParams.eventId});
+    $scope.documentSkills = DocumentSkill.query({id: $stateParams.documentId});
 
     $scope.document = Document.get({id: $stateParams.documentId});
 

@@ -16,38 +16,27 @@
             <table class="table table-striped">
                 <colgroup>
                     <col width="10%" />
-                    <col width="90%" />
+                    <col width="60%" />
+                    <col width="30%" />
                 </colgroup>
                 <thead>
                     <tr>
                         <th>Number</th>
                         <th>Skill</th>
+                        <th>Last updated</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="skill in skills.skills">
-                        <td>{{ skill.number }}</td>
-                        <td><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ skill.name.text }}</a></td>
+                    <tr ng-repeat="documentSkill in documentSkills.documents">
+                        <td>{{ documentSkill.skill.number }}</td>
+                        <td><a ui-sref="document({eventId: event.id, documentId: document.id, skillId: documentSkill.skill.id})">{{ documentSkill.skill.name.text }}</a></td>
+                        <td>{{ documentSkill.last_updated | date: 'dd.MM.yyyy HH:mm' }}</td>
                     </tr>
-                    <tr ng-show="skills.skills.length == 0">
-                        <td colspan="2">No skills found</td>
+                    <tr ng-show="documentSkills.documents.length == 0">
+                        <td colspan="3">No skills found</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default" ng-show="resources.resources.length">
-        <div class="panel-heading">Resources</div>
-        <div class="panel-body">
-          <p ng-repeat="resource in resources.resources">
-              <a href="{{ resource.link }}" target="_blank" rel="noopener">
-                  <span class="glyphicon glyphicon-link" ng-if="resource.storage_type == 'REDIRECT_LINK'"></span>
-                  <span class="glyphicon glyphicon-file" ng-if="resource.storage_type != 'REDIRECT_LINK'"></span>
-                  {{ resource.title }}
-              </a>
-          </p>
-        </div>
-      </div>
     </div>
 </div>
