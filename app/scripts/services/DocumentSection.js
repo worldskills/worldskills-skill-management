@@ -18,7 +18,15 @@
             },
             delete: {
                 method: 'DELETE'
-            }
+            },
+            search: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/documents/:documentId/search'
+            },
+            replace: {
+                method: 'POST',
+                url: WORLDSKILLS_API_SKILLMAN + '/documents/:documentId/replace'
+            },
         });
 
     });

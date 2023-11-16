@@ -1,0 +1,58 @@
+<alerts></alerts>
+
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="searchQuery">Search query</label>
+      <input type="text" class="form-control" id="searchQuery" ng-model="query" ng-change="searchChanged()">
+      <span class="help-block text-muted">Note the search query is case-sensitive.</span>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="replacement">Replacement</label>
+      <input type="text" class="form-control" id="replacement" ng-model="replacement" >
+      <span class="help-block text-muted" ng-show="sections">Found {{ sections.sections.length }} sections.</span>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label>&nbsp;</label>
+      <button class="btn btn-primary btn-block" ng-click="replace()" ng-disabled="!query || !replacement">Replace All</button>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+      <colgroup>
+          <col width="20%" />
+          <col width="30%" />
+          <col width="50%" />
+      </colgroup>
+      <thead>
+          <tr>
+              <th>Skill</th>
+              <th>Section</th>
+              <th>Content</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="section in sections.sections">
+              <td>{{ section.skill.number }} {{ section.skill.name.text }}</td>
+              <td>{{ section.number }} {{ section.title.text }}</td>
+              <td>
+                  <div ng-bind-html="section.highlighted"></div>
+              </td>
+          </tr>
+          <tr ng-show="!loading && (!sections || sections.sections.length == 0)">
+              <td colspan="3">No sections found</td>
+          </tr>
+          <tr ng-show="loading">
+              <td colspan="3"><ws-spinner></ws-spinner></td>
+          </tr>
+      </tbody>
+  </table>
+</div>

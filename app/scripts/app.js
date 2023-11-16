@@ -737,6 +737,18 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             ]
         }
     })
+    .state('admin_document.search', {
+        url: '/search',
+        templateUrl: 'views/admin_document_search.html',
+        controller: 'AdminDocumentSearchCtrl',
+        data: {
+            requireLoggedIn: true,
+            requiredRoles: [
+                {code: 1200, role: 'Admin'},
+                {code: 1200, role: 'ManageDocument'}
+            ]
+        }
+    })
     .state('admin_document.chapters', {
         url: '/chapters',
         templateUrl: 'views/admin_document_chapters.html',

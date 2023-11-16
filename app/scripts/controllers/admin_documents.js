@@ -71,6 +71,58 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
 
 });
 
+angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($scope, $state, $stateParams, $timeout, alert, DocumentSection) {
+
+    $scope.query = '';
+
+    var timeoutSearch;
+    $scope.searchChanged = function () {
+        $scope.loading = true;
+        var search = function () {
+
+            $scope.sections = DocumentSection.search({documentId: $stateParams.documentId, query: $scope.query, l: 'en'}, function (response) {
+
+                // highlight query in results
+                angular.forEach($scope.sections.sections, function (section) {
+                    var text = section.introduction.text;
+                    if (section.skill) {
+                        text = section.latest_revision.text;
+                    }
+                    section.highlighted = text.replace(new RegExp($scope.query, 'g'), '<span class="worldskills-highlight">$&</span>');
+                });
+
+                $scope.loading = false;
+            });
+        };
+        if (timeoutSearch) {
+            $timeout.cancel(timeoutSearch);
+        }
+        timeoutSearch = $timeout(search, 1000);
+    };
+
+    $scope.replace = function () {
+        if (window.confirm('Replace all occurences of "' + $scope.query + '" with "' + $scope.replacement + '"? ' + $scope.sections.sections.length + ' section(s) will be updated. Click OK to proceed.')) {
+            $scope.loading = true;
+            $scope.sections = DocumentSection.replace({documentId: $stateParams.documentId, query: $scope.query, l: 'en'}, {text: $scope.replacement, lang_code: 'en'}, function (response) {
+
+                // highlight query in results
+                angular.forEach($scope.sections.sections, function (section) {
+                    var text = section.introduction.text;
+                    if (section.skill) {
+                        text = section.latest_revision.text;
+                    }
+                    section.highlighted = text.replace(new RegExp($scope.replacement, 'g'), '<span class="worldskills-replaced">$&</span>');
+                });
+
+                $scope.loading = false;
+
+                alert.success('Text replaced, ' + $scope.sections.sections.length + ' section(s) have been updated.');
+            });
+        }
+    };
+
+});
+
 angular.module('skillMgmtApp').controller('AdminDocumentChaptersCtrl', function($scope, $state, $stateParams, $uibModal, Event, Document, DocumentChapter, DocumentSection) {
 
     $scope.editSection = function (index, chapter, section) {

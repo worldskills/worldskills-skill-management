@@ -175,6 +175,14 @@ footer {
     background-color: pink;
 }
 
+.worldskills-highlight {
+    background-color: #FFFF00;
+}
+
+.worldskills-replaced {
+    background-color: #00FF00;
+}
+
 
 @media print {
 
