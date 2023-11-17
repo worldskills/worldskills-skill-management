@@ -120,13 +120,14 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             2, // Chief Expert
             3, // Deputy Chief Expert
             7, // Workshop Manager
-            9, // Interpreter
             26, // Skill Competition Manager
             27, // Jury President
             28, // Competitions Committee Delegate
             31 // Skill Advisor
         ];
-        $scope.people = PeoplePerson.public({base_position: basePositionIds, skill: $stateParams.skillId});
+        $scope.people = PeoplePerson.query({base_position: basePositionIds, skill: $stateParams.skillId, show_inactive: 1, include_history: 1});
+
+        $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1});
 
         $scope.experts = SkillExpert.query({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
