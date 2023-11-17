@@ -42,12 +42,6 @@
         <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Edit Groups</a></p>
       </div>
     </div>
-    <div class="panel panel-default" ng-show="userCanViewInfrastructureList">
-      <div class="panel-heading">Related Apps</div>
-      <div class="panel-body">
-        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> Infrastructure Lists</a></p>
-      </div>
-    </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="userCanViewProgressItemsReport || userCanViewProgressItems">
@@ -106,6 +100,12 @@
         <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
         <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
         <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-show="userCanViewInfrastructureList">
+      <div class="panel-heading">Related Apps</div>
+      <div class="panel-body">
+        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> Infrastructure Lists</a></p>
       </div>
     </div>
   </div>
