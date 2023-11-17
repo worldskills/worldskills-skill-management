@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, Registration, SkillProgressItem, Poll, Resource, Document) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
@@ -115,6 +115,18 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         $scope.occupationalStandard = Resource.query({type: DOCUMENT_TYPE_STANDARD_SPECIFICATION, tags: tags, limit: 1});
 
         $scope.documents = Document.query({eventId: $stateParams.eventId});
+
+        var basePositionIds = [
+            2, // Chief Expert
+            3, // Deputy Chief Expert
+            7, // Workshop Manager
+            9, // Interpreter
+            26, // Skill Competition Manager
+            27, // Jury President
+            28, // Competitions Committee Delegate
+            31 // Skill Advisor
+        ];
+        $scope.people = PeoplePerson.public({base_position: basePositionIds, skill: $stateParams.skillId});
 
         $scope.experts = SkillExpert.query({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});

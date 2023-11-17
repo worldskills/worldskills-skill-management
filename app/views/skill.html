@@ -48,14 +48,6 @@
         <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> Infrastructure Lists</a></p>
       </div>
     </div>
-    <!--
-    <div class="panel panel-default">
-      <div class="panel-heading">Competitors</div>
-      <div class="panel-body">
-        
-      </div>
-    </div>
-    -->
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="userCanViewProgressItemsReport || userCanViewProgressItems">
@@ -116,6 +108,30 @@
         <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
       </div>
     </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Skill Positions</div>
+      <div class="panel-body">
+        <div class="media" ng-repeat="person in people.people">
+          <div class="media-left media-middle">
+            <img class="img-circle media-object" ng-show="person.images[0]" ng-src="{{person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+          </div>
+          <div class="media-body">
+            {{ person.first_name }} {{ person.last_name }}
+            <span class="text-muted" ng-repeat="position in person.positions" ng-if="position.skill.id == skill.id"><br/>{{ position.position.name.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
     <div class="panel panel-default" ng-show="experts.registration_people.length && (userCanEditExperts || userCanViewSubmissionsExperts)">
       <div class="panel-heading">Experts ({{ experts.registration_people.length }})</div>
       <div class="panel-body">
@@ -133,6 +149,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="col-md-4">
     <div class="panel panel-default" ng-show="competitors.registrations.length && userCanEditLunch">
       <div class="panel-heading">Competitors ({{ competitors.registrations.length }})</div>
       <div class="panel-body">
