@@ -6,17 +6,6 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId}, function () {
 
-        $scope.skillItems = SkillItem.query({skillId: $stateParams.skillId}, {}, function () {
-
-            $scope.loading = false;
-
-            angular.forEach($scope.skillItems.items, function (item) {
-                if (item.time) {
-                    item.time = item.time.substring(0, 5);
-                }
-            });
-        });
-
         $scope.skillTimes = SkillTime.query({skillId: $stateParams.skillId}, function () {
 
             angular.forEach($scope.skillTimes.times, function (time) {
@@ -41,6 +30,23 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
         });
     });
 
+    $scope.loadSkillItems = function () {
+        $scope.skillItems = SkillItem.query({skillId: $stateParams.skillId}, {}, function () {
+    
+            $scope.loading = false;
+    
+            angular.forEach($scope.skillItems.items, function (item) {
+                if (item.time) {
+                    item.time = item.time.substring(0, 5);
+                }
+                if (item.end_time) {
+                    item.end_time = item.end_time.substring(0, 5);
+                }
+            });
+        });
+    };
+    $scope.loadSkillItems();
+
     $scope.skill = Skill.get({id: $stateParams.skillId}, {}, function () {
         $scope.active.skill = $scope.skill;
     });
@@ -60,10 +66,15 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
 
 angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, $rootScope, $state, $stateParams, $filter, $timeout, auth, alert, SkillItem, SkillTime) {
 
+    $scope.filteredItems = [];
+
     $scope.competitionDays.$promise.then(function () {
         angular.forEach($scope.competitionDays.days, function (competitionDay) {
             if (competitionDay.timeline == $stateParams.day) {
                 $scope.active.day = competitionDay;
+                $scope.skillItems.$promise.then(function () {
+                    $scope.filteredItems = $filter('filter')($scope.skillItems.items, {competition_day_id: $scope.active.day.id});
+                });
             }
         });
     });
@@ -111,7 +122,7 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
             $scope.changed = true;
             var updateItem = function () {
                 $scope.saving = true;
-                if (!item.time || form.time.$invalid) {
+                if (!item.time || (form && form.time.$invalid)) {
                     item.time = null;
                 }
                 if (item.id) {
@@ -126,56 +137,66 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
             if (item.$timeout) {
                 $timeout.cancel(item.$timeout);
             }
-            item.$timeout = $timeout(updateItem, 1000);
+            item.$timeout = $timeout(updateItem, 300);
         }
     };
 
     $scope.addItem = function () {
-        var maxOrderNum = 0;
-        $scope.filteredItems.forEach(function (item) {
-            maxOrderNum = Math.max(maxOrderNum, item.order_num);
-        });
+        $scope.addItemBelow($scope.filteredItems.length);
+    };
+
+    $scope.addItemBelow = function (index) {
         var newItem = {
             competition_day_id: $scope.active.day.id,
-            order_num: maxOrderNum + 1,
+            order_num: 0,
             description: {
                 lang_code: 'en',
                 text: ''
             },
             responsibility: '',
             internal_notes: '',
+            public_item: false,
+            highlight: false,
             skill: $scope.skill
         };
-        var lastIndex = $scope.skillItems.items.indexOf($scope.filteredItems[$scope.filteredItems.length - 1]);
-        $scope.skillItems.items.splice(lastIndex + 1, 0, newItem);
+        $scope.filteredItems.splice(index + 1, 0, newItem);
+        $scope.updateOrderNumbers();
+        $scope.loadSkillItems();
     };
 
-    $scope.removeItem = function (item) {
-        var index = $scope.skillItems.items.indexOf(item);
-        $scope.skillItems.items.splice(index, 1);
+    $scope.updateOrderNumbers = function () {
+        var orderNum = 0;
+        angular.forEach($scope.filteredItems, function (item) {
+            item.order_num = orderNum++;
+            $scope.itemChanged(null, item, false);
+        });
+    };
+
+    $scope.removeItem = function (index, item) {
+        $scope.filteredItems.splice(index, 1);
         SkillItem.delete({skillId: $stateParams.skillId}, item);
+        $scope.updateOrderNumbers();
+        $scope.loadSkillItems();
     };
 
-    $scope.moveItemUp = function (form, orderNum, item) {
-        var index = $scope.skillItems.items.indexOf(item);
-        var newItem = $scope.skillItems.items[index];
-        var oldItem = $scope.skillItems.items[index - 1];
-        $scope.skillItems.items[index - 1] = newItem;
-        $scope.skillItems.items[index] = oldItem;
-        newItem.order_num = orderNum - 1;
-        oldItem.order_num = orderNum;
+    $scope.moveItemUp = function (form, index) {
+        var newItem = $scope.filteredItems[index];
+        var oldItem = $scope.filteredItems[index - 1];
+        $scope.filteredItems[index - 1] = newItem;
+        $scope.filteredItems[index] = oldItem;
+        newItem.order_num = index - 1;
+        oldItem.order_num = index;
         $scope.itemChanged(form, newItem, false);
         $scope.itemChanged(form, oldItem, false);
     };
 
-    $scope.moveItemDown = function (form, orderNum, item) {
-        var index = $scope.skillItems.items.indexOf(item);
-        var newItem = $scope.skillItems.items[index];
-        var oldItem = $scope.skillItems.items[index + 1];
-        $scope.skillItems.items[index + 1] = newItem;
-        $scope.skillItems.items[index] = oldItem;
-        newItem.order_num = orderNum + 1;
-        oldItem.order_num = orderNum;
+    $scope.moveItemDown = function (form, index) {
+        var newItem = $scope.filteredItems[index];
+        var oldItem = $scope.filteredItems[index + 1];
+        $scope.filteredItems[index + 1] = newItem;
+        $scope.filteredItems[index] = oldItem;
+        newItem.order_num = index + 1;
+        oldItem.order_num = index;
         $scope.itemChanged(form, newItem, false);
         $scope.itemChanged(form, oldItem, false);
     };

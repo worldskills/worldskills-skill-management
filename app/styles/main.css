@@ -24,6 +24,10 @@ li.active a {
     padding-right: 15px;
 }
 
+.less-gutter [class*="col-"] {
+    padding-right: 0;
+}
+
 /** NG CLOAK */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;

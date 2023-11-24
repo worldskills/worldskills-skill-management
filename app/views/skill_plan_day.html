@@ -1,7 +1,6 @@
 <div style="margin-top: -12px;">
 <p class="pull-right text-muted">
     <span ng-show="!changed && !saving && !saved && !skill.event.locked">Changes are saved automatically</span>
-    <span ng-show="changed && !saving">Unsaved changes</span>
     <span ng-show="saving">Saving...</span>
     <span ng-show="!changed && !saving && saved">Plan saved</span>
     <span ng-show="skill.event.locked">Event is locked</span>
@@ -12,53 +11,61 @@
 
 <form class="form-horizontal">
     <fieldset ng-disabled="skill.event.locked">
-        <div class="form-group">
+        <div class="form-group less-gutter">
             <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1">
                 <p class="form-control-static"><strong>Time</strong></p>
             </div>
             <div class="col-sm-5 col-lg-6">
                 <p class="form-control-static"><strong>Description</strong></p>
             </div>
-            <div class="col-sm-2 col-lg-3">
+            <div class="col-sm-2">
                 <p class="form-control-static"><strong>Responsibility</strong></p>
             </div>
+            <div class="col-sm-1">
+                <p class="form-control-static"><strong>Public</strong></p>
+            </div>
         </div>
-        <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'}:true as filteredTimes" class="form-group form-group-sm">
+        <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'}:true as filteredTimes" class="form-group form-group-sm less-gutter">
             <ng-form name="form">
                 <div class="col-sm-2 col-sm-offset-2 col-lg-1 col-lg-offset-1" ng-class="{'has-error': form.time.$invalid}">
-                    <input class="form-control input-sm" name="time" ng-model="time.time" ng-change="skillTimeChanged(form, time)" placeholder="HH:mm" autocomplete="off">
+                    <input class="form-control input-sm" style="width: 64px;"  name="time" ng-model="time.time" ng-change="skillTimeChanged(form, time)" placeholder="HH:mm" autocomplete="off">
                 </div>
                 <div class="col-sm-6">
                     <p class="form-control-static">Competitor Finish Time</p>
                 </div>
             </ng-form>
         </div>
-        <div ng-repeat="item in skillItems.items | filter:{competition_day_id:active.day.id}:true as filteredItems" class="form-group form-group-sm">
+        <div ng-repeat="item in filteredItems" class="form-group form-group-sm less-gutter">
             <ng-form name="form">
                 <div class="col-sm-2 col-lg-1">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemUp(form, $index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
-                        <button type="button" class="btn btn-primary btn-sm" ng-click="moveItemDown(form, $index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveItemUp(form, $index, item)" ng-disabled="$first"><span class="glyphicon glyphicon-triangle-top"></span></button>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="moveItemDown(form, $index, item)" ng-disabled="$last"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
                     </div>
+                    <button type="button" class="btn btn-success btn-xs" style="margin-left: 7px;" title="Add line below" ng-click="addItemBelow($index)"><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
                 <div class="col-sm-2 col-lg-1" ng-class="{'has-error': form.time.$invalid}">
-                    <input class="form-control input-sm" name="time" ng-model="item.time" ng-change="itemChanged(form, item, true)" placeholder="HH:mm" autocomplete="off">
+                    <input class="form-control input-sm" style="width: 64px;" name="time" ng-model="item.time" ng-change="itemChanged(form, item, true)" placeholder="HH:mm" autocomplete="off">
                 </div>
-                <div class="col-sm-5 col-lg-6">
+                <div class="col-sm-3 col-lg-6">
                     <div class="row">
-                        <div class="col-sm-10 col-lg-11">
+                        <div class="col-sm-9 col-lg-11">
                             <textarea class="form-control input-sm" rows="2" ng-model="item.description.text" ng-change="itemChanged(form, item, false)"></textarea>
                         </div>
-                        <div class="col-sm-2 col-lg-1">
+                        <div class="col-sm-3 col-lg-1">
                             <button type="button" class="btn btn-xs" ng-class="{'btn-warning': item.internal_notes, 'btn-default': !item.internal_notes}" uib-popover="{{item.internal_notes}}" popover-trigger="mouseenter" popover-enable="item.internal_notes" popover-append-to-body="true" ng-click="editNote(item)"><span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2 col-lg-3">
+                <div class="col-sm-1 col-lg-2">
                     <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(form, item, false)">
                 </div>
-                <div class="col-sm-1">
-                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                <div class="col-sm-2 col-lg-1">
+                    <button type="button" class="btn btn-xs" ng-class="{'btn-primary': item.public_item, 'btn-default': !item.public_item}" ng-click="item.public_item = !item.public_item; itemChanged(form, item, false)" title="Public"><span class="glyphicon glyphicon-globe"></span></button>
+                    <button type="button" class="btn btn-xs" ng-class="{'btn-warning': item.highlight, 'btn-default': !item.highlight}" ng-show="item.public_item" ng-click="item.highlight = !item.highlight; itemChanged(form, item, false)" title="Skill Highlight"><span class="glyphicon glyphicon-star"></span></button>
+                </div>
+                <div class="col-sm-2 col-lg-1">
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem($index, item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
                 </div>
             </ng-form>
         </div>
