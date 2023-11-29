@@ -75,6 +75,12 @@ angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($s
 
     $scope.query = '';
 
+    $scope.htmlEntities = function (str) {
+        return str.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+            return '&#'+i.charCodeAt(0)+';';
+        });
+    };
+
     var timeoutSearch;
     $scope.searchChanged = function () {
         $scope.loading = true;
@@ -88,7 +94,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($s
                     if (section.skill) {
                         text = section.latest_revision.text;
                     }
-                    section.highlighted = text.replace(new RegExp($scope.query, 'g'), '<span class="worldskills-highlight">$&</span>');
+                    // escape HTML
+                    text = $scope.htmlEntities(text);
+                    section.highlighted = text.replace(new RegExp($scope.htmlEntities($scope.query), 'g'), '<span class="worldskills-highlight">$&</span>');
                 });
 
                 $scope.loading = false;
@@ -111,7 +119,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($s
                     if (section.skill) {
                         text = section.latest_revision.text;
                     }
-                    section.highlighted = text.replace(new RegExp($scope.replacement, 'g'), '<span class="worldskills-replaced">$&</span>');
+                    // escape HTML
+                    text = $scope.htmlEntities(text);
+                    section.highlighted = text.replace(new RegExp($scope.htmlEntities($scope.replacement), 'g'), '<span class="worldskills-replaced">$&</span>');
                 });
 
                 $scope.loading = false;
