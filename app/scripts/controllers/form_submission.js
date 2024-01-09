@@ -176,7 +176,7 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.submit = function () {
         $scope.submitted = true;
         if ($scope.form.$valid) {
-            if (confirm('Please only submit the form if you have filled out all fields. Click OK to proceed.')) {
+            if (confirm('Experts must not submit the form! Only submit the form if all fields have been filled out. Click OK to submit the form or Cancel to keep editing.')) {
                 $q.all(angular.extend(promises, timeoutsFields)).then(function() {
                     $scope.submitting = true;
                     $scope.submission.state = 'submitted';
