@@ -17,7 +17,15 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
         // loop chapters and fetch details
         angular.forEach($scope.document.chapters, function (chapter) {
-            chapter.chapter = DocumentChapter.get({documentId: $scope.document.id, id: chapter.id});
+            chapter.chapter = DocumentChapter.get({documentId: $scope.document.id, id: chapter.id}, function (c) {
+                
+                c.sections.forEach(function (section) {
+                    if (section.wsos) {
+                        $scope.wsos = section;
+                    }
+                });
+            });
+
         });
 
         $scope.loading = false;
@@ -25,12 +33,13 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $timeout, $interval, Skill, DocumentSkill, Downloader, WORLDSKILLS_API_SKILLMAN, WORLDSKILLS_API_AUTH) {
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $timeout, $interval, Skill, DocumentSkill, DocumentWSOSSection, Downloader, WORLDSKILLS_API_SKILLMAN, WORLDSKILLS_API_AUTH) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
         angular.forEach($scope.skills.skills, function (skill) {
-            skill.unapprovedSections = DocumentSkill.unapprovedSections({id: $stateParams.documentId, skillId: skill.id});
+            skill.unapprovedSections = DocumentSkill.unapprovedSections({id: $stateParams.documentId, skillId: skill.id, l: 'en'});
+            skill.unapprovedWsosSections = DocumentWSOSSection.unapprovedSections({id: $stateParams.documentId, skillId: skill.id, l: 'en'});
         });
     });
 

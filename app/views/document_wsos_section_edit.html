@@ -1,0 +1,35 @@
+<form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
+        <h2 class="modal-title">WSOS Section</h2>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 col-lg-1 control-label">Title</label>
+            <div class="col-sm-6 col-lg-7">
+                <input type="text" class="form-control" name="title" ng-model="wsosSection.latest_revision.title">
+            </div>
+            <label for="title" class="col-sm-2 control-label">Importance</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="importance" ng-model="wsosSection.latest_revision.importance">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="2" ng-model="wsosSection.latest_revision.knowledge" ck-editor></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="2" ng-model="wsosSection.latest_revision.ability" ck-editor></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <div class="pull-left">
+          <button type="button" class="btn btn-danger btn-xs" ng-click="delete()" ng-show="wsosSection.id && userCanDeleteSkillDocumentWSOS">Delete WSOS Section</button>
+        </div>
+    </div>
+</form>

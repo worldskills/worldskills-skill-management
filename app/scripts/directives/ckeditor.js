@@ -19,11 +19,10 @@
                 var isReady = false;
                 var data = [];
                 var options = {
-                    height: 400,
                     contentsCss: 'ckeditor/contents.css',
                     removePlugins : 'elementspath,specialchar,image',
                     removeButtons : 'Underline',
-                    extraPlugins : 'worldskillsimages,uploadimage,image2,tableresize',
+                    extraPlugins : 'worldskillsimages,uploadimage,image2,tableresize,autogrow',
                     filebrowserUploadUrl: WORLDSKILLS_API_IMAGES,
                     uploadUrl: WORLDSKILLS_API_IMAGES,
                     toolbarGroups : [
