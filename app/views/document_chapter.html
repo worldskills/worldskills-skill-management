@@ -9,6 +9,8 @@
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
 
+        <alerts></alerts>
+
         <p class="text-muted">
             {{ document.name.text }}
             <br/>
@@ -38,6 +40,71 @@
                             <a href ng-click="diffRevision(section, index)">Pending changes by {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}</a>
                         </small>
                     </div>
+                </div>
+            </div>
+            <div class="worldskills-document-edited-text" ng-if="section.wsos">
+                <table cellspacing="0" class="table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="2"><p><strong>Section</strong></p></th>
+                            <th><p><strong>Relative importance (%)</strong></p></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="green-background" ng-repeat-start="(wsosIndex, wsosSection) in section.wsosSections">
+                            <td><p><strong>{{wsosSection.number}}</strong></p></td>
+                            <td>
+                                <p ng-show="!userCanEditSkillDocument"><strong>{{wsosSection.title}}</strong></p>
+                                <p ng-show="userCanEditSkillDocument"><strong>{{wsosSection.latest_revision.title}}</strong></p>
+                                <div>
+                                    <button class="btn btn-xs btn-primary" ng-click="editWsosSection(wsosSection, index, wsosIndex)">Edit</button>
+                                    <small class="text-muted" ng-show="wsosSection.latest_revision && wsosSection.latest_revision.id != wsosSection.approved_revision_id">
+                                        <a href ng-click="diffWsosRevision(section, wsosSection, index, wsosIndex)">Pending changes by {{ wsosSection.latest_revision.author.first_name }} {{ wsosSection.latest_revision.author.last_name }}</a>
+                                    </small>
+                                </div>
+                            </td>
+                            <td>
+                                <p ng-show="!userCanEditSkillDocument"><strong>{{wsosSection.importance}}</strong></p>
+                                <p ng-show="userCanEditSkillDocument"><strong>{{wsosSection.latest_revision.importance}}</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div ng-show="!userCanEditSkillDocument">
+                                    <div ng-bind-html="wsosSection.knowledge"></div>
+                                </div>
+                                <div ng-show="userCanEditSkillDocument">
+                                    <div ng-bind-html="wsosSection.latest_revision.knowledge"></div>
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr ng-repeat-end>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div ng-show="!userCanEditSkillDocument">
+                                    <div ng-bind-html="wsosSection.ability"></div>
+                                </div>
+                                <div ng-show="userCanEditSkillDocument">
+                                    <div ng-bind-html="wsosSection.latest_revision.ability"></div>
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <strong>Total</strong>
+                            </td>
+                            <td><p><strong>{{section.totalImportance}}</strong></p></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div ng-if="userCanAddSkillDocumentWSOS">
+                    <button class="btn btn-xs btn-success" ng-click="addWsosSection(index)">Add WSOS Section</button>
                 </div>
             </div>
         </div>

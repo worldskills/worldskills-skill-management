@@ -21,6 +21,9 @@
                     <div ng-repeat="section in skill.unapprovedSections.sections">
                         <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: section.chapter_id, '#': 'section' + section.id})">{{ section.number }} {{ section.title.text }}</a> - {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}, {{ section.latest_revision.created|date:'dd.MM.yyyy HH:mm' }} 
                     </div>
+                    <div ng-repeat="section in skill.unapprovedWsosSections.sections">
+                        <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: wsos.chapter_id, '#': 'section' + wsos.id})">WSOS {{ section.number }} {{ section.title }}</a> - {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}, {{ section.latest_revision.created|date:'dd.MM.yyyy HH:mm' }}
+                    </div>
                 </td>
             </tr>
             <tr ng-show="skills.length == 0">

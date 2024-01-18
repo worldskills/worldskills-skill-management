@@ -52,6 +52,16 @@
                 <textarea class="form-control" rows="4" ng-model="section.explanation.text" name="explanation" ck-editor></textarea>
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="section.wsos">
+                        WSOS (Special section, only allowed once per document)
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>

@@ -11,6 +11,18 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
                 $scope.userCanEditSkillDocument = true;
             }
         });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'AddSkillDocumentWSOS'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanAddSkillDocumentWSOS = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'DeleteSkillDocumentWSOS'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanDeleteSkillDocumentWSOS = true;
+            }
+        });
     });
 
     $scope.document = DocumentSkill.get({id: $stateParams.documentId, skillId: $stateParams.skillId}, {}, function () {
@@ -32,11 +44,38 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
 
     if ($stateParams.chapterId) {
         $scope.chapter = DocumentChapterSkill.get({documentId: $stateParams.documentId, id: $stateParams.chapterId, skillId: $stateParams.skillId, l: 'en'}, {}, function () {
+
+            var maxWsosSort = 1;
+            $scope.chapter.sections.forEach(function (section) {
+                // check if WSOS and count total importance
+                if (section.wsos) {
+                    $scope.calculateTotalImportance(section);
+                    section.wsosSections.forEach(function (wsos) {
+                        maxWsosSort = Math.max(maxWsosSort, wsos.sort);
+                    });
+                }
+            });
+
+            $scope.maxWsosSort = maxWsosSort;
+
             $timeout(function () {
                 $anchorScroll();
             });
         });
     }
+
+    $scope.calculateTotalImportance = function (section) {
+        section.totalImportance = 0;
+        section.wsosSections.forEach(function (wsos) {
+            auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'EditSkillDocument'], $scope.skill.entity_id).then(function (hasUserRole) {
+                if (hasUserRole) {
+                    section.totalImportance += wsos.latest_revision.importance;
+                } else {
+                    section.totalImportance += wsos.importance;
+                }
+            });
+        });
+    };
 
     $scope.downloadPDF = function () {
         $scope.loadingPDF = true;
@@ -65,6 +104,37 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
         });
     };
 
+    $scope.editWsosSection = function (wsosSection, index, wsosIndex) {
+        $scope.wsosSection = angular.copy(wsosSection);
+        $scope.wsosSectionIndex = index;
+        $scope.wsosSectionWsosIndex = wsosIndex;
+        $scope.editWsosSectionModal = $uibModal.open({
+            templateUrl: 'views/document_wsos_section_edit.html',
+            controller: 'DocumentWSOSSectionEditFormCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+    };
+
+    $scope.addWsosSection = function (index) {
+
+        $scope.wsosSection = {};
+        $scope.wsosSection.latest_revision = {};
+        $scope.wsosSection.sort = $scope.maxWsosSort + 1;
+        $scope.wsosSection.locale = 'en';
+
+        $scope.wsosSectionIndex = index;
+
+        $scope.addWsosSectionModal = $uibModal.open({
+            templateUrl: 'views/document_wsos_section_edit.html',
+            controller: 'DocumentWSOSSectionEditFormCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+    };
+
     // show diff between two revisions in new modal window
     $scope.diffRevision = function (section, index) {
         $scope.section = section;
@@ -77,9 +147,23 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
             animation: false
         });
     };
+
+    $scope.diffWsosRevision = function (section, wsosSection, index, wsosIndex) {
+        $scope.section = section;
+        $scope.wsosSection = wsosSection;
+        $scope.wsosSectionIndex = index;
+        $scope.wsosSectionWsosIndex = wsosIndex;
+        $scope.diffWsosRevisionModal = $uibModal.open({
+            templateUrl: 'views/document_wsos_section_diff.html',
+            controller: 'DocumentWSOSSectionDiffCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+    }
 });
 
-angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($scope, $stateParams, $uibModal, $filter, Event, Skill, DocumentSkill, DocumentSectionRevision, DocumentSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($scope, $stateParams, $uibModal, $filter, Event, Skill, DocumentSkill, DocumentSectionRevision, DocumentSectionSkillRevision, DocumentWSOSSectionSkillRevision) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -101,11 +185,29 @@ angular.module('skillMgmtApp').controller('DocumentRevisionsCtrl', function ($sc
         });
     });
 
+    DocumentWSOSSectionSkillRevision.query({documentId: $stateParams.documentId, skillId: $stateParams.skillId}, function (revisions) {
+        angular.forEach(revisions.revisions, function (revision) {
+            revision.wsos = true;
+            $scope.revisions.push(revision);
+        });
+    });
+
     $scope.diffRevision = function (revision) {
         $scope.revision = revision;
         $scope.diffRevisionModal = $uibModal.open({
             templateUrl: 'views/document_revision_diff.html',
             controller: 'DocumentRevisionDiffCtrl',
+            scope: $scope,
+            size: 'lg',
+            animation: false
+        });
+    };
+
+    $scope.diffWsosRevision = function (revision) {
+        $scope.revision = revision;
+        $scope.diffWsosRevisionModal = $uibModal.open({
+            templateUrl: 'views/document_wsos_revision_diff.html',
+            controller: 'DocumentWSOSRevisionDiffCtrl',
             scope: $scope,
             size: 'lg',
             animation: false
@@ -127,6 +229,51 @@ angular.module('skillMgmtApp').controller('DocumentSectionEditFormCtrl', functio
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
         });
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+});
+
+angular.module('skillMgmtApp').controller('DocumentWSOSSectionEditFormCtrl', function ($scope, $state, $stateParams, $uibModalInstance, alert, DocumentWSOSSection) {
+
+    $scope.save = function () {
+        $scope.wsosSection.title = $scope.wsosSection.latest_revision.title;
+        $scope.wsosSection.knowledge = $scope.wsosSection.latest_revision.knowledge;
+        $scope.wsosSection.ability = $scope.wsosSection.latest_revision.ability;
+        $scope.wsosSection.importance = $scope.wsosSection.latest_revision.importance;
+
+        if ($scope.wsosSection.id) {
+            DocumentWSOSSection.update({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, $scope.wsosSection, function (response) {
+                $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections[$scope.wsosSectionWsosIndex] = response;
+                $scope.calculateTotalImportance($scope.chapter.sections[$scope.wsosSectionIndex]);
+                $uibModalInstance.close();
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        } else {
+            DocumentWSOSSection.save({documentId: $stateParams.documentId, skillId: $stateParams.skillId}, $scope.wsosSection, function (response) {
+                $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections.push(response);
+                $scope.calculateTotalImportance($scope.chapter.sections[$scope.wsosSectionIndex]);
+                $uibModalInstance.close();
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        }
+    };
+
+    $scope.delete = function () {
+        if (window.confirm('A deleted WSOS section cannot be recovered. Click OK to delete this WSOS section.')) {
+
+            DocumentWSOSSection.delete({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, function () {
+                alert.success('The WSOS section has been deleted.');
+                $state.reload();
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        }
     };
 
     $scope.cancel = function () {
@@ -160,11 +307,56 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
 
 });
 
+angular.module('skillMgmtApp').controller('DocumentWSOSSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentWSOSSectionSkillRevision) {
+
+    $scope.diffImportance = $sce.trustAsHtml(htmldiff($scope.wsosSection.importance + '', $scope.wsosSection.latest_revision.importance + ''));
+    $scope.diffTitle = $sce.trustAsHtml(htmldiff($scope.wsosSection.title, $scope.wsosSection.latest_revision.title));
+    $scope.diffKnowledge = $sce.trustAsHtml(htmldiff($scope.wsosSection.knowledge, $scope.wsosSection.latest_revision.knowledge));
+    $scope.diffAbility = $sce.trustAsHtml(htmldiff($scope.wsosSection.ability, $scope.wsosSection.latest_revision.ability));
+
+    $scope.approve = function () {
+        DocumentWSOSSectionSkillRevision.approve({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.latest_revision.id}, {}, function (section) {
+            $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections[$scope.wsosSectionWsosIndex] = section;
+            $scope.document.last_updated = $scope.wsosSection.latest_revision.created;
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+
+    $scope.edit = function () {
+        $uibModalInstance.dismiss('edit');
+        $scope.editWsosSection($scope.wsosSection, $scope.wsosSectionIndex, $scope.wsosSectionWsosIndex);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
 angular.module('skillMgmtApp').controller('DocumentRevisionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff) {
 
     var previousText = $scope.revision.previous ? $scope.revision.previous.text : '';
 
     $scope.diff = $sce.trustAsHtml(htmldiff(previousText, $scope.revision.text));
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('close');
+    };
+
+});
+
+angular.module('skillMgmtApp').controller('DocumentWSOSRevisionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff) {
+
+    var previousTitle = $scope.revision.previous ? $scope.revision.previous.title : '';
+    var previousKnowledge = $scope.revision.previous ? $scope.revision.previous.knowledge : '';
+    var previousAbility = $scope.revision.previous ? $scope.revision.previous.ability : '';
+    var previousImportance = $scope.revision.previous ? $scope.revision.previous.importance : '';
+
+    $scope.diffTitle = $sce.trustAsHtml(htmldiff(previousTitle, $scope.revision.title));
+    $scope.diffKnowledge = $sce.trustAsHtml(htmldiff(previousKnowledge, $scope.revision.knowledge));
+    $scope.diffAbility = $sce.trustAsHtml(htmldiff(previousAbility, $scope.revision.ability));
+    $scope.diffImportance = $sce.trustAsHtml(htmldiff(previousImportance + '', $scope.revision.importance + ''));
 
     $scope.close = function () {
         $uibModalInstance.dismiss('close');
