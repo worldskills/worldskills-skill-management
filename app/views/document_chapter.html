@@ -56,7 +56,7 @@
                             <td>
                                 <p ng-show="!userCanEditSkillDocument"><strong>{{wsosSection.title}}</strong></p>
                                 <p ng-show="userCanEditSkillDocument"><strong>{{wsosSection.latest_revision.title}}</strong></p>
-                                <div>
+                                <div ng-show="userCanEditSkillDocument">
                                     <button class="btn btn-xs btn-primary" ng-click="editWsosSection(wsosSection, index, wsosIndex)">Edit</button>
                                     <small class="text-muted" ng-show="wsosSection.latest_revision && wsosSection.latest_revision.id != wsosSection.approved_revision_id">
                                         <a href ng-click="diffWsosRevision(section, wsosSection, index, wsosIndex)">Pending changes by {{ wsosSection.latest_revision.author.first_name }} {{ wsosSection.latest_revision.author.last_name }}</a>
