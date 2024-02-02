@@ -109,10 +109,13 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
     $scope.itemChanged = function (form, item, time) {
         if (time && item.time) {
             item.time = item.time.replace('.', ':');
+            item.time = item.time.replace('h', ':');
             if (item.time.length === 4 && item.time.charAt(1) === ':') {
                 item.time = '0' + item.time;
             }
-            if (/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(item.time)) {
+            var matches = item.time.match(/^([0-1][0-9]|2[0-3]):?([0-5][0-9])$/);
+            if (matches !== null) {
+                item.time = matches[1] + ':' + matches[2];
                 form.time.$setValidity('time', true);
             } else {
                 form.time.$setValidity('time', false);
