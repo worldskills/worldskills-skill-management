@@ -17,10 +17,11 @@
             {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
         </p>
 
-        <div ng-if="skill.id == 1719 || skill.id == 1835" class="alert alert-warning" role="alert">This Technical Description has not been verified by WSI.</div>
-
-        <div ng-if="skill.id == 1719 || skill.id == 1835" style="position: fixed; display: flex; top: 0; left: 0; right: 0; bottom: 0; justify-content: center; align-items: center; z-index: -1;">
-            <div style="transform: rotate(300deg); width: 50%; text-align: center; color: #eee; font-size: 4.5em;">This Technical Description has not been verified by WSI.</div>
+        <div ng-if="skill.id == 1719 || skill.id == 1835">
+            <div class="alert alert-warning" role="alert">This Technical Description has not been verified by WSI.</div>
+            <div style="position: fixed; display: flex; top: 0; left: 0; right: 0; bottom: 0; justify-content: center; align-items: center; z-index: -1;">
+                <div style="transform: rotate(300deg); width: 50%; text-align: center; color: #eee; font-size: 4.5em;">This Technical Description has not been verified by WSI.</div>
+            </div>
         </div>
 
         <h2>{{ chapter.number }} {{ chapter.title.text }}</h2>
