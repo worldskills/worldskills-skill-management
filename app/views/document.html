@@ -21,6 +21,8 @@
             {{ skill.number }} {{ skill.name.text }}
         </h1>
 
+        <div ng-if="skill.id == 1719 || skill.id == 1835" class="alert alert-warning" role="alert">This Technical Description has not been verified by WSI.</div>
+
         <div ng-bind-html="document.introduction.text"></div>
 
         <ol>
