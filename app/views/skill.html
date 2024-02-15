@@ -147,11 +147,11 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default" ng-show="experts.registration_people.length && (userCanViewTimetable || userCanEditExperts || userCanViewSubmissionsExperts)">
-      <div class="panel-heading">Experts ({{ experts.registration_people.length }})</div>
+    <div class="panel panel-default" ng-show="experts.registrations.length && (userCanViewTimetable || userCanEditExperts || userCanViewSubmissionsExperts)">
+      <div class="panel-heading">Experts ({{ experts.registrations.length }})</div>
       <div class="panel-body">
         <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Edit Chief Expert Nominations</a></p>
-        <div class="media" ng-repeat="expert in experts.registration_people">
+        <div class="media" ng-repeat="expert in experts.registrations">
           <div class="media-left media-middle">
             <img class="img-circle media-object" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="30" height="30">
             <img class="img-circle media-object" ng-show="!expert.person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">

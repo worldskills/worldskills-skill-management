@@ -129,7 +129,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
 
         $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1});
 
-        $scope.experts = SkillExpert.query({skillId: $stateParams.skillId});
+        $scope.experts = Registration.experts({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
 
     });
