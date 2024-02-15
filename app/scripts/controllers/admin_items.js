@@ -61,6 +61,19 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
 
     var timeoutsItems = {};
     $scope.itemChanged = function (item) {
+        var parseTime = function (item, key) {
+            if (item[key]) {
+                item[key] = item[key].replace('.', ':');
+                item[key] = item[key].replace('h', ':');
+                if (item[key].length === 4 && item[key].charAt(1) === ':') {
+                    item[key] = '0' + item[key];
+                }
+                var matches = item[key].match(/^([0-1][0-9]|2[0-3]):?([0-5][0-9])$/);
+                if (matches !== null) {
+                    item[key] = matches[1] + ':' + matches[2];
+                }
+            }
+        }
         var updateItem = function () {
             $scope.saving = true;
             if (item.id) {
@@ -72,6 +85,8 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
                 }, errored);
             }
         };
+        parseTime(item, 'start_time');
+        parseTime(item, 'end_time');
         if (item.id in timeoutsItems) {
             $timeout.cancel(timeoutsItems[item.id]);
         }
