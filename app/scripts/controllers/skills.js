@@ -117,17 +117,41 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         $scope.documents = Document.query({eventId: $stateParams.eventId});
 
         var basePositionIds = [
+            26, // Skill Competition Manager
             2, // Chief Expert
             3, // Deputy Chief Expert
             7, // Workshop Manager
-            26, // Skill Competition Manager
+            31, // Skill Advisor
             27, // Jury President
-            28, // Competitions Committee Delegate
-            31 // Skill Advisor
+            28 // Competitions Committee Delegate
         ];
-        $scope.people = PeoplePerson.query({base_position: basePositionIds, skill: $stateParams.skillId, show_inactive: 1, include_history: 1});
+        $scope.people = PeoplePerson.query({base_position: basePositionIds, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
 
-        $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1});
+            // sort by base position ID
+            $scope.people.people.sort(function (a, b) {
+                var positionA = a.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                var positionB = b.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                return basePositionIds.indexOf(positionA.position.base_position.id) - basePositionIds.indexOf(positionB.position.base_position.id);
+            });
+        });
+
+        $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
+
+            // sort by Member code
+            $scope.interpreters.people.sort(function (a, b) {
+                var positionA = a.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                var positionB = b.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                return positionA.member.code.localeCompare(positionB.member.code);
+            });
+        });
 
         $scope.experts = Registration.experts({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
