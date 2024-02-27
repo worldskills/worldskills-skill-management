@@ -30,6 +30,12 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             }
         });
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewRegistrations'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanViewRegistrations = true;
+            }
+        });
+
         auth.hasUserRole(WORLDSKILLS_API_IL_CODE, ['Admin', 'View'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewInfrastructureList = true;

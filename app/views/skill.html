@@ -147,7 +147,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default" ng-show="experts.registrations.length && (userCanViewTimetable || userCanEditExperts || userCanViewSubmissionsExperts)">
+    <div class="panel panel-default" ng-show="experts.registrations.length && userCanViewRegistrations">
       <div class="panel-heading">Experts ({{ experts.registrations.length }})</div>
       <div class="panel-body">
         <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Edit Chief Expert Nominations</a></p>
@@ -166,7 +166,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="panel panel-default" ng-show="competitors.registrations.length && userCanEditLunch">
+    <div class="panel panel-default" ng-show="competitors.registrations.length && userCanViewRegistrations">
       <div class="panel-heading">Competitors ({{ competitors.registrations.length }})</div>
       <div class="panel-body">
         <div class="media" ng-repeat="competitor in competitors.registrations">
