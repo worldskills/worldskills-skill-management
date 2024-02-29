@@ -26,9 +26,9 @@ angular.module('skillMgmtApp').controller('ReportProgressItems', function ($scop
         }
     };
 
-    var skillAdvisorPositionIdWSC2022SE = 534;
+    var skillAdvisorBasePositionId = 31;
 
-    $scope.skillAdvisors = PeoplePerson.query({event: $stateParams.eventId, position: skillAdvisorPositionIdWSC2022SE});
+    $scope.skillAdvisors = PeoplePerson.query({event: $stateParams.eventId, base_position: skillAdvisorBasePositionId, show_inactive: 1, include_history: 1});
 
     $scope.checkSkillAvisor = function (skillAdvisor) {
 
@@ -38,7 +38,7 @@ angular.module('skillMgmtApp').controller('ReportProgressItems', function ($scop
         });
 
         angular.forEach(skillAdvisor.positions, function (position) {
-            if (position.position.id == skillAdvisorPositionIdWSC2022SE) {
+            if (position.position.base_position.id == skillAdvisorBasePositionId) {
                 angular.forEach($scope.skills.skills, function (skill) {
                     if (skill.id == position.skill.id) {
                         skill.progress = SkillProgressItem.query({skillId: skill.id});
