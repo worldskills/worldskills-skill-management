@@ -61,10 +61,6 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
   //$translateProvider.determinePreferredLanguage();
 
   //routes
-  var assessmentCriteriaMenu = {
-    templateUrl: 'views/assessmentCriteria.menu.html',
-    controller: 'AssessmentcriteriamenuCtrl'
-  };
 
   $stateProvider
 
