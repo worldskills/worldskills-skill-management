@@ -47,7 +47,7 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
             window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
 
             // reload page
-            window.location.reload(false)
+            window.location.reload()
 
         } else {
             if (httpResponse.data.user_msg) {
