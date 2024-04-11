@@ -88,6 +88,7 @@ footer {
 .worldskills-document-edited-text img {
     vertical-align: top;
     max-width: 100%;
+    height: auto;
 }
 
 .worldskills-document-text ul,
