@@ -65,13 +65,28 @@ angular.module('skillMgmtApp').controller('ReportLunchSummaryCtrl', function($sc
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
-    $scope.report = Report.lunchSummary({eventId: $stateParams.eventId});
+    $scope.report = Report.lunchSummary({eventId: $stateParams.eventId}, function () {
+        
+        $scope.competitionDays.$promise.then(function () {
+            
+            angular.forEach($scope.report.reports, function (report) {
+                angular.forEach($scope.competitionDays.days, function (competitionDay) {
+                    if (competitionDay.id == report.competition_day_id) {
+                        if (typeof competitionDay.total == 'undefined') {
+                            competitionDay.total = 0;
+                        }
+                        competitionDay.total = competitionDay.total + report.total;
+                    }
+                });
+            });
+        });
+    });
 
 });
 
 angular.module('skillMgmtApp').controller('ReportLunchInWorkshopCtrl', function($scope, $stateParams, $window, Event, CompetitionDay, Report) {
 
-    $window.document.title = 'Lunch Summary';
+    $window.document.title = 'Lunch in Workshop';
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
