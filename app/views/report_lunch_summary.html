@@ -11,7 +11,7 @@
 <div ng-repeat="day in competitionDays.days | filter:{lunch:true}">
     <h3>Day {{ day.timeline }} <small>{{ day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-condensed">
         <colgroup>
             <col width="50%" />
             <col width="50%" />
