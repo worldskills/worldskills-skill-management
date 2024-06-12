@@ -15,6 +15,12 @@ angular.module('skillMgmtApp').controller('EventCtrl', function($scope, $statePa
 
     $scope.event = Event.get({id: $stateParams.eventId}, function () {
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ViewManagementPlan'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanViewManagementPlan = true;
+            }
+        });
+
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, 'EditForms', $scope.event.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditForms = true;

@@ -32,6 +32,14 @@
           <p ng-repeat="document in documents.documents"><a ui-sref="event_document({eventId: event.id, documentId: document.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
           </div>
       </div>
+      <div class="panel panel-default" ng-show="userCanViewManagementPlan">
+        <div class="panel-heading">Reports</div>
+        <div class="panel-body">
+            <p>
+                <a ui-sref="report_competitor_finish_times({eventId: event.id})"><span class="glyphicon glyphicon-th-list"></span> Competitor Finish Times</a>
+            </p>
+        </div>
+      </div>
       <div class="panel panel-default" ng-show="resources.resources.length">
         <div class="panel-heading">Resources</div>
         <div class="panel-body">

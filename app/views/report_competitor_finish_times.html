@@ -1,8 +1,14 @@
-<p>
-    <span class="text-muted">{{ event.name || "&nbsp;" }}</span>
-</p>
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Competitor Finish Times</li>
+</ol>
 
-<h1>Competitor Finish Times</h1>
+<div>
+    <span class="text-muted">{{ event.name || "&nbsp;" }}</span>
+</div>
+
+<h1 class="align-top">Competitor Finish Times</h1>
 
 <hr/>
 
