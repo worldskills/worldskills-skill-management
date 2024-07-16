@@ -17,6 +17,10 @@
             },
             delete: {
                 method: 'DELETE'
+            },
+            publicItems: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/events/:eventId/skill_items/public'
             }
         });
 

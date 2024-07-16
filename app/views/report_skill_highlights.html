@@ -1,0 +1,38 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">Skill Highlights</li>
+</ol>
+
+<h1 class="h3">Skill Highlights</h1>
+
+<div class="table-responsive" ng-hide="loading">
+    <table class="table table-striped">
+        <colgroup>
+            <col width="30%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="60%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Skill Highlight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items.items">
+                <td>{{item.skill.number}} {{item.skill.name.text}}</td>
+                <td>{{item.competitionDay.timeline}}</td>
+                <td>{{ item.time | limitTo:5 }}</td>
+                <td><a ui-sref="plan({skillId: item.skill_id, day: item.competitionDay.timeline})">{{item.description.text}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-show="loading">
+    <ws-spinner></ws-spinner>
+</div>
