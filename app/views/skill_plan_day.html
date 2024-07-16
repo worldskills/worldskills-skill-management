@@ -22,7 +22,7 @@
                 <p class="form-control-static"><strong>Responsibility</strong></p>
             </div>
             <div class="col-sm-1">
-                <p class="form-control-static"><strong>Public</strong></p>
+                <p class="form-control-static"><strong>Highlight</strong></p>
             </div>
         </div>
         <div ng-repeat="time in skillTimes.times | filter:{competition_day_id:active.day.id, type:'finish'}:true as filteredTimes" class="form-group form-group-sm less-gutter">
@@ -61,8 +61,7 @@
                     <input class="form-control input-sm" ng-model="item.responsibility" ng-change="itemChanged(form, item, false)">
                 </div>
                 <div class="col-sm-2 col-lg-1">
-                    <button type="button" class="btn btn-xs" ng-class="{'btn-primary': item.public_item, 'btn-default': !item.public_item}" ng-click="item.public_item = !item.public_item; itemChanged(form, item, false)" title="Public"><span class="glyphicon glyphicon-globe"></span></button>
-                    <button type="button" class="btn btn-xs" ng-class="{'btn-warning': item.highlight, 'btn-default': !item.highlight}" ng-show="item.public_item" ng-click="item.highlight = !item.highlight; itemChanged(form, item, false)" title="Skill Highlight"><span class="glyphicon glyphicon-star"></span></button>
+                    <button type="button" class="btn btn-xs" ng-class="{'btn-warning': item.highlight, 'btn-default': !item.highlight}" ng-click="item.highlight = !item.highlight; itemChanged(form, item, false)" title="Public Skill Highlight"><span class="glyphicon glyphicon-star"></span></button>
                 </div>
                 <div class="col-sm-2 col-lg-1">
                     <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem($index, item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>

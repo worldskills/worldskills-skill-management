@@ -158,7 +158,6 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
             },
             responsibility: '',
             internal_notes: '',
-            public_item: false,
             highlight: false,
             skill: $scope.skill
         };
