@@ -17,7 +17,7 @@ angular.module('skillMgmtApp').controller('ReportSkillHighlights', function ($sc
     promises.push($scope.days.$promise);
 
     $q.all(promises).then(function () {
-        
+
         angular.forEach($scope.items.items, function (item) {
             item.skill = $scope.skills.skills.find(function (skill) {
                 return skill.id === item.skill_id;
@@ -25,6 +25,9 @@ angular.module('skillMgmtApp').controller('ReportSkillHighlights', function ($sc
             item.competitionDay = $scope.days.days.find(function (day) {
                 return day.id === item.competition_day_id;
             });
+
+            item.skill.items = item.skill.items || [];
+            item.skill.items.push(item);
         });
 
         $scope.loading = false;
