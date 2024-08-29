@@ -43,7 +43,7 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
             PeoplePerson.get({id: expert.person.id, include_history: 1}, function (person) {
                 expert.history = [];
                 angular.forEach(person.positions, function (position) {
-                    if (position.timestamp_end !== null && (position.position.name.text === 'Expert' || position.position.name.text === 'Deputy Chief Expert' || position.position.name.text === 'Chief Expert')) {
+                    if (position.timestamp_end !== null && (position.position.name.text === 'Expert' || position.position.name.text === 'Expert Lead' || position.position.name.text === 'Deputy Chief Expert' || position.position.name.text === 'Chief Expert')) {
                         expert.history.push(position);
                     }
                 });
