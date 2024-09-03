@@ -153,13 +153,13 @@
         <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Edit Chief Expert Nominations</a></p>
         <div class="media" ng-repeat="expert in experts.registrations">
           <div class="media-left media-middle">
-            <img class="img-circle media-object" ng-show="expert.person.images[0]" ng-src="{{expert.person.images[0].thumbnail}}_square" width="30" height="30">
-            <img class="img-circle media-object" ng-show="!expert.person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+            <img class="img-circle media-object" ng-show="expert.person.person.images[0]" ng-src="{{expert.person.person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!expert.person.person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
           </div>
           <div class="media-body">
-            {{ expert.person.first_name }} {{ expert.person.last_name }}
+            {{ expert.person.person.first_name }} {{ expert.person.person.last_name }}
             <span class="text-muted"><br/>{{ expert.member.code }} - {{ expert.member.name.text }}</span>
-            <span class="text-info" ng-if="expert.nominated_smt"><br/>Nominated for Chief Expert</span>
+            <span class="text-info" ng-if="expert.person.nominated_smt"><br/>Nominated for Chief Expert</span>
           </div>
         </div>
       </div>

@@ -124,7 +124,7 @@
                                 </td>
                                 <td>
                                     <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}:true">
-                                        {{ allocation.registration.person.first_name }} {{ allocation.registration.person.last_name }}
+                                        {{ allocation.registration.person.person.first_name }} {{ allocation.registration.person.person.last_name }}
                                         {{ allocation.registration.member.code }}
                                         <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
                                     </div>
@@ -135,7 +135,7 @@
                                 </td>
                                 <td>
                                     <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}:true">
-                                        {{ allocation.registration.person.first_name }} {{ allocation.registration.person.last_name }}
+                                        {{ allocation.registration.person.person.first_name }} {{ allocation.registration.person.person.last_name }}
                                         {{ allocation.registration.member.code }}
                                         <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
                                     </div>

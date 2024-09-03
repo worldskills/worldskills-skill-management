@@ -48,7 +48,7 @@
                   <tbody>
                       <tr ng-repeat="registration in group.registrations">
                           <td>
-                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                              {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                               {{ registration.member.code }}
                           </td>
                           <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
@@ -60,7 +60,7 @@
                                   <ul class="dropdown-menu" uib-dropdown-menu>
                                       <li ng-repeat="registration in competitors.registrations | filter:inGroup as filteredCompetitors">
                                           <a href ng-click="addRegistration(group, registration)">
-                                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                              {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                                               {{ registration.member.code }}
                                           </a>
                                       </li>
@@ -92,7 +92,7 @@
                   <tbody>
                       <tr ng-repeat="registration in group.registrations">
                           <td>
-                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                              {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                               {{ registration.member.code }}
                           </td>
                           <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
@@ -104,7 +104,7 @@
                                   <ul class="dropdown-menu" uib-dropdown-menu>
                                       <li ng-repeat="registration in experts.registrations | filter:inGroup as filteredExperts">
                                           <a href ng-click="addRegistration(group, registration)">
-                                              {{ registration.person.first_name }} {{ registration.person.last_name }}
+                                              {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                                               {{ registration.member.code }}
                                           </a>
                                       </li>
