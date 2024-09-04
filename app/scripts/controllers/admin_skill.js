@@ -118,6 +118,7 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
             poll.expiry.setDate(poll.expiry.getDate() + 1);
             poll.expiry.setHours(14);
             poll.expiry.setMinutes(0);
+            poll.expiry.setSeconds(0);
 
             var p = Poll.save(poll, function (response) {
                 alert.success('The poll has been created. Please ask all Experts to login to the Skill Management app and vote.');
