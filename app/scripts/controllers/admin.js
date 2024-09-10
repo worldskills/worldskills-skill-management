@@ -195,7 +195,7 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
     };
 
     $scope.missingPin = function (competitor) {
-        return competitor.checked === false;
+        return competitor.submission.state === 'submitted' && competitor.checked === false;
     };
 
     $scope.overwritePeople = function (competitor) {
