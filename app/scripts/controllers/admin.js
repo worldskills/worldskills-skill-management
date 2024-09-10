@@ -243,11 +243,14 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
 
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Competitors');
 
+        var now = new Date();
         var filename = $scope.event.code;
         if (filename) {
             filename += '_';
         }
-        filename += 'Competitor_name_changes.xlsx';
+        filename += 'Competitor_name_changes';
+        filename += '_' + now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2) + ('00' + now.getHours()).slice(-2) + ('00' + now.getMinutes()).slice(-2) + ('00' + now.getSeconds()).slice(-2);
+        filename += '.xlsx';
 
         XLSX.writeFile(workbook, filename);
     };
@@ -282,11 +285,14 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
 
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Competitors');
 
+        var now = new Date();
         var filename = $scope.event.code;
         if (filename) {
             filename += '_';
         }
-        filename += 'Competitor_missing.xlsx';
+        filename += 'Competitor_missing';
+        filename += '_' + now.getFullYear() + ('00' + (now.getMonth() + 1)).slice(-2) + ('00' + now.getDate()).slice(-2) + ('00' + now.getHours()).slice(-2) + ('00' + now.getMinutes()).slice(-2) + ('00' + now.getSeconds()).slice(-2);
+        filename += '.xlsx';
 
         XLSX.writeFile(workbook, filename);
     };
