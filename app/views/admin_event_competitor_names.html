@@ -46,12 +46,12 @@
             <td>
                 {{ r.member_name }}
             </td>
-            <td>
+            <td ng-class="{'warning': r.person.first_name != r.first_name}">
                 <a href="https://people.worldskills.org/people/{{r.person.id}}" target="_blank">{{ r.person.first_name }}</a>
                 <br>
                 <a ui-sref="admin_submission({eventId: event.id, formId: r.submission.form.id, id: r.submission.id})" target="_blank">{{ r.first_name }}</a>
             </td>
-            <td>
+            <td ng-class="{'warning': r.person.last_name != r.last_name}">
                 <a href="https://people.worldskills.org/people/{{r.person.id}}" target="_blank">{{ r.person.last_name }}</a>
                 <br>
                 <a ui-sref="admin_submission({eventId: event.id, formId: r.submission.form.id, id: r.submission.id})" target="_blank">{{ r.last_name }}</a>
