@@ -16,7 +16,8 @@
 
 <table class="table table-hover">
     <colgroup>
-        <col width="20%" />
+        <col width="10%" />
+        <col width="10%" />
         <col width="20%" />
         <col width="20%" />
         <col width="20%" />
@@ -24,6 +25,7 @@
     </colgroup>
     <thead>
         <tr>
+            <th>Skill</th>
             <th>Member</th>
             <th colspan="2">
                 Name in People<br>
@@ -38,13 +40,16 @@
     </thead>
     <tfoot>
         <tr>
-            <td colspan="9"></td>
+            <td colspan="10"></td>
         </tr>
     </tfoot>
     <tbody>
         <tr ng-repeat="r in report.reports | filter:nameMismatch as filteredReports">
+            <td title="{{ r.submission.skill.number }} {{ r.submission.skill.name.text }}">
+                <div style="max-width: 10rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ r.submission.skill.number }} {{ r.submission.skill.name.text }}</div>
+            </td>
             <td>
-                {{ r.member_name }}
+                <div style="max-width: 10rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ r.member_name }}</div>
             </td>
             <td ng-class="{'warning': r.person.first_name != r.first_name}">
                 <a href="https://people.worldskills.org/people/{{r.person.id}}" target="_blank">{{ r.person.first_name }}</a>
