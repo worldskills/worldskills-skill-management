@@ -175,7 +175,7 @@ angular.module('skillMgmtApp').controller('AdminEventAdvancedCtrl', function($sc
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $timeout, Event, CompetitionDay, Report, PeoplePerson) {
+angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', function($scope, $stateParams, $filter, Event, CompetitionDay, Report, PeoplePerson) {
 
     $scope.loading = true;
 
@@ -194,6 +194,10 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
         return empty && (firstName || lastName);
     };
 
+    $scope.missingPin = function (competitor) {
+        return competitor.checked === false;
+    };
+
     $scope.overwritePeople = function (competitor) {
         competitor.loading = true;
         PeoplePerson.get({id: competitor.person.id}, function (person) {
@@ -205,6 +209,86 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitorNamesCtrl', funct
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
             });
         });
+    };
+
+    $scope.exportNameChanges = function () {
+
+        var aoa = [
+            [
+                'Person ID',
+                'Previous Name',
+                'New Name',
+                'Member',
+                'Skill'
+            ]
+        ];
+
+        var competitors = $filter('filter')($scope.report.reports, $scope.nameMismatch);
+        angular.forEach(competitors, function (competitor) {
+
+            var data = [
+                competitor.person.id,
+                competitor.person.first_name + ' ' + competitor.person.last_name,
+                competitor.first_name + ' ' + competitor.last_name,
+                competitor.member_name,
+                competitor.submission.skill.number + ' ' + competitor.submission.skill.name.text
+            ];
+
+            aoa.push(data);
+        });
+
+        var workbook = XLSX.utils.book_new();
+    
+        var worksheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Competitors');
+
+        var filename = $scope.event.code;
+        if (filename) {
+            filename += '_';
+        }
+        filename += 'Competitor_name_changes.xlsx';
+
+        XLSX.writeFile(workbook, filename);
+    };
+
+    $scope.exportMissing = function () {
+
+        var aoa = [
+            [
+                'Person ID',
+                'Name',
+                'Member',
+                'Skill'
+            ]
+        ];
+
+        var competitors = $filter('filter')($scope.report.reports, $scope.missingPin);
+        angular.forEach(competitors, function (competitor) {
+
+            var data = [
+                competitor.person.id,
+                competitor.person.first_name + ' ' + competitor.person.last_name,
+                competitor.member_name,
+                competitor.submission.skill.number + ' ' + competitor.submission.skill.name.text
+            ];
+
+            aoa.push(data);
+        });
+
+        var workbook = XLSX.utils.book_new();
+    
+        var worksheet = XLSX.utils.aoa_to_sheet(aoa);
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Competitors');
+
+        var filename = $scope.event.code;
+        if (filename) {
+            filename += '_';
+        }
+        filename += 'Competitor_missing.xlsx';
+
+        XLSX.writeFile(workbook, filename);
     };
 });
 
