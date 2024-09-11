@@ -12,6 +12,12 @@ angular.module('skillMgmtApp').controller('DocumentCtrl', function ($scope, $sta
             }
         });
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ApproveDocument'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanApproveDocument = true;
+            }
+        });
+
         auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'AddSkillDocumentWSOS'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanAddSkillDocumentWSOS = true;

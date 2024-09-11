@@ -42,7 +42,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-success">Approve<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">Approve<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
           <button type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
         </div>
