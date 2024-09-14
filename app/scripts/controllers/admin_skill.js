@@ -36,6 +36,7 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
 angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, PeoplePerson, Poll) {
 
     $scope.loading = true;
+    $scope.createPollLoading = false;
 
     $scope.experts = SkillExpert.query({skillId: $stateParams.skillId}, function () {
 
@@ -69,6 +70,8 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
     };
 
     $scope.createPoll = function () {
+
+        $scope.createPollLoading = true;
 
         var numberOfSelections = Math.min(3, $scope.getNominatedTotal());
 
