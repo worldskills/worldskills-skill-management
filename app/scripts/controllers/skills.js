@@ -112,7 +112,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         });
 
 
-        $scope.polls = Poll.query({entity: $scope.skill.entity_id});
+        $scope.polls = Poll.query({entity: $scope.skill.entity_id, limit: 99});
 
         $scope.technicalDescription = Resource.query({type: DOCUMENT_TYPE_TECHNICAL_DESCRIPTION, tags: tags, limit: 1});
         $scope.workshopLayouts = Resource.query({type: DOCUMENT_TYPE_HALL_LAYOUTS, tags: tags, limit: 1});
