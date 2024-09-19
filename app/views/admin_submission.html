@@ -72,6 +72,7 @@
             </div>
 
             <div ng-if="field.type == 'input_file'">
+                <p><button ng-click="downloadFiles(field.files)" class="btn btn-primary btn-sm">Download all files</button></p>
                 <div class="panel panel-default">
                     <table class="table table-striped">
                         <tbody>

@@ -286,6 +286,12 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
         }
     };
 
+    $scope.downloadFiles = function (files) {
+        angular.forEach(files, function (file) {
+            window.open(file.download);
+        });
+    };
+
     auth.user.$promise.then(function () {
 
         angular.forEach(auth.user.roles, function (role) {
