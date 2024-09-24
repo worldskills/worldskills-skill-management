@@ -12,9 +12,9 @@
 
 <ul class="nav nav-tabs">
     <li ui-sref-active="{active: 'admin_document.skills'}"><a ui-sref="admin_document.skills">Skills</a></li>
-    <li ui-sref-active="{active: 'admin_document.search'}"><a ui-sref="admin_document.search">Search &amp; Replace</a></li>
-    <li ui-sref-active="{active: 'admin_document.chapters'}"><a ui-sref="admin_document.chapters">Sections</a></li>
-    <li ui-sref-active="{active: 'admin_document.name'}"><a ui-sref="admin_document.name">Settings</a></li>
+    <li ng-show="userCanManageDocument" ui-sref-active="{active: 'admin_document.search'}"><a ui-sref="admin_document.search">Search &amp; Replace</a></li>
+    <li ng-show="userCanManageDocument" ui-sref-active="{active: 'admin_document.chapters'}"><a ui-sref="admin_document.chapters">Sections</a></li>
+    <li ng-show="userCanManageDocument" ui-sref-active="{active: 'admin_document.name'}"><a ui-sref="admin_document.name">Settings</a></li>
 </ul>
 
 <div id="content" ui-view>

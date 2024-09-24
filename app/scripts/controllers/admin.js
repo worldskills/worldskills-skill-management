@@ -37,6 +37,18 @@ angular.module('skillMgmtApp').controller('AdminEventCtrl', function($scope, $st
             }
         });
 
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ApproveDocument'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanApproveDocument = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ManageDocument'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanManageDocument = true;
+            }
+        });
+
     });
 
 });
