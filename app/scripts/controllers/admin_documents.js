@@ -6,11 +6,19 @@ angular.module('skillMgmtApp').controller('AdminEventDocumentsCtrl', function($s
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, $state, $stateParams, $uibModal, Event, Document, DocumentChapter, DocumentSection) {
+angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, $state, $stateParams, $uibModal, WORLDSKILLS_API_SKILLMAN_CODE, auth, Event, Document, DocumentChapter, DocumentSection) {
 
     $scope.loading = true;
 
-    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        auth.hasUserRole(WORLDSKILLS_API_SKILLMAN_CODE, ['Admin', 'ManageDocument'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanManageDocument = true;
+            }
+        });
+
+    });
 
     $scope.document = Document.get({id: $stateParams.documentId}, function () {
         $scope.title = $scope.document.name.text;
