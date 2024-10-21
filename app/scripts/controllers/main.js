@@ -1,8 +1,12 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, Language, auth, alert, WORLDSKILLS_API_SKILLMAN_CODE, ENVIRONMENT_WARNING) {
+angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $scope, $state, $translate, auth, alert, WORLDSKILLS_API_SKILLMAN_CODE, ENVIRONMENT_WARNING) {
 
-    $scope.selectedLanguage = Language.selectedLanguage;
+    $scope.availableLanguages = {
+        'en': 'English',
+        'fr': 'Français',
+        'fi': 'Suomi'
+    };
 
     $scope.active = {};
 
@@ -11,6 +15,12 @@ angular.module('skillMgmtApp').controller('MainCtrl', function ($rootScope, $sco
         auth.logout();
     };
     $scope.date = new Date();
+
+    auth.user.$promise.then(function () {
+        if (auth.user.preferred_language) {
+            $translate.use(auth.user.preferred_language);
+        }
+    });
 
     $scope.$on('$stateChangeStart', function () {
         alert.clear();

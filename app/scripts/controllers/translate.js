@@ -1,16 +1,18 @@
 'use strict';
 
-angular.module('skillMgmtApp')
-	.controller('TranslateCtrl', ['$translate', '$translateLocalStorage', '$scope', 'Language', function ($translate, $translateLocalStorage, $scope, Language) {
+angular.module('skillMgmtApp').controller('TranslateCtrl', function ($translate, $scope, $http, $state) {
 
-		//get current language from local storage
-		Language.selectedLanguage = $translateLocalStorage.get('NG_TRANSLATE_LANG_KEY');
-		$scope.selectedLanguage = Language.selectedLanguage;
+		// get current language
+		$scope.selectedLanguage = $translate.proposedLanguage();
 
 		$scope.changeLanguage = function(langKey){
 			$translate.use(langKey);
-			Language.selectedLanguage = langKey;
 			$scope.selectedLanguage = langKey;
+
+			// force locale for api requests
+			$http.defaults.headers.common["Accept-Language"] = langKey;
+
+			$state.reload();
 		};
 
-	}]);
+});

@@ -45,20 +45,15 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
     suffix: '.json?v=20220331094635'
   });
 
-  $translateProvider.preferredLanguage('en');
+  $translateProvider.registerAvailableLanguageKeys(['en', 'fr', 'fi'], {
+    'en_*': 'en',
+    'fr_*': 'fr',
+    'fi_*': 'fi',
+    '*': 'en'
+  });
+  $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
   $translateProvider.fallbackLanguage('en');
-  $translateProvider.useLocalStorage();
-
-  //language negotiation
-  //http://angular-translate.github.io/docs/#/guide/09_language-negotiation
-  // $translateProvider.registerAvailableLanguageKeys(['en', 'pt'], {
-  //   'en_US': 'en',
-  //   'en_UK': 'en',
-  //   'pt_BR': 'pt'
-  // });
-
-  // try to find out preferred language by yourself
-  //$translateProvider.determinePreferredLanguage();
+  $translateProvider.preferredLanguage('en');
 
   //routes
 
@@ -830,7 +825,13 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
 
 
 }])
-.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
+.run(['$rootScope', '$state', '$stateParams', '$translate', '$http', function($rootScope, $state, $stateParams, $translate, $http) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+
+    $rootScope.$on('$translateChangeSuccess', function () {
+        var activeLanguage = $translate.use();
+        $http.defaults.headers.common['Accept-Language'] = activeLanguage;
+    });
+  
 }]);

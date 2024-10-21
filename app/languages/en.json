@@ -1,4 +1,5 @@
 {
+	"language": "Language",
 	"input_text": "Textfield",
 	"input_textarea": "Textarea",
 	"input_yesno": "Yes/No",

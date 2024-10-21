@@ -72,6 +72,24 @@
 
         <footer>
             <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <div class="dropdown" ng-controller="TranslateCtrl">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="languageSelect" data-toggle="dropdown">
+                            <span translate>language</span><small class='label'>{{availableLanguages[selectedLanguage]}}</small>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="languageSelect">
+                            <li ng-repeat="(langCode, langName) in availableLanguages" ng-class="{active: langCode == selectedLanguage}" role="presentation">
+                                <a ng-click="changeLanguage(langCode);" role="menuitem" tabindex="-1">{{langName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+            <p>&nbsp;</p>
+    
+            <div class="row">
                 <div class="col-md-10 col-sm-8">
                     <p>
                         © {{date | date:'yyyy'}} WorldSkills International
@@ -85,7 +103,7 @@
                 </div>
             </div>
         </footer>
-
+  
     </div>
 
     <!--[if lt IE 9]>
@@ -107,8 +125,6 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/js-xlsx/xlsx.js"></script>
@@ -153,7 +169,6 @@
         <script src="scripts/directives/alerts.js"></script>
         <script src="scripts/directives/select2_tags.js"></script>
         <script src="scripts/directives/form_fields.js"></script>
-        <script src="scripts/services/language.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/alert.js"></script>
         <script src="scripts/services/Form.js"></script>
