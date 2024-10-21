@@ -1,15 +1,4 @@
 {
-	"APP_NAME":"Skill Management",
-	"APP_TITLE":"Skill Management",
-	
-	"BinderFormListHeading": "Forms",
-	"JP": "Jury President",
-	"CE": "Chief Expert",
-	
-	"Day": "Day",
-	"Form": "Form",
-	"NoForms": "No Forms Found",
-
 	"input_text": "Textfield",
 	"input_textarea": "Textarea",
 	"input_yesno": "Yes/No",
