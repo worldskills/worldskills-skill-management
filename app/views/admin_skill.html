@@ -1,8 +1,8 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li class="active">Skill Admin</li>
+    <li class="active">{{ 'skill_admin' | translate }}</li>
 </ol>
 
 <p class="text-muted">
@@ -11,7 +11,7 @@
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
 </p>
 
-<h1 class="align-top">Skill Admin</h1>
+<h1 class="align-top">{{ 'skill_admin' | translate }}</h1>
 
 <ul class="nav nav-tabs">
     <li ng-show="userCanEditExperts" ui-sref-active="{active: 'admin_skill.expert_nominations'}"><a ui-sref="admin_skill.expert_nominations">Chief Expert Nominations</a></li>

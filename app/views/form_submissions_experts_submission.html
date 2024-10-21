@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
     <li><a ui-sref="form_submissions_experts({eventId: submission.skill.event.id, skillId: submission.skill.id})">Form Submissions</a></li>

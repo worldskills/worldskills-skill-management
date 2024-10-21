@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li class="active">Events</li>
+    <li class="active">{{ 'events' | translate }}</li>
 </ol>
 
 <div class="table-responsive">
@@ -12,10 +12,10 @@
         </colgroup>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Event</th>
-                <th>Start Date</th>
-                <th>Entity</th>
+                <th>{{ 'id' | translate }}</th>
+                <th>{{ 'event' | translate }}</th>
+                <th>{{ 'start_date' | translate }}</th>
+                <th>{{ 'entity' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                 <td>{{ event.highest_parent_entity.name.text }}</td>
             </tr>
             <tr ng-show="events.events.length == 0">
-                <td colspan="4">No events found</td>
+                <td colspan="4">{{ 'message_no_events_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="4"><ws-spinner></ws-spinner></td>

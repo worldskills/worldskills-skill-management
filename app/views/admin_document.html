@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
-    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'event_admin' | translate }}</a></li>
     <li><a ui-sref="admin_event.documents({eventId: event.id})">Documents</a></li>
     <li class="active">{{ title }}</li>
 </ol>
