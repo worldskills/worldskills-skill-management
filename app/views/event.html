@@ -1,16 +1,16 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="events">Events</a></li>
+    <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li class="active">{{ event.name }}</li>
 </ol>
 
 <div class="pull-right">
     <div class="btn-group" uib-dropdown ng-show="userCanViewAllSubmissions || userCanEditForms || userCanViewProgressItemsInternalNotes">
-        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Tools <span class="caret"></span></button>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">{{ 'tools' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
-            <li ng-show="userCanViewProgressItemsInternalNotes"><a ui-sref="report_progress_items({eventId: event.id})">Prep. Progress Report</a></li>
-            <li><a ui-sref="report_skill_highlights({eventId: event.id})">Skill Highlights Report</a></li>
+            <li ng-show="userCanViewProgressItemsInternalNotes"><a ui-sref="report_progress_items({eventId: event.id})">{{ 'preparation_progress_report' | translate }}</a></li>
+            <li><a ui-sref="report_skill_highlights({eventId: event.id})">{{ 'skill_highlights_report' | translate }}</a></li>
             <li ng-show="userCanViewProgressItemsInternalNotes && (userCanViewAllSubmissions || userCanEditForms)" role="separator" class="divider"></li>
-            <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin_event.form_list({eventId: event.id})">Event Admin</a></li>
+            <li ng-show="userCanViewAllSubmissions || userCanEditForms"><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'event_admin' | translate }}</a></li>
         </ul>
     </div>
 </div>
