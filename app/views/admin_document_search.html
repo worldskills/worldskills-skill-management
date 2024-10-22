@@ -3,14 +3,14 @@
 <div class="row">
   <div class="col-md-5">
     <div class="form-group">
-      <label for="searchQuery">Search query</label>
+      <label for="searchQuery">{{ 'search_query' | translate }}</label>
       <input type="text" class="form-control" id="searchQuery" ng-model="query" ng-change="searchChanged()">
-      <span class="help-block text-muted">Note the search query is case-sensitive.</span>
+      <span class="help-block text-muted">{{ 'message_search_query_case_sensitive' | translate }}</span>
     </div>
   </div>
   <div class="col-md-5">
     <div class="form-group">
-      <label for="replacement">Replacement</label>
+      <label for="replacement">{{ 'replacement' | translate }}</label>
       <input type="text" class="form-control" id="replacement" ng-model="replacement" >
       <span class="help-block text-muted" ng-show="sections">Found {{ sections.sections.length }} sections.</span>
     </div>
@@ -18,7 +18,7 @@
   <div class="col-md-2">
     <div class="form-group">
       <label>&nbsp;</label>
-      <button class="btn btn-primary btn-block" ng-click="replace()" ng-disabled="!query || !replacement">Replace All</button>
+      <button class="btn btn-primary btn-block" ng-click="replace()" ng-disabled="!query || !replacement">{{ 'replace_all' | translate }}</button>
     </div>
   </div>
 </div>
@@ -34,9 +34,9 @@
       </colgroup>
       <thead>
           <tr>
-              <th>Skill</th>
-              <th>Section</th>
-              <th>Content</th>
+              <th>{{ 'skill' | translate }}</th>
+              <th>{{ 'section' | translate }}</th>
+              <th>{{ 'content' | translate }}</th>
           </tr>
       </thead>
       <tbody>
@@ -48,7 +48,7 @@
               </td>
           </tr>
           <tr ng-show="!loading && (!sections || sections.sections.length == 0)">
-              <td colspan="3">No sections found</td>
+              <td colspan="3">{{ 'message_no_sections_found' | translate }}</td>
           </tr>
           <tr ng-show="loading">
               <td colspan="3"><ws-spinner></ws-spinner></td>

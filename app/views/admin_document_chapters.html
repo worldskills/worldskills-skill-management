@@ -12,9 +12,9 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Ordering</th>
-                <th>Number</th>
-                <th>Section/Subsection</th>
+                <th>{{ 'ordering' | translate }}</th>
+                <th>{{ 'number' | translate }}</th>
+                <th>{{ 'section_or_subsection' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +43,7 @@
                                 <td>&nbsp;</td>
                                 <td>{{ section.number }}</td>
                                 <td><span ng-repeat="i in [].constructor(section.level) track by $index">&nbsp;&nbsp;&nbsp;&nbsp;</span><a href ng-click="editSection($index, chapter.chapter, section)">{{ section.title.text }}</a></td>
-                                <td><em ng-show="section.skill_editable">(Editable by Skill)</em></td>
+                                <td><em ng-show="section.skill_editable">({{ 'editable_by_skill' | translate }})</em></td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-primary btn-xs" ng-click="moveSectionUp($index, chapter.chapter, section)" ng-disabled="$first || event.locked"><span class="glyphicon glyphicon-triangle-top"></span></button>
@@ -54,7 +54,7 @@
                             <tr>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
-                                <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success btn-xs" ng-click="addSection(chapter)">Add Subsection</button></td>
+                                <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success btn-xs" ng-click="addSection(chapter)">{{ 'add_subsection' | translate }}</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -63,12 +63,12 @@
             <tr ng-show="document.chapters.length == 0">
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td>No chapters found</td>
+                <td>{{ 'message_no_chapters_found' | translate }}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td><button type="button" class="btn btn-success btn-xs" ng-click="addChapter()">Add Section</button></td>
+                <td><button type="button" class="btn btn-success btn-xs" ng-click="addChapter()">{{ 'add_section' | translate }}</button></td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="3"><ws-spinner></ws-spinner></td>
