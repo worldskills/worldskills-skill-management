@@ -28,6 +28,7 @@
   "language": "Language",
   "link": "Link",
   "logout": "Logout",
+  "message_found_x_sections": "Found {{count}} sections.",
   "message_no_chapters_found": "No chapters found",
   "message_no_events_found": "No events found",
   "message_no_sections_found": "No sections found",

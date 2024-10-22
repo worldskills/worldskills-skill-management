@@ -12,7 +12,7 @@
     <div class="form-group">
       <label for="replacement">{{ 'replacement' | translate }}</label>
       <input type="text" class="form-control" id="replacement" ng-model="replacement" >
-      <span class="help-block text-muted" ng-show="sections">Found {{ sections.sections.length }} sections.</span>
+      <span class="help-block text-muted" ng-show="sections">{{ 'message_found_x_sections' | translate:{count: sections.sections.length} }}</span>
     </div>
   </div>
   <div class="col-md-2">
