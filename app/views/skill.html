@@ -47,7 +47,7 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="userCanViewProgressItemsReport || userCanViewProgressItems">
-      <div class="panel-heading">Preparation Progress</div>
+      <div class="panel-heading">{{ 'preparation_progress' | translate }}</div>
       <div class="panel-body">
         <p ng-show="userCanEditSkillProgressItems"><a ui-sref="admin_skill.progress({eventId: skill.event.id, skillId: skill.id})">Edit Progress Items</a></p>
         <div ng-show="userCanViewProgressItemsReport">
