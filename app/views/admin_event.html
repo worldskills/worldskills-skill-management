@@ -6,13 +6,13 @@
 
 <div class="pull-right">
     <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">Reports <span class="caret"></span></button>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">{{ 'reports' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu" uib-dropdown-menu>
-            <li><a ui-sref="report_lunch_summary({eventId: event.id})" target="_blank">Lunch Summary</a></li>
-            <li><a ui-sref="report_lunch_in_workshop({eventId: event.id})" target="_blank">Lunch in Workshop</a></li>
+            <li><a ui-sref="report_lunch_summary({eventId: event.id})" target="_blank">{{ 'lunch_summary' | translate }}</a></li>
+            <li><a ui-sref="report_lunch_in_workshop({eventId: event.id})" target="_blank">{{ 'lunch_in_workshop' | translate }}</a></li>
             <li role="separator" class="divider"></li>
-            <li><a ui-sref="admin_competitor_names({eventId: event.id})">Competitor Names</a></li>
-            <li><a ui-sref="admin_competitor_date_of_birth({eventId: event.id})">Competitor Date of Birth</a></li>
+            <li><a ui-sref="admin_competitor_names({eventId: event.id})">{{ 'competitor_names' | translate }}</a></li>
+            <li><a ui-sref="admin_competitor_date_of_birth({eventId: event.id})">{{ 'competitor_date_of_birth' | translate }}</a></li>
         </ul>
     </div>
 </div>
@@ -24,16 +24,16 @@
 <h1 class="align-top">{{ 'event_admin' | translate }}</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="{active: 'admin_event.form_list'}"><a ui-sref="admin_event.form_list">Forms</a></li>
-    <li ui-sref-active="{active: 'admin_event.form_progress'}"><a ui-sref="admin_event.form_progress">Forms Report</a></li>
-    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_event.progress_items'}"><a ui-sref="admin_event.progress_items">Progress Items</a></li>
+    <li ui-sref-active="{active: 'admin_event.form_list'}"><a ui-sref="admin_event.form_list">{{ 'forms' | translate }}</a></li>
+    <li ui-sref-active="{active: 'admin_event.form_progress'}"><a ui-sref="admin_event.form_progress">{{ 'forms_report' | translate }}</a></li>
+    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_event.progress_items'}"><a ui-sref="admin_event.progress_items">{{ 'progress_items' | translate }}</a></li>
     <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_event.skills'}"><a ui-sref="admin_event.skills">{{ 'skills' | translate }}</a></li>
-    <li ng-show="userCanEditCompetitionItems" ui-sref-active="{active: 'admin_event.items'}"><a ui-sref="admin_event.items({day: 'C1'})">Competition Items</a></li>
-    <li ng-show="userCanEditCompetitionDays" ui-sref-active="{active: 'admin_event.competition_days'}"><a ui-sref="admin_event.competition_days">Competition Days</a></li>
-    <li ng-show="userCanEditRooms" ui-sref-active="{active: 'admin_event.rooms'}"><a ui-sref="admin_event.rooms">Rooms</a></li>
-    <li ng-show="userCanEditLunchPeriods" ui-sref-active="{active: 'admin_event.lunch_periods'}"><a ui-sref="admin_event.lunch_periods">Lunch Times</a></li>
-    <li ng-show="userCanApproveDocument || userCanManageDocument" ui-sref-active="{active: 'admin_event.documents'}"><a ui-sref="admin_event.documents">Documents</a></li>
-    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_event.advanced'}"><a ui-sref="admin_event.advanced">Advanced</a></li>
+    <li ng-show="userCanEditCompetitionItems" ui-sref-active="{active: 'admin_event.items'}"><a ui-sref="admin_event.items({day: 'C1'})">{{ 'competiton_items' | translate }}</a></li>
+    <li ng-show="userCanEditCompetitionDays" ui-sref-active="{active: 'admin_event.competition_days'}"><a ui-sref="admin_event.competition_days">{{ 'competition_days' | translate }}</a></li>
+    <li ng-show="userCanEditRooms" ui-sref-active="{active: 'admin_event.rooms'}"><a ui-sref="admin_event.rooms">{{ 'rooms' | translate }}</a></li>
+    <li ng-show="userCanEditLunchPeriods" ui-sref-active="{active: 'admin_event.lunch_periods'}"><a ui-sref="admin_event.lunch_periods">{{ 'lunch_times' | translate }}</a></li>
+    <li ng-show="userCanApproveDocument || userCanManageDocument" ui-sref-active="{active: 'admin_event.documents'}"><a ui-sref="admin_event.documents">{{ 'documents' | translate }}</a></li>
+    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_event.advanced'}"><a ui-sref="admin_event.advanced">{{ 'advanced' | translate }}</a></li>
 </ul>
 
 <div id="content" ui-view>

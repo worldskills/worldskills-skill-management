@@ -8,17 +8,17 @@
                         <input class="form-control input-sm" ng-model="room.name.text" ng-change="roomChanged(room)">
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeRoom(room)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeRoom(room)"><span class="glyphicon glyphicon-ban-circle"></span> {{ 'remove' | translate }}</button>
                     </div>
                 </div>
                 <div class="form-group form-group-sm" ng-show="!rooms.rooms.length">
                     <div class="col-sm-4">
-                        <p>No rooms.</p>
+                        <p>{{ 'message_no_rooms' | translate }}</p>
                     </div>
                 </div>
                 <div class="form-group form-group-sm">
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-success btn-sm" ng-click="addRoom()"><span class="glyphicon glyphicon-plus"></span> Add Room</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="addRoom()"><span class="glyphicon glyphicon-plus"></span> {{ 'add_room' | translate }}</button>
                     </div>
                 </div>
             </fieldset>

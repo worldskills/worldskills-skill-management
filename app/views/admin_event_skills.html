@@ -19,7 +19,7 @@
                 <td><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></td>
             </tr>
             <tr ng-show="skills.skills.length == 0">
-                <td colspan="2">No skills found</td>
+                <td colspan="2">{{ 'message_no_skills_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="2"><ws-spinner></ws-spinner></td>
