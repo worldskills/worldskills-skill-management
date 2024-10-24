@@ -2,10 +2,10 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
     <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'event_admin' | translate }}</a></li>
-    <li class="active">Competitor Date of Birth</li>
+    <li class="active">{{ 'competitor_date_of_birth' | translate }}</li>
 </ol>
 
-<h1>Competitor Date of Birth</h1>
+<h1>{{ 'competitor_date_of_birth' | translate }}</h1>
 
 <hr/>
 
@@ -20,12 +20,12 @@
     </colgroup>
     <thead>
         <tr>
-            <th>Member</th>
-            <th>Name in People</th>
-            <th>Date of Birth in People</th>
-            <th>in Skill Management</th>
-            <th>Submitted</th>
-            <th>Actions</th>
+            <th>{{ 'member' | translate }}</th>
+            <th>{{ 'name_in_people' | translate }}</th>
+            <th>{{ 'date_of_birth_in_people' | translate }}</th>
+            <th>{{ 'in_skill_management' | translate }}</th>
+            <th>{{ 'submitted' | translate }}</th>
+            <th>{{ 'actions' | translate }}</th>
         </tr>
     </thead>
     <tfoot>
@@ -51,11 +51,11 @@
                 {{ r.submission.submitted|date:'d MMMM yyyy HH:mm' }}
             </td>
             <td>
-                <button type="button" class="btn btn-warning btn-xs" ng-click="overwritePeople(r)" ng-disabled="r.loading">Overwrite in People</button>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="overwritePeople(r)" ng-disabled="r.loading">{{ 'overwrite_in_people' | translate }}</button>
             </td>
         </tr>
         <tr ng-show="filteredReports.length == 0">
-            <td colspan="6">No Competitors found</td>
+            <td colspan="6">{{ 'message_no_competitors_found' | translate }}</td>
         </tr>
         <tr ng-show="loading">
             <td colspan="6"><ws-spinner></ws-spinner></td>

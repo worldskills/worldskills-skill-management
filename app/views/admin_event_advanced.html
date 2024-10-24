@@ -4,10 +4,10 @@
             <div class="panel-heading">{{ 'event' | translate }}</div>
             <div class="panel-body">
                 <p>
-                    <button type="button" class="btn btn-danger" ng-click="lockEvent()" ng-disabled="event.locked">Lock Event</button>
+                    <button type="button" class="btn btn-danger" ng-click="lockEvent()" ng-disabled="event.locked">{{ 'lock_event' | translate }}</button>
                 </p>
-                <p>After locking an event it is no longer possible to edit Competition Items, Skills Items, Forms, or any other event related information.</p>
-                <p ng-show="event.locked" class="text-muted">Event is locked.</p>
+                <p>{{ 'message_after_locking_event' | translate }}</p>
+                <p ng-show="event.locked" class="text-muted">{{ 'message_event_is_locked' | translate }}</p>
             </div>
         </div>
     </div>

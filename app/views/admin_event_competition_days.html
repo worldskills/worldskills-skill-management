@@ -21,29 +21,29 @@
                     <div class="col-sm-2">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="competitionDay.lunch" ng-change="competitionDayChanged(competitionDay)"> Lunch
+                                <input type="checkbox" ng-model="competitionDay.lunch" ng-change="competitionDayChanged(competitionDay)"> {{ 'lunch' | translate }}
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="competitionDay.competitor_finish_time" ng-change="competitionDayChanged(competitionDay)"> Competitor Finish Time
+                                <input type="checkbox" ng-model="competitionDay.competitor_finish_time" ng-change="competitionDayChanged(competitionDay)"> {{ 'competitor_finish_time' | translate }}
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeCompetitionDay(competitionDay)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeCompetitionDay(competitionDay)"><span class="glyphicon glyphicon-ban-circle"></span> {{ 'remove' | translate }}</button>
                     </div>
                 </div>
                 <div class="form-group form-group-sm" ng-show="!competitionDays.days.length">
                     <div class="col-sm-4">
-                        <p>No Competition days.</p>
+                        <p>{{ 'message_no_competition_days' | translate }}</p>
                     </div>
                 </div>
                 <div class="form-group form-group-sm">
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-success btn-sm" ng-click="addCompetitionDay()"><span class="glyphicon glyphicon-plus"></span> Add Competition Day</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="addCompetitionDay()"><span class="glyphicon glyphicon-plus"></span> {{ 'add_competition_day' | translate }}</button>
                     </div>
                 </div>
             </fieldset>

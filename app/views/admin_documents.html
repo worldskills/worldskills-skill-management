@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th>{{ 'id' | translate }}</th>
-                <th>Title</th>
+                <th>{{ 'title' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                 <td><a ui-sref="admin_document.skills({eventId: event.id, documentId: document.id})">{{ document.name.text }}</a></td>
             </tr>
             <tr ng-show="documents.documents.length == 0">
-                <td colspan="2">No documents found</td>
+                <td colspan="2">{{ 'message_no_documents_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="2"><ws-spinner></ws-spinner></td>

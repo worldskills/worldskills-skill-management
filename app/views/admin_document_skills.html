@@ -9,8 +9,8 @@
         <thead>
             <tr>
                 <th>{{ 'id' | translate }}</th>
-                <th>Document for Skill</th>
-                <th>Pending changes</th>
+                <th>{{ 'document_for_skill' | translate }}</th>
+                <th>{{ 'pending_changes' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             </tr>
             <tr ng-show="skills.length == 0">
                 <td>&nbsp;</td>
-                <td colspan="2">No skills found</td>
+                <td colspan="2">{{ 'message_no_skills_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="3"><ws-spinner></ws-spinner></td>
@@ -38,5 +38,5 @@
 </div>
 
 <p>
-    <button class="btn btn-default btn-sm" ng-show="userIsAdmin" ng-click="downloadPDFs()" ng-disabled="loadingPDF">Download all PDFs<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
+    <button class="btn btn-default btn-sm" ng-show="userIsAdmin" ng-click="downloadPDFs()" ng-disabled="loadingPDF">{{ 'download_all_pdfs' | translate }}<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
 </p>
