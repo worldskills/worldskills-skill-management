@@ -1,6 +1,6 @@
 
 <div class="text-right">
-    <button class="btn btn-sm btn-default" ng-click="export()">Export all submissions (.xlsx) <ws-text-spinner ng-show="loadingExport" class="ng-hide"></ws-text-spinner></button>
+    <button class="btn btn-sm btn-default" ng-click="export()">{{ 'export_all_submissions' | translate }} (.xlsx) <ws-text-spinner ng-show="loadingExport" class="ng-hide"></ws-text-spinner></button>
 </div>
 
 <div class="table-responsive">
@@ -12,9 +12,9 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Submitted on</th>
-                <th ng-show="model.multiple_submissions">Title</th>
-                <th>Skill</th>
+                <th>{{ 'submitted_on' | translate }}</th>
+                <th ng-show="model.multiple_submissions">{{ 'title' | translate }}</th>
+                <th>{{ 'skill' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
                 <td>{{ submission.skill.number }} {{ submission.skill.name.text }}</td>
             </tr>
             <tr ng-show="!loading && submissions.submissions.length == 0">
-                <td colspan="{{ model.multiple_submissions ? 3 : 2 }}">No submissions found</td>
+                <td colspan="{{ model.multiple_submissions ? 3 : 2 }}">{{ 'message_no_submissions_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="{{ model.multiple_submissions ? 3 : 2 }}"><ws-spinner></ws-spinner></td>

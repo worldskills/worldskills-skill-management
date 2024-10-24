@@ -1,24 +1,24 @@
 <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
     <fieldset ng-disabled="event.locked">
         <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
-            <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
+            <label for="name" class="col-sm-3 control-label">{{ 'name' | translate }} <span class="required">*</span></label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="name" ng-model="model.name.text" required>
             </div>
             <div class="col-sm-4">
                 <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
-                    <span ng-message="required">Please enter a name!</span>
+                    <span ng-message="required">{{ 'message_please_enter_name' | translate }}</span>
                 </span>
             </div>
         </div>
         <div class="form-group">
-            <label for="description" class="col-sm-3 control-label">Description</label>
+            <label for="description" class="col-sm-3 control-label">{{ 'description' | translate }}</label>
             <div class="col-sm-5">
                 <textarea class="form-control" rows="6" ng-model="model.description.text" name="description"></textarea>
             </div>
         </div>
         <div class="form-group">
-            <label for="title_label" class="col-sm-3 control-label">Competition Day</label>
+            <label for="title_label" class="col-sm-3 control-label">{{ 'competition_day' | translate }}</label>
             <div class="col-sm-5">
                 <select class="form-control input-sm" ng-options="day.id as day.timeline for day in competitionDays.days" ng-model="model.competition_day.id">
                     <option></option>
@@ -27,38 +27,38 @@
         </div>
         <hr>
         <div class="form-group">
-            <label for="view_submissions_experts" class="col-sm-3 control-label">Experts</label>
+            <label for="view_submissions_experts" class="col-sm-3 control-label">{{ 'experts' | translate }}</label>
             <div class="col-sm-5">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="view_submissions_experts" ng-model="model.view_submissions_experts"> Experts can view all submissions of this form
+                        <input type="checkbox" name="view_submissions_experts" ng-model="model.view_submissions_experts"> {{ 'message_experts_can_view_all_submissions' | translate }}
                     </label>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="multiple_submissions" class="col-sm-3 control-label">Multi</label>
+            <label for="multiple_submissions" class="col-sm-3 control-label">{{ 'multi' | translate }}</label>
             <div class="col-sm-5">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="multiple_submissions" ng-model="model.multiple_submissions"> Form can be submitted multiple times
+                        <input type="checkbox" name="multiple_submissions" ng-model="model.multiple_submissions"> {{ 'message_form_multiple_submissions' | translate }}
                     </label>
                 </div>
             </div>
         </div>
         <div class="form-group" ng-show="model.multiple_submissions">
-            <label for="title_label" class="col-sm-3 control-label">Title Label</label>
+            <label for="title_label" class="col-sm-3 control-label">{{ 'title_label' | translate }}</label>
             <div class="col-sm-5">
                 <input type="text" class="form-control" name="title_label" ng-model="model.title_label.text">
             </div>
             <div class="col-sm-4">
-                <span class="help-block text-muted">e.g. "Competitor Name" - can be empty</span>
+                <span class="help-block text-muted">{{ 'message_example_competitor_name' | translate }}</span>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-                <button type="submit" class="btn btn-success">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-                <a ui-sref="admin_event.form_list({eventId: event.id})" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-success">{{ 'save' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+                <a ui-sref="admin_event.form_list({eventId: event.id})" class="btn btn-default">{{ 'cancel' | translate }}</a>
             </div>
         </div>
     </fieldset>

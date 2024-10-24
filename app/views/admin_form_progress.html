@@ -7,7 +7,7 @@
         </colgroup
         <thead>
             <tr>
-                <th>Skill / Form</th>
+                <th>{{ 'skill' | translate }} / {{ 'form' | translate }}</th>
                 <th ng-repeat="form in forms.forms" title="{{ form.name.text }}" class="text-center">{{ $index + 1 }}</th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 </th>
             </tr>
             <tr ng-show="forms.total_count == 0">
-                <td colspan="{{ forms.forms.length + 1 }}">No forms found</td>
+                <td colspan="{{ forms.forms.length + 1 }}">{{ 'message_no_forms_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="{{ forms.forms.length + 1 }}"><ws-spinner></ws-spinner></td>
@@ -33,7 +33,7 @@
             </tr>
             <tr ng-show="!loading">
                 <th colspan="2">&nbsp;</th>
-                <th colspan="{{ forms.forms.length }}">Forms</th>
+                <th colspan="{{ forms.forms.length }}">{{ 'forms' | translate }}</th>
             </tr>
             <tr ng-show="!loading" ng-repeat="form in forms.forms">
                 <th>&nbsp;</th>

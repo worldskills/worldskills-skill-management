@@ -4,7 +4,7 @@
 <h1 class="align-top">
     <small>{{ event.name || "&nbsp;" }}</small>
     <br/>
-    00 Skill Name
+    {{ 'example_skill_number_name' | translate }}
 </h1>
 
 <hr/>
@@ -15,7 +15,7 @@
     <ws-spinner></ws-spinner>
 </div>
 
-<p ng-if="fields.fields.length == 0">No fields need to be filled out.</p>
+<p ng-if="fields.fields.length == 0">{{ 'message_no_fields_need_to_be_filled_out' | translate }}</p>
 
 <div ng-show="model.description.text">
     <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
@@ -38,7 +38,7 @@
             <h4>{{ field.title.text }}</h4>
             <p ng-show="field.type != 'input_checkbox' && field.type != 'link'">{{ field.text.text }}</p>
 
-            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}" target="_blank" rel="noopener">Download</a></p>
+            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}" target="_blank" rel="noopener">{{ 'download' | translate }}</a></p>
 
             <input ng-if="field.type == 'input_text'" type="text" class="form-control" />
 
@@ -47,11 +47,11 @@
             <div ng-if="field.type == 'input_yesno'">
                 <label class="radio-inline">
                     <input type="radio">
-                    Yes
+                    {{ 'yes' | translate }}
                 </label>
                 <label class="radio-inline">
                     <input type="radio">
-                    No
+                    {{ 'no' | translate }}
                 </label>
             </div>
 
@@ -64,7 +64,7 @@
 
             <div ng-if="field.type == 'input_file'">
                 <p>
-                    <button type="button" class="btn btn-default" multiple>Upload file(s)</button>
+                    <button type="button" class="btn btn-default" multiple>{{ 'upload_file_s' | translate }}</button>
                 </p>
                 <div class="panel panel-default">
                     <table class="table table-striped">
@@ -87,9 +87,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <strong ng-if="field.type == 'expert_agreement'">Expert 1</strong>
-                                            <strong ng-if="field.type == 'competitor_agreement'">Competitor 1</strong>
-                                            <span class="text-muted"><br/>Country/Region 1</span>
+                                            <strong ng-if="field.type == 'expert_agreement'">{{ 'example_expert' | translate }} 1</strong>
+                                            <strong ng-if="field.type == 'competitor_agreement'">{{ 'example_competitor' | translate }} 1</strong>
+                                            <span class="text-muted"><br/>{{ 'example_country_region' | translate }} 1</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -119,9 +119,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <strong ng-if="field.type == 'expert_agreement'">Expert 2</strong>
-                                            <strong ng-if="field.type == 'competitor_agreement'">Competitor 2</strong>
-                                            <span class="text-muted"><br/>Country/Region 2</span>
+                                            <strong ng-if="field.type == 'expert_agreement'">{{ 'example_expert' | translate }} 2</strong>
+                                            <strong ng-if="field.type == 'competitor_agreement'">{{ 'example_competitor' | translate }} 2</strong>
+                                            <span class="text-muted"><br/>{{ 'example_country_region' | translate }} 2</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -154,9 +154,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <p>
-                                            <span>Position<br/></span>
-                                            <strong>Person Name</strong>
-                                            <span class="text-muted"><br/>Country/Region</span>
+                                            <span>{{ 'position' | translate }}<br/></span>
+                                            <strong>{{ 'person_name' | translate }}</strong>
+                                            <span class="text-muted"><br/>{{ 'example_country_region' | translate }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-xs-5">
@@ -181,15 +181,15 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <div class="checkbox">
-                                <strong>Competitor 1</strong>
-                                <span class="text-muted"><br/>Country/Region 1</span>
+                                <strong>{{ 'example_competitor' | translate }} 1</strong>
+                                <span class="text-muted"><br/>{{ 'example_country_region' | translate }} 1</span>
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" value="true">
-                                    Toolbox checked
+                                    {{ 'toolbox_checked' | translate }}
                                 </label>
                             </div>
                         </div>
@@ -203,15 +203,15 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <div class="checkbox">
-                                <strong>Competitor 2</strong>
-                                <span class="text-muted"><br/>Country/Region 2</span>
+                                <strong>{{ 'example_competitor' | translate }} 2</strong>
+                                <span class="text-muted"><br/>{{ 'example_country_region' | translate }} 2</span>
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" value="true">
-                                    Toolbox checked
+                                    {{ 'toolbox_checked' | translate }}
                                 </label>
                             </div>
                         </div>
@@ -231,31 +231,31 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label>First name for certificate:</label>
+                                        <label>{{ 'first_name_for_certificate' | translate }}:</label>
                                         <input type="text" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label>Last name:</label>
+                                        <label>{{ 'last_name' | translate }}:</label>
                                         <input type="text" class="form-control" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Name on passport or identity card:</label>
+                                <label>{{ 'name_on_passport' | translate }}:</label>
                                 <input type="text" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label>Passport or identity card number:</label>
+                                <label>{{ 'passport_id_number' | translate }}:</label>
                                 <input type="text" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label>Date of birth (DD.MM.YYYY):</label>
-                                <input type="text" class="form-control" placeholder="DD.MM.YYYY" />
+                                <label>{{ 'date_of_birth' | translate }} ({{ 'date_format_dd_mm_yyyy' | translate }}):</label>
+                                <input type="text" class="form-control" placeholder="{{ 'date_format_dd_mm_yyyy' | translate }}" />
                             </div>
                             <div class="form-group">
-                                <label>Language for Test Project:</label>
+                                <label>{{ 'language_for_test_project' | translate }}:</label>
                                 <input type="text" class="form-control" placeholder="e.g. EN" />
                             </div>
                         </div>
@@ -270,8 +270,8 @@
                                         </div>
                                         <div class="col-xs-8">
                                             <p>
-                                                <strong>Competitor Name</strong>
-                                                <span class="text-muted"><br/>Country/Region</span>
+                                                <strong>{{ 'competitor_name' | translate }}</strong>
+                                                <span class="text-muted"><br/>{{ 'example_country_region' | translate }}</span>
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-5">

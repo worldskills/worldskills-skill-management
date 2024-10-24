@@ -10,9 +10,9 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Day</th>
-                <th>Name</th>
-                <th>Multi</th>
+                <th>{{ 'day' | translate }}</th>
+                <th>{{ 'name' | translate }}</th>
+                <th>{{ 'form_multiple_submissions_short' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,11 +20,11 @@
                 <td>{{ form.competition_day.timeline }}</td>
                 <td><a ui-sref="admin_form_detail.submissions({eventId: event.id, id: form.id})">{{ form.name.text }}</a></td>
                 <td>
-                    <span class="glyphicon glyphicon-repeat text-info" ng-show="form.multiple_submissions" title="Can be submitted again"></span>
+                    <span class="glyphicon glyphicon-repeat text-info" ng-show="form.multiple_submissions" title="{{ 'message_form_multiple_submissions' | translate }}"></span>
                 </td>
             </tr>
             <tr ng-show="forms.total_count == 0">
-                <td colspan="3">No forms found</td>
+                <td colspan="3">{{ 'message_no_forms_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="3"><ws-spinner></ws-spinner></td>
@@ -33,4 +33,4 @@
     </table>
 </div>
 
-<a class="btn btn-success btn-sm" ui-sref="admin_form_create.form({eventId: event.id, id: form.id})" ng-hide="event.locked"><span class="glyphicon glyphicon-plus"></span> Add Form</a>
+<a class="btn btn-success btn-sm" ui-sref="admin_form_create.form({eventId: event.id, id: form.id})" ng-hide="event.locked"><span class="glyphicon glyphicon-plus"></span> {{ 'add_form' | translate }}</a>
