@@ -1,11 +1,11 @@
 <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
     <div class="modal-header">
         <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
-        <h2 class="modal-title">Field</h2>
+        <h2 class="modal-title">{{ 'form_field' | translate }}</h2>
     </div>
     <div class="modal-body">
         <div class="form-group" ng-class="{'has-error': submitted && form.type.$invalid}">
-            <label for="group" class="col-sm-3 control-label">Type <span class="required">*</span></label>
+            <label for="group" class="col-sm-3 control-label">{{ 'form_field_type' | translate }} <span class="required">*</span></label>
             <div class="col-sm-6">
                 <select class="form-control" name="type" ng-model="field.type" ng-disabled="field.id && model.has_submissions" required>
                     <option value="input_text">{{ 'input_text' | translate }}</option>
@@ -27,29 +27,29 @@
             </div>
             <div class="col-sm-offset-3 col-sm-9">
                 <span class="help-block" ng-show="submitted" ng-messages="form.type.$error">
-                    <span ng-message="required">Please select a type!</span>
+                    <span ng-message="required">{{ 'message_please_select_form_field_type' | translate }}</span>
                 </span>
             </div>
         </div>
         <div class="form-group">
-            <label for="description" class="col-sm-3 control-label">Title</label>
+            <label for="description" class="col-sm-3 control-label">{{ 'title' | translate }}</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" name="description" ng-model="field.title.text">
             </div>
         </div>
         <div class="form-group">
-            <label for="description" class="col-sm-3 control-label">Text</label>
+            <label for="description" class="col-sm-3 control-label">{{ 'text' | translate }}</label>
             <div class="col-sm-9">
                 <textarea class="form-control" rows="4" ng-model="field.text.text" name="text"></textarea>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ 'cancel' | translate }}</button>
+        <button type="submit" class="btn btn-primary">{{ 'save' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
-          <button type="button" class="btn btn-danger" ng-click="delete()" ng-show="field.id" ng-disabled="model.has_submissions">Delete</button>
-          <span class="text-muted" ng-show="field.id && model.has_submissions">Has submissions, field can't be deleted.</span>
+          <button type="button" class="btn btn-danger" ng-click="delete()" ng-show="field.id" ng-disabled="model.has_submissions">{{ 'delete' | translate }}</button>
+          <span class="text-muted" ng-show="field.id && model.has_submissions">{{ 'message_form_has_submissions_cannot_be_deleted' | translate }}</span>
         </div>
     </div>
 </form>

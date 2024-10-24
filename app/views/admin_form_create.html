@@ -2,11 +2,11 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
     <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'event_admin' | translate }}</a></li>
-    <li><a ui-sref="admin_event.form_list({eventId: event.id})">Forms</a></li>
-    <li class="active">Add Form</li>
+    <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'forms' | translate }}</a></li>
+    <li class="active">{{ 'add_form' | translate }}</li>
 </ol>
 
-<h1>Add Form</h1>
+<h1>{{ 'add_form' | translate }}</h1>
 
 <alerts></alerts>
 

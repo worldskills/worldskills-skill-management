@@ -7,9 +7,9 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Ordering</th>
-                <th>Field</th>
-                <th>Type</th>
+                <th>{{ 'ordering' | translate }}</th>
+                <th>{{ 'form_field' | translate }}</th>
+                <th>{{ 'form_field_type' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +35,10 @@
                 </td>
             </tr>
             <tr ng-show="!fields.fields.length">
-                <td colspan="3">No fields.</td>
+                <td colspan="3">{{ 'message_no_form_fields' | translate }}</td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<button type="button" class="btn btn-success btn-sm" ng-click="addField()" ng-disabled="event.locked"><span class="glyphicon glyphicon-plus"></span> Add Field</button>
+<button type="button" class="btn btn-success btn-sm" ng-click="addField()" ng-disabled="event.locked"><span class="glyphicon glyphicon-plus"></span> {{ 'add_form_field' | translate }}</button>
