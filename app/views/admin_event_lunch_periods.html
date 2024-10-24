@@ -11,17 +11,17 @@
                         <input class="form-control input-sm" ng-model="lunchPeriod.end_time" ng-change="lunchPeriodChanged(lunchPeriod)">
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeLunchPeriod(lunchPeriod)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeLunchPeriod(lunchPeriod)"><span class="glyphicon glyphicon-ban-circle"></span> {{ 'remove' | translate }}</button>
                     </div>
                 </div>
                 <div class="form-group form-group-sm" ng-show="!lunchPeriods.lunch_periods.length">
                     <div class="col-sm-4">
-                        <p>No lunch times.</p>
+                        <p>{{ 'message_no_lunch_times' | translate }}</p>
                     </div>
                 </div>
                 <div class="form-group form-group-sm">
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-success btn-sm" ng-click="addLunchPeriod()"><span class="glyphicon glyphicon-plus"></span> Add lunch time</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="addLunchPeriod()"><span class="glyphicon glyphicon-plus"></span> {{ 'add_lunch_time' | translate }}</button>
                     </div>
                 </div>
             </fieldset>

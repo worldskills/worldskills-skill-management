@@ -2,15 +2,15 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
     <li><a ui-sref="admin_event.form_list({eventId: event.id})">{{ 'event_admin' | translate }}</a></li>
-    <li class="active">Competitor Names</li>
+    <li class="active">{{ 'competitor_names' | translate }}</li>
 </ol>
 
 <div class="pull-right">
-    <button class="btn btn-sm btn-default" ng-click="exportNameChanges()" ng-disabled="loading">Export Name Changes (.xlsx)</button>
-    <button class="btn btn-sm btn-default" ng-click="exportMissing()" ng-disabled="loading">Export Missing (.xlsx)</button>
+    <button class="btn btn-sm btn-default" ng-click="exportNameChanges()" ng-disabled="loading">{{ 'export_name_changes' | translate }} (.xlsx)</button>
+    <button class="btn btn-sm btn-default" ng-click="exportMissing()" ng-disabled="loading">{{ 'export_missing' | translate }} (.xlsx)</button>
 </div>
 
-<h1>Competitor Names</h1>
+<h1>{{ 'competitor_names' | translate }}</h1>
 
 <hr/>
 
@@ -25,16 +25,16 @@
     </colgroup>
     <thead>
         <tr>
-            <th>Skill</th>
-            <th>Member</th>
+            <th>{{ 'skill' | translate }}</th>
+            <th>{{ 'member' | translate }}</th>
             <th colspan="2">
-                Name in People<br>
-                Name in Skill Management
+                {{ 'name_in_people' | translate }}<br>
+                {{ 'name_in_skill_management' | translate }}
             </th>
-            <th>Submitted</th>
+            <th>{{ 'submitted' | translate }}</th>
             <th>
-                Actions<br>
-                <em>(Manually update names in CIS)</em>
+                {{ 'actions' | translate }}<br>
+                <em>({{ 'message_manually_update_names_in_cis' | translate }})</em>
             </th>
         </tr>
     </thead>
@@ -65,11 +65,11 @@
                 {{ r.submission.submitted|date:'d MMMM yyyy HH:mm' }}
             </td>
             <td>
-                <button type="button" class="btn btn-warning btn-xs" ng-click="overwritePeople(r)" ng-disabled="r.loading">Overwrite in People</button>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="overwritePeople(r)" ng-disabled="r.loading">{{ 'overwrite_in_people' | translate }}</button>
             </td>
         </tr>
         <tr ng-show="filteredReports.length == 0">
-            <td colspan="7">No Competitors found</td>
+            <td colspan="7">{{ 'message_no_competitors_found' | translate }}</td>
         </tr>
         <tr ng-show="loading">
             <td colspan="7"><ws-spinner></ws-spinner></td>

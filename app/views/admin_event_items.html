@@ -3,22 +3,22 @@
     <uib-tab ng-repeat="day in competitionDays.days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
 
         <p class="pull-right text-muted">
-            <span ng-show="!saving && !saved">Changes are saved automatically</span>
-            <span ng-show="saving">Saving...</span>
-            <span ng-show="!saving && saved">Items saved</span>
+            <span ng-show="!saving && !saved">{{ 'message_changes_are_saved_automatically' | translate }}</span>
+            <span ng-show="saving">{{ 'saving' | translate }}...</span>
+            <span ng-show="!saving && saved">{{ 'message_items_saved' | translate }}</span>
         </p>
 
-        <h3>Management Plan Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+        <h3>{{ 'management_plan_day' | translate }} {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
 
         <hr/>
 
         <div class="row">
-            <label class="col-sm-1">Start T.</label>
-            <label class="col-sm-1">End Time</label>
-            <label class="col-sm-3">Name</label>
-            <label class="col-sm-3">Description</label>
-            <label class="col-sm-2">Room</label>
-            <label class="col-sm-1">Colour</label>
+            <label class="col-sm-1">{{ 'start_time_short' | translate }}</label>
+            <label class="col-sm-1">{{ 'end_time_short' | translate }}</label>
+            <label class="col-sm-3">{{ 'name' | translate }}</label>
+            <label class="col-sm-3">{{ 'description' | translate }}</label>
+            <label class="col-sm-2">{{ 'room' | translate }}</label>
+            <label class="col-sm-1">{{ 'colour' | translate }}</label>
         </div>
 
         <br/>
@@ -47,17 +47,17 @@
                         <input class="form-control input-sm" ng-model="item.color" ng-change="itemChanged(item)" style="background-color: #{{ item.color }};">
                     </div>
                     <div class="col-sm-1">
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> Remove</button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(item)"><span class="glyphicon glyphicon-ban-circle"></span> {{ 'remove' | translate }}</button>
                     </div>
                 </div>
                 <div class="form-group form-group-sm" ng-show="!filteredItems.length">
                     <div class="col-sm-4">
-                        <p>No entries.<br/>&nbsp;</p>
+                        <p>{{ 'message_no_entries' | translate }}<br/>&nbsp;</p>
                     </div>
                 </div>
                 <div class="form-group form-group-sm">
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> Add item</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="addItem()"><span class="glyphicon glyphicon-plus"></span> {{ 'add_item' | translate }}</button>
                     </div>
                 </div>
             </fieldset>
@@ -71,5 +71,5 @@
 </div>
 
 <div class="alert alert-warning" ng-show="!loading && !competitionDays.days.length" ng-cloak>
-    <strong>No competition days found!</strong> <a ng-show="userCanEditCompetitionDays" ui-sref="admin_event.competition_days">Please add Competition Days.</a>
+    <strong>{{ 'message_no_competition_days_found' | translate }}</strong> <a ng-show="userCanEditCompetitionDays" ui-sref="admin_event.competition_days">{{ 'message_please_add_competition_days' | translate }}</a>
 </div>
