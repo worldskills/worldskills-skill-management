@@ -8,16 +8,16 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Progress Item</th>
+                <th>{{ 'progress_item' | translate }}</th>
                 <th>
-                  <span>Internal Notes</span>
+                  <span>{{ 'internal_notes' | translate }}</span>
                   <span class="text-muted font-weight-normal">
-                    <span ng-show="!saving && !saved">Changes are saved automatically</span>
-                    <span ng-show="saving">Saving...</span>
-                    <span ng-show="!saving && saved">Saved</span>
+                    <span ng-show="!saving && !saved">{{ 'message_changes_are_saved_automatically' | translate }}</span>
+                    <span ng-show="saving">{{ 'saving' | translate }}</span>
+                    <span ng-show="!saving && saved">{{ 'saved' | translate }}</span>
                   </span>
                 </th>
-                <th>Status</th>
+                <th>{{ 'status' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
                     </div>
                 </td>
                 <tr ng-show="items.skill_progress_items.length == 0">
-                    <td colspan="3">No progress items defined</td>
+                    <td colspan="3">{{ 'message_no_progress_items_found' | translate }}</td>
                 </tr>
             </tr>
         </tbody>

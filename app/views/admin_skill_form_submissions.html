@@ -8,9 +8,9 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Submitted on</th>
-                <th>Form</th>
-                <th>Title</th>
+                <th>{{ 'submitted_on' | translate }}</th>
+                <th>{{ 'form' | translate }}</th>
+                <th>{{ 'title' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
                 <td>{{ submission.title }}</td>
             </tr>
             <tr ng-show="!loading && submissions.submissions.length == 0">
-                <td colspan="3">No submissions found</td>
+                <td colspan="3">{{ 'message_no_submissions_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="3"><ws-spinner></ws-spinner></td>

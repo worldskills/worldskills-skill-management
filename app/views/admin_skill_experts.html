@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
-                <th>Expert</th>
-                <th>Forms</th>
+                <th>{{ 'expert' | translate }}</th>
+                <th>{{ 'forms' | translate }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -28,7 +28,7 @@
                 <td>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="expertChanged(expert)"> Exclude Expert from Forms
+                            <input type="checkbox" ng-model="expert.exclude_from_forms" ng-change="expertChanged(expert)"> {{ 'exclude_expert_from_forms' | translate }}
                         </label>
                     </div>
                 </td>
@@ -37,7 +37,7 @@
                 </td>
             </tr>
             <tr ng-show="experts.registration_people.length == 0">
-                <td colspan="3">No Experts found</td>
+                <td colspan="3">{{ 'message_no_experts_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="3"><ws-spinner></ws-spinner></td>

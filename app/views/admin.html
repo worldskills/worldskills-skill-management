@@ -1,11 +1,11 @@
 <ol class="breadcrumb">
-    <li class="active">Admin</li>
+    <li class="active">{{ 'admin' | translate }}</li>
 </ol>
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-<h1 class="align-top">Administration</h1>
+<h1 class="align-top">{{ 'administration' | translate }}</h1>
 
 <hr/>
 
@@ -24,7 +24,7 @@
                 <td><a ui-sref="admin_event.form_list({eventId: event.id})">{{ event.name }}</a></td>
             </tr>
             <tr ng-show="events.events.length == 0">
-                <td colspan="1">No events found</td>
+                <td colspan="1">{{ 'message_no_events_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="1"><ws-spinner></ws-spinner></td>
