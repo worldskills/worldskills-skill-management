@@ -2,11 +2,11 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li class="active">Lunch Times</li>
+    <li class="active">{{ 'lunch_times' | translate }}</li>
 </ol>
 
 <p class="pull-right" ng-show="skills.skills.length > 1">
-    <button class="btn btn-default" ng-click="changeSkill()">Change Skill</button>
+    <button class="btn btn-default" ng-click="changeSkill()">{{ 'change_skill' | translate }}</button>
 </p>
 
 <p class="text-muted">
@@ -15,7 +15,7 @@
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
 </p>
 
-<h1 class="align-top">Lunch Times</h1>
+<h1 class="align-top">{{ 'lunch_times' | translate }}</h1>
 
 <div ng-show="loading">
     <ws-spinner></ws-spinner>

@@ -36,8 +36,8 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Description</th>
+                                <th>{{ 'time' | translate }}</th>
+                                <th>{{ 'description' | translate }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +58,7 @@
 
             <div class="panel panel-default" ng-show="filteredSkillItems.length">
                 <div class="panel-heading">
-                    <h2 class="panel-title text-center">Skill Specific Items</h2>
+                    <h2 class="panel-title text-center">{{ 'skill_specific_items' | translate }}</h2>
                 </div>
 
                 <div class="table-responsive">
@@ -70,9 +70,9 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Description</th>
-                                <th>Responsible</th>
+                                <th>{{ 'time' | translate }}</th>
+                                <th>{{ 'description' | translate }}</th>
+                                <th>{{ 'responsible' | translate }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
 
             <div class="panel panel-default" ng-show="day.lunch && lunchPeriods.lunch_periods.length">
                 <div class="panel-heading">
-                    <h2 class="panel-title text-center">Lunch Allocations</h2>
+                    <h2 class="panel-title text-center">{{ 'lunch_allocations' | translate }}</h2>
                 </div>
 
                 <div class="table-responsive">
@@ -112,9 +112,9 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Competitors</th>
-                                <th>Experts</th>
+                                <th>{{ 'time' | translate }}</th>
+                                <th>{{ 'competitors' | translate }}</th>
+                                <th>{{ 'experts' | translate }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,22 +126,22 @@
                                     <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'COMPETITOR'}:true">
                                         {{ allocation.registration.person.person.first_name }} {{ allocation.registration.person.person.last_name }}
                                         {{ allocation.registration.member.code }}
-                                        <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
+                                        <span class="text-muted" ng-if="allocation.in_workshop">({{ 'workshop' | translate }})</span>
                                     </div>
                                     <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}:true">
                                         {{ group.group.name }}
-                                        <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
+                                        <span class="text-muted" ng-if="group.in_workshop">({{ 'workshop' | translate }})</span>
                                     </div>
                                 </td>
                                 <td>
                                     <div ng-repeat="allocation in plan.lunch_allocations | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, type:'EXPERT'}:true">
                                         {{ allocation.registration.person.person.first_name }} {{ allocation.registration.person.person.last_name }}
                                         {{ allocation.registration.member.code }}
-                                        <span class="text-muted" ng-if="allocation.in_workshop">(Workshop)</span>
+                                        <span class="text-muted" ng-if="allocation.in_workshop">({{ 'workshop' | translate }})</span>
                                     </div>
                                     <div ng-repeat="group in plan.lunch_allocation_groups | filter:{competition_day_id:day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}:true">
                                         {{ group.group.name }}
-                                        <span class="text-muted" ng-if="group.in_workshop">(Workshop)</span>
+                                        <span class="text-muted" ng-if="group.in_workshop">({{ 'workshop' | translate }})</span>
                                     </div>
                                 </td>
                             </tr>

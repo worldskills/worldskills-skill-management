@@ -1,18 +1,18 @@
 <p class="pull-right text-muted">
-    <span ng-show="!saving && !saved && !skill.event.locked">Changes are saved automatically</span>
-    <span ng-show="saving">Saving...</span>
-    <span ng-show="!saving && saved">Lunch times saved</span>
-    <span ng-show="skill.event.locked">Event is locked</span>
+    <span ng-show="!saving && !saved && !skill.event.locked">{{ 'message_changes_are_saved_automatically' | translate }}</span>
+    <span ng-show="saving">{{ 'saving' | translate }}</span>
+    <span ng-show="!saving && saved">{{ 'message_lunch_times_saved' | translate }}</span>
+    <span ng-show="skill.event.locked">{{ 'message_event_is_locked' | translate }}</span>
 </p>
 
-<h3>Lunch Day {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+<h3>{{ 'lunch_day' | translate }} {{ active.day.timeline }} <small>{{ active.day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
 
 <hr/>
 
 <fieldset ng-disabled="skill.event.locked">
     <div class="row">
         <div class="col-sm-6">
-            <h4>Competitor lunch times</h4>
+            <h4>{{ 'competitor_lunch_times' | translate }}</h4>
             <div class="panel panel-default" ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
                 <div class="panel-heading">
                     <h6 class="panel-title">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</h6>
@@ -28,33 +28,33 @@
                             <td>
                                 <div class="btn-toolbar">
                                     <div class="btn-group" uib-dropdown>
-                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Add Competitor <span class="caret"></span></button>
+                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_competitor' | translate }} <span class="caret"></span></button>
                                         <ul class="dropdown-menu" uib-dropdown-menu>
-                                            <li ng-show="filteredCompetitors.length != 0"><a href ng-click="addAllCompetitors(lunchPeriod)">Add all remaining Competitors</a></li>
+                                            <li ng-show="filteredCompetitors.length != 0"><a href ng-click="addAllCompetitors(lunchPeriod)">{{ 'add_all_remaining_competitors' | translate }}</a></li>
                                             <li ng-repeat="registration in competitors.registrations | filter:inAssociation as filteredCompetitors">
                                                 <a href ng-click="addRegistration(lunchPeriod, registration, 'COMPETITOR')">
                                                     {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                                                     {{ registration.member.code }}
                                                 </a>
                                             </li>
-                                            <li ng-show="filteredCompetitors.length == 0"><a href>All Competitors already assigned</a></li>
+                                            <li ng-show="filteredCompetitors.length == 0"><a href>{{ 'message_all_competitors_assigned' | translate }}</a></li>
                                         </ul>
                                     </div>
                                     <div class="btn-group" uib-dropdown>
-                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Add group <span class="caret"></span></button>
+                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_group' | translate }} <span class="caret"></span></button>
                                         <ul class="dropdown-menu" uib-dropdown-menu>
                                             <li ng-repeat="group in lunchGroups.groups | filter:inAssociationGroupCompetitor as filteredLunchGroups"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
-                                            <li ng-show="filteredLunchGroups.length == 0"><a href>No groups</a></li>
+                                            <li ng-show="filteredLunchGroups.length == 0"><a href>{{ 'message_no_groups' | translate }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </td>
                             <td colspan="2" class="text-right">
                                 <div class="btn-group" uib-dropdown>
-                                    <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Lunch in workshop <span class="caret"></span></button>
+                                    <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'lunch_in_workshop' | translate }} <span class="caret"></span></button>
                                     <ul class="dropdown-menu" uib-dropdown-menu>
-                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'COMPETITOR', true)">Everyone has lunch in workshop</a></li>
-                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'COMPETITOR', false)">Nobody has lunch in workshop</a></li>
+                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'COMPETITOR', true)">{{ 'everyone_lunch_in_workshop' | translate }}</a></li>
+                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'COMPETITOR', false)">{{ 'nobody_lunch_in_workshop' | translate }}</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -70,12 +70,12 @@
                                 <form class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="allocation.in_workshop" ng-change="lunchInWorkshopChanged(allocation)">&nbsp;Workshop
+                                            <input type="checkbox" ng-model="allocation.in_workshop" ng-change="lunchInWorkshopChanged(allocation)">&nbsp;{{ 'workshop' | translate }}
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                         </tr>
                         <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'COMPETITOR'}}:true as filteredGroups">
                             <td>
@@ -85,20 +85,20 @@
                                 <form class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="group.in_workshop" ng-change="lunchInWorkshopGroupChanged(group)">&nbsp;Workshop
+                                            <input type="checkbox" ng-model="group.in_workshop" ng-change="lunchInWorkshopGroupChanged(group)">&nbsp;{{ 'workshop' | translate }}
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p ng-show="lunchPeriods.lunch_periods.length == 0">Competition lunch times not known yet</p>
+            <p ng-show="lunchPeriods.lunch_periods.length == 0">{{ 'message_competition_lunch_times_not_known' | translate }}</p>
         </div>
         <div class="col-sm-6">
-            <h4>Expert lunch times</h4>
+            <h4>{{ 'expert_lunch_times' | translate }}</h4>
             <div class="panel panel-default" ng-repeat="lunchPeriod in lunchPeriods.lunch_periods">
                 <div class="panel-heading">
                     <h6 class="panel-title">{{ lunchPeriod.start_time | limitTo:5 }} - {{ lunchPeriod.end_time | limitTo:5 }}</h6>
@@ -114,33 +114,33 @@
                             <td>
                                 <div class="btn-toolbar">
                                     <div class="btn-group" uib-dropdown>
-                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Add Expert <span class="caret"></span></button>
+                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_expert' | translate }} <span class="caret"></span></button>
                                         <ul class="dropdown-menu" uib-dropdown-menu>
-                                            <li ng-show="filteredExperts.length != 0"><a href ng-click="addAllExperts(lunchPeriod)">Add all remaining Experts</a></li>
+                                            <li ng-show="filteredExperts.length != 0"><a href ng-click="addAllExperts(lunchPeriod)">{{ 'add_all_remaining_experts' | translate }}</a></li>
                                             <li ng-repeat="registration in experts.registrations | filter:inAssociation as filteredExperts">
                                                 <a href ng-click="addRegistration(lunchPeriod, registration, 'EXPERT')">
                                                     {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                                                     {{ registration.member.code }}
                                                 </a>
                                             </li>
-                                            <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
+                                            <li ng-show="filteredExperts.length == 0"><a href>{{ 'message_all_experts_assigned' | translate }}</a></li>
                                         </ul>
                                     </div>
                                     <div class="btn-group" uib-dropdown>
-                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Add group <span class="caret"></span></button>
+                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_group' | translate }} <span class="caret"></span></button>
                                         <ul class="dropdown-menu" uib-dropdown-menu>
                                             <li ng-repeat="group in lunchGroups.groups | filter:inAssociationGroupExpert as filteredLunchGroups"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
-                                            <li ng-show="filteredLunchGroups.length == 0"><a href>No groups</a></li>
+                                            <li ng-show="filteredLunchGroups.length == 0"><a href>{{ 'message_no_groups' | translate }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </td>
                             <td colspan="2" class="text-right">
                                 <div class="btn-group" uib-dropdown>
-                                    <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>Lunch in workshop <span class="caret"></span></button>
+                                    <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'lunch_in_workshop' | translate }} <span class="caret"></span></button>
                                     <ul class="dropdown-menu" uib-dropdown-menu>
-                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'EXPERT', true)">Everyone has lunch in workshop</a></li>
-                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'EXPERT', false)">Nobody has lunch in workshop</a></li>
+                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'EXPERT', true)">{{ 'everyone_lunch_in_workshop' | translate }}</a></li>
+                                        <li><a href ng-click="lunchInWorkshopAll(lunchPeriod, 'EXPERT', false)">{{ 'nobody_lunch_in_workshop' | translate }}</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -156,12 +156,12 @@
                                 <form class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="allocation.in_workshop" ng-change="lunchInWorkshopChanged(allocation)">&nbsp;Workshop
+                                            <input type="checkbox" ng-model="allocation.in_workshop" ng-change="lunchInWorkshopChanged(allocation)">&nbsp;{{ 'workshop' | translate }}
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeAllocation(allocation)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                         </tr>
                         <tr ng-repeat="group in lunchAllocations.groups | filter:{competition_day_id:active.day.id, lunch_period:{id: lunchPeriod.id}, group: {type: 'EXPERT'}}:true as filteredGroups">
                             <td>
@@ -171,17 +171,17 @@
                                 <form class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" ng-model="group.in_workshop" ng-change="lunchInWorkshopGroupChanged(group)">&nbsp;Workshop
+                                            <input type="checkbox" ng-model="group.in_workshop" ng-change="lunchInWorkshopGroupChanged(group)">&nbsp;{{ 'workshop' | translate }}
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                            <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeGroup(group)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p ng-show="lunchPeriods.lunch_periods.length == 0">Competition lunch times not known yet</p>
+            <p ng-show="lunchPeriods.lunch_periods.length == 0">{{ 'message_competition_lunch_times_not_known' | translate }}/p>
         </div>
     </div>
 </fieldset>

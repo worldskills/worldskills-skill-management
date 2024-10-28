@@ -2,19 +2,19 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li class="active">Groups</li>
+    <li class="active">{{ 'groups' | translate }}</li>
 </ol>
 
 <div class="pull-right text-right">
     <p ng-show="skills.skills.length > 1">
-        <button class="btn btn-default" ng-click="changeSkill()">Change Skill</button>
+        <button class="btn btn-default" ng-click="changeSkill()">{{ 'change_skill' | translate }}</button>
     </p>
     <br/>
     <p class="text-muted">
-        <span ng-show="!saving && !saved && !skill.event.locked">Saving automatically</span>
-        <span ng-show="saving">Saving...</span>
-        <span ng-show="!saving && saved">Groups saved</span>
-        <span ng-show="skill.event.locked">Event is locked</span>
+        <span ng-show="!saving && !saved && !skill.event.locked">{{ 'saving_automatically' | translate }}</span>
+        <span ng-show="saving">{{ 'saving' | translate }}</span>
+        <span ng-show="!saving && saved">{{ 'groups_saved' | translate }}</span>
+        <span ng-show="skill.event.locked">{{ 'message_event_is_locked' | translate }}</span>
     </p>
 </div>
 
@@ -24,7 +24,7 @@
     {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
 </p>
 
-<h1 class="align-top">Groups</h1>
+<h1 class="align-top">{{ 'groups' | translate }}</h1>
 
 <hr/>
 
@@ -35,7 +35,7 @@
 <fieldset ng-disabled="skill.event.locked">
     <div class="row">
         <div class="col-sm-6">
-            <h3>Competitor groups</h3>
+            <h3>{{ 'competitor_groups' | translate }}</h3>
             <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'}:true as competitorGroups">
               <div class="panel-heading">
                 <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
@@ -51,12 +51,12 @@
                               {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                               {{ registration.member.code }}
                           </td>
-                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                       </tr>
                       <tr>
                           <td>
                               <div class="btn-group" uib-dropdown>
-                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
+                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">{{ 'add_to_group' | translate }} <span class="caret"></span></button>
                                   <ul class="dropdown-menu" uib-dropdown-menu>
                                       <li ng-repeat="registration in competitors.registrations | filter:inGroup as filteredCompetitors">
                                           <a href ng-click="addRegistration(group, registration)">
@@ -64,22 +64,22 @@
                                               {{ registration.member.code }}
                                           </a>
                                       </li>
-                                      <li ng-show="filteredCompetitors.length == 0"><a href>No Competitors unassigned</a></li>
+                                      <li ng-show="filteredCompetitors.length == 0"><a href>{{ 'message_all_competitors_assigned' | translate }}</a></li>
                                   </ul>
                               </div>
                           </td>
                           <td class="text-right">
-                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
+                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">{{ 'delete_group' | translate }}</button>
                           </td>
                       </tr>
                   </tbody>
               </table>
             </div>
-            <p ng-show="competitorGroups.length == 0">No groups yet</p>
-            <p><button type="button" class="btn btn-success" ng-click="addGroup('COMPETITOR')">Add Competitor group</button></p>
+            <p ng-show="competitorGroups.length == 0">{{ 'message_no_groups' | translate }}</p>
+            <p><button type="button" class="btn btn-success" ng-click="addGroup('COMPETITOR')">{{ 'add_competitor_group' | translate }}</button></p>
         </div>
         <div class="col-sm-6">
-            <h3>Expert groups</h3>
+            <h3>{{ 'expert_groups' | translate }}</h3>
             <div class="panel panel-default" ng-repeat="group in groups.groups | filter:{type:'EXPERT'}:true as expertGroups">
               <div class="panel-heading">
                 <input type="text" class="form-control" ng-model="group.name" ng-change="groupChanged(group)">
@@ -95,12 +95,12 @@
                               {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
                               {{ registration.member.code }}
                           </td>
-                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="Remove"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
+                          <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="removeRegistration(group, registration)" title="{{ 'remove' | translate }}"><span class="glyphicon glyphicon-ban-circle"></span></button></td>
                       </tr>
                       <tr>
                           <td>
                               <div class="btn-group" uib-dropdown>
-                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">Add to group <span class="caret"></span></button>
+                                  <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle ng-disabled="disabled">{{ 'add_to_group' | translate }} <span class="caret"></span></button>
                                   <ul class="dropdown-menu" uib-dropdown-menu>
                                       <li ng-repeat="registration in experts.registrations | filter:inGroup as filteredExperts">
                                           <a href ng-click="addRegistration(group, registration)">
@@ -108,19 +108,19 @@
                                               {{ registration.member.code }}
                                           </a>
                                       </li>
-                                      <li ng-show="filteredExperts.length == 0"><a href>No Experts unassigned</a></li>
+                                      <li ng-show="filteredExperts.length == 0"><a href>{{ 'message_all_experts_assigned' | translate }}</a></li>
                                   </ul>
                               </div>
                           </td>
                           <td class="text-right">
-                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">Delete group</button>
+                              <button type="button" class="btn btn-danger btn-sm" ng-click="deleteGroup(group)">{{ 'delete_group' | translate }}</button>
                           </td>
                       </tr>
                   </tbody>
               </table>
             </div>
-            <p ng-show="expertGroups.length == 0">No groups yet</p>
-            <p><button type="button" class="btn btn-success" ng-click="addGroup('EXPERT')">Add Expert group</button></p>
+            <p ng-show="expertGroups.length == 0">{{ 'message_no_groups' | translate }}</p>
+            <p><button type="button" class="btn btn-success" ng-click="addGroup('EXPERT')">{{ 'add_expert_group' | translate }}</button></p>
         </div>
     </div>
 </fieldset>
