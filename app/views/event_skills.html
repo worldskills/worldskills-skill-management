@@ -9,8 +9,8 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Number</th>
-                        <th>Skill</th>
+                        <th>{{ 'skill_number' | translate }}</th>
+                        <th>{{ 'skill' | translate }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <td><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.name.text }}</a></td>
                     </tr>
                     <tr ng-show="skills.skills.length == 0">
-                        <td colspan="2">No skills found</td>
+                        <td colspan="2">{{ 'message_no_skills_found' | translate }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -27,21 +27,21 @@
     </div>
     <div class="col-md-4">
       <div class="panel panel-default" ng-show="userCanViewDocument && documents.documents.length">
-          <div class="panel-heading">Documents</div>
+          <div class="panel-heading">{{ 'documents' | translate }}</div>
           <div class="panel-body">
           <p ng-repeat="document in documents.documents"><a ui-sref="event_document({eventId: event.id, documentId: document.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
           </div>
       </div>
       <div class="panel panel-default" ng-show="userCanViewManagementPlan">
-        <div class="panel-heading">Reports</div>
+        <div class="panel-heading">{{ 'reports' | translate }}</div>
         <div class="panel-body">
             <p>
-                <a ui-sref="report_competitor_finish_times({eventId: event.id})"><span class="glyphicon glyphicon-th-list"></span> Competitor Finish Times</a>
+                <a ui-sref="report_competitor_finish_times({eventId: event.id})"><span class="glyphicon glyphicon-th-list"></span> {{ 'competitor_finish_times' | translate }}</a>
             </p>
         </div>
       </div>
       <div class="panel panel-default" ng-show="resources.resources.length">
-        <div class="panel-heading">Resources</div>
+        <div class="panel-heading">{{ 'resources' | translate }}</div>
         <div class="panel-body">
           <p ng-repeat="resource in resources.resources">
               <a href="{{ resource.link }}" target="_blank" rel="noopener">
