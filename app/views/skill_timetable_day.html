@@ -2,10 +2,10 @@
 <div class="pull-right">
     <span ng-show="active.group" class="text-muted">{{active.group.name}}&nbsp;&nbsp;</span>
     <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled">Filter <span class="caret"></span></button>
+        <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle ng-disabled="disabled">{{ 'filter' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu" uib-dropdown-menu>
             <li>
-                <a href ng-click="filterGroups(null)">All Groups</a>
+                <a href ng-click="filterGroups(null)">{{ 'all_groups' | translate }}</a>
             </li>
             <li ng-repeat="group in groups.groups | filter:{type:'COMPETITOR'}:true">
                 <a href ng-click="filterGroups(group)">{{ group.name }}</a>
@@ -30,9 +30,9 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th>Time</th>
-                    <th>Description</th>
-                    <th>Group</th>
+                    <th>{{ 'time' | translate }}</th>
+                    <th>{{ 'description' | translate }}</th>
+                    <th>{{ 'group' | translate }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,11 +49,11 @@
                     </td>
                 </tr>
                 <tr ng-show="!filteredItems.length">
-                    <td colspan="3">No entries.</td>
+                    <td colspan="3">{{ 'message_no_entries' | translate }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<button type="button" class="btn btn-success btn-sm" ng-click="addItem()" ng-disabled="skill.event.locked"><span class="glyphicon glyphicon-plus"></span> Add Item</button>
+<button type="button" class="btn btn-success btn-sm" ng-click="addItem()" ng-disabled="skill.event.locked"><span class="glyphicon glyphicon-plus"></span> {{ 'add_item' | translate }}</button>

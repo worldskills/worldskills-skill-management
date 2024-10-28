@@ -8,13 +8,13 @@
 
 <div class="pull-right">
     <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>Skill Advisors <span class="caret"></span></button>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>{{ 'skill_advisors' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
             <li ng-repeat="person in skillAdvisors.people"><a href ng-click="checkSkillAvisor(person)">{{person.first_name}} {{person.last_name}}</a></li>
         </ul>
     </div>
     <div class="btn-group" uib-dropdown>
-        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>Skills <span class="caret"></span></button>
+        <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>{{ 'skills' | translate }} <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
             <li ng-repeat="skill in skills.skills"><a href ng-click="checkSkill(skill)"><span ng-style="{'visibility' : skill.checked ? 'visible' : 'hidden'}" class="glyphicon glyphicon-ok-sign"></span> {{skill.number}} {{skill.name.text}}</a></li>
         </ul>
@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th>
-                  <span style="white-space: nowrap;">Progress Item</span>
+                  <span style="white-space: nowrap;">{{ 'progress_item' | translate }}</span>
                 </th>
                 <th ng-repeat="skill in skills.skills | filter:{checked: true}">
                   <span style="white-space: nowrap;">{{skill.number}} {{skill.name.text}}</span>
@@ -43,7 +43,7 @@
                 <td ng-repeat="skill in skills.skills | filter:{checked: true}">
                     <div ng-repeat="skillItem in skill.progress.skill_progress_items" ng-if="skillItem.progress_item.id == item.id">
                         <div ng-if="item.has_status">
-                            <span class="label" style="background-color: {{skillItem.status.color || '#999'}}; color: #fff;">{{skillItem.status.name.text || "Unknown"}}</span>
+                            <span class="label" style="background-color: {{skillItem.status.color || '#999'}}; color: #fff;">{{skillItem.status.name.text || ('unknown' | translate)}}</span>
                         </div>
                         {{skillItem.internal_notes}}
                     </div>

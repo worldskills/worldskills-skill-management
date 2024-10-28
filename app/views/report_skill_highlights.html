@@ -1,13 +1,13 @@
 <ol class="breadcrumb">
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
-    <li class="active">Skill Highlights Report</li>
+    <li class="active">{{ 'skill_highlights_report' | translate }}</li>
 </ol>
 
 <h1 class="align-top">
     <small>{{ event.name || "&nbsp;" }}</small>
     <br/>
-    Skill Highlights Report
+    {{ 'skill_highlights_report' | translate }}
 </h1>
 
 <hr>
@@ -29,10 +29,10 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Day</th>
-                            <th>Time</th>
-                            <th>Description</th>
+                            <th>{{ 'date' | translate }}</th>
+                            <th>{{ 'day' | translate }}</th>
+                            <th>{{ 'time' | translate }}</th>
+                            <th>{{ 'description' | translate }}</th>
                         </tr>
                     </thead>
                     <tbody>

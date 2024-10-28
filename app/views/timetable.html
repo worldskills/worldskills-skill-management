@@ -1,5 +1,5 @@
 <p class="pull-right">
-    <button class="btn btn-default" ng-click="changeRegistration()" ng-show="registrations.registrations.length > 1">Change Competitor</button>
+    <button class="btn btn-default" ng-click="changeRegistration()" ng-show="registrations.registrations.length > 1">{{ 'change_competitor' | translate }}</button>
 </p>
 
 <p>
@@ -10,7 +10,7 @@
     {{ timetable.registration.person.person.first_name }} {{ timetable.registration.person.person.last_name || "&nbsp;" }}
 </p>
 
-<h1>Competitor Timetable</h1>
+<h1>{{ 'competitor_timetable' | translate }}</h1>
 
 <uib-tabset ng-show="!loading" active="active.day.id">
     <uib-tab ng-repeat="day in timetable.competition_days" heading="{{ day.timeline }}" index="day.id" select="changeDay(day)">
@@ -30,8 +30,8 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Description</th>
+                                <th>{{ 'time' | translate }}</th>
+                                <th>{{ 'description' | translate }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,7 @@
                                 </td>
                             </tr>
                             <tr ng-show="!filteredItems.length">
-                                <td colspan="2">No entries.</td>
+                                <td colspan="2">{{ 'message_no_entries' | translate }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -61,5 +61,5 @@
 </div>
 
 <div class="alert alert-warning" ng-show="!loading && !timetable.competition_days.length" ng-cloak>
-    No Competition days found!
+    {{ 'message_no_competition_days_found' | translate }}
 </div>

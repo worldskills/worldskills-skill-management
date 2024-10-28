@@ -2,14 +2,14 @@
     <span class="text-muted">{{ event.name || "&nbsp;" }}</span>
 </p>
 
-<h1>Lunch Summary</h1>
+<h1>{{ 'lunch_summary' | translate }}</h1>
 
-<p class="text-muted">Number of people does not include people having lunch in the workshop. See <a ui-sref="report_lunch_in_workshop({eventId: event.id})" target="_blank">Lunch in Workshop</a>.</p>
+<p class="text-muted">{{ 'message_number_of_people_excl_lunch_in_workshop' | translate }} {{ 'see' | translate }} <a ui-sref="report_lunch_in_workshop({eventId: event.id})" target="_blank">{{ 'lunch_in_workshop' | translate }}</a>.</p>
 
 <hr/>
 
 <div ng-repeat="day in competitionDays.days | filter:{lunch:true}">
-    <h3>Day {{ day.timeline }} <small>{{ day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
+    <h3>{{ 'day' | translate }} {{ day.timeline }} <small>{{ day.date|date:'EEEE, d MMMM yyyy' }}</small></h3>
 
     <table class="table table-striped table-condensed">
         <colgroup>
@@ -18,8 +18,8 @@
         </colgroup>
         <thead>
             <tr>
-                <th>Time</th>
-                <th>People</th>
+                <th>{{ 'time' | translate }}</th>
+                <th>{{ 'people' | translate }}</th>
             </tr>
         </thead>
         <tfoot>
@@ -37,7 +37,7 @@
                 </td>
             </tr>
             <tr>
-                <td><strong>Total {{ day.timeline }}</strong></td>
+                <td><strong>{{ 'total' | translate }} {{ day.timeline }}</strong></td>
                 <td><strong>{{ day.total }}</strong></td>
             </tr>
         </tbody>
