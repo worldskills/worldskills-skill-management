@@ -9,7 +9,7 @@
 </div>
 
 <p class="pull-right">
-    <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">Edit Sections</button>
+    <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">{{ 'edit_sections' | translate }}</button>
 </p>
 
 <h1 class="align-top">{{ document.name.text }}</h1>
@@ -25,19 +25,19 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Number</th>
-                        <th>Skill</th>
-                        <th>Last updated</th>
+                        <th>{{ 'number' | translate }}</th>
+                        <th>{{ 'skill' | translate }}</th>
+                        <th>{{ 'last_updated' | translate }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="documentSkill in documentSkills.documents">
                         <td>{{ documentSkill.skill.number }}</td>
                         <td><a ui-sref="document({eventId: event.id, documentId: document.id, skillId: documentSkill.skill.id})">{{ documentSkill.skill.name.text }}</a></td>
-                        <td>{{ documentSkill.last_updated | date: 'dd.MM.yyyy HH:mm' }} <span class="label label-success" ng-show="isNew(documentSkill.last_updated)">New</span></td>
+                        <td>{{ documentSkill.last_updated | date: 'dd.MM.yyyy HH:mm' }} <span class="label label-success" ng-show="isNew(documentSkill.last_updated)">{{ 'new' | translate }}</span></td>
                     </tr>
                     <tr ng-show="documentSkills.documents.length == 0">
-                        <td colspan="3">No skills found</td>
+                        <td colspan="3">{{ 'message_no_skills_found' | translate }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -11,8 +11,8 @@
     <div class="col-lg-8 col-lg-offset-2">
 
         <p class="pull-right">
-            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">Edit Sections</button>
-            <button class="btn btn-default" ng-click="downloadPDF()" ng-disabled="loadingPDF">Download PDF<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
+            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="admin_document.chapters({eventId: event.id, documentId: document.id})">{{ 'edit_sections' | translate }}</button>
+            <button class="btn btn-default" ng-click="downloadPDF()" ng-disabled="loadingPDF">{{ 'download_pdf' | translate }}<ws-text-spinner ng-show="loadingPDF" class="ng-hide"></ws-text-spinner></button>
         </p>
 
         <h1 class="align-top">
@@ -22,7 +22,7 @@
         </h1>
 
         <div ng-if="skill.id == 1719 || skill.id == 1835">
-            <div class="alert alert-warning" role="alert">This Technical Description has not been verified by WSI.</div>
+            <div class="alert alert-warning" role="alert">{{ 'message_td_not_verified' | translate }}</div>
         </div>
 
         <div ng-bind-html="document.introduction.text"></div>
@@ -33,7 +33,7 @@
 
         <br><br>
 
-        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}} - <a ui-sref="document_revisions({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">Change log</a></p>
+        <p class="text-muted">{{ 'last_updated' | translate }}: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}} - <a ui-sref="document_revisions({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ 'change_log' | translate }}</a></p>
 
     </div>
 </div>

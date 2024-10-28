@@ -3,7 +3,7 @@
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
     <li><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ document.name.text }}</a></li>
-    <li class="active">Change log</li>
+    <li class="active">{{ 'change_log' | translate }}</li>
 </ol>
 
 <div class="row">
@@ -15,7 +15,7 @@
             {{ skill.number }} {{ skill.name.text || "&nbsp;" }}
         </p>
 
-        <h1 class="align-top">Change log</h1>
+        <h1 class="align-top">{{ 'change_log' | translate }}</h1>
 
         <br>
 
@@ -28,8 +28,8 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Date/Time</th>
-                        <th>Subsection</th>
+                        <th>{{ 'date_time' | translate }}</th>
+                        <th>{{ 'subsection' | translate }}</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -42,14 +42,14 @@
                             <a ui-sref="document_chapter({eventId: event.id, documentId: document.id, skillId: skill.id, chapterId: revision.parent.chapter_id, '#': 'section' + revision.parent.id})">{{ revision.parent.number }} {{ revision.parent.title.text }}</a>
                         </td>
                         <td>
-                            <a href ng-click="diffRevision(revision)" ng-show="!revision.wsos && !revision.deleted">Show change</a>
-                            <a href ng-click="diffWsosRevision(revision)" ng-show="revision.wsos && !revision.deleted">Show change</a>
-                            <em ng-show="revision.wsos && revision.deleted">WSOS section deleted</em>
+                            <a href ng-click="diffRevision(revision)" ng-show="!revision.wsos && !revision.deleted">{{ 'show_change' | translate }}</a>
+                            <a href ng-click="diffWsosRevision(revision)" ng-show="revision.wsos && !revision.deleted">{{ 'show_change' | translate }}</a>
+                            <em ng-show="revision.wsos && revision.deleted">{{ 'message_wsos_section_deleted' | translate }}</em>
                             <span ng-show="revision.author">({{ revision.author.first_name }} {{ revision.author.last_name }})</span>
                         </td>
                     </tr>
                     <tr ng-show="revisions.length == 0">
-                        <td colspan="3">No changes found</td>
+                        <td colspan="3">{{ 'message_no_changes_found' | translate }}</td>
                     </tr>
                     <tr ng-show="loading">
                         <td colspan="3"><ws-spinner></ws-spinner></td>

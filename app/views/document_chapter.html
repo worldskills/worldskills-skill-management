@@ -18,9 +18,9 @@
         </p>
 
         <div ng-if="skill.id == 1719 || skill.id == 1835">
-            <div class="alert alert-warning" role="alert">This Technical Description has not been verified by WSI.</div>
+            <div class="alert alert-warning" role="alert">{{ 'message_td_not_verified' | translate }}</div>
             <div style="position: fixed; display: flex; top: 0; left: 0; right: 0; bottom: 0; justify-content: center; align-items: center; z-index: -1;">
-                <div style="transform: rotate(300deg); width: 50%; text-align: center; color: #eee; font-size: 4.5em;">This Technical Description has not been verified by WSI.</div>
+                <div style="transform: rotate(300deg); width: 50%; text-align: center; color: #eee; font-size: 4.5em;">{{ 'message_td_not_verified' | translate }}</div>
             </div>
         </div>
 
@@ -42,9 +42,9 @@
                         <div ng-bind-html="section.latest_revision.text"></div>
                     </div>
                     <div>
-                        <button class="btn btn-xs btn-primary" ng-click="editSection(section, index)">Edit</button>
+                        <button class="btn btn-xs btn-primary" ng-click="editSection(section, index)">{{ 'edit' | translate }}</button>
                         <small class="text-muted" ng-show="section.latest_revision && section.latest_revision.id != section.approved_revision_id">
-                            <a href ng-click="diffRevision(section, index)">Pending changes by {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}</a>
+                            <a href ng-click="diffRevision(section, index)">{{ 'pending_changes_by' | translate }} {{ section.latest_revision.author.first_name }} {{ section.latest_revision.author.last_name }}</a>
                         </small>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                 <table cellspacing="0" class="table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="2"><p><strong>Section</strong></p></th>
-                            <th><p><strong>Relative importance (%)</strong></p></th>
+                            <th colspan="2"><p><strong>{{ 'section' | translate }}</strong></p></th>
+                            <th><p><strong>{{ 'relative_importance_percentage' | translate }}</strong></p></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,9 +64,9 @@
                                 <p ng-show="!userCanEditSkillDocument"><strong>{{wsosSection.title}}</strong></p>
                                 <p ng-show="userCanEditSkillDocument"><strong>{{wsosSection.latest_revision.title}}</strong></p>
                                 <div ng-show="userCanEditSkillDocument">
-                                    <button class="btn btn-xs btn-primary" ng-click="editWsosSection(wsosSection, index, wsosIndex)">Edit</button>
+                                    <button class="btn btn-xs btn-primary" ng-click="editWsosSection(wsosSection, index, wsosIndex)">{{ 'edit' | translate }}</button>
                                     <small class="text-muted" ng-show="wsosSection.latest_revision && wsosSection.latest_revision.id != wsosSection.approved_revision_id">
-                                        <a href ng-click="diffWsosRevision(section, wsosSection, index, wsosIndex)">Pending changes by {{ wsosSection.latest_revision.author.first_name }} {{ wsosSection.latest_revision.author.last_name }}</a>
+                                        <a href ng-click="diffWsosRevision(section, wsosSection, index, wsosIndex)">{{ 'pending_changes_by' | translate }} {{ wsosSection.latest_revision.author.first_name }} {{ wsosSection.latest_revision.author.last_name }}</a>
                                     </small>
                                 </div>
                             </td>
@@ -104,14 +104,14 @@
                         <tr>
                             <td>&nbsp;</td>
                             <td>
-                                <strong>Total</strong>
+                                <strong>{{ 'total' | translate }}</strong>
                             </td>
                             <td><p><strong>{{section.totalImportance}}</strong></p></td>
                         </tr>
                     </tfoot>
                 </table>
                 <div ng-if="userCanAddSkillDocumentWSOS">
-                    <button class="btn btn-xs btn-success" ng-click="addWsosSection(index)">Add WSOS Section</button>
+                    <button class="btn btn-xs btn-success" ng-click="addWsosSection(index)">{{ 'add_wsos_section' | translate }}</button>
                 </div>
             </div>
         </div>
@@ -121,13 +121,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div ng-show="previousChapter">
-                    <h5>Previous</h5>
+                    <h5>{{ 'previous' | translate }}</h5>
                     <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: previousChapter.id})"><span class="glyphicon glyphicon-chevron-left"></span> {{ previousChapter.title.text }}</a></p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="pull-right" ng-show="nextChapter">
-                    <h5 class="text-right">Next</h5>
+                    <h5 class="text-right">{{ 'next' | translate }}</h5>
                     <p><a ui-sref="document_chapter({eventId: skill.event.id, documentId: document.id, skillId: skill.id, chapterId: nextChapter.id})">{{ nextChapter.title.text }} <span class="glyphicon glyphicon-chevron-right"></span></a></p>
                 </div>
             </div>
@@ -135,7 +135,7 @@
 
         <br><br>
 
-        <p class="text-muted">Last updated: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}} - <a ui-sref="document_revisions({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">Change log</a></p>
+        <p class="text-muted">{{ 'last_updated' | translate }}: {{document.last_updated|date:'dd.MM.yyyy HH:mm'}} - <a ui-sref="document_revisions({eventId: skill.event.id, documentId: document.id, skillId: skill.id})">{{ 'change_log' | translate }}</a></p>
 
     </div>
 </div>

@@ -7,10 +7,10 @@
         <div class="worldskills-document-text worldskills-document-diff" ng-bind-html="diff"></div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">Approve<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ 'cancel' | translate }}</button>
+        <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">{{ 'approve' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
-          <button type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
+          <button type="button" class="btn btn-primary" ng-click="edit()">{{ 'edit' | translate }}</button>
         </div>
     </div>
 </form>

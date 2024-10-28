@@ -1,15 +1,15 @@
 <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
     <div class="modal-header">
         <button type="button" class="close" ng-click="cancel()"><span>&times;</span></button>
-        <h2 class="modal-title">WSOS Section</h2>
+        <h2 class="modal-title">{{ 'wsos_section' | translate }}</h2>
     </div>
     <div class="modal-body">
         <div class="form-group">
-            <label for="title" class="col-sm-2 col-lg-1 control-label">Title</label>
+            <label for="title" class="col-sm-2 col-lg-1 control-label">{{ 'title' | translate }}</label>
             <div class="col-sm-6 col-lg-7">
                 <input type="text" class="form-control" name="title" ng-model="wsosSection.latest_revision.title">
             </div>
-            <label for="title" class="col-sm-2 control-label">Importance</label>
+            <label for="title" class="col-sm-2 control-label">{{ 'importance' | translate }}</label>
             <div class="col-sm-2">
                 <input type="text" class="form-control" name="importance" ng-model="wsosSection.latest_revision.importance">
             </div>
@@ -26,10 +26,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ 'cancel' | translate }}</button>
+        <button type="submit" class="btn btn-primary">{{ 'save' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
-          <button type="button" class="btn btn-danger btn-xs" ng-click="delete()" ng-show="wsosSection.id && userCanDeleteSkillDocumentWSOS">Delete WSOS Section</button>
+          <button type="button" class="btn btn-danger btn-xs" ng-click="delete()" ng-show="wsosSection.id && userCanDeleteSkillDocumentWSOS">{{ 'delete_wsos_section' | translate }}</button>
         </div>
     </div>
 </form>

@@ -8,8 +8,8 @@
             <table cellspacing="0" class="table-bordered">
                 <thead>
                     <tr>
-                        <th colspan="2"><p><strong>Section</strong></p></th>
-                        <th><p><strong>Relative importance (%)</strong></p></th>
+                        <th colspan="2"><p><strong>{{ 'section' | translate }}</strong></p></th>
+                        <th><p><strong>{{ 'relative_importance_percentage' | translate }}</strong></p></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,10 +41,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">Approve<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ 'cancel' | translate }}</button>
+        <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">{{ 'approve' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
-          <button type="button" class="btn btn-primary" ng-click="edit()">Edit</button>
+          <button type="button" class="btn btn-primary" ng-click="edit()">{{ 'edit' | translate }}</button>
         </div>
     </div>
 </form>
