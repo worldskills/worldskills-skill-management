@@ -41,7 +41,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentCtrl', function($scope, 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $timeout, $interval, Skill, DocumentSkill, DocumentWSOSSection, Downloader, WORLDSKILLS_API_SKILLMAN, WORLDSKILLS_API_AUTH) {
+angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($scope, $state, $stateParams, $http, $timeout, $interval, $translate, Skill, DocumentSkill, DocumentWSOSSection, Downloader, WORLDSKILLS_API_SKILLMAN, WORLDSKILLS_API_AUTH) {
 
     $scope.skills = Skill.query({event: $stateParams.eventId}, function () {
 
