@@ -1,4 +1,5 @@
 {
+  "message_error_downloading_pdf": "Error downloading PDF for Skill {{skill}}",
   "actions": "Actions",
   "add_all_remaining_competitors": "Add all remaining Competitors",
   "add_all_remaining_experts": "Add all remaining Experts",

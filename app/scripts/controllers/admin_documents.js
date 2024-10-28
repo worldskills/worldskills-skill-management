@@ -79,7 +79,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
                         doCountdown();
                     })
                     .error(function(data, status) {
-                        alert("Error downloading PDF for Skill " + skill.number + " " + skill.name.text);
+                        $translate('message_error_downloading_pdf', {skill: skill.number + " " + skill.name.text}).then(function (message) {
+                            alert(message);
+                        });
                         doCountdown();
                     });
             }, i * 10000);
