@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scope, $rootScope, $state, $stateParams, $location, $timeout, CompetitionDay, CompetitionItem, Room) {
+angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scope, $rootScope, $state, $stateParams, $location, $timeout, $translate, CompetitionDay, CompetitionItem, Room) {
 
     $scope.loading = true;
 
@@ -44,10 +44,12 @@ angular.module('skillMgmtApp').controller('AdminEventItemsCtrl', function ($scop
         if (httpResponse.status == 401) {
             // Unauthorized
 
-            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            $translate('message_error_session_timed_out').then(function (message) {
+                window.alert(message);
 
-            // reload page
-            window.location.reload()
+                // reload page
+                window.location.reload()
+            });
 
         } else {
             if (httpResponse.data.user_msg) {

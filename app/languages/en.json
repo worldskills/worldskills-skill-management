@@ -1,5 +1,4 @@
 {
-  "message_error_downloading_pdf": "Error downloading PDF for Skill {{skill}}",
   "actions": "Actions",
   "add_all_remaining_competitors": "Add all remaining Competitors",
   "add_all_remaining_experts": "Add all remaining Experts",
@@ -160,6 +159,8 @@
   "message_competition_lunch_times_not_known": "Competition lunch times not known yet",
   "message_draft_saved": "Draft saved",
   "message_end_time_must_be_after_start_time": "End time must be after start time!",
+  "message_error_downloading_pdf": "Error downloading PDF for Skill {{skill}}",
+  "message_error_session_timed_out": "Your session has timed out. The page will now refresh and you might need to login again.",
   "message_event_is_locked": "Event is locked.",
   "message_example_competitor_name": "e.g. \"Competitor Name\" - can be empty",
   "message_experts_can_view_all_submissions": "Experts can view all submissions of this form",

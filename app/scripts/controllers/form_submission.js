@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, $filter, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, $translate, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
@@ -20,10 +20,12 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
         if (httpResponse.status == 401) {
             // Unauthorized
 
-            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            $translate('message_error_session_timed_out').then(function (message) {
+                window.alert(message);
 
-            // reload page
-            window.location.reload(false)
+                // reload page
+                window.location.reload(false)
+            });
 
         } else {
             if (httpResponse.data.user_msg) {

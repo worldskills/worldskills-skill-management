@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchGroup, LunchGroupRegistration, Registration) {
+angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, $translate, auth, alert, Skill, LunchGroup, LunchGroupRegistration, Registration) {
 
     $scope.loading = true;
 
@@ -69,10 +69,12 @@ angular.module('skillMgmtApp').controller('LunchGroupListCtrl', function ($scope
         if (httpResponse.status == 401) {
             // Unauthorized
 
-            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            $translate('message_error_session_timed_out').then(function (message) {
+                window.alert(message);
 
-            // reload page
-            window.location.reload(false)
+                // reload page
+                window.location.reload(false);
+            });
 
         } else {
             if (httpResponse.data.user_msg) {

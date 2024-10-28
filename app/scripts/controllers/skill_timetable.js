@@ -83,7 +83,7 @@ angular.module('skillMgmtApp').controller('SkillTimetableDayCtrl', function ($sc
     };
 });
 
-angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($scope, $uibModalInstance, SkillTimetableItem) {
+angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($scope, $translate, $uibModalInstance, SkillTimetableItem) {
 
     $scope.submitted = false;
 
@@ -92,10 +92,12 @@ angular.module('skillMgmtApp').controller('SkillTimetableItemCtrl', function ($s
         if (httpResponse.status == 401) {
             // Unauthorized
 
-            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            $translate('message_error_session_timed_out').then(function (message) {
+                window.alert(message);
 
-            // reload page
-            window.location.reload(false)
+                // reload page
+                window.location.reload(false);
+            });
 
         } else {
             if (httpResponse.data.user_msg) {

@@ -64,7 +64,7 @@ angular.module('skillMgmtApp').controller('SkillPlanCtrl', function ($scope, $ro
     };
 });
 
-angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, $rootScope, $state, $stateParams, $filter, $timeout, auth, alert, SkillItem, SkillTime) {
+angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, $rootScope, $state, $stateParams, $filter, $timeout, $translate, auth, alert, SkillItem, SkillTime) {
 
     $scope.filteredItems = [];
 
@@ -91,10 +91,12 @@ angular.module('skillMgmtApp').controller('SkillPlanDayCtrl', function ($scope, 
         if (httpResponse.status == 401) {
             // Unauthorized
 
-            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            $translate('message_error_session_timed_out').then(function (message) {
+                window.alert(message);
 
-            // reload page
-            window.location.reload(false)
+                // reload page
+                window.location.reload(false)
+            });
 
         } else {
             if (httpResponse.data.user_msg) {
