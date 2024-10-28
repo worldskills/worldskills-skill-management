@@ -4,7 +4,7 @@
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
     <li><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">{{ 'competition_forms' | translate }}</a></li>
     <li><a ui-sref="form_submission({eventId: skill.event.id, skillId: skill.id, formId: form.id})">{{ form.name.text }}</a></li>
-    <li class="active">Submissions</li>
+    <li class="active">{{ 'submissions' | translate }}</li>
 </ol>
 
 <div class="row">

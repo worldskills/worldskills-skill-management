@@ -166,13 +166,13 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="competitiorFirstName{{ person.person.id }}">First name for certificate:</label>
+                                        <label for="competitiorFirstName{{ person.person.id }}">{{ 'first_name_for_certificate' | translate }}:</label>
                                         <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.first_name" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="competitiorLastName{{ person.person.id }}">Last name:</label>
+                                        <label for="competitiorLastName{{ person.person.id }}">{{ 'last_name' | translate }}:</label>
                                         <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.last_name" readonly="readonly" />
                                     </div>
                                 </div>

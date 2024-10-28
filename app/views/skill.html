@@ -26,22 +26,22 @@
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="userCanViewManagementPlan || userCanViewTimetable || userCanEditSkillItems || userCanEditSubmissions || userCanViewSubmissionsExperts || userCanEditLunch">
-      <div class="panel-heading">Skill Management</div>
+      <div class="panel-heading">{{ 'skill_management' | translate }}</div>
       <div class="panel-body">
         <p ng-show="userCanViewManagementPlan">
           <a ui-sref="plan({skillId: skill.id, day: 'C1'})">{{ 'skill_management_plan' | translate }}</a>
           <span> </span>
-          <a ng-show="userCanEditSkillItems" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
+          <a ng-show="userCanEditSkillItems" ui-sref="skill_plan.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">({{ 'edit' | translate }})</a>
         </p>
         <p ng-show="userCanViewTimetable">
-          <a ui-sref="timetable_index({eventId: skill.event.id, skillId: skill.id})">Competitor Timetable</a>
+          <a ui-sref="timetable_index({eventId: skill.event.id, skillId: skill.id})">{{ 'competitor_timetable' | translate }}</a>
           <span> </span>
-          <a ng-show="userCanEditSkillItems" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">(Edit)</a>
+          <a ng-show="userCanEditSkillItems" ui-sref="skill_timetable.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">({{ 'edit' | translate }})</a>
         </p>
-        <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Check Forms</a></p>
-        <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})">Form Submissions (Experts)</a></p>
-        <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">Edit Lunch Times</a></p>
-        <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">Edit Groups</a></p>
+        <p ng-show="userCanEditSubmissions"><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">{{ 'check_forms' | translate }}</a></p>
+        <p ng-show="userCanViewSubmissionsExperts"><a ui-sref="form_submissions_experts({eventId: skill.event.id, skillId: skill.id})">{{ 'form_submissions_experts' | translate }}</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch.day({eventId: skill.event.id, skillId: skill.id, day: 'C1'})">{{ 'edit_lunch_times' | translate }}</a></p>
+        <p ng-show="userCanEditLunch"><a ui-sref="lunch_group_list({eventId: skill.event.id, skillId: skill.id})">{{ 'edit_groups' | translate }}</a></p>
       </div>
     </div>
   </div>
@@ -49,9 +49,9 @@
     <div class="panel panel-default" ng-show="userCanViewProgressItemsReport || userCanViewProgressItems">
       <div class="panel-heading">{{ 'preparation_progress' | translate }}</div>
       <div class="panel-body">
-        <p ng-show="userCanEditSkillProgressItems"><a ui-sref="admin_skill.progress({eventId: skill.event.id, skillId: skill.id})">Edit Progress Items</a></p>
+        <p ng-show="userCanEditSkillProgressItems"><a ui-sref="admin_skill.progress({eventId: skill.event.id, skillId: skill.id})">{{ 'edit_progress_items' | translate }}</a></p>
         <div ng-show="userCanViewProgressItemsReport">
-          <div>Summary:</div>
+          <div>{{ 'summary' | translate }}:</div>
           <div class="progress">
             <div
               ng-repeat="report in progressItemsReport.reports"
@@ -63,12 +63,12 @@
         </div>
         <div class="row" ng-repeat="item in progressItems.skill_progress_items | filter:{progress_item: {has_status: true}}">
           <div class="col-xs-8"><p>{{item.progress_item.title.text}}</p></div>
-          <div class="col-xs-4"><p class="text-right"><span class="label" style="background-color: {{item.status.color || '#999'}}; color: #fff;">{{item.status.name.text || "Unknown"}}</span></p></div>
+          <div class="col-xs-4"><p class="text-right"><span class="label" style="background-color: {{item.status.color || '#999'}}; color: #fff;">{{item.status.name.text || ('unknown' | translate)}}</span></p></div>
         </div>
       </div>
     </div>
     <div class="panel panel-default" ng-show="polls.items.length">
-      <div class="panel-heading">Polls</div>
+      <div class="panel-heading">{{ 'polls' | translate }}</div>
       <div class="panel-body">
         <div ng-repeat="poll in polls.items">
           <p><strong>{{poll.title.text}}</strong></p>
@@ -76,13 +76,13 @@
           <ul class="list-unstyled">
             <li ng-repeat="option in poll.options">- {{option.text.text}}</li>
           </ul>
-          <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}votes.{{WORLDSKILLS_WEB_DOMAIN}}/polls/{{poll.id}}/result" class="btn btn-primary btn-sm" target="_blank">Go to poll</a></p>
+          <p><a href="{{WORLDSKILLS_WEB_PROTOCOL}}votes.{{WORLDSKILLS_WEB_DOMAIN}}/polls/{{poll.id}}/result" class="btn btn-primary btn-sm" target="_blank">{{ 'go_to_poll' | translate }}</a></p>
           <hr ng-hide="$last" />
         </div>
       </div>
     </div>
     <div class="panel panel-default" ng-show="testProject.resources.length">
-      <div class="panel-heading">Test Project</div>
+      <div class="panel-heading">{{ 'test_project' | translate }}</div>
       <div class="panel-body">
         <p ng-repeat="resource in testProject.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{resource.name.text}}</a></p>
       </div>
@@ -90,24 +90,24 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="userCanViewDocument && documents.documents.length">
-      <div class="panel-heading">Documents</div>
+      <div class="panel-heading">{{ 'documents' | translate }}</div>
       <div class="panel-body">
         <p ng-repeat="document in documents.documents"><a ui-sref="document({eventId: skill.event.id, documentId: document.id, skillId: skill.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
       </div>
     </div>
     <div class="panel panel-default" ng-show="technicalDescription.resources.length || workshopLayouts.resources.length || healthSafetyEnvironment.resources.length || occupationalStandard.resources.length">
-      <div class="panel-heading">Resources</div>
+      <div class="panel-heading">{{ 'resources' | translate }}</div>
       <div class="panel-body">
-        <p ng-repeat="resource in technicalDescription.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Technical Description (PDF)</a></p>
-        <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Workshop Layout (PDF)</a></p>
-        <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Health, Safety, and Environment (PDF)</a></p>
-        <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> Occupational Standard (PDF)</a></p>
+        <p ng-repeat="resource in technicalDescription.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{ 'technical_description_pdf' | translate }}</a></p>
+        <p ng-repeat="resource in workshopLayouts.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{ 'workshop_layout_pdf' | translate }}</a></p>
+        <p ng-repeat="resource in healthSafetyEnvironment.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{ 'hse_pdf' | translate }}</a></p>
+        <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{ 'wsos_pdf' | translate }}</a></p>
       </div>
     </div>
     <div class="panel panel-default" ng-show="userCanViewInfrastructureList">
-      <div class="panel-heading">Related Apps</div>
+      <div class="panel-heading">{{ 'related_apps' | translate }}</div>
       <div class="panel-body">
-        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> Infrastructure Lists</a></p>
+        <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> {{ 'infrastructure_lists' | translate }}</a></p>
       </div>
     </div>
   </div>
@@ -118,7 +118,7 @@
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">Skill Positions</div>
+      <div class="panel-heading">{{ 'skill_positions' | translate }}</div>
       <div class="panel-body">
         <div class="media" ng-repeat="person in people.people">
           <div class="media-left media-middle">
@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="panel panel-default" ng-show="interpreters.people.length">
-      <div class="panel-heading">Interpreters ({{ interpreters.people.length }})</div>
+      <div class="panel-heading">{{ 'interpreters' | translate }} ({{ interpreters.people.length }})</div>
       <div class="panel-body">
         <div class="media" ng-repeat="person in interpreters.people">
           <div class="media-left media-middle">
@@ -150,9 +150,9 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="experts.registrations.length && userCanViewRegistrations">
-      <div class="panel-heading">Experts ({{ experts.registrations.length }})</div>
+      <div class="panel-heading">{{ 'experts' | translate }} ({{ experts.registrations.length }})</div>
       <div class="panel-body">
-        <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">Edit Chief Expert Nominations</a></p>
+        <p ng-show="userCanEditExperts"><a ui-sref="admin_skill.expert_nominations({eventId: skill.event.id, skillId: skill.id})">{{ 'edit_chief_expert_nominations' | translate }}</a></p>
         <div class="media" ng-repeat="expert in experts.registrations">
           <div class="media-left media-middle">
             <img class="img-circle media-object" ng-show="expert.person.person.images[0]" ng-src="{{expert.person.person.images[0].thumbnail}}_square" width="30" height="30">
@@ -161,7 +161,7 @@
           <div class="media-body">
             {{ expert.person.person.first_name }} {{ expert.person.person.last_name }}
             <span class="text-muted"><br/>{{ expert.member.code }} - {{ expert.member.name.text }}</span>
-            <span class="text-info" ng-if="expert.person.nominated_smt"><br/>Nominated for Chief Expert</span>
+            <span class="text-info" ng-if="expert.person.nominated_smt"><br/>{{ 'nominated_for_chief_expert' | translate }}</span>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="competitors.registrations.length && userCanViewRegistrations">
-      <div class="panel-heading">Competitors ({{ competitors.registrations.length }})</div>
+      <div class="panel-heading">{{ 'competitors' | translate }} ({{ competitors.registrations.length }})</div>
       <div class="panel-body">
         <div class="media" ng-repeat="competitor in competitors.registrations">
           <div class="media-left media-middle">

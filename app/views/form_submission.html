@@ -2,7 +2,7 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
-    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Competition Forms</a></li>
+    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ 'competition_forms' | translate }}</a></li>
     <li class="active">{{ submission.form.name.text }}</li>
 </ol>
 
