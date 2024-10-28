@@ -14,10 +14,10 @@
 <h1 class="align-top">{{ 'skill_admin' | translate }}</h1>
 
 <ul class="nav nav-tabs">
-    <li ng-show="userCanEditExperts" ui-sref-active="{active: 'admin_skill.expert_nominations'}"><a ui-sref="admin_skill.expert_nominations">Chief Expert Nominations</a></li>
-    <li ng-show="userCanEditExperts" ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">Exclude from Forms</a></li>
+    <li ng-show="userCanEditExperts" ui-sref-active="{active: 'admin_skill.expert_nominations'}"><a ui-sref="admin_skill.expert_nominations">{{ 'chief_expert_nominations' | translate }}</a></li>
+    <li ng-show="userCanEditExperts" ui-sref-active="{active: 'admin_skill.experts'}"><a ui-sref="admin_skill.experts">{{ 'exclude_from_forms' | translate }}</a></li>
     <li ng-show="userCanEditSkillProgressItems" ui-sref-active="{active: 'admin_skill.progress'}"><a ui-sref="admin_skill.progress">{{ 'preparation_progress' | translate }}</a></li>
-    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_skill.form_submissions'}"><a ui-sref="admin_skill.form_submissions">Form Submissions</a></li>
+    <li ng-show="userIsAdmin" ui-sref-active="{active: 'admin_skill.form_submissions'}"><a ui-sref="admin_skill.form_submissions">{{ 'form_submissions' | translate }}</a></li>
 </ul>
 
 <div id="content" ui-view>

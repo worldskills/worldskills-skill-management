@@ -12,9 +12,9 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
-                <th>Expert</th>
-                <th>History</th>
-                <th>Nominations</th>
+                <th>{{ 'expert' | translate }}</th>
+                <th>{{ 'history' | translate }}</th>
+                <th>{{ 'nominations' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,19 +29,19 @@
                 </td>
                 <td>
                     <div class="checkbox">
-                        <u class="text-success" ng-if="expert.history.length > 0" uib-popover-template="'views/admin_skill_expert_nominations_history.html'" popover-trigger="mouseenter">{{expert.history.length}} Expert position(s)</u>
+                        <u class="text-success" ng-if="expert.history.length > 0" uib-popover-template="'views/admin_skill_expert_nominations_history.html'" popover-trigger="mouseenter">{{expert.history.length}} {{ 'expert_position_s' | translate }}</u>
                     </div>
                 </td>
                 <td>
                     <div class="checkbox" ng-if="expert.history_override || expert.nominated_smt || expert.history.length">
                         <label>
-                            <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> Nominated for Chief Expert
+                            <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> {{ 'nominated_for_chief_expert' | translate }}
                         </label>
                     </div>
                 </td>
             </tr>
             <tr ng-show="experts.registration_people.length == 0">
-                <td colspan="4">No Experts found</td>
+                <td colspan="4">{{ 'message_no_experts_found' | translate }}</td>
             </tr>
             <tr ng-show="loading">
                 <td colspan="4"><ws-spinner></ws-spinner></td>
@@ -52,7 +52,7 @@
 
 <div class="form-group form-group-sm">
     <div class="col-sm-offset-6 col-sm-6">
-        <button ng-click="createPoll()" class="btn btn-sm btn-warning" ng-disabled="createPollLoading"><span class="glyphicon glyphicon-flash"></span> Create poll for Chief Expert election<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+        <button ng-click="createPoll()" class="btn btn-sm btn-warning" ng-disabled="createPollLoading"><span class="glyphicon glyphicon-flash"></span> {{ 'create_poll_for_chief_expert_election' | translate }}<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
         <!-- <span class="text-muted">(Only available from C4 at 12:00)</span> -->
     </div>
 </div>
