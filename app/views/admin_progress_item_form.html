@@ -1,37 +1,37 @@
 <form class="form-horizontal" name="form" novalidate focus-error ng-submit="save()">
     <div class="form-group" ng-class="{'has-error': submitted && form.title.$invalid}">
-        <label for="title" class="col-sm-2 control-label">Title <span class="required">*</span></label>
+        <label for="title" class="col-sm-2 control-label">{{ 'title' | translate }} <span class="required">*</span></label>
         <div class="col-sm-6">
             <input type="text" class="form-control" id="title" name="title" required ng-model="item.title.text">
         </div>
         <div class="col-sm-4">
             <span class="help-block" ng-show="submitted" ng-messages="form.title.$error">
-                <span ng-message="required">Please enter a title!</span>
+                <span ng-message="required">{{ 'message_please_enter_title' | translate }}</span>
             </span>
         </div>
     </div>
     <div class="form-group">
-        <label for="multiple_submissions" class="col-sm-2 control-label">Header</label>
+        <label for="multiple_submissions" class="col-sm-2 control-label">{{ 'header' | translate }}</label>
         <div class="col-sm-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="is_header" ng-model="item.is_header"> Item is a header row (no internal notes)
+                    <input type="checkbox" name="is_header" ng-model="item.is_header"> {{ 'message_progress_item_is_header_row' | translate }}
                 </label>
             </div>
         </div>
     </div>
     <div class="form-group">
-        <label for="multiple_submissions" class="col-sm-2 control-label">Status</label>
+        <label for="multiple_submissions" class="col-sm-2 control-label">{{ 'status' | translate }}</label>
         <div class="col-sm-6">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="has_status" ng-model="item.has_status"> Item has a status to select
+                    <input type="checkbox" name="has_status" ng-model="item.has_status"> {{ 'message_progress_item_has_status' | translate }}
                 </label>
             </div>
         </div>
     </div>
     <div class="form-group" ng-show="item.has_status">
-        <label for="title" class="col-sm-2 control-label">Statuses</label>
+        <label for="title" class="col-sm-2 control-label">{{ 'statuses' | translate }}</label>
         <div class="col-sm-6">
             <div class="row" ng-repeat="status in item.statuses">
                 <div class="col-md-4">
@@ -46,8 +46,8 @@
     <hr>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-            <a ui-sref="admin_event.progress_items({eventId: event.id})" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-success">{{ 'save' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="admin_event.progress_items({eventId: event.id})" class="btn btn-default">{{ 'cancel' | translate }}</a>
         </div>
     </div>
 </form>
