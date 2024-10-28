@@ -2,7 +2,7 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: skill.event.id})">{{ skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: skill.event.id, skillId: skill.id})">{{ skill.number }} {{ skill.name.text }}</a></li>
-    <li><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">Competition Forms</a></li>
+    <li><a ui-sref="form_submission_list({eventId: skill.event.id, skillId: skill.id})">{{ 'competition_forms' | translate }}</a></li>
     <li><a ui-sref="form_submission({eventId: skill.event.id, skillId: skill.id, formId: form.id})">{{ form.name.text }}</a></li>
     <li class="active">Submissions</li>
 </ol>
@@ -22,8 +22,8 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>Submitted on</th>
-                        <th>Title</th>
+                        <th>{{ 'submitted_on' | translate }}</th>
+                        <th>{{ 'title' | translate }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     <tr ng-show="!loading && submissions.submissions.length == 0">
-                        <td colspan="2">No submissions found</td>
+                        <td colspan="2">{{ 'message_no_submissions_found' | translate }}</td>
                     </tr>
                     <tr ng-show="loading">
                         <td colspan="2"><ws-spinner></ws-spinner></td>

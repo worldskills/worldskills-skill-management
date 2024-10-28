@@ -2,9 +2,9 @@
     <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
     <li><a ui-sref="event.skills({eventId: submission.skill.event.id})">{{ submission.skill.event.name }}</a></li>
     <li><a ui-sref="skill({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ submission.skill.number }} {{ submission.skill.name.text }}</a></li>
-    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">Competition Forms</a></li>
+    <li><a ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">{{ 'competition_forms' | translate }}</a></li>
     <li><a ui-sref="form_submission({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">{{ submission.form.name.text }}</a></li>
-    <li><a ui-sref="form_submission_submissions({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">Submissions</a></li>
+    <li><a ui-sref="form_submission_submissions({eventId: submission.skill.event.id, skillId: submission.skill.id, formId: submission.form.id})">{{ 'submissions' | translate }}</a></li>
 </ol>
 
 <div class="row">
@@ -14,7 +14,7 @@
 
 <hr>
 
-<p class="text-muted">Submitted on {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</p>
+<p class="text-muted">{{ 'submitted_on' | translate }} {{ submission.submitted|date:'d MMMM yyyy HH:mm' }}</p>
 
 <div ng-show="submission.form.description.text">
     <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
@@ -24,7 +24,7 @@
 <form role="form" novalidate>
     <div ng-show="submission.form.multiple_submissions">
         <div class="form-group">
-            <h4>Title</h4>
+            <h4>{{ 'title' | translate }}</h4>
             <input type="text" class="form-control" ng-model="submission.title" readonly="readonly" />
         </div>
         <div class="clearfix"></div>
@@ -42,11 +42,11 @@
             <div ng-if="field.type == 'input_yesno'">
                 <label class="radio-inline">
                     <input type="radio" ng-model="field.checked" disabled="disabled" ng-value="true" >
-                    Yes
+                    {{ 'yes' | translate }}
                 </label>
                 <label class="radio-inline">
                     <input type="radio" ng-model="field.checked" disabled="disabled" ng-value="false" >
-                    No
+                    {{ 'no' | translate }}
                 </label>
             </div>
 
@@ -65,7 +65,7 @@
                                 <td><a href="{{file.download}}">{{file.filename}}</a></td>
                             </tr>
                             <tr ng-show="field.files.length == 0">
-                                <td>No files</td>
+                                <td>{{ 'message_no_files' | translate }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -178,19 +178,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
+                                <label for="competitiorNameOfficial{{ person.person.id }}">{{ 'name_on_passport' | translate }}:</label>
                                 <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
+                                <label for="competitiorPassport{{ person.person.id }}">{{ 'passport_id_number' | translate }}:</label>
                                 <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (DD.MM.YYYY):</label>
+                                <label for="competitiorDateOfBirth{{ person.person.id }}">{{ 'date_of_birth' | translate }} ({{ 'date_format_dd_mm_yyyy' | translate }}):</label>
                                 <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
+                                <label for="competitiorLanguageTestProject{{ person.person.id }}">{{ 'language_for_test_project' | translate }}:</label>
                                 <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" readonly="readonly" />
                             </div>
                         </div>
@@ -228,7 +228,7 @@
 
     <div>
         <br/>
-        <a class="btn btn-link pull-right" ui-sref="form_submission_submissions({formId: submission.form.id, skillId: submission.skill.id, eventId: submission.skill.event.id})">« Return to Submissions</a>
+        <a class="btn btn-link pull-right" ui-sref="form_submission_submissions({formId: submission.form.id, skillId: submission.skill.id, eventId: submission.skill.event.id})">« {{ 'return_to_submissions' | translate }}</a>
     </div>
 
     <br/><br/><br/>

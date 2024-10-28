@@ -184,19 +184,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
+                                <label for="competitiorNameOfficial{{ person.person.id }}">{{ 'name_on_passport' | translate }}:</label>
                                 <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
+                                <label for="competitiorPassport{{ person.person.id }}">{{ 'passport_id_number' | translate }}:</label>
                                 <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (DD.MM.YYYY):</label>
+                                <label for="competitiorDateOfBirth{{ person.person.id }}">{{ 'date_of_birth' | translate }} ({{ 'date_format_dd_mm_yyyy' | translate }}):</label>
                                 <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.date_of_birth" readonly="readonly" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
+                                <label for="competitiorLanguageTestProject{{ person.person.id }}">{{ 'language_for_test_project' | translate }}:</label>
                                 <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" readonly="readonly" />
                             </div>
                         </div>

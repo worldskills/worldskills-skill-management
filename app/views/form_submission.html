@@ -14,8 +14,8 @@
 </p>
 
 <p class="pull-right text-muted">
-    <span ng-show="saving">Saving...</span>
-    <span ng-show="!saving && saved">Draft saved</span>
+    <span ng-show="saving">{{ 'saving' | translate }}</span>
+    <span ng-show="!saving && saved">{{ 'message_draft_saved' | translate }}</span>
 </p>
 <h1 class="align-top">{{ submission.form.name.text }} <small>{{ submission.form.competition_day.timeline }}</small></h1>
 
@@ -26,10 +26,10 @@
 </div>
 
 <div class="alert alert-danger" ng-show="submitted && form.$invalid">
-    Some values are missing or wrong. Please check the form and try to submit again.
+    {{ 'message_some_value_missing_check_form' | translate }}
 </div>
 
-<p ng-if="submission.fields.length == 0">No fields need to be filled out.</p>
+<p ng-if="submission.fields.length == 0">{{ 'message_form_no_fields_need_to_be_filled' | translate }}</p>
 
 <div ng-show="submission.form.description.text">
     <p style="white-space: pre-line;">{{ submission.form.description.text }}</p>
@@ -52,7 +52,7 @@
             <h4>{{ field.title.text }}</h4>
             <p ng-show="field.type != 'input_checkbox' && field.type != 'link'">{{ field.text.text }}</p>
 
-            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}" target="_blank" rel="noopener">Download</a></p>
+            <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}" target="_blank" rel="noopener">{{ 'download' | translate }}</a></p>
 
             <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
 
@@ -61,11 +61,11 @@
             <div ng-if="field.type == 'input_yesno'">
                 <label class="radio-inline">
                     <input type="radio" ng-model="field.checked" ng-change="fieldChecked(field)" ng-value="true" >
-                    Yes
+                    {{ 'yes' | translate }}
                 </label>
                 <label class="radio-inline">
                     <input type="radio" ng-model="field.checked" ng-change="fieldChecked(field)" ng-value="false" >
-                    No
+                    {{ 'no' | translate }}
                 </label>
             </div>
 
@@ -78,14 +78,14 @@
 
             <div ng-if="field.type == 'input_file'">
                 <p>
-                    <button type="button" class="btn btn-default" ngf-select="fieldUploadFiles(field, $files, $invalidFiles)" multiple>Upload file(s)</button>
+                    <button type="button" class="btn btn-default" ngf-select="fieldUploadFiles(field, $files, $invalidFiles)" multiple>{{ 'upload_files' | translate }}</button>
                 </p>
                 <div class="panel panel-default">
                     <table class="table table-striped">
                         <tbody>
                             <tr ng-repeat="file in field.files">
                                 <td><a href="{{file.download}}">{{file.filename}}</a></td>
-                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="deleteFieldFile(field, file)">Delete file</button></td>
+                                <td class="text-right"><button type="button" class="btn btn-danger btn-xs" ng-click="deleteFieldFile(field, file)">{{ 'delete_file' | translate }}</button></td>
                             </tr>
                             <tr ng-repeat="file in field.uploading | filter:{progress: '!100'}">
                                 <td>{{file.name}} {{file.$errorParam}}</td>
@@ -188,7 +188,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" ng-model="person.checked" ng-change="personChecked(field, person)" value="true">
-                                    Toolbox checked
+                                    {{ 'toolbox_checked' | translate }}
                                 </label>
                             </div>
                         </div>
@@ -208,31 +208,31 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="competitiorFirstName{{ person.person.id }}">First name for certificate:</label>
+                                        <label for="competitiorFirstName{{ person.person.id }}">{{ 'first_name_for_certificate' | translate }}:</label>
                                         <input type="text" id="competitiorFirstName{{ person.person.id }}" class="form-control" ng-model="person.first_name" ng-change="fieldPersonChanged(field, person)" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="competitiorLastName{{ person.person.id }}">Last name:</label>
+                                        <label for="competitiorLastName{{ person.person.id }}">{{ 'last_name' | translate }}:</label>
                                         <input type="text" id="competitiorLastName{{ person.person.id }}" class="form-control" ng-model="person.last_name" ng-change="fieldPersonChanged(field, person)" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="competitiorNameOfficial{{ person.person.id }}">Name on passport or identity card:</label>
+                                <label for="competitiorNameOfficial{{ person.person.id }}">{{ 'name_on_passport' | translate }}:</label>
                                 <input type="text" id="competitiorNameOfficial{{ person.person.id }}" class="form-control" ng-model="person.name_official" ng-change="fieldPersonChanged(field, person)" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorPassport{{ person.person.id }}">Passport or identity card number:</label>
+                                <label for="competitiorPassport{{ person.person.id }}">{{ 'passport_id_number' | translate }}:</label>
                                 <input type="text" id="competitiorPassport{{ person.person.id }}" class="form-control" ng-model="person.passport" ng-change="fieldPersonChanged(field, person)" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorDateOfBirth{{ person.person.id }}">Date of birth (DD.MM.YYYY):</label>
+                                <label for="competitiorDateOfBirth{{ person.person.id }}">{{ 'date_of_birth' | translate }} ({{ 'date_format_dd_mm_yyyy' | translate }}):</label>
                                 <input type="text" id="competitiorDateOfBirth{{ person.person.id }}" class="form-control" ng-model="person.dob" ng-change="fieldPersonDateOfBirthChanged(field, person)" placeholder="DD.MM.YYYY" />
                             </div>
                             <div class="form-group">
-                                <label for="competitiorLanguageTestProject{{ person.person.id }}">Language for Test Project:</label>
+                                <label for="competitiorLanguageTestProject{{ person.person.id }}">{{ 'language_for_test_project' | translate }}:</label>
                                 <input type="text" id="competitiorLanguageTestProject{{ person.person.id }}" class="form-control" ng-model="person.language_test_project" ng-change="fieldPersonChanged(field, person)" placeholder="e.g. EN" />
                             </div>
                         </div>
@@ -279,8 +279,8 @@
 
     <div>
         <br/>
-        <button class="btn btn-primary" type="submit">Submit Form<ws-text-spinner ng-show="submitting" class="ng-hide"></ws-text-spinner></button>
-        <a class="btn btn-link pull-right" ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">« Return to Forms</a>
+        <button class="btn btn-primary" type="submit">{{ 'submit_form' | translate }}<ws-text-spinner ng-show="submitting" class="ng-hide"></ws-text-spinner></button>
+        <a class="btn btn-link pull-right" ui-sref="form_submission_list({eventId: submission.skill.event.id, skillId: submission.skill.id})">« {{ 'return_to_forms' | translate }}</a>
     </div>
 
 
