@@ -90,7 +90,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentSkillsCtrl', function($s
 
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($scope, $state, $stateParams, $timeout, alert, DocumentSection) {
+angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($scope, $state, $stateParams, $timeout, $translate, alert, DocumentSection) {
 
     $scope.query = '';
 
@@ -145,7 +145,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($s
 
                 $scope.loading = false;
 
-                alert.success('Text replaced, ' + $scope.sections.sections.length + ' section(s) have been updated.');
+                $translate('message_document_search_replace_completed', {count: $scope.sections.sections.length}).then(function (message) {
+                    alert.success(message);
+                });
             });
         }
     };
@@ -282,7 +284,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentChaptersCtrl', function(
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function ($scope, $uibModalInstance, alert, DocumentSection) {
+angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function ($scope, $uibModalInstance, $translate, alert, DocumentSection) {
 
     $scope.submitted = false;
 
@@ -292,14 +294,18 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
             $scope.loading = true;
             if ($scope.section.id) {
                 DocumentSection.update({documentId: $scope.document.id}, $scope.section, function (response) {
-                    alert.success('The subsection has been updated.');
+                    $translate('message_subsection_updated').then(function (message) {
+                        alert.success(message);
+                    });
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
             } else {
                 DocumentSection.save({documentId: $scope.document.id}, $scope.section, function (response) {
-                    alert.success('The subsection has been created.');
+                    $translate('message_subsection_created').then(function (message) {
+                        alert.success(message);
+                    });
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -315,7 +321,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
     $scope.delete = function () {
         if (confirm('Really delete the subsection and all edits from all Skills? Click OK to proceed.')) {
             DocumentSection.delete({documentId: $scope.document.id, id: $scope.section.id}, function () {
-                alert.success('The subsection has been deleted.');
+                $translate('message_subsection_deleted').then(function (message) { 
+                    alert.success(message);
+                });
                 $uibModalInstance.close();
             }, function (httpResponse) {
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -325,7 +333,7 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function ($scope, $uibModalInstance, alert, DocumentChapter) {
+angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function ($scope, $uibModalInstance, $translate, alert, DocumentChapter) {
 
     $scope.submitted = false;
 
@@ -335,7 +343,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
             $scope.loading = true;
             if ($scope.chapter.id) {
                 DocumentChapter.update({documentId: $scope.document.id}, $scope.chapter.chapter, function (response) {
-                    alert.success('The section has been updated.');
+                    $translate('message_section_updated').then(function (message) {
+                        alert.success(message);
+                    });
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -343,7 +353,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
                 });
             } else {
                 DocumentChapter.save({documentId: $scope.document.id}, $scope.chapter.chapter, function (response) {
-                    alert.success('The section has been created.');
+                    $translate('message_section_created').then(function (message) {
+                        alert.success(message);
+                    });
                     $uibModalInstance.close(response);
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -356,7 +368,9 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
     $scope.delete = function () {
         if (confirm('Deleting the section will also delete all of its subsections! Click OK to proceed.')) {
             DocumentChapter.delete({documentId: $scope.document.id, id: $scope.chapter.id}, $scope.chapter, function () {
-                alert.success('The section has been deleted.');
+                $translate('message_section_deleted').then(function (message) {
+                    alert.success(message);
+                });
                 $uibModalInstance.close();
             }, function (httpResponse) {
                 window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));

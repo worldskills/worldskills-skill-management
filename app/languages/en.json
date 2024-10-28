@@ -1,4 +1,11 @@
 {
+  "message_subsection_updated": "The subsection has been updated.",
+  "message_subsection_created": "The subsection has been created.",
+  "message_subsection_deleted": "The subsection has been deleted.",
+  "message_section_updated": "The section has been updated.",
+  "message_section_created": "The section has been created.",
+  "message_section_deleted": "The section has been deleted.",
+  "message_document_search_replace_completed": "Text replaced, {{count}} section(s) have been updated.",
   "actions": "Actions",
   "add_all_remaining_competitors": "Add all remaining Competitors",
   "add_all_remaining_experts": "Add all remaining Experts",
