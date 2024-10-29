@@ -13,5 +13,6 @@
     wsApp.constant('WORLDSKILLS_WEB_PROTOCOL', 'https://');
     wsApp.constant('WORLDSKILLS_WEB_DOMAIN', 'worldskills.show');
     wsApp.constant('ENVIRONMENT_WARNING', 'This is the staging environment. Changes in this environment might get overwritten.');
+    wsApp.constant('SENTRY_ENVIRONMENT', 'staging');
 
 })();

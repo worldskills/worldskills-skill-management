@@ -1,7 +1,13 @@
 'use strict';
 
+Sentry.init({
+    dsn: 'https://e8a3a50581d97bb15c8c17bfbed17348@o200076.ingest.us.sentry.io/4508205560823808',
+    integrations: [new Sentry.Integrations.Angular()]
+});
+
 var skillmanApp = angular
   .module('skillMgmtApp', [
+    'ngSentry',
     'ngResource',
     'ngCookies',
     'ngSanitize',
@@ -19,7 +25,13 @@ skillmanApp.constant('WORLDSKILLS_API_IL_CODE', 2200);
 skillmanApp.constant('FILTER_AUTH_ROLES', [1200, 2200]); // Skill Management, IL
 skillmanApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
 
-skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'SENTRY_ENVIRONMENT', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, SENTRY_ENVIRONMENT) {
+
+    if (SENTRY_ENVIRONMENT) {
+        Sentry.getCurrentHub().getClient().getOptions().environment = SENTRY_ENVIRONMENT;
+    } else {
+        Sentry.getCurrentHub().getClient().getOptions().enabled = false;    
+    }
 
     $urlRouterProvider.otherwise(function ($injector, $location) {
         // check for existing redirect

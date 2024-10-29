@@ -13,5 +13,6 @@
     wsApp.constant('WORLDSKILLS_WEB_PROTOCOL', 'https://');
     wsApp.constant('WORLDSKILLS_WEB_DOMAIN', 'worldskills.org');
     wsApp.constant('ENVIRONMENT_WARNING', 'This is the local development environment. Happy coding!');
+    wsApp.constant('SENTRY_ENVIRONMENT', null);
 
 })();
