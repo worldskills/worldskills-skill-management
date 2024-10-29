@@ -26,7 +26,7 @@ angular.module('skillMgmtApp').controller('AdminEventProgressItemCreateCtrl', fu
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminEventProgressItemCtrl', function($scope, $state, $stateParams, alert, Event, ProgressItem) {
+angular.module('skillMgmtApp').controller('AdminEventProgressItemCtrl', function($scope, $state, $stateParams, $translate, alert, Event, ProgressItem) {
 
     $scope.id = $stateParams.itemId;
 
@@ -37,19 +37,23 @@ angular.module('skillMgmtApp').controller('AdminEventProgressItemCtrl', function
     });
 
     $scope.deleteItem = function() {
-       if (confirm('Are you sure you want to delete this progress item for all skills? Click OK to proceed.')) {
-           $scope.deleteLoading = true;
-           $scope.item.$delete({eventId: $scope.event.id}, function () {
-               alert.success('The progress item has been deleted successfully.');
-               $state.go('admin_event.progress_items', {eventId: $scope.event.id});
-           }, function (httpResponse) {
-               window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
-           });
-       }
+        $translate('message_confirm_delete_progress_item').then(function (message) {
+            if (confirm(message)) {
+                $scope.deleteLoading = true;
+                $scope.item.$delete({eventId: $scope.event.id}, function () {
+                        $translate('message_progress_item_deleted').then(function (message) {
+                            alert.success(message);
+                            $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+                        });
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            }
+        });
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventProgressItemFormCtrl', function($scope, $state, $q, alert) {
+angular.module('skillMgmtApp').controller('AdminEventProgressItemFormCtrl', function($scope, $state, $q, $translate, alert) {
 
     $scope.save = function() {
         $scope.submitted = true;
@@ -57,15 +61,19 @@ angular.module('skillMgmtApp').controller('AdminEventProgressItemFormCtrl', func
             $scope.loading = true;
             if ($scope.item.id) {
                 $scope.item.$update({eventId: $scope.event.id}, function () {
-                    alert.success('The progress item has been updated successfully.');
-                    $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+                    $translate('message_progress_item_updated').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
             } else {
                 $scope.item.$save({eventId: $scope.event.id}, function () {
-                    alert.success('The progress item has been added successfully.');
-                    $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+                    $translate('message_progress_item_created').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_event.progress_items', {eventId: $scope.event.id});
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });

@@ -33,7 +33,7 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertsCtrl', function($sco
 
 });
 
-angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, alert, SkillExpert, PeoplePerson, Poll) {
+angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', function($scope, $stateParams, $state, $translate, alert, SkillExpert, PeoplePerson, Poll) {
 
     $scope.loading = true;
     $scope.createPollLoading = false;
@@ -95,41 +95,45 @@ angular.module('skillMgmtApp').controller('AdminSkillExpertNominationsCtrl', fun
             }
         });
 
-        if (confirm('Are you sure you want to create the poll for the Chief Expert election with these Experts?\n\n' + ces.join('\n') + '\n\n Click OK to proceed.')) {
-    
-            var poll = {
-                start: new Date(),
-                expiry: new Date(),
-                entity: {
-                    id: $scope.skill.entity_id
-                },
-                title: { lang_code: 'en', text: 'Chief Expert election - ' + $scope.skill.name.text },
-                question: { lang_code: 'en', text: 'Please select your choices for the Chief Expert position in order of preference:' },
-                type: 'weighted',
-                numberOfSelections: numberOfSelections,
-                anonymousResults: true,
-                anonymousVoting: false,
-                showingResults: false,
-                allowingReVote: true,
-                allowingAbstain: false,
-                whitelist: true,
-                options: options,
-                allowedVoters: experts
-            };
+        $translate('message_confirm_create_poll', {experts: ces.join(', ')}).then(function (message) {
+            if (confirm(message)) {
+        
+                var poll = {
+                    start: new Date(),
+                    expiry: new Date(),
+                    entity: {
+                        id: $scope.skill.entity_id
+                    },
+                    title: { lang_code: 'en', text: 'Chief Expert election - ' + $scope.skill.name.text },
+                    question: { lang_code: 'en', text: 'Please select your choices for the Chief Expert position in order of preference:' },
+                    type: 'weighted',
+                    numberOfSelections: numberOfSelections,
+                    anonymousResults: true,
+                    anonymousVoting: false,
+                    showingResults: false,
+                    allowingReVote: true,
+                    allowingAbstain: false,
+                    whitelist: true,
+                    options: options,
+                    allowedVoters: experts
+                };
 
-            // C+1 14:00, see Competitions Rules 6.5.5 Nomination, election, and approval
-            poll.expiry.setDate(poll.expiry.getDate() + 1);
-            poll.expiry.setHours(14);
-            poll.expiry.setMinutes(0);
-            poll.expiry.setSeconds(0);
+                // C+1 14:00, see Competitions Rules 6.5.5 Nomination, election, and approval
+                poll.expiry.setDate(poll.expiry.getDate() + 1);
+                poll.expiry.setHours(14);
+                poll.expiry.setMinutes(0);
+                poll.expiry.setSeconds(0);
 
-            var p = Poll.save(poll, function (response) {
-                alert.success('The poll has been created. Please ask all Experts to login to the Skill Management app and vote.');
-                $state.go('skill', {eventId: $scope.skill.event.id, skillId: $scope.skill.id});
-            }, function (response) {
-                window.alert('An error has occured: ' + JSON.stringify(response.data));
-            });
-        }
+                var p = Poll.save(poll, function (response) {
+                    $translate('message_poll_created').then(function (message) {
+                        alert.success(message);
+                        $state.go('skill', {eventId: $scope.skill.event.id, skillId: $scope.skill.id});
+                    });
+                }, function (response) {
+                    window.alert('An error has occured: ' + JSON.stringify(response.data));
+                });
+            }
+        });
     };
 
 });

@@ -243,7 +243,7 @@ angular.module('skillMgmtApp').controller('DocumentSectionEditFormCtrl', functio
 
 });
 
-angular.module('skillMgmtApp').controller('DocumentWSOSSectionEditFormCtrl', function ($scope, $state, $stateParams, $uibModalInstance, alert, DocumentWSOSSection) {
+angular.module('skillMgmtApp').controller('DocumentWSOSSectionEditFormCtrl', function ($scope, $state, $stateParams, $uibModalInstance, $translate, alert, DocumentWSOSSection) {
 
     $scope.save = function () {
         $scope.wsosSection.title = $scope.wsosSection.latest_revision.title;
@@ -271,15 +271,19 @@ angular.module('skillMgmtApp').controller('DocumentWSOSSectionEditFormCtrl', fun
     };
 
     $scope.delete = function () {
-        if (window.confirm('A deleted WSOS section cannot be recovered. Click OK to delete this WSOS section.')) {
+        $translate('message_confirm_delete_wsos_section').then(function (message) {
+            if (window.confirm(message)) {
 
-            DocumentWSOSSection.delete({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, function () {
-                alert.success('The WSOS section has been deleted.');
-                $state.reload();
-            }, function (httpResponse) {
-                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
-            });
-        }
+                DocumentWSOSSection.delete({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, function () {
+                    $translate('message_wsos_section_deleted').then(function (message) {
+                        alert.success(message);
+                        $state.reload();
+                    });
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                });
+            }
+        });
     };
 
     $scope.cancel = function () {

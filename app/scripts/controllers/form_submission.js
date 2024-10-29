@@ -4,8 +4,10 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
-            alert.error('The form has been already been submitted and can\'t be edited anymore.');
-            $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
+            $translate('message_form_already_submitted').then(function (message) {
+                alert.error(message);
+                $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
+            });
         }
         $scope.loading = false;
     });
@@ -178,20 +180,26 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
     $scope.submit = function () {
         $scope.submitted = true;
         if ($scope.form.$valid) {
-            if (confirm('Experts must not submit the form! Only submit the form if all fields have been filled out. Click OK to submit the form or Cancel to keep editing.')) {
-                $q.all(angular.extend(promises, timeoutsFields)).then(function() {
-                    $scope.submitting = true;
-                    $scope.submission.state = 'submitted';
-                    $scope.submission.$update(function () {
-                        alert.success('The form has been submitted successfully.');
-                        $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
-                    }, function (response) {
-                        $scope.submitting = false;
-                        alert.error('There was an error submitting the form.');
-                        $('body,html').animate({scrollTop: 0});
+            $translate('message_confirm_submit_form_experts').then(function (message) {
+                if (confirm(message)) {
+                    $q.all(angular.extend(promises, timeoutsFields)).then(function() {
+                        $scope.submitting = true;
+                        $scope.submission.state = 'submitted';
+                        $scope.submission.$update(function () {
+                            $translate('message_form_submitted').then(function (message) {
+                                alert.success(message);
+                                $state.go('form_submission_list', {eventId: $scope.submission.skill.event.id, skillId: $scope.submission.skill.id});
+                            });
+                        }, function (response) {
+                            $scope.submitting = false;
+                            $translate('message_error_submitting_form').then(function (message) {
+                                alert.error(message);
+                                $('body,html').animate({scrollTop: 0});
+                            });
+                        });
                     });
-                });
-            }
+                }
+            });
         } else {
             $('body,html').animate({scrollTop: 0});
         }

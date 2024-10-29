@@ -128,28 +128,30 @@ angular.module('skillMgmtApp').controller('AdminDocumentSearchCtrl', function($s
     };
 
     $scope.replace = function () {
-        if (window.confirm('Replace all occurences of "' + $scope.query + '" with "' + $scope.replacement + '"? ' + $scope.sections.sections.length + ' section(s) will be updated. Click OK to proceed.')) {
-            $scope.loading = true;
-            $scope.sections = DocumentSection.replace({documentId: $stateParams.documentId, query: $scope.query, l: 'en'}, {text: $scope.replacement, lang_code: 'en'}, function (response) {
+        $translate('message_confirm_search_replace', {query: $scope.query, replacement: $scope.replacement, count: $scope.sections.sections.length}).then(function (message) {
+            if (window.confirm(message)) {
+                $scope.loading = true;
+                $scope.sections = DocumentSection.replace({documentId: $stateParams.documentId, query: $scope.query, l: 'en'}, {text: $scope.replacement, lang_code: 'en'}, function (response) {
 
-                // highlight query in results
-                angular.forEach($scope.sections.sections, function (section) {
-                    var text = section.introduction.text;
-                    if (section.skill) {
-                        text = section.latest_revision.text;
-                    }
-                    // escape HTML
-                    text = $scope.htmlEntities(text);
-                    section.highlighted = text.replace(new RegExp($scope.htmlEntities($scope.replacement), 'g'), '<span class="worldskills-replaced">$&</span>');
+                    // highlight query in results
+                    angular.forEach($scope.sections.sections, function (section) {
+                        var text = section.introduction.text;
+                        if (section.skill) {
+                            text = section.latest_revision.text;
+                        }
+                        // escape HTML
+                        text = $scope.htmlEntities(text);
+                        section.highlighted = text.replace(new RegExp($scope.htmlEntities($scope.replacement), 'g'), '<span class="worldskills-replaced">$&</span>');
+                    });
+
+                    $scope.loading = false;
+
+                    $translate('message_document_search_replace_completed', {count: $scope.sections.sections.length}).then(function (message) {
+                        alert.success(message);
+                    });
                 });
-
-                $scope.loading = false;
-
-                $translate('message_document_search_replace_completed', {count: $scope.sections.sections.length}).then(function (message) {
-                    alert.success(message);
-                });
-            });
-        }
+            }
+        });
     };
 
 });
@@ -319,17 +321,19 @@ angular.module('skillMgmtApp').controller('AdminDocumentSectionCtrl', function (
     };
 
     $scope.delete = function () {
-        if (confirm('Really delete the subsection and all edits from all Skills? Click OK to proceed.')) {
-            DocumentSection.delete({documentId: $scope.document.id, id: $scope.section.id}, function () {
-                $translate('message_subsection_deleted').then(function (message) { 
-                    alert.success(message);
+        $translate('message_confirm_delete_subsection').then(function (message) {
+            if (confirm(message)) {
+                DocumentSection.delete({documentId: $scope.document.id, id: $scope.section.id}, function () {
+                    $translate('message_subsection_deleted').then(function (message) { 
+                        alert.success(message);
+                    });
+                    $uibModalInstance.close();
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+                    $scope.loading = false;
                 });
-                $uibModalInstance.close();
-            }, function (httpResponse) {
-                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
-                $scope.loading = false;
-            });
-        }
+            }
+        });
     };
 });
 
@@ -366,16 +370,18 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
     };
 
     $scope.delete = function () {
-        if (confirm('Deleting the section will also delete all of its subsections! Click OK to proceed.')) {
-            DocumentChapter.delete({documentId: $scope.document.id, id: $scope.chapter.id}, $scope.chapter, function () {
-                $translate('message_section_deleted').then(function (message) {
-                    alert.success(message);
+        $translate('message_confirm_delete_section').then(function (message) {
+            if (confirm(message)) {
+                DocumentChapter.delete({documentId: $scope.document.id, id: $scope.chapter.id}, $scope.chapter, function () {
+                    $translate('message_section_deleted').then(function (message) {
+                        alert.success(message);
+                    });
+                    $uibModalInstance.close();
+                }, function (httpResponse) {
+                    window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
-                $uibModalInstance.close();
-            }, function (httpResponse) {
-                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
-            });
-        }
+            }
+        });
     };
 
     $scope.cancel = function () {

@@ -131,7 +131,7 @@ angular.module('skillMgmtApp').controller('AdminEventLunchPeriodsCtrl', function
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', function($scope, $stateParams, $timeout, CompetitionDay) {
+angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', function($scope, $stateParams, $timeout, $translate, CompetitionDay) {
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
@@ -160,11 +160,13 @@ angular.module('skillMgmtApp').controller('AdminEventCompetitionDaysCtrl', funct
     };
 
     $scope.removeCompetitionDay = function (competitionDay) {
-        if (confirm('Deleting the Competition Day will also delete all Competition and Skill Items as well as all Lunch Allocations for this day. Click OK to proceed.')) {
-            var index = $scope.competitionDays.days.indexOf(competitionDay);
-            $scope.competitionDays.days.splice(index, 1);
-            CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
-        }
+        $translate('message_confirm_delete_competition_day').then(function (message) {
+            if (confirm(message)) {
+                var index = $scope.competitionDays.days.indexOf(competitionDay);
+                $scope.competitionDays.days.splice(index, 1);
+                CompetitionDay.delete({eventId: $stateParams.eventId}, competitionDay);
+            }
+        });
     };
 
     $scope.swapDay = function (oldIndex, newIndex) {

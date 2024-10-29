@@ -14,7 +14,7 @@ angular.module('skillMgmtApp').controller('AdminFormListCtrl', function ($scope,
     });
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, alert, auth, WORLDSKILLS_API_SKILLMAN_CODE, Form, Event) {
+angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scope, $rootScope, $state, $stateParams, $location, $translate, alert, auth, WORLDSKILLS_API_SKILLMAN_CODE, Form, Event) {
 
     $scope.id = $stateParams.id;
 
@@ -38,13 +38,17 @@ angular.module('skillMgmtApp').controller('AdminFormDetailCtrl', function ($scop
     });
 
     $scope.deleteForm = function() {
-       if (window.confirm('Deleting the Form will also delete all data associated with this Form. Click OK to proceed.')) {
-           $scope.deleteLoading = true;
-           $scope.model.$delete(function () {
-               alert.success('The Form has been deleted successfully.');
-               $state.go('admin_event.form_list', {eventId: $scope.event.id});
-           });
-       }
+        $translate('message_confirm_delete_form').then(function (message) {
+            if (window.confirm(message)) {
+                $scope.deleteLoading = true;
+                $scope.model.$delete(function () {
+                    $translate('message_form_deleted').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_event.form_list', {eventId: $scope.event.id});
+                    });
+                });
+            }
+        });
     };
 });
 
@@ -178,7 +182,7 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldsCtrl', function 
 
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function ($scope, $uibModalInstance, alert, FormField) {
+angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function ($scope, $uibModalInstance, $translate, alert, FormField) {
 
     $scope.submitted = false;
 
@@ -189,16 +193,20 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function (
             if ($scope.field.id) {
                 FormField.update({formId: $scope.id}, $scope.field, function (response) {
                     $scope.loadFields();
-                    alert.success('The field has been updated.');
-                    $uibModalInstance.close();
+                    $translate('message_field_updated').then(function (message) {
+                        alert.success(message);
+                        $uibModalInstance.close();
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
             } else {
                 FormField.save({formId: $scope.id}, $scope.field, function (response) {
                     $scope.loadFields();
-                    alert.success('The field has been added.');
-                    $uibModalInstance.close();
+                    $translate('message_field_created').then(function (message) {
+                        alert.success(message);
+                        $uibModalInstance.close();
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
@@ -213,15 +221,17 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFieldCtrl', function (
     $scope.delete = function () {
         FormField.delete({formId: $scope.id}, $scope.field, function () {
             $scope.loadFields();
-            alert.success('The field has been deleted.');
-            $uibModalInstance.close();
+            $translate('message_field_deleted').then(function (message) {
+                alert.success(message);
+                $uibModalInstance.close();
+            });
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
         });
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($scope, $state, $stateParams, alert, Form, CompetitionDay) {
+angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($scope, $state, $stateParams, $translate, alert, Form, CompetitionDay) {
 
     $scope.competitionDays = CompetitionDay.query({eventId: $stateParams.eventId});
 
@@ -234,15 +244,19 @@ angular.module('skillMgmtApp').controller('AdminFormDetailFormCtrl', function ($
             }
             if ($scope.model.id) {
                 Form.update($scope.model, function (response) {
-                    alert.success('The Form has been updated.');
-                    $state.go('admin_event.form_list', {eventId: $scope.event.id});
+                    $translate('message_form_updated').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_event.form_list', {eventId: $scope.event.id});
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
             } else {
                 Form.save($scope.model, function (response) {
-                    alert.success('The Form has been added. Please add the fields below.');
-                    $state.go('admin_form_detail.fields', {eventId: $scope.event.id, id: response.id});
+                    $translate('message_form_created').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_form_detail.fields', {eventId: $scope.event.id, id: response.id});
+                    });
                 }, function (httpResponse) {
                     window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
                 });
@@ -261,7 +275,7 @@ angular.module('skillMgmtApp').controller('AdminFormDetailPreviewCtrl', function
 
 });
 
-angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, auth, alert, FormSubmission, WORLDSKILLS_API_SKILLMAN_CODE) {
+angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, auth, alert, FormSubmission, WORLDSKILLS_API_SKILLMAN_CODE) {
 
     $scope.loading = true;
 
@@ -273,17 +287,23 @@ angular.module('skillMgmtApp').controller('AdminSubmissionCtrl', function ($scop
     });
 
     $scope.rejectSubmission = function () {
-        if (confirm('Rejecting a submission will show the form to the Chief Expert for editing again. Click OK to proceed.')) {
-            $scope.rejectLoading = true;
-            $scope.submission.$reject(function () {
-                $scope.rejectLoading = false;
-                alert.success('The submission has been rejected.');
-                $state.go('admin_form_detail.submissions', {eventId: $stateParams.eventId, id: $scope.formId});
-            }, function (response) {
-                $scope.rejectLoading = false;
-                alert.error('There was an error rejecting the form.');
-            });
-        }
+        $translate('message_confirm_reject_submission').then(function (message) {
+            if (window.confirm(message)) {
+                $scope.rejectLoading = true;
+                $scope.submission.$reject(function () {
+                    $scope.rejectLoading = false;
+                    $translate('message_submission_rejected').then(function (message) {
+                        alert.success(message);
+                        $state.go('admin_form_detail.submissions', {eventId: $stateParams.eventId, id: $scope.formId});
+                    });
+                }, function (response) {
+                    $scope.rejectLoading = false;
+                    $translate('message_submission_rejected_error').then(function (message) {
+                        alert.error(message);
+                    });
+                });
+            }
+        });
     };
 
     $scope.downloadFiles = function (files) {
