@@ -54,7 +54,7 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'languages/',
-    suffix: '.json?v=20220331094635'
+    suffix: '.json?v=20241029131549'
   });
 
   $translateProvider.registerAvailableLanguageKeys(['en', 'fr', 'fi'], {
