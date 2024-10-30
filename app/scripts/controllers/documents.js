@@ -292,7 +292,7 @@ angular.module('skillMgmtApp').controller('DocumentWSOSSectionEditFormCtrl', fun
 
 });
 
-angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentSectionSkillRevision, DocumentSectionSkill) {
 
     $scope.diff = $sce.trustAsHtml(htmldiff($scope.section.text.text, $scope.section.latest_revision.text));
 
@@ -300,6 +300,15 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
         DocumentSectionSkillRevision.approve({documentId: $stateParams.documentId, id: $scope.section.latest_revision.id}, {}, function (section) {
             $scope.chapter.sections[$scope.sectionIndex] = section;
             $scope.document.last_updated = $scope.section.latest_revision.created;
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+
+    $scope.reject = function () {
+        DocumentSectionSkill.update({documentId: $stateParams.documentId, id: $scope.section.id, skillId: $stateParams.skillId}, $scope.section.text, function (response) {
+            $scope.chapter.sections[$scope.sectionIndex] = response;
             $uibModalInstance.close();
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
@@ -317,7 +326,7 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
 
 });
 
-angular.module('skillMgmtApp').controller('DocumentWSOSSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentWSOSSectionSkillRevision) {
+angular.module('skillMgmtApp').controller('DocumentWSOSSectionDiffCtrl', function ($scope, $stateParams, $sce, $uibModalInstance, htmldiff, DocumentWSOSSectionSkillRevision, DocumentWSOSSection) {
 
     $scope.diffImportance = $sce.trustAsHtml(htmldiff($scope.wsosSection.importance + '', $scope.wsosSection.latest_revision.importance + ''));
     $scope.diffTitle = $sce.trustAsHtml(htmldiff($scope.wsosSection.title, $scope.wsosSection.latest_revision.title));
@@ -328,6 +337,17 @@ angular.module('skillMgmtApp').controller('DocumentWSOSSectionDiffCtrl', functio
         DocumentWSOSSectionSkillRevision.approve({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.latest_revision.id}, {}, function (section) {
             $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections[$scope.wsosSectionWsosIndex] = section;
             $scope.document.last_updated = $scope.wsosSection.latest_revision.created;
+            $uibModalInstance.close();
+        }, function (httpResponse) {
+            window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+        });
+    };
+
+    $scope.reject = function () {
+        DocumentWSOSSection.update({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, $scope.wsosSection, function (response) {
+            $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections[$scope.wsosSectionWsosIndex] = response;
+            $scope.document.last_updated = $scope.wsosSection.latest_revision.created;
+            $scope.calculateTotalImportance($scope.chapter.sections[$scope.wsosSectionIndex]);
             $uibModalInstance.close();
         }, function (httpResponse) {
             window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));

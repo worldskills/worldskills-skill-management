@@ -8,6 +8,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="cancel()">{{ 'cancel' | translate }}</button>
+        <button type="button" class="btn btn-danger" ng-show="userCanApproveDocument" ng-click="reject()">{{ 'reject' | translate }}</button>
         <button type="submit" class="btn btn-success" ng-show="userCanApproveDocument">{{ 'approve' | translate }}<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
         <div class="pull-left">
           <button type="button" class="btn btn-primary" ng-click="edit()">{{ 'edit' | translate }}</button>
