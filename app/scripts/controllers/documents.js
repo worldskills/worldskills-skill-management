@@ -306,7 +306,7 @@ angular.module('skillMgmtApp').controller('DocumentSectionDiffCtrl', function ($
         });
     };
 
-    $scope.reject = function () {
+    $scope.revert = function () {
         DocumentSectionSkill.update({documentId: $stateParams.documentId, id: $scope.section.id, skillId: $stateParams.skillId}, $scope.section.text, function (response) {
             $scope.chapter.sections[$scope.sectionIndex] = response;
             $uibModalInstance.close();
@@ -343,7 +343,7 @@ angular.module('skillMgmtApp').controller('DocumentWSOSSectionDiffCtrl', functio
         });
     };
 
-    $scope.reject = function () {
+    $scope.revert = function () {
         DocumentWSOSSection.update({documentId: $stateParams.documentId, skillId: $stateParams.skillId, id: $scope.wsosSection.id}, $scope.wsosSection, function (response) {
             $scope.chapter.sections[$scope.wsosSectionIndex].wsosSections[$scope.wsosSectionWsosIndex] = response;
             $scope.document.last_updated = $scope.wsosSection.latest_revision.created;
