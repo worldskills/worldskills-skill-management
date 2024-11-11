@@ -111,7 +111,7 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             }
         });
 
-        auth.hasUserRole(WORLDSKILLS_API_REGO_CODE, ['Admin', 'ViewRegistrations'], $scope.skill.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(WORLDSKILLS_API_REGO_CODE, ['Admin', 'ViewRegistrations', 'ManageEvent'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewRegoRegistrations = true;
             }
