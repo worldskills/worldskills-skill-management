@@ -108,7 +108,7 @@
       <div class="panel-heading">{{ 'related_apps' | translate }}</div>
       <div class="panel-body">
         <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> {{ 'infrastructure_lists' | translate }}</a></p>
-        <p ng-show="userCanViewRegoRegistrations"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}api.{{WORLDSKILLS_WEB_DOMAIN}}/registrations/manage/events/{{skill.event.id}}/reports/skill_personnel/{{skill.id}}" target="_blank"><span class="glyphicon glyphicon-link"></span> {{ 'skill_registrations_xlsx' | translate }}</a></p>
+        <p ng-show="userCanViewRegoRegistrations"><a href ng-click="downloadSkillPersonnelReport()" ng-disabled="loadingSkillPersonnelReport"><span class="glyphicon glyphicon-download-alt"></span> {{ 'download_skill_personnel_report_xlsx' | translate }}</a></p>
       </div>
     </div>
   </div>

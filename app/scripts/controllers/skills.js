@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, $http, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
@@ -167,6 +167,21 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
 
         $scope.experts = Registration.experts({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
+
+        $scope.downloadSkillPersonnelReport = function () {
+
+            $scope.loadingSkillPersonnelReport = true;
+
+            $http({url: WORLDSKILLS_WEB_PROTOCOL + 'api.' + WORLDSKILLS_WEB_DOMAIN + '/registrations/manage/events/' + $stateParams.eventId + '/reports/skill_personnel/' + $stateParams.skillId, params: {l: 'en'}, method: 'GET', responseType : 'blob'})
+                .success( function(data, status, headers) {
+                    Downloader.handleDownload(data, status, headers);
+                    $scope.loadingSkillPersonnelReport = false;
+                })
+                .error(function(data, status) {
+                    alert("Error downloading report");
+                    $scope.loadingSkillPersonnelReport = false;
+                });
+        };
 
     });
 
