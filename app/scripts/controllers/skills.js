@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, $http, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, $http, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, Downloader, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
