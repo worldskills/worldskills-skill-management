@@ -157,11 +157,11 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             sortByMemberCode($scope.interpreters.people);
         });
 
-        $scope.peopleExperts = PeoplePerson.query({base_position: 1, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
+        $scope.peopleExperts = PeoplePerson.public({base_position: 1, skill: $stateParams.skillId, show_inactive: 1, include_history: 1, limit: 999}, function () {
             sortByMemberCode($scope.peopleExperts.people);
         });
 
-        $scope.peopleCompetitors = PeoplePerson.query({base_position: 4, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
+        $scope.peopleCompetitors = PeoplePerson.public({base_position: 4, skill: $stateParams.skillId, show_inactive: 1, include_history: 1, limit: 999}, function () {
             sortByMemberCode($scope.peopleCompetitors.people);
         });
 

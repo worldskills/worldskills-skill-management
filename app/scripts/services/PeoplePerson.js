@@ -11,7 +11,11 @@
             },
             update: {
                 method: 'PUT'
-            }
+            },
+            public: {
+                method: 'GET',
+                url: WORLDSKILLS_API_PEOPLE + '/public/:id'
+            } 
         });
 
     });
