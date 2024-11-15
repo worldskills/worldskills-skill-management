@@ -12,6 +12,18 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
     var DOCUMENT_TYPE_HEALTH_SAFETY_ENVIRONMENT = 20;
     var DOCUMENT_TYPE_STANDARD_SPECIFICATION = 19;
 
+    function sortByMemberCode(people) {
+        people.sort(function (a, b) {
+            var positionA = a.positions.find(function (position) {
+                return position.skill && position.skill.id == $stateParams.skillId;
+            });
+            var positionB = b.positions.find(function (position) {
+                return position.skill && position.skill.id == $stateParams.skillId;
+            });
+            return positionA.member.code.localeCompare(positionB.member.code);
+        });
+    }
+
     $scope.event = Event.get({id: $stateParams.eventId});
 
     $scope.skill = Skill.get({id: $stateParams.skillId}, {});
@@ -138,59 +150,19 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             28 // Competitions Committee Delegate
         ];
         $scope.people = PeoplePerson.query({base_position: basePositionIds, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
-
-            // sort by base position ID
-            $scope.people.people.sort(function (a, b) {
-                var positionA = a.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                var positionB = b.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                return basePositionIds.indexOf(positionA.position.base_position.id) - basePositionIds.indexOf(positionB.position.base_position.id);
-            });
+            sortByMemberCode($scope.people.people);
         });
 
         $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
-
-            // sort by Member code
-            $scope.interpreters.people.sort(function (a, b) {
-                var positionA = a.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                var positionB = b.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                return positionA.member.code.localeCompare(positionB.member.code);
-            });
+            sortByMemberCode($scope.interpreters.people);
         });
 
         $scope.peopleExperts = PeoplePerson.query({base_position: 1, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
-            
-            // sort by Member code
-            $scope.peopleExperts.people.sort(function (a, b) {
-                var positionA = a.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                var positionB = b.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                return positionA.member.code.localeCompare(positionB.member.code);
-            });
+            sortByMemberCode($scope.peopleExperts.people);
         });
 
         $scope.peopleCompetitors = PeoplePerson.query({base_position: 4, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
-
-            // sort by Member code
-            $scope.peopleCompetitors.people.sort(function (a, b) {
-                var positionA = a.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                var positionB = b.positions.find(function (position) {
-                    return position.skill && position.skill.id == $stateParams.skillId;
-                });
-                return positionA.member.code.localeCompare(positionB.member.code);
-            });
+            sortByMemberCode($scope.peopleCompetitors.people);
         });
 
         $scope.experts = Registration.experts({skillId: $stateParams.skillId});
