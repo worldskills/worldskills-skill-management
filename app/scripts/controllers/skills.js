@@ -150,7 +150,17 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             28 // Competitions Committee Delegate
         ];
         $scope.people = PeoplePerson.query({base_position: basePositionIds, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
-            sortByMemberCode($scope.people.people);
+
+            // sort by base position ID
+            $scope.people.people.sort(function (a, b) {
+                var positionA = a.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                var positionB = b.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                return basePositionIds.indexOf(positionA.position.base_position.id) - basePositionIds.indexOf(positionB.position.base_position.id);
+            });
         });
 
         $scope.interpreters = PeoplePerson.query({base_position: 9, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
