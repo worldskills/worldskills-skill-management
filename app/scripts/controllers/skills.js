@@ -165,6 +165,34 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
             });
         });
 
+        $scope.peopleExperts = PeoplePerson.query({base_position: 1, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
+            
+            // sort by Member code
+            $scope.peopleExperts.people.sort(function (a, b) {
+                var positionA = a.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                var positionB = b.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                return positionA.member.code.localeCompare(positionB.member.code);
+            });
+        });
+
+        $scope.peopleCompetitors = PeoplePerson.query({base_position: 4, skill: $stateParams.skillId, show_inactive: 1, include_history: 1}, function () {
+
+            // sort by Member code
+            $scope.peopleCompetitors.people.sort(function (a, b) {
+                var positionA = a.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                var positionB = b.positions.find(function (position) {
+                    return position.skill && position.skill.id == $stateParams.skillId;
+                });
+                return positionA.member.code.localeCompare(positionB.member.code);
+            });
+        });
+
         $scope.experts = Registration.experts({skillId: $stateParams.skillId});
         $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
 

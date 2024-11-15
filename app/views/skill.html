@@ -167,6 +167,21 @@
         </div>
       </div>
     </div>
+    <div class="panel panel-default" ng-show="peopleExperts.people.length && !userCanViewRegistrations">
+      <div class="panel-heading">{{ 'experts' | translate }}</div>
+      <div class="panel-body">
+        <div class="media" ng-repeat="person in peopleExperts.people">
+          <div class="media-left media-middle">
+            <img class="img-circle media-object" ng-show="person.images[0]" ng-src="{{person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+          </div>
+          <div class="media-body">
+            {{ person.first_name }} {{ person.last_name }}
+            <span class="text-muted" ng-repeat="position in person.positions" ng-if="position.skill.id == skill.id"><br/>{{ position.member.code }} - {{ position.member.name.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default" ng-show="competitors.registrations.length && userCanViewRegistrations">
@@ -180,6 +195,21 @@
           <div class="media-body">
             {{ competitor.person.person.first_name }} {{ competitor.person.person.last_name }}
             <span class="text-muted"><br/>{{ competitor.member.code }} - {{ competitor.member.name.text }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-show="peopleCompetitors.people.length && !userCanViewRegistrations">
+      <div class="panel-heading">{{ 'competitors' | translate }}</div>
+      <div class="panel-body">
+        <div class="media" ng-repeat="person in peopleCompetitors.people">
+          <div class="media-left media-middle">
+            <img class="img-circle media-object" ng-show="person.images[0]" ng-src="{{person.images[0].thumbnail}}_square" width="30" height="30">
+            <img class="img-circle media-object" ng-show="!person.images[0]" src="https://people.worldskills.org/images/user.png" width="30" height="30">
+          </div>
+          <div class="media-body">
+            {{ person.first_name }} {{ person.last_name }}
+            <span class="text-muted" ng-repeat="position in person.positions" ng-if="position.skill.id == skill.id"><br/>{{ position.member.code }} - {{ position.member.name.text }}</span>
           </div>
         </div>
       </div>
