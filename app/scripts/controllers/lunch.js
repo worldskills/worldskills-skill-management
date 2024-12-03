@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $uibModal, auth, alert, Skill, LunchPeriod, LunchAllocation, LunchGroup, CompetitionDay, Registration) {
+angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $q, $uibModal, auth, alert, Skill, LunchPeriod, LunchAllocation, LunchGroup, CompetitionDay, Registration) {
 
     $scope.loading = true;
 
@@ -25,7 +25,14 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
 
     $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
     $scope.experts = Registration.experts({skillId: $stateParams.skillId});
+    $scope.scms = Registration.scms({skillId: $stateParams.skillId});
     $scope.lunchGroups = LunchGroup.query({skillId: $stateParams.skillId});
+
+    $q.all([$scope.experts.$promise, $scope.scms.$promise]).then(function () {
+        angular.forEach($scope.scms.registrations, function (registration) {
+            $scope.experts.registrations.push(registration);
+        });
+    });
 
     $scope.cancelSkillsModal = function () {
         $scope.skillsModal.dismiss('cancel');

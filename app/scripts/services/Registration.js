@@ -13,6 +13,10 @@
             experts: {
                 method: 'GET',
                 url: WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/registrations/experts',
+            },
+            scms: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/registrations/scms',
             }
         });
 
