@@ -26,6 +26,7 @@ angular.module('skillMgmtApp').controller('LunchCtrl', function ($scope, $rootSc
     $scope.competitors = Registration.competitors({skillId: $stateParams.skillId});
     $scope.experts = Registration.experts({skillId: $stateParams.skillId});
     $scope.scms = Registration.scms({skillId: $stateParams.skillId});
+    $scope.interpreters = Registration.interpreters({skillId: $stateParams.skillId});
     $scope.lunchGroups = LunchGroup.query({skillId: $stateParams.skillId});
 
     $q.all([$scope.experts.$promise, $scope.scms.$promise]).then(function () {
@@ -137,8 +138,8 @@ angular.module('skillMgmtApp').controller('LunchDayCtrl', function ($scope, $roo
         });
     };
 
-    $scope.addAllExperts = function (lunchPeriod) {
-        angular.forEach($scope.experts.registrations, function (registration) {
+    $scope.addAllExperts = function (lunchPeriod, registrations) {
+        angular.forEach(registrations, function (registration) {
             if ($scope.inAssociation(registration)) {
                 $scope.addRegistration(lunchPeriod, registration, 'EXPERT');
             }

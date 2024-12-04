@@ -116,7 +116,7 @@
                                     <div class="btn-group" uib-dropdown>
                                         <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_expert' | translate }} <span class="caret"></span></button>
                                         <ul class="dropdown-menu" uib-dropdown-menu>
-                                            <li ng-show="filteredExperts.length != 0"><a href ng-click="addAllExperts(lunchPeriod)">{{ 'add_all_remaining_experts' | translate }}</a></li>
+                                            <li ng-show="filteredExperts.length != 0"><a href ng-click="addAllExperts(lunchPeriod, experts.registrations)">{{ 'add_all_remaining_experts' | translate }}</a></li>
                                             <li ng-repeat="registration in experts.registrations | filter:inAssociation as filteredExperts">
                                                 <a href ng-click="addRegistration(lunchPeriod, registration, 'EXPERT')">
                                                     {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
@@ -131,6 +131,19 @@
                                         <ul class="dropdown-menu" uib-dropdown-menu>
                                             <li ng-repeat="group in lunchGroups.groups | filter:inAssociationGroupExpert as filteredLunchGroups"><a href ng-click="addGroup(lunchPeriod, group)">{{ group.name }}</a></li>
                                             <li ng-show="filteredLunchGroups.length == 0"><a href>{{ 'message_no_groups' | translate }}</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group" uib-dropdown>
+                                        <button id="single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>{{ 'add_interpreter' | translate }} <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu>
+                                            <li ng-show="filteredInterpreters.length != 0"><a href ng-click="addAllExperts(lunchPeriod, interpreters.registrations)">{{ 'add_all_remaining_interpreters' | translate }}</a></li>
+                                            <li ng-repeat="registration in interpreters.registrations | filter:inAssociation as filteredInterpreters">
+                                                <a href ng-click="addRegistration(lunchPeriod, registration, 'EXPERT')">
+                                                    {{ registration.person.person.first_name }} {{ registration.person.person.last_name }}
+                                                    {{ registration.member.code }}
+                                                </a>
+                                            </li>
+                                            <li ng-show="filteredInterpreters.length == 0"><a href>{{ 'message_all_interpreters_assigned' | translate }}</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -17,7 +17,11 @@
             scms: {
                 method: 'GET',
                 url: WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/registrations/scms',
-            }
+            },
+            interpreters: {
+                method: 'GET',
+                url: WORLDSKILLS_API_SKILLMAN + '/skills/:skillId/registrations/interpreters',
+            },
         });
 
     });

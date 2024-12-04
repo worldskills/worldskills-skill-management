@@ -1,4 +1,7 @@
 {
+  "add_interpreter": "Add Interpreter",
+  "message_all_interpreters_assigned": "No Interpreters unassigned",
+  "add_all_remaining_interpreters": "Add all remaining Interpreters",
   "download_skill_personnel_report_xlsx": "Download Skill Personnel (.xlsx)",
   "message_subsection_updated": "The subsection has been updated.",
   "message_subsection_created": "The subsection has been created.",
