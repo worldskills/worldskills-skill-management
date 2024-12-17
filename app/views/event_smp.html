@@ -1,0 +1,42 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="events">{{ 'events' | translate }}</a></li>
+    <li><a ui-sref="event.skills({eventId: event.id})">{{ event.name }}</a></li>
+    <li class="active">{{ 'skill_management_plan' | translate }}</li>
+</ol>
+
+<div>
+    <span class="text-muted">{{ event.name || "&nbsp;" }}</span>
+</div>
+
+<h1 class="align-top">{{ 'skill_management_plan' | translate }}</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col width="10%" />
+                    <col width="60%" />
+                    <col width="30%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>{{ 'skill_number' | translate }}</th>
+                        <th>{{ 'skill' | translate }}</th>
+                        <th>{{ 'last_updated' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="skill in skills.skills">
+                        <td>{{ skill.number }}</td>
+                        <td><a ui-sref="plan({skillId: skill.id, day: 'C1'})">{{ skill.name.text }}</a></td>
+                        <td>{{ skill.smp_last_updated | date: 'dd.MM.yyyy HH:mm' }} <span class="label label-success" ng-show="isNew(skill.smp_last_updated)">{{ 'new' | translate }}</span></td>
+                    </tr>
+                    <tr ng-show="skills.skills.length == 0">
+                        <td colspan="3">{{ 'message_no_skills_found' | translate }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

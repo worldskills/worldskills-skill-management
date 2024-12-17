@@ -102,6 +102,14 @@ skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider'
             requireLoggedIn: true
         }
     })
+    .state('event_smp', {
+        url: '/events/{eventId}/smp',
+        templateUrl: 'views/event_smp.html',
+        controller: 'EventSMPCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('event_document', {
         url: '/events/{eventId}/documents/{documentId}',
         templateUrl: 'views/event_document.html',

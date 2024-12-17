@@ -29,7 +29,8 @@
       <div class="panel panel-default" ng-show="userCanViewDocument && documents.documents.length">
           <div class="panel-heading">{{ 'documents' | translate }}</div>
           <div class="panel-body">
-          <p ng-repeat="document in documents.documents"><a ui-sref="event_document({eventId: event.id, documentId: document.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
+            <p ng-repeat="document in documents.documents"><a ui-sref="event_document({eventId: event.id, documentId: document.id})"><span class="glyphicon glyphicon-book"></span> {{document.name.text}}</a></p>
+            <p><a ui-sref="event_smp({eventId: event.id})"><span class="glyphicon glyphicon-book"></span> {{ 'skill_management_plan' | translate }}</a></p>
           </div>
       </div>
       <div class="panel panel-default" ng-show="userCanViewManagementPlan">

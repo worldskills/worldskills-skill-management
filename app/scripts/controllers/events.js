@@ -78,7 +78,20 @@ angular.module('skillMgmtApp').controller('EventSkillsCtrl', function($scope, $s
     $scope.skills = Skill.query({event: $stateParams.eventId});
 
     $scope.documents = Document.query({eventId: $stateParams.eventId});
+});
 
+angular.module('skillMgmtApp').controller('EventSMPCtrl', function($scope, $stateParams, Event, Skill) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.skills = Skill.query({event: $stateParams.eventId});
+
+    $scope.isNew = function (lastUpdated) {
+        var now = new Date();
+        var lastUpdatedDate = new Date(lastUpdated);
+        var diff = now.getTime() - lastUpdatedDate.getTime();
+        var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+        return diffDays < 7;
+    };
 });
 
 angular.module('skillMgmtApp').controller('EventDocumentCtrl', function ($scope, $stateParams, Event, DocumentSkill, Document) {
