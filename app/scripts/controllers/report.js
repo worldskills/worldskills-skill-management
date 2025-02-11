@@ -29,7 +29,6 @@ angular.module('skillMgmtApp').controller('ReportLunchCtrl', function ($scope, $
         $scope.loading = false;
 
         angular.forEach($scope.lunchReport.competition_days, function (competitionDay) {
-            console.log(competitionDay.timeline, $stateParams.day, competitionDay.timeline == $stateParams.day);
             if (competitionDay.timeline == $stateParams.day) {
                 $scope.active.day = competitionDay;
             }
