@@ -1,4 +1,7 @@
 {
+  "message_document_updated": "The document has been updated.",
+  "document_cover_image": "Cover Image",
+  "document_logo_image": "Logo Image",
   "add_interpreter": "Add Interpreter",
   "message_all_interpreters_assigned": "No Interpreters unassigned",
   "add_all_remaining_interpreters": "Add all remaining Interpreters",

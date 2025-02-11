@@ -389,12 +389,45 @@ angular.module('skillMgmtApp').controller('AdminDocumentChapterCtrl', function (
     };
 });
 
-angular.module('skillMgmtApp').controller('AdminDocumentNameCtrl', function($scope, $state, $stateParams, alert, Event, Document, DocumentChapter) {
+angular.module('skillMgmtApp').controller('AdminDocumentNameCtrl', function($scope, $state, $stateParams, $q, $translate, Upload, alert, WORLDSKILLS_API_IMAGES, Event, Document, DocumentChapter) {
 
     $scope.event = Event.get({id: $stateParams.eventId});
 
     $scope.document = Document.get({id: $stateParams.documentId}, function () {
         $scope.title = $scope.document.name.text;
     });
+
+    $scope.save = function (coverImage, logoImage) {
+        var coverImageUpload = $q.when();
+        if (coverImage) {
+            coverImageUpload = Upload.upload({
+                url: WORLDSKILLS_API_IMAGES,
+                data: {file: coverImage},
+            });
+        }
+        var logoImageUpload = $q.when();
+        if (logoImage) {
+            logoImageUpload = Upload.upload({
+                url: WORLDSKILLS_API_IMAGES,
+                data: {file: logoImage},
+            });
+        }
+        $q.all([coverImageUpload, logoImageUpload]).then(function (results) {
+            if (results[0]) {
+                $scope.document.cover_image = results[0].data.thumbnail;
+            }
+            if (results[1]) {
+                $scope.document.logo_image = results[1].data.thumbnail;
+            }
+            Document.update({id: $scope.document.id}, $scope.document, function (response) {
+                console.log(response);
+                $translate('message_document_updated').then(function (message) {
+                    alert.success(message);
+                });
+            }, function (httpResponse) {
+                window.alert('An error has occured: ' + JSON.stringify(httpResponse.data));
+            });
+        });
+    }
 
 });
