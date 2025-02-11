@@ -6,7 +6,7 @@
     <li class="active">{{id ? ('progress_item' | translate) : ('add_progress_item' | translate)}}</li>
 </ol>
 
-<ws-alerts></ws-alerts>
+<alerts></alerts>
 
 <p class="pull-right">
     <button ng-show="id" ng-click="deleteItem()" class="btn btn-danger">{{ 'delete_progress_item' | translate }}<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
