@@ -104,9 +104,10 @@
         <p ng-repeat="resource in occupationalStandard.resources"><a href="{{ WorldSkills.getLink(resource.links, 'web_download') }}" target="_blank" rel="noopener"><span class="glyphicon glyphicon-file"></span> {{ 'wsos_pdf' | translate }}</a></p>
       </div>
     </div>
-    <div class="panel panel-default" ng-show="userCanViewInfrastructureList || userCanViewRegoRegistrations">
+    <div class="panel panel-default" ng-show="userCanViewForum || userCanViewInfrastructureList || userCanViewRegoRegistrations">
       <div class="panel-heading">{{ 'related_apps' | translate }}</div>
       <div class="panel-body">
+        <p ng-show="userCanViewForum"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}forums.{{WORLDSKILLS_WEB_DOMAIN}}/feed/entity/{{skill.entity_id}}" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> {{ 'forums' | translate }}</a></p>
         <p ng-show="userCanViewInfrastructureList"><a href="{{WORLDSKILLS_WEB_PROTOCOL}}il.{{WORLDSKILLS_WEB_DOMAIN}}/#/events/{{skill.event.id}}/skills/{{skill.id}}/public" target="_blank" title="Opens in new window"><span class="glyphicon glyphicon-link"></span> {{ 'infrastructure_lists' | translate }}</a></p>
         <p ng-show="userCanViewRegoRegistrations"><a href ng-click="downloadSkillPersonnelReport()" ng-disabled="loadingSkillPersonnelReport"><span class="glyphicon glyphicon-download-alt"></span> {{ 'download_skill_personnel_report_xlsx' | translate }}</a></p>
       </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, $http, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, WORLDSKILLS_API_URL, Downloader, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
+angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $stateParams, $q, $http, WorldSkills, WORLDSKILLS_API_SKILLMAN_CODE, WORLDSKILLS_API_IL_CODE, WORLDSKILLS_API_REGO_CODE, WORLDSKILLS_API_FORUMS_CODE, WORLDSKILLS_WEB_PROTOCOL, WORLDSKILLS_WEB_DOMAIN, WORLDSKILLS_API_URL, Downloader, auth, Event, Skill, SkillExpert, PeoplePerson, Registration, SkillProgressItem, Poll, Resource, Document) {
 
     $scope.WorldSkills = WorldSkills;
     $scope.WORLDSKILLS_WEB_PROTOCOL = WORLDSKILLS_WEB_PROTOCOL;
@@ -126,6 +126,12 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         auth.hasUserRole(WORLDSKILLS_API_REGO_CODE, ['Admin', 'ViewRegistrations', 'ManageEvent'], $scope.skill.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanViewRegoRegistrations = true;
+            }
+        });
+
+        auth.hasUserRole(WORLDSKILLS_API_FORUMS_CODE, ['Admin', 'ViewForum'], $scope.skill.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanViewForum = true;
             }
         });
 

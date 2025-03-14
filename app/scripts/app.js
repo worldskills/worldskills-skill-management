@@ -23,7 +23,8 @@ var skillmanApp = angular
 skillmanApp.constant('WORLDSKILLS_API_SKILLMAN_CODE', 1200);
 skillmanApp.constant('WORLDSKILLS_API_IL_CODE', 2200);
 skillmanApp.constant('WORLDSKILLS_API_REGO_CODE', 2700);
-skillmanApp.constant('FILTER_AUTH_ROLES', [1200, 2700, 2200]); // Skill Management, Rego, IL
+skillmanApp.constant('WORLDSKILLS_API_FORUMS_CODE', 500);
+skillmanApp.constant('FILTER_AUTH_ROLES', [1200, 2700, 2200, 500]); // Skill Management, Rego, IL, Forums
 skillmanApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
 
 skillmanApp.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'SENTRY_ENVIRONMENT', function ($translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, SENTRY_ENVIRONMENT) {
