@@ -1,0 +1,64 @@
+name: Build
+
+on: [ push ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Setup
+        run: |
+          npm install -g bower
+          npm ci
+          bower install
+        env:
+          CI: true
+
+      - name: Build for staging
+        if: github.ref == 'refs/heads/staging'
+        run: grunt build --env=staging
+      - name: Configure AWS credentials for staging
+        if: github.ref == 'refs/heads/staging'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Deploy to staging
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          aws s3 sync dist/ s3://skill-management.worldskills.show --exclude index.html --cache-control max-age=31536000
+          aws s3 cp dist/index.html s3://skill-management.worldskills.show/index.html --metadata-directive REPLACE --cache-control max-age=60
+          aws s3 cp dist/languages/ s3://skill-management.worldskills.show/languages/ --recursive --metadata-directive REPLACE --cache-control max-age=3600
+      - name: Invalidate staging
+        if: github.ref == 'refs/heads/staging'
+        run: aws cloudfront create-invalidation --distribution-id E14YANET3D8LRI --paths /index.html /languages/*
+
+      - name: Build for production
+        if: github.ref == 'refs/heads/prod'
+        run: grunt build --env=prod
+      - name: Configure AWS credentials for production
+        if: github.ref == 'refs/heads/prod'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/prod'
+        run: |
+          aws s3 sync dist/ s3://skill-management.worldskills.org --exclude index.html --cache-control max-age=31536000
+          aws s3 cp dist/index.html s3://skill-management.worldskills.org/index.html --metadata-directive REPLACE --cache-control max-age=60
+          aws s3 cp dist/languages/ s3://skill-management.worldskills.org/languages/ --recursive --metadata-directive REPLACE --cache-control max-age=3600
+      - name: Invalidate production
+        if: github.ref == 'refs/heads/prod'
+        run: aws cloudfront create-invalidation --distribution-id ERC9P7LKAHOK3 --paths /index.html /languages/*
