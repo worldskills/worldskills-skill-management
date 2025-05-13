@@ -1,4 +1,10 @@
 {
+  "scm_election": "Skill Management Team Election",
+  "first_choice_3_points": "First choice (3 points)",
+  "second_choice_2_points": "Second choice (2 points)",
+  "third_choice_1_point": "Third choice (1 point)",
+  "scm_election_vote": "Submit Vote",
+  "scm_election_vote_edit": "Edit Vote",
   "forums": "Forums",
   "message_document_updated": "The document has been updated.",
   "document_cover_image": "Cover Image",

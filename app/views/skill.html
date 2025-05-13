@@ -46,6 +46,53 @@
     </div>
   </div>
   <div class="col-md-4">
+    <div class="panel panel-default" ng-show="skill.smt_election_state == 'IN_PROGRESS' && userCanVote">
+      <div class="panel-heading">{{ 'scm_election' | translate }}</div>
+      <div class="panel-body">
+        <div ng-show="smtElectionVote.id && !smtElectionVoteEdit">
+          <p>
+            <strong>{{ 'first_choice_3_points' | translate }}</strong><br>
+            {{smtElectionVote.first_choice.person.first_name}} {{smtElectionVote.first_choice.person.last_name}} {{smtElectionVote.first_choice.member.code}}
+          </p>
+          <p>
+            <strong>{{ 'second_choice_2_points' | translate }}</strong><br>
+            {{smtElectionVote.second_choice.person.first_name}} {{smtElectionVote.second_choice.person.last_name}} {{smtElectionVote.second_choice.member.code}}
+          </p>
+          <p>
+            <strong>{{ 'third_choice_1_point' | translate }}</strong><br>
+            {{smtElectionVote.third_choice.person.first_name}} {{smtElectionVote.third_choice.person.last_name}} {{smtElectionVote.third_choice.member.code}}
+          </p>
+          <p><a ng-click="smtElectionVoteEdit = true" class="btn btn-default btn-xs">{{ 'scm_election_vote_edit' | translate }}</a></p>
+        </div>
+        <div ng-show="!smtElectionVote.id || smtElectionVoteEdit">
+          <div class="form-group">
+            <label for="smtElectionVoteFirstChoice">{{ 'first_choice_3_points' | translate }}</label>
+            <select class="form-control" id="smtElectionVoteFirstChoice" ng-model="smtElectionVote.first_choice.id" convert-to-number>
+              <option></option>
+              <option ng-repeat="expert in experts.registrations | filter:{person:{nominated_smt:true}}" value="{{expert.person.id}}" ng-disabled="expert.person.id == smtElectionVote.second_choice.id || expert.person.id == smtElectionVote.third_choice.id">{{ expert.person.person.first_name }} {{ expert.person.person.last_name }} {{ expert.member.code }}</option>
+            </select>
+          </div>
+          <div class="form-group" ng-show="filteredExpertsSmtElectionSecondChoice.length > 1">
+            <label for="smtElectionVoteSecondChoice">{{ 'second_choice_2_points' | translate }}</label>
+            <select class="form-control" id="smtElectionVoteSecondChoice" ng-model="smtElectionVote.second_choice.id" convert-to-number>
+              <option></option>
+              <option ng-repeat="expert in experts.registrations | filter:{person:{nominated_smt:true}} as filteredExpertsSmtElectionSecondChoice" value="{{expert.person.id}}" ng-disabled="expert.person.id == smtElectionVote.first_choice.id || expert.person.id == smtElectionVote.third_choice.id">{{ expert.person.person.first_name }} {{ expert.person.person.last_name }} {{ expert.member.code }}</option>
+            </select>
+          </div>
+          <div class="form-group" ng-show="filteredExpertsSmtElectionThirdChoice.length > 2">
+            <label for="smtElectionVoteThirdChoice">{{ 'third_choice_1_point' | translate }}</label>
+            <select class="form-control" id="smtElectionVoteThirdChoice" ng-model="smtElectionVote.third_choice.id" convert-to-number>
+              <option></option>
+              <option ng-repeat="expert in experts.registrations | filter:{person:{nominated_smt:true}} as filteredExpertsSmtElectionThirdChoice" value="{{expert.person.id}}" ng-disabled="expert.person.id == smtElectionVote.first_choice.id || expert.person.id == smtElectionVote.second_choice.id">{{ expert.person.person.first_name }} {{ expert.person.person.last_name }} {{ expert.member.code }}</option>
+            </select>
+          </div>
+          <div class="text-right">
+            <button type="button" class="btn btn-link" ng-click="smtElectionVoteEdit = false" ng-show="smtElectionVote.id">{{ 'cancel' | translate }}</button>
+            <button type="submit" class="btn btn-success" ng-click="smtElectionVoteSave()">{{ 'scm_election_vote' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="panel panel-default" ng-show="userCanViewProgressItemsReport || userCanViewProgressItems">
       <div class="panel-heading">{{ 'preparation_progress' | translate }}</div>
       <div class="panel-body">
