@@ -210,7 +210,7 @@
           <div class="media-body">
             {{ expert.person.person.first_name }} {{ expert.person.person.last_name }}
             <span class="text-muted"><br/>{{ expert.member.code }} - {{ expert.member.name.text }}</span>
-            <span class="text-info" ng-if="expert.person.nominated_smt"><br/>{{ 'nominated_for_chief_expert' | translate }}</span>
+            <span class="text-info" ng-if="skill.smt_election_state != 'COMPLETED' && expert.person.nominated_smt"><br/>{{ 'nominated_for_chief_expert' | translate }}</span>
           </div>
         </div>
       </div>
