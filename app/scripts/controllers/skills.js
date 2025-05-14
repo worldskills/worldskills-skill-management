@@ -222,12 +222,23 @@ angular.module('skillMgmtApp').controller('SkillCtrl', function($scope, $statePa
         $scope.smtElectionVoteEdit = false;
         $scope.smtElectionVoteSave = function () {
 
+            if ($scope.filteredExpertsSmtElectionSecondChoice.length < 2) {
+                $scope.smtElectionVote.second_choice = null;
+            }
+            if ($scope.filteredExpertsSmtElectionThirdChoice.length < 3) {
+                $scope.smtElectionVote.third_choice = null;
+            }
+
             SMTElectionVote.update({skillId: $stateParams.skillId, voterId: auth.user.person_id}, $scope.smtElectionVote, function (response) {
                 $scope.smtElectionVote = response;
                 $scope.smtElectionVoteEdit = false;
                 alert.success("Vote submitted successfully");
             }, function (error) {
-                alert.error("Error saving vote: " + error.data.message);
+                 if (error.data.user_msg) {
+                    window.alert('Error saving vote: ' + error.data.user_msg + ' (' + error.data.dev_msg + ')');
+                } else {
+                    window.alert('An error has occured: ' + JSON.stringify(error.data));
+                }
             });
         }
     });

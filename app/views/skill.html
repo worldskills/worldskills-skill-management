@@ -54,11 +54,11 @@
             <strong>{{ 'first_choice_3_points' | translate }}</strong><br>
             {{smtElectionVote.first_choice.person.first_name}} {{smtElectionVote.first_choice.person.last_name}} {{smtElectionVote.first_choice.member.code}}
           </p>
-          <p>
+          <p ng-show="smtElectionVote.second_choice.id">
             <strong>{{ 'second_choice_2_points' | translate }}</strong><br>
             {{smtElectionVote.second_choice.person.first_name}} {{smtElectionVote.second_choice.person.last_name}} {{smtElectionVote.second_choice.member.code}}
           </p>
-          <p>
+          <p ng-show="smtElectionVote.third_choice.id">
             <strong>{{ 'third_choice_1_point' | translate }}</strong><br>
             {{smtElectionVote.third_choice.person.first_name}} {{smtElectionVote.third_choice.person.last_name}} {{smtElectionVote.third_choice.member.code}}
           </p>
@@ -88,7 +88,7 @@
           </div>
           <div class="text-right">
             <button type="button" class="btn btn-link" ng-click="smtElectionVoteEdit = false" ng-show="smtElectionVote.id">{{ 'cancel' | translate }}</button>
-            <button type="submit" class="btn btn-success" ng-click="smtElectionVoteSave()">{{ 'scm_election_vote' | translate }}</button>
+            <button type="submit" class="btn btn-success" ng-click="smtElectionVoteSave()" ng-disabled="!smtElectionVote.first_choice.id || (filteredExpertsSmtElectionSecondChoice.length > 1 && !smtElectionVote.second_choice.id) || (filteredExpertsSmtElectionThirdChoice.length > 2 && !smtElectionVote.third_choice.id)">{{ 'scm_election_vote' | translate }}</button>
           </div>
         </div>
       </div>
