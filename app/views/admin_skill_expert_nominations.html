@@ -1,6 +1,24 @@
 
 <alerts></alerts>
 
+<div class="form-group form-group-sm" ng-show="skill.smt_election_state == 'IN_PROGRESS'">
+    <div class="col-sm-offset-6 col-sm-6">
+        <button ng-click="closePoll()" class="btn btn-sm btn-warning">{{ 'smt_election_close_poll' | translate }}</button>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+</div>
+
+<div ng-if="skill.smt_election_state == 'COMPLETED'">
+    <div class="alert alert-info">
+        <strong>{{ 'smt_election_results' | translate }}</strong>
+        <br><br>
+        <div ng-repeat="result in votes.results">
+            {{ result.person.person.first_name }} {{ result.person.person.last_name }} {{ result.person.member.code }} ({{ result.points }} points)
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table table-striped">
         <colgroup>
@@ -14,7 +32,7 @@
                 <th>&nbsp;</th>
                 <th>{{ 'expert' | translate }}</th>
                 <th>{{ 'history' | translate }}</th>
-                <th>{{ 'nominations' | translate }}</th>
+                <th>{{ 'nominations' | translate }}/{{ 'vote' | translate }}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,10 +51,18 @@
                     </div>
                 </td>
                 <td>
-                    <div class="checkbox" ng-if="expert.history_override || expert.nominated_smt || expert.history.length">
+                    <div class="checkbox" ng-if="expert.history_override || expert.nominated_smt || expert.history.length" ng-show="skill.smt_election_state == 'NOT_STARTED'">
                         <label>
                             <input type="checkbox" ng-model="expert.nominated_smt" ng-change="expertChanged(expert)"> {{ 'nominated_for_chief_expert' | translate }}
                         </label>
+                    </div>
+                    <div ng-if="skill.smt_election_state == 'IN_PROGRESS'">
+                        <span ng-show="expert.vote" class="label label-success">
+                            <span class="glyphicon glyphicon-check"></span> {{ 'voted' | translate }}
+                        </span>
+                        <span ng-show="!expert.vote" class="label label-danger">
+                            <span class="glyphicon glyphicon-remove"></span> {{ 'not_voted' | translate }}
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -50,9 +76,9 @@
     </table>
 </div>
 
-<div class="form-group form-group-sm">
+<div class="form-group form-group-sm" ng-show="skill.smt_election_state == 'NOT_STARTED'">
     <div class="col-sm-offset-6 col-sm-6">
-        <button ng-click="createPoll()" class="btn btn-sm btn-warning" ng-disabled="createPollLoading"><span class="glyphicon glyphicon-flash"></span> {{ 'create_poll_for_chief_expert_election' | translate }}<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+        <button ng-click="createPoll()" class="btn btn-sm btn-warning">{{ 'create_poll_for_smt_election' | translate }}</button>
         <!-- <span class="text-muted">(Only available from C4 at 12:00)</span> -->
     </div>
 </div>
