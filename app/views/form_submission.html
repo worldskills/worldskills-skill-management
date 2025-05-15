@@ -54,7 +54,7 @@
 
             <p ng-show="field.type == 'link'"><a href="{{ field.text.text }}" target="_blank" rel="noopener">{{ 'download' | translate }}</a></p>
 
-            <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-change="fieldChanged(field)" />
+            <input ng-if="field.type == 'input_text'" type="text" class="form-control" ng-model="field.value" ng-disabled="field.disabled" ng-change="fieldChanged(field)" />
 
             <textarea ng-if="field.type == 'input_textarea'" class="form-control" rows="3" ng-model="field.value" ng-change="fieldChanged(field)"></textarea>
 

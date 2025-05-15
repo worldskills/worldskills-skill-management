@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, $translate, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
+angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope, $rootScope, $state, $stateParams, $q, $timeout, $translate, auth, alert, Upload, WORLDSKILLS_API_SKILLMAN, SMTElectionVote, FormSubmission, FormSubmissionField, FormSubmissionFieldPerson, FormSubmissionFieldFile) {
 
     $scope.submission = FormSubmission.save({formId: $stateParams.formId, skillId: $stateParams.skillId}, {}, function () {
         if ($scope.submission.state == 'submitted') {
@@ -10,6 +10,19 @@ angular.module('skillMgmtApp').controller('FormSubmissionCtrl', function ($scope
             });
         }
         $scope.loading = false;
+        if ($scope.submission.fields[0].text.text == 'Chief Expert (most number of votes)') {
+            $scope.votes = SMTElectionVote.query({skillId: $stateParams.skillId}, function () {
+                angular.forEach($scope.submission.fields, function (field, i) {
+                    var result = $scope.votes.results[i];
+                    if (result && i < 6 && field.value == '') {
+                        field.value = result.person.person.first_name + ' ' + result.person.person.last_name + ' ' + result.person.member.code + ' (' + result.points + ' points)';
+                    }
+                    if ($scope.votes.results.length > 0) {
+                        field.disabled = true;
+                    }
+                });
+            });
+        }
     });
 
     $scope.saving = false;
